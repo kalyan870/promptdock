@@ -2,6 +2,7 @@
 
 > A curated, copy-paste AI prompt library & animated component directory for crafting websites that actually move.
 
+[![CI Status](https://github.com/kalyan870/promptdock/actions/workflows/ci.yml/badge.svg)](https://github.com/kalyan870/promptdock/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](#)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](#)
@@ -18,10 +19,13 @@
 
 ## ✨ Features
 
-- 🎯 **12 Ready-to-Ship AI Prompts**: Curated system prompts for Hero sections, Landing pages, Portfolios, Ecommerce, 3D Canvas, and Animated Backgrounds.
-- 🎨 **Visual Image Mockups**: 14 custom-designed vector illustrations providing high-fidelity visual previews of each prompt and interaction.
+- 🎯 **16 Ready-to-Ship AI Prompts**: Curated system prompts for Hero sections, Landing pages, Portfolios, Ecommerce, 3D Canvas, WebGL Shaders, Dynamic Islands, and Animated Backgrounds.
+- 🎨 **18 Bespoke Vector Illustrations**: Custom high-fidelity SVG mockups for all prompt concepts, social share card, and favicon.
 - 💎 **Curated Component Directories & Resources**: Direct integration with leading UI ecosystems including **21st.dev** and **Libraries.dev**.
-- 🔍 **Live Search & Filter**: Real-time keyword search and category tag filtering.
+- 🔍 **Spotlight Search & Filter**: Real-time keyword search with instant `Ctrl + K` or `/` keyboard shortcut.
+- ⭐ **Local Favorites & Bookmarking**: Save your favorite prompts to `localStorage` with a dedicated "⭐ Saved" filter.
+- 🔗 **Direct URL Deep-Linking**: Share direct links to any prompt (e.g. `/#prompt=aurora-hero`) that automatically scrolls and opens the modal.
+- 📑 **Tabbed Modal Inspector**: Toggle between **AI Prompt**, **Key Tech Specs**, and **Starter Code Snippet** for every design.
 - 📋 **One-Click Clipboard Copy**: Instantly copy full system prompts optimized for Claude, Cursor, v0, ChatGPT, or Gemini.
 - 📱 **Fully Responsive & Dark-Themed**: Handcrafted responsive UI with CSS glassmorphism, glowing gradient orbs, and scroll reveal effects.
 - 🚀 **Zero Build Dependencies**: Pure HTML5, modern CSS, and vanilla JavaScript. Runs anywhere without heavy bundling.
@@ -44,6 +48,10 @@
 | <img src="images/gallery-wall.svg" width="120"> | **Gallery Wall** | Portfolio | Photographer portfolio with masonry layout. |
 | <img src="images/menu-board.svg" width="120"> | **Menu Board** | Ecommerce | Restaurant menu with sticky category tabs. |
 | <img src="images/glass-cards.svg" width="120"> | **Glass Cards** | Hero | Glassmorphism feature cards over a gradient. |
+| <img src="images/liquid-metal.svg" width="120"> | **Liquid Metal** | Background | WebGL liquid metal fluid dynamics shader with cursor interaction. |
+| <img src="images/dynamic-island.svg" width="120"> | **Dynamic Island** | Hero | iOS-style morphing floating pill with state transitions. |
+| <img src="images/kinetic-type.svg" width="120"> | **Kinetic Type** | Typography | Scroll-skewed variable font marquee with depth. |
+| <img src="images/particle-cloud.svg" width="120"> | **Particle Cloud** | 3D | Interactive GPU particle vortex reacting to mouse velocity. |
 
 ---
 
@@ -59,6 +67,16 @@
 | **shadcn/ui** | [ui.shadcn.com](https://ui.shadcn.com) | `Free` | The accessible, copy-paste component architecture that modern web animation libraries extend. |
 | **MotionSites** | [motionsites.ai](https://motionsites.ai) | `Freemium` | Curated prompt and design library for animated hero sections with instant copy. |
 | **Libraries.io** | [libraries.io](https://libraries.io) | `Open Data` | Search and discover open-source packages, dependency trees, and licenses across 30+ package managers. |
+
+---
+
+## ⌨️ Keyboard Shortcuts
+
+| Shortcut | Action |
+| :--- | :--- |
+| <kbd>/</kbd> or <kbd>Ctrl</kbd> + <kbd>K</kbd> | Focus search bar |
+| <kbd>Esc</kbd> | Close prompt modal |
+| <kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd> | Accessible keyboard navigation |
 
 ---
 
@@ -78,19 +96,12 @@ npm test
 ```powershell
 npm start
 ```
-Then open `http://localhost:3000` in your browser.
+Then visit `http://localhost:3000` in your browser.
 
 ---
 
-## ☁️ Deployment
-
-### Deploy to Vercel
-1. Repository is linked to `kalyan870/promptdock`.
-2. Every push to the `main` branch automatically deploys to [promptdock-eight.vercel.app](https://promptdock-eight.vercel.app).
-3. Manual CLI deployment:
-```powershell
-vercel deploy --prod --yes
-```
+## 🤝 Contributing
+Contributions are warmly welcomed! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a Pull Request.
 
 ---
 

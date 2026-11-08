@@ -1,0 +1,43 @@
+name: Submit a New Prompt
+description: Suggest a new animated website prompt for the PromptDock library
+title: "[Prompt]: "
+labels: ["prompt-submission", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for contributing to PromptDock! Please fill in the details below.
+  - type: input
+    id: prompt_title
+    attributes:
+      label: Prompt Title
+      placeholder: e.g. Neon Horizon
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Hero
+        - Landing
+        - Portfolio
+        - Ecommerce
+        - 3D
+        - Background
+        - Typography
+    validations:
+      required: true
+  - type: textarea
+    id: prompt_body
+    attributes:
+      label: Full AI Prompt Text
+      placeholder: Write the complete prompt with instructions for Next.js, Tailwind, animation libraries, and reduced-motion handling...
+    validations:
+      required: true
+  - type: input
+    id: colors
+    attributes:
+      label: Fallback Gradient Hex Colors
+      placeholder: e.g. #38bdf8,#818cf8
+    validations:
+      required: true

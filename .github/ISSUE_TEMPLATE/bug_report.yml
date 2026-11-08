@@ -1,0 +1,17 @@
+name: Bug Report
+description: Report an issue or broken interaction
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      placeholder: Describe what happened...
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & OS
+      placeholder: Chrome 132 / Windows 11
