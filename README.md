@@ -1,7 +1,7 @@
-# PromptDock 5.0 — The Creative Developer Platform
+# PromptDock 6.0 — The Real Interactive Creative Developer Platform
 
 <p align="center">
-  <img src="images/comp-hero.svg" alt="PromptDock 5.0 Split-Screen 3D Hero Preview" width="100%" style="border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);" />
+  <img src="images/comp-hero.svg" alt="PromptDock 6.0 Split-Screen 3D Hero Preview" width="100%" style="border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);" />
 </p>
 
 <p align="center">
@@ -9,148 +9,141 @@
   <a href="https://github.com/kalyan870/promptdock/actions"><img src="https://img.shields.io/badge/CI-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white" alt="CI Status"></a>
   <img src="https://img.shields.io/badge/Three.js-r128-818cf8?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js">
   <img src="https://img.shields.io/badge/WebGL-2.0-c084fc?style=for-the-badge" alt="WebGL 2.0">
-  <img src="https://img.shields.io/badge/License-MIT-38bdf8?style=for-the-badge" alt="MIT License">
+  <img src="https://img.shields.io/badge/Release-6.0.0-38bdf8?style=for-the-badge" alt="Release 6.0.0">
+  <img src="https://img.shields.io/badge/License-MIT-a78bfa?style=for-the-badge" alt="MIT License">
 </p>
 
 ---
 
 ## 🌟 Executive Overview
 
-**PromptDock 5.0** is an interactive creative developer platform engineered for high-performance 3D WebGL interfaces, AI prompt discovery, **21st.dev** component marketplace synchronization, and **Libraries.dev** open-source dependency exploration.
+**PromptDock 6.0** is an interactive creative developer platform engineered for high-performance 3D WebGL interfaces, a **Live Component Playground (inspired by 21st.dev)**, a **Creative Effects Registry (inspired by Libraries.dev)**, an **AI Coding Agent Workflow Studio**, and a robust **Prompt Library 2.0**.
 
-Every major section visibly demonstrates its technology with **large, high-resolution preview compositions, real-time WebGL canvases, and copy-paste code snippets**.
+Every section provides real-time interactivity, large visual previews, live configuration sliders, and production-tested code snippets.
 
 - **Production Live Website**: [https://promptdock-eight.vercel.app](https://promptdock-eight.vercel.app)
 - **GitHub Repository**: [https://github.com/kalyan870/promptdock](https://github.com/kalyan870/promptdock)
 
 ---
 
-## 🎨 Visual Showcase & Feature Architecture
+## 🚀 Key Highlights in PromptDock 6.0
+
+1. **Live Interactive Component Playground**:
+   - Real-time DOM/Three.js sandbox mounting interactive components.
+   - Responsive viewport toggles: **Desktop (100%)**, **Tablet (768px)**, and **Mobile (375px)**.
+   - Theme switcher (Dark / Light) and canvas background pattern switcher.
+   - Real-time parameter sliders (Text, Accent Color, Speed, Glow, Border Radius) updating preview and code instantaneously.
+   - Complete copy-pasteable production-ready React / Three.js code.
+
+2. **Accurate Libraries.dev Integration**:
+   - Canonical attribution to **[https://libraries.dev](https://libraries.dev)**.
+   - Open-source packages from the real ecosystem: `motion`, `three`, `simplex-noise`.
+   - Interactive Effects Playground with live sliders and AI agent prompts.
+
+3. **Optimized Three.js Engine Lifecycle**:
+   - Single coordinated animation loop with `requestAnimationFrame` and `cancelAnimationFrame`.
+   - `IntersectionObserver` automatically pauses off-screen canvases (reducing idle GPU usage to 0%).
+   - Page Visibility API (`document.hidden`) pauses rendering when switching tabs.
+   - `ResizeObserver` for smooth canvas resizing and aspect ratio recalculation.
+   - Explicit GPU memory disposal (`geometry.dispose()`, `material.dispose()`) and WebGL context loss handling.
+
+4. **AI Coding Agent Workflow Section**:
+   - Visual architecture pipeline diagram (`images/workflow-agents.svg`).
+   - Copyable prompt templates for Google Antigravity, Claude Code, Cursor, Codex, and Gemini.
+
+5. **Showcase Projects (8 Projects)**:
+   - Dedicated "View Details" interactive modal.
+   - Clear distinction between "Interactive Demonstration" and "Concept Mockup".
+   - Architecture breakdowns, stack specifications, and live demonstrations.
+
+6. **Production Engineering Quality Suite**:
+   - `npm run lint` — Syntax and tag integrity validation.
+   - `npm run typecheck` — Schema and catalog typechecker.
+   - `npm test` — Core build and ecosystem verification.
+   - `npm run test:e2e` — Headless HTTP server end-to-end testing (41 checks).
+   - `npm run build` — Asset integrity check and build manifest generation.
+   - `npm run validate` — Full end-to-end pipeline.
+
+---
+
+## 🏗️ Architecture & System Topology
 
 ```mermaid
 graph TD
-    User["Creative Developer"] --> Client["PromptDock 5.0 Client"]
+    User["Creative Developer / AI Agent"] --> Client["PromptDock 6.0 Client"]
     
-    subgraph Showcase ["Visible Visual Showcases"]
-      Hero3D["Split-Screen Hero 3D (Three.js Icosahedron + Torus Knot)"]
-      Comp21["21st.dev Component Marketplace (Bento, Dynamic Island, Hero)"]
-      Prompts16["AI Prompt Discovery (16 Categories + Specular 3D Tilt)"]
-      LibFX["Creative Effects & Shader Registry (Border Beam, Thinking Orb)"]
-      WorkFlow["Workflow Studio (8-Stage Interactive Visual Pipeline)"]
-      CaseStudies["Showcase Projects (8 Production Case Studies)"]
+    subgraph Workspaces ["Interactive Developer Workspaces"]
+      Playground["Live Component Playground (21st.dev Sandbox, Viewport Switcher, Live Controls)"]
+      Marketplace["Visual Component Marketplace (11 Production Classes)"]
+      EffectsReg["Creative Effects Registry (Libraries.dev, Motion, Three.js)"]
+      PromptLib["Prompt Library 2.0 (16 Tested AI Prompts + Search Filter)"]
+      AgentWF["AI Agent Workflow Studio (Antigravity, Claude Code, Cursor)"]
+      Showcase["Showcase Projects (8 Case Studies + Architecture Inspector)"]
     end
     
-    subgraph Engine ["3D & Motion Engine"]
-      WebGL2["Three.js WebGL 2.0 Engine"]
-      GSAPMotion["GSAP 3 Elastic Spring Physics & Magnetic Pull"]
-      Intersection["IntersectionObserver (Pauses Off-Screen Scenes)"]
-      TiltEngine["3D Perspective Tilt Physics with Specular Glare"]
+    subgraph LifecycleEngine ["Three.js Engine Lifecycle"]
+      WebGLScenes["Hero, Component & Workflow WebGL 2.0 Canvases"]
+      IO["IntersectionObserver (Off-Screen Pausing)"]
+      VisAPI["Page Visibility API (Tab Switch Pausing)"]
+      ResizeObs["ResizeObserver (Aspect Ratio Lerp)"]
+      GPUClean["Explicit Geometry & Material Disposal"]
+      ContextLoss["webglcontextlost / restored Handlers"]
     end
     
-    Client --> Showcase
-    Showcase --> Engine
-    Engine --> Vercel["Global Vercel Production Edge CDN"]
+    Client --> Workspaces
+    Workspaces --> LifecycleEngine
+    LifecycleEngine --> Vercel["Global Vercel Edge Production CDN"]
 ```
 
 ---
 
-## 🧩 Visual Component Marketplace (21st.dev-Inspired)
-
-| Component | Category | Preview Asset | Stack |
-| :--- | :--- | :--- | :--- |
-| **Split Screen 3D Hero** | Hero | `images/comp-hero.svg` | React 19 + Three.js + Tailwind |
-| **Dynamic Island Dock** | Navigation | `images/comp-navbar.svg` | Framer Motion + Tailwind |
-| **Interactive Button Suite** | Buttons | `images/comp-buttons.svg` | GSAP 3 + CSS Keyframes |
-| **3D Perspective Tilt Cards** | Cards | `images/comp-cards.svg` | CSS 3D Transforms + Vanilla JS |
-| **Glassmorphic Pricing Table** | Pricing | `images/comp-pricing.svg` | Tailwind + Framer Motion |
-| **Asymmetrical Bento Grid** | Bento | `images/comp-bento.svg` | CSS Grid + Canvas2D |
-| **AI Copilot Chat Interface** | AI Chat | `images/comp-chat.svg` | React + Lucide Icons |
-| **Multi-Step Inquiry Form** | Forms | `images/comp-forms.svg` | React Hook Form + Zod |
-| **Kinetic Variable Typography** | Animated Text | `images/comp-text.svg` | CSS Variable Fonts + GSAP |
-| **Three.js 3D Viewport** | 3D Viewport | `images/comp-3d.svg` | Three.js WebGL Canvas |
-| **Mesh Gradient & Starfield** | Backgrounds | `images/comp-backgrounds.svg` | GLSL Fragment Shader |
-
----
-
-## ⚡ Creative Effects Registry (Libraries.dev-Inspired)
-
-| Effect | Category | Preview Asset | Install Command | License |
-| :--- | :--- | :--- | :--- | :--- |
-| **Border Beam Effect** | Shader & Border FX | `images/lib-border-beam.svg` | `npm i @promptdock/border-beam` | MIT |
-| **AI Thinking Orb** | 3D Shader FX | `images/lib-thinking-orb.svg` | `npm i @promptdock/thinking-orb` | MIT |
-| **Liquid Metal Chrome** | WebGL Normal Maps | `images/lib-liquid-metal.svg` | `npm i @promptdock/liquid-chrome` | MIT |
-| **Gooey Fluid Blob** | SVG Filters | `images/lib-gooey.svg` | `npm i @promptdock/gooey-blob` | MIT |
-| **Audio Spectrum Bars** | WebAudio Visualizer | `images/lib-voice-viz.svg` | `npm i @promptdock/voice-spectrum` | MIT |
-| **Magnetic Spring Physics** | Motion & Physics | `images/lib-magnetic.svg` | `npm i @promptdock/magnetic-ui` | MIT |
-
----
-
-## 🚀 8-Stage Interactive Workflow
-
-<p align="center">
-  <img src="images/workflow-pipeline.svg" alt="PromptDock 5.0 End-to-End Production Pipeline Diagram" width="100%" style="border-radius: 14px;" />
-</p>
-
-1. **Idea & Specifications**: Define requirements, 3D interaction models, and tech choices.
-2. **Prompt Discovery**: Select tested 3D and animation prompts from the catalog.
-3. **Component Selection**: Browse 21st.dev-inspired UI recipes.
-4. **AI Code Generation**: Execute prompt in Claude, GPT-4o, or Gemini inside your IDE.
-5. **Local Development**: Live-reload testing on `http://localhost:3000`.
-6. **Automated QA**: Run `npm test && npm run build` for 63+ assertions and asset checks.
-7. **GitHub Push**: Trigger multi-version Node.js matrix GitHub Actions CI.
-8. **Vercel Deploy**: Deploy globally to Vercel edge with immutable asset caching.
-
----
-
-## 📁 Project Structure
-
-```
-promptdock/
-├── .github/
-│   └── workflows/
-│       └── ci.yml                 # Node.js 18.x, 20.x, 22.x CI Matrix
-├── docs/
-│   ├── architecture.md            # System architecture & Mermaid flowcharts
-│   ├── getting-started.md         # Local setup & keyboard shortcuts
-│   ├── components.md              # 21st.dev component marketplace reference
-│   ├── visual-system.md           # Visual hierarchy & design tokens
-│   ├── 3d-engine.md               # Three.js WebGL scenes & shader pipelines
-│   ├── workflow.md                # 8-stage interactive engineering pipeline
-│   ├── testing.md                 # Automated QA & test runner specs
-│   ├── deployment.md              # Vercel global edge CDN configuration
-│   └── roadmap.md                 # Upcoming features (5.1 & WebGPU)
-├── images/                        # 53 Production Vector SVG Assets
-├── index.html                     # Core PromptDock 5.0 application
-├── package.json                   # Project metadata & npm scripts
-├── build.js                       # Production build compilation script
-├── test-build.js                  # Master 63-point automated test suite
-├── vercel.json                    # Edge headers & caching configuration
-├── CHANGELOG.md                   # Version history
-└── README.md                      # Platform documentation
-```
-
----
-
-## 🛠️ Local Development & Production Build
+## 🛠️ Verification & Pipeline Commands
 
 ```bash
-# 1. Install dependencies (zero external node packages required)
+# Install dependencies
 npm install
 
-# 2. Run the automated test runner (63 assertions)
+# Run local development server
+npm run dev
+
+# Run code linter
+npm run lint
+
+# Run catalog & schema typechecker
+npm run typecheck
+
+# Run unit & filesystem tests
 npm test
 
-# 3. Run production build validation
+# Run end-to-end HTTP integration tests
+npm run test:e2e
+
+# Run production build
 npm run build
 
-# 4. Start the local server
-npm start
+# Run all verification checks (100% pass required)
+npm run validate
 ```
-
-Visit [http://localhost:3000](http://localhost:3000) to view the application locally.
 
 ---
 
-## 📜 License
+## 📚 Documentation
 
-MIT License &copy; 2026 Kalyan. All community resources attributed to their respective owners.
+The `docs/` folder contains comprehensive technical specifications:
+- [`docs/architecture.md`](docs/architecture.md) — System architecture and design principles.
+- [`docs/getting-started.md`](docs/getting-started.md) — Developer setup and onboarding.
+- [`docs/components.md`](docs/components.md) — Component playground catalog and API.
+- [`docs/effects.md`](docs/effects.md) — Libraries.dev effects and shader registry.
+- [`docs/prompt-library.md`](docs/prompt-library.md) — Prompt engineering specifications.
+- [`docs/3d-engine.md`](docs/3d-engine.md) — Three.js WebGL rendering engine.
+- [`docs/performance.md`](docs/performance.md) — GPU lifecycle and performance optimization.
+- [`docs/workflow.md`](docs/workflow.md) — AI coding agent workflow pipeline.
+- [`docs/testing.md`](docs/testing.md) — Automated testing and QA procedures.
+- [`docs/deployment.md`](docs/deployment.md) — Vercel Edge deployment and CI/CD.
+- [`docs/roadmap.md`](docs/roadmap.md) — Future enhancements and release trajectory.
+
+---
+
+## 📄 License
+
+MIT License. Copyright (c) 2026 Kalyan.

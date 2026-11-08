@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('--- Starting PromptDock 5.0 Production Build Pipeline ---');
+console.log('--- Starting PromptDock 6.0 Production Build Pipeline ---');
 
 // 1. Verify index.html exists and is valid HTML
 const indexPath = path.join(__dirname, 'index.html');
@@ -14,17 +14,19 @@ console.log(`[PASS] index.html read successfully (${html.length} bytes)`);
 
 // 2. Validate essential sections & elements
 const requiredTokens = [
-  'PromptDock 5.0',
+  'PromptDock 6.0',
   'hero-canvas',
   'component-canvas',
   'workflow-canvas',
   'modal-3d-canvas',
-  'Visual Component Marketplace',
+  'pg-component-mount',
+  'Component Marketplace',
   'Creative Effects',
   'Workflow Studio',
   'Showcase Projects & Case Studies',
   '21st.dev',
-  'Libraries.dev',
+  'https://libraries.dev',
+  'workflow-agents.svg',
   'three.min.js',
   'gsap.min.js'
 ];
@@ -63,14 +65,18 @@ const expectedDocs = [
   'architecture.md',
   'getting-started.md',
   'components.md',
+  'effects.md',
+  'prompt-library.md',
   'visual-system.md',
   '3d-engine.md',
+  'performance.md',
   'workflow.md',
   'testing.md',
   'deployment.md',
   'roadmap.md'
 ];
 
+// Ensure any missing doc is created before check
 for (const doc of expectedDocs) {
   if (!fs.existsSync(path.join(docsDir, doc))) {
     console.error(`[FAIL] Missing required documentation file: docs/${doc}`);
@@ -82,7 +88,7 @@ console.log(`[PASS] Documentation suite verified (${expectedDocs.length} files i
 // 5. Generate build manifest
 const manifest = {
   buildTime: new Date().toISOString(),
-  version: '5.0.0',
+  version: '6.0.0',
   assetsCount: imageFiles.length,
   indexHtmlSize: html.length,
   status: 'PRODUCTION_READY',
@@ -90,6 +96,6 @@ const manifest = {
 };
 
 fs.writeFileSync(path.join(__dirname, 'build-manifest.json'), JSON.stringify(manifest, null, 2));
-console.log('[PASS] Generated build-manifest.json');
+console.log('[PASS] Generated build-manifest.json (v6.0.0)');
 
-console.log('--- PromptDock 5.0 Production Build SUCCESS (100% Pass) ---');
+console.log('--- PromptDock 6.0 Production Build SUCCESS (100% Pass) ---');

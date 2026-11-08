@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PromptDock 5.0 — The Creative Developer Platform</title>
-<meta name="description" content="A futuristic, interactive AI Prompt and Web Design Resource Platform with 3D WebGL experiences, 21st.dev component marketplace, and Libraries.dev open-source effect registry.">
+<title>PromptDock 6.0 — The Real Interactive Creative Developer Platform</title>
+<meta name="description" content="A next-generation creative developer platform featuring live interactive component playgrounds, 21st.dev component marketplace, Libraries.dev effect registry, Three.js WebGL scenes, and AI coding agent workflows.">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
 <!-- OpenGraph / Social Meta Tags -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="PromptDock 5.0 — The Creative Developer Platform">
-<meta property="og:description" content="Where AI prompts become websites that actually move. Large visual previews, 3D WebGL scenes, 21st.dev components, and Libraries.dev effects.">
+<meta property="og:title" content="PromptDock 6.0 — The Real Interactive Creative Developer Platform">
+<meta property="og:description" content="Discover, preview, experiment, configure, and copy live interactive components, Three.js 3D shaders, and verified AI prompts.">
 <meta property="og:image" content="images/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PromptDock 5.0 — The Creative Developer Platform">
-<meta name="twitter:description" content="Where AI prompts become websites that actually move. Large visual previews, 3D WebGL scenes, 21st.dev components, and Libraries.dev effects.">
+<meta name="twitter:title" content="PromptDock 6.0 — The Real Interactive Creative Developer Platform">
+<meta name="twitter:description" content="Discover, preview, experiment, configure, and copy live interactive components, Three.js 3D shaders, and verified AI prompts.">
 <meta name="twitter:image" content="images/og-image.svg">
 
 <!-- Fonts -->
@@ -25,15 +25,14 @@
 <!-- Three.js & GSAP via CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
 :root{
   --bg:#04060b;
   --bg-deep:#020306;
-  --panel:rgba(12, 17, 29, 0.75);
+  --panel:rgba(12, 17, 29, 0.78);
   --panel-solid:#0d1322;
-  --panel-hover:rgba(20, 28, 48, 0.85);
+  --panel-hover:rgba(20, 28, 48, 0.88);
   --line:rgba(255, 255, 255, 0.08);
   --line-bright:rgba(94, 234, 212, 0.35);
   --text:#f1f5fd;
@@ -71,8 +70,8 @@ a{color:inherit;text-decoration:none}
 }
 
 /* Nav */
-nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);background:rgba(4, 6, 11, 0.8);border-bottom:1px solid var(--line);transition:background .3s}
-nav .wrap{display:flex;justify-content:space-between;align-items:center;height:70px}
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);background:rgba(4, 6, 11, 0.82);border-bottom:1px solid var(--line);transition:background .3s}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:72px}
 .logo{font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:22px;display:flex;gap:10px;align-items:center;letter-spacing:-.02em}
 .logo-icon{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 20px rgba(94,234,212,0.5);display:grid;place-items:center;font-size:14px;color:#04060b;font-weight:900}
 .logo-badge{font-size:11px;background:#142036;color:var(--a);padding:3px 8px;border-radius:6px;border:1px solid rgba(94,234,212,0.3);font-family:'Inter',sans-serif;font-weight:700}
@@ -86,6 +85,22 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:7
 .cmd-btn{background:#0e1526;border:1px solid var(--line);color:var(--muted);padding:8px 14px;border-radius:10px;cursor:pointer;font-size:13px;display:flex;gap:8px;align-items:center;transition:all .2s}
 .cmd-btn:hover{border-color:var(--a);color:var(--text)}
 .cmd-kbd{background:#172238;padding:2px 6px;border-radius:4px;font-size:11px;font-family:monospace}
+.hamburger{display:none;background:transparent;border:0;color:var(--text);font-size:24px;cursor:pointer}
+
+/* Mobile Nav Drawer */
+.mobile-nav{
+  position:fixed;
+  inset:0;
+  background:rgba(4,6,11,0.96);
+  backdrop-filter:blur(20px);
+  z-index:99;
+  display:none;
+  flex-direction:column;
+  padding:30px;
+  gap:20px;
+}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-size:20px;font-weight:700;color:#fff;padding:10px 0;border-bottom:1px solid var(--line)}
 
 /* Buttons */
 .btn{
@@ -113,7 +128,7 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:7
 /* Hero Section (Split Screen 3D Product Showcase) */
 .hero{
   position:relative;
-  min-height:92vh;
+  min-height:90vh;
   display:flex;
   align-items:center;
   padding:80px 0 60px;
@@ -206,7 +221,7 @@ h1 span{
   transition:transform .4s ease,box-shadow .4s ease;
 }
 .hero-preview-window:hover{
-  transform:perspective(1000px) rotateY(-3deg) rotateX(2deg) scale(1.02);
+  transform:perspective(1000px) rotateY(-2deg) rotateX(2deg) scale(1.02);
   box-shadow:0 35px 80px rgba(0,0,0,0.9),0 0 45px rgba(94,234,212,0.25);
 }
 .hero-preview-window img{width:100%;height:auto;display:block}
@@ -267,30 +282,25 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
   z-index:1;
 }
 
-/* Large Featured Showcase Banner */
-.featured-showcase{
-  background:linear-gradient(135deg, rgba(14, 21, 38, 0.9), rgba(8, 12, 22, 0.9));
-  border:1px solid rgba(94, 234, 212, 0.3);
-  border-radius:22px;
-  overflow:hidden;
-  margin-bottom:50px;
-  display:grid;
-  grid-template-columns:1.2fr 0.8fr;
-  align-items:center;
-  box-shadow:0 20px 50px rgba(0,0,0,0.6);
-  position:relative;
-  z-index:2;
+/* Chips / Filter Bar */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px;position:relative;z-index:2}
+.chip{
+  border:1px solid var(--line);
+  background:var(--panel);
+  backdrop-filter:blur(8px);
+  padding:8px 16px;
+  border-radius:99px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:500;
+  color:var(--muted);
+  transition:all .2s;
+  user-select:none;
 }
-.featured-showcase-img{
-  position:relative;
-  overflow:hidden;
-  border-right:1px solid var(--line);
-  background:#090d18;
-}
-.featured-showcase-img img{width:100%;height:100%;object-fit:cover;display:block}
-.featured-showcase-content{padding:40px}
+.chip:hover{border-color:var(--muted);color:var(--text);transform:translateY(-1px)}
+.chip.on{background:linear-gradient(135deg,var(--a),var(--b));color:#04060b;border-color:transparent;font-weight:700;box-shadow:0 4px 16px rgba(94,234,212,0.25)}
 
-/* 3D Bento & Perspective Cards */
+/* Cards Grid */
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:26px;position:relative;z-index:2}
 .visual-card{
   background:var(--panel);
@@ -343,119 +353,120 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
 .card-meta{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--line);margin-top:auto}
 .badge{background:#131c30;color:var(--a);font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;border:1px solid rgba(94,234,212,0.25)}
 .badge.tech{color:var(--b);border-color:rgba(129,140,248,0.25)}
+.badge.live{color:#10b981;border-color:rgba(16,185,129,0.35);background:rgba(16,185,129,0.1)}
+.badge.concept{color:#f59e0b;border-color:rgba(245,158,11,0.35);background:rgba(245,158,11,0.1)}
 
-/* Chips / Filter Bar */
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px;position:relative;z-index:2}
-.chip{
-  border:1px solid var(--line);
-  background:var(--panel);
-  backdrop-filter:blur(8px);
-  padding:8px 16px;
-  border-radius:99px;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:500;
-  color:var(--muted);
-  transition:all .2s;
-  user-select:none;
-}
-.chip:hover{border-color:var(--muted);color:var(--text);transform:translateY(-1px)}
-.chip.on{background:linear-gradient(135deg,var(--a),var(--b));color:#04060b;border-color:transparent;font-weight:700;box-shadow:0 4px 16px rgba(94,234,212,0.25)}
-
-/* Visual Workflow Diagram Container */
-.workflow-diagram-wrap{
-  background:rgba(9, 13, 24, 0.85);
+/* =====================================================================
+   INTERACTIVE PLAYGROUND WORKSPACE (Component & Effects)
+   ===================================================================== */
+.playground-workspace{
+  background:rgba(10, 15, 27, 0.95);
   border:1px solid var(--line-bright);
   border-radius:24px;
-  padding:30px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.7);
-  margin-bottom:40px;
+  padding:32px;
+  margin-bottom:50px;
+  box-shadow:0 25px 70px rgba(0,0,0,0.8);
   position:relative;
   z-index:2;
 }
-.workflow-diagram-wrap img{width:100%;height:auto;display:block;border-radius:12px}
-
-/* 8-Stage Workflow Grid */
-.workflow-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  position:relative;
-  z-index:2;
-}
-.workflow-step-card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:24px;
-  transition:all .25s;
-}
-.workflow-step-card:hover{
-  border-color:var(--a);
-  transform:translateY(-3px);
-  box-shadow:0 15px 35px rgba(0,0,0,0.6);
-}
-.workflow-step-num{
-  font-family:'Space Grotesk',sans-serif;
-  font-size:26px;
-  font-weight:900;
-  color:var(--a);
-  margin-bottom:8px;
-}
-.workflow-step-card h3{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;margin-bottom:6px}
-.workflow-step-card p{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:12px}
-.workflow-cmd{font-family:'JetBrains Mono',monospace;font-size:11px;background:#090d18;padding:6px 10px;border-radius:6px;border:1px solid var(--line);color:var(--a);display:block}
-
-/* Command Palette Modal */
-.cmd-palette{
-  position:fixed;
-  inset:0;
-  background:rgba(2, 4, 8, 0.85);
-  backdrop-filter:blur(16px);
-  z-index:100;
-  display:none;
-  place-items:center;
-  padding:20px;
-}
-.cmd-palette.open{display:grid}
-.cmd-box{
-  width:min(640px,94vw);
-  background:#0c1221;
-  border:1px solid var(--line-bright);
-  border-radius:18px;
-  box-shadow:0 25px 70px rgba(0,0,0,0.9),0 0 35px rgba(94,234,212,0.2);
-  overflow:hidden;
-}
-.cmd-search-input{
-  width:100%;
-  background:transparent;
-  border:0;
-  border-bottom:1px solid var(--line);
-  padding:18px 22px;
-  font-size:16px;
-  color:#fff;
-  font-family:inherit;
-  outline:none;
-}
-.cmd-results{max-height:380px;overflow-y:auto;padding:10px}
-.cmd-item{
-  padding:12px 16px;
-  border-radius:10px;
-  cursor:pointer;
+.playground-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  color:var(--text);
-  transition:all .15s;
+  flex-wrap:wrap;
+  gap:16px;
+  margin-bottom:24px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
 }
-.cmd-item:hover,.cmd-item.active{background:#151f36;color:var(--a)}
+.playground-title{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:#fff}
+.playground-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 
-/* Detail Modal */
+/* Playground Preview Frame */
+.playground-stage{
+  min-height:360px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:#05070e;
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  padding:40px 20px;
+  transition:all .3s ease;
+}
+.playground-stage.theme-light{background:#f8fafc;color:#0f172a}
+.playground-stage.bg-grid{
+  background-image:linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+.playground-stage.bg-glass{
+  background:radial-gradient(circle at 50% 50%, rgba(94,234,212,0.15), transparent 70%), #070a14;
+}
+
+/* Controls Panel */
+.playground-controls-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+}
+.control-group{display:flex;flex-direction:column;gap:8px}
+.control-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.control-input{
+  background:#0d1322;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:8px 12px;
+  color:#fff;
+  font-family:inherit;
+  font-size:13px;
+  outline:none;
+}
+.control-input:focus{border-color:var(--a)}
+.control-slider{accent-color:var(--a);cursor:pointer;width:100%}
+
+/* Tabs in Playground */
+.playground-tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.pg-tab{
+  background:transparent;
+  border:0;
+  color:var(--muted);
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+  font-size:14px;
+  padding:10px 18px;
+  cursor:pointer;
+  position:relative;
+  transition:color .2s;
+}
+.pg-tab:hover{color:#fff}
+.pg-tab.active{color:var(--a)}
+.pg-tab.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--a)}
+.pg-tab-content{display:none}
+.pg-tab-content.active{display:block}
+.code-box{
+  background:#070b14;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:20px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12.5px;
+  line-height:1.6;
+  color:#cbd5e1;
+  white-space:pre-wrap;
+  max-height:360px;
+  overflow-y:auto;
+}
+
+/* Modals */
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(2, 4, 8, 0.85);
-  backdrop-filter:blur(16px);
+  background:rgba(2, 4, 8, 0.88);
+  backdrop-filter:blur(18px);
   z-index:90;
   display:none;
   place-items:center;
@@ -463,10 +474,10 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
 }
 .modal.show{display:grid}
 .modal-box{
-  width:min(880px,94vw);
+  width:min(900px,94vw);
   max-height:90vh;
   overflow-y:auto;
-  background:#0d1424;
+  background:#0c1221;
   border:1px solid var(--line-bright);
   border-radius:22px;
   padding:32px;
@@ -517,6 +528,50 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
   overflow-y:auto;
 }
 
+/* Command Palette Modal */
+.cmd-palette{
+  position:fixed;
+  inset:0;
+  background:rgba(2, 4, 8, 0.88);
+  backdrop-filter:blur(18px);
+  z-index:100;
+  display:none;
+  place-items:center;
+  padding:20px;
+}
+.cmd-palette.open{display:grid}
+.cmd-box{
+  width:min(660px,94vw);
+  background:#0c1221;
+  border:1px solid var(--line-bright);
+  border-radius:18px;
+  box-shadow:0 25px 70px rgba(0,0,0,0.9),0 0 35px rgba(94,234,212,0.2);
+  overflow:hidden;
+}
+.cmd-search-input{
+  width:100%;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--line);
+  padding:18px 22px;
+  font-size:16px;
+  color:#fff;
+  font-family:inherit;
+  outline:none;
+}
+.cmd-results{max-height:380px;overflow-y:auto;padding:10px}
+.cmd-item{
+  padding:12px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:var(--text);
+  transition:all .15s;
+}
+.cmd-item:hover,.cmd-item.active{background:#151f36;color:var(--a)}
+
 /* Toast */
 .toast{
   position:fixed;
@@ -543,9 +598,8 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
   .hero-left{max-width:100%}
   .hero-cta{justify-content:center}
   .hero-right{height:420px}
-  .featured-showcase{grid-template-columns:1fr}
-  .featured-showcase-img{border-right:0;border-bottom:1px solid var(--line)}
   .links{display:none}
+  .hamburger{display:block}
 }
 </style>
 </head>
@@ -553,27 +607,45 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
 
 <div id="cursor-glow"></div>
 
+<!-- Mobile Nav Drawer -->
+<div class="mobile-nav" id="mobile-nav">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <span style="font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:20px;color:var(--a)">PromptDock 6.0</span>
+    <button id="close-mobile-nav" style="background:transparent;border:0;color:#fff;font-size:28px;cursor:pointer">&times;</button>
+  </div>
+  <a href="#playground">Component Playground</a>
+  <a href="#components">Marketplace</a>
+  <a href="#effects">Effects Playground</a>
+  <a href="#library">Prompt Library</a>
+  <a href="#agents">AI Agent Workflow</a>
+  <a href="#workflow">Workflow Studio</a>
+  <a href="#examples">Showcase Cases</a>
+  <a href="#resources">Ecosystem</a>
+</div>
+
 <!-- Nav -->
 <nav><div class="wrap">
   <a class="logo" href="#">
     <span class="logo-icon">✦</span>
     PromptDock
-    <span class="logo-badge">v5.0 Ultra</span>
+    <span class="logo-badge">v6.0 Ultra</span>
   </a>
   <div class="links">
-    <a href="#components">Components</a>
+    <a href="#playground">Playground</a>
+    <a href="#components">Marketplace</a>
+    <a href="#effects">Effects</a>
     <a href="#library">Prompts</a>
-    <a href="#libraries">Libraries &amp; FX</a>
+    <a href="#agents">Agents</a>
+    <a href="#examples">Cases</a>
     <a href="#resources">Ecosystem</a>
-    <a href="#workflow">Workflow</a>
-    <a href="#examples">Showcase</a>
   </div>
   <div class="nav-actions">
     <button class="cmd-btn" id="open-cmd" title="Command Palette">
       <span>Search</span>
       <span class="cmd-kbd">Ctrl K</span>
     </button>
-    <a class="btn sm" href="#components">Explore 5.0</a>
+    <a class="btn sm" href="#playground">Try Live Playground</a>
+    <button class="hamburger" id="open-mobile-nav" aria-label="Toggle navigation">&#9776;</button>
   </div>
 </div></nav>
 
@@ -585,45 +657,45 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
       <div class="hero-left">
         <div class="tag">
           <span class="tag-dot"></span>
-          PROMPTDOCK 5.0 · THE CREATIVE DEVELOPER PLATFORM
+          PROMPTDOCK 6.0 · THE INTERACTIVE CREATIVE DEVELOPER PLATFORM
         </div>
         <h1>Where AI prompts become websites that <span>actually move.</span></h1>
-        <p class="lead">A high-performance visual catalog of copy-paste AI prompts, 21st.dev component recipes, WebGL shaders, and Three.js 3D environments.</p>
+        <p class="lead">An interactive creative engineering platform combining 21st.dev component discovery, Libraries.dev AI visual effects, Three.js 3D shaders, and real-time live preview playgrounds.</p>
         <div class="hero-cta">
-          <a class="btn" href="#components">Explore 5.0 Components ➔</a>
-          <a class="btn o" href="#libraries">3D &amp; Motion Libraries</a>
+          <a class="btn" href="#playground">Launch Component Playground ➔</a>
+          <a class="btn o" href="#effects">Explore Visual Effects</a>
         </div>
         <div class="hero-trust">
-          <span class="hero-trust-title">Integrated Creative Stack</span>
+          <span class="hero-trust-title">Integrated Creative Developer Stack</span>
           <div class="hero-tech-badges">
-            <span class="tech-pill">Three.js</span>
+            <span class="tech-pill">Three.js r128</span>
             <span class="tech-pill">WebGL 2.0</span>
             <span class="tech-pill">GSAP 3</span>
-            <span class="tech-pill">Next.js 15</span>
-            <span class="tech-pill">Tailwind</span>
             <span class="tech-pill">21st.dev</span>
             <span class="tech-pill">Libraries.dev</span>
+            <span class="tech-pill">Next.js 15</span>
+            <span class="tech-pill">Tailwind</span>
           </div>
         </div>
       </div>
-      <!-- Right Hero 3D Product Viewport -->
+      <!-- Right Hero 3D Viewport -->
       <div class="hero-right">
         <canvas id="hero-canvas"></canvas>
         <div class="hero-floating-badge hfb-1">
           <span style="color:var(--a);font-size:16px">✦</span>
           <div>
-            <div style="font-size:12px;font-weight:700">WebGL 2.0 Active</div>
-            <div style="font-size:10px;color:var(--muted)">60.2 FPS · 12.4k Polys</div>
+            <div style="font-size:12px;font-weight:700">Three.js WebGL Core</div>
+            <div style="font-size:10px;color:var(--muted)">Active Lifecycle · 60 FPS Target</div>
           </div>
         </div>
         <div class="hero-preview-window">
-          <img src="images/comp-hero.svg" alt="PromptDock 5.0 3D Split Screen Hero Component" loading="eager">
+          <img src="images/comp-hero.svg" alt="PromptDock 6.0 Split Screen Hero Preview" loading="eager">
         </div>
         <div class="hero-floating-badge hfb-2">
           <span style="color:var(--b);font-size:16px">⚡</span>
           <div>
-            <div style="font-size:12px;font-weight:700">21st.dev Sync</div>
-            <div style="font-size:10px;color:var(--muted)">Instant AI Component Copy</div>
+            <div style="font-size:12px;font-weight:700">21st.dev &amp; Libraries.dev</div>
+            <div style="font-size:10px;color:var(--muted)">Live Interactive Playground</div>
           </div>
         </div>
       </div>
@@ -633,37 +705,172 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
 
 <div class="marquee"><div class="marquee-track" id="mq"></div></div>
 
-<!-- Section 1: Component Explorer (21st.dev-Inspired) -->
+<!-- Section 1: Interactive Component Playground Workspace -->
+<section id="playground">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Interactive Component Playground</h2>
+        <p class="sub">Experiment with real interactive components directly in the browser. Adjust live properties, switch viewports, change themes, and copy working production code.</p>
+      </div>
+      <div>
+        <span class="badge live">● LIVE INTERACTIVE WORKSPACE</span>
+      </div>
+    </div>
+
+    <div class="playground-workspace">
+      <div class="playground-header">
+        <div>
+          <span style="font-size:11px;font-weight:700;color:var(--a);text-transform:uppercase;letter-spacing:.05em">Active Sandbox</span>
+          <div class="playground-title" id="pg-active-title">Magnetic Glowing Button</div>
+        </div>
+        <div class="playground-toolbar">
+          <!-- Viewport toggles -->
+          <button class="btn o sm" id="pg-vp-desktop" title="Desktop view">🖥️ Desktop</button>
+          <button class="btn o sm" id="pg-vp-tablet" title="Tablet view">📱 Tablet</button>
+          <button class="btn o sm" id="pg-vp-mobile" title="Mobile view">📲 Mobile</button>
+          <!-- Theme toggle -->
+          <button class="btn o sm" id="pg-theme-toggle">🌓 Theme</button>
+          <!-- Background toggle -->
+          <button class="btn o sm" id="pg-bg-toggle">🎨 Canvas BG</button>
+          <!-- Reset button -->
+          <button class="btn o sm" id="pg-reset-btn">↺ Reset Props</button>
+        </div>
+      </div>
+
+      <!-- Playground Tabs -->
+      <div class="playground-tabs">
+        <button class="pg-tab active" data-pgtab="pg-tab-preview">Interactive Live Sandbox</button>
+        <button class="pg-tab" data-pgtab="pg-tab-code">Copyable Code Implementation</button>
+        <button class="pg-tab" data-pgtab="pg-tab-install">Installation &amp; Setup</button>
+        <button class="pg-tab" data-pgtab="pg-tab-docs">Props &amp; Documentation</button>
+      </div>
+
+      <!-- Tab 1: Live Sandbox -->
+      <div id="pg-tab-preview" class="pg-tab-content active">
+        <div class="playground-stage bg-grid" id="pg-stage">
+          <!-- Live Interactive Component Mount Point -->
+          <div id="pg-component-mount"></div>
+        </div>
+
+        <!-- Dynamic Property Controls Panel -->
+        <div class="playground-controls-grid">
+          <div class="control-group">
+            <label class="control-label">Label Text</label>
+            <input class="control-input" id="ctrl-text" value="Deploy to Production ➔">
+          </div>
+          <div class="control-group">
+            <label class="control-label">Accent Color</label>
+            <select class="control-input" id="ctrl-color">
+              <option value="#5eead4" selected>Neon Cyan (#5eead4)</option>
+              <option value="#818cf8">Soft Indigo (#818cf8)</option>
+              <option value="#c084fc">Electric Violet (#c084fc)</option>
+              <option value="#f43f5e">Crimson Rose (#f43f5e)</option>
+              <option value="#facc15">Solar Amber (#facc15)</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Animation Speed: <span id="val-speed">1.2s</span></label>
+            <input type="range" class="control-slider" id="ctrl-speed" min="0.4" max="4.0" step="0.1" value="1.2">
+          </div>
+          <div class="control-group">
+            <label class="control-label">Glow Intensity: <span id="val-glow">60%</span></label>
+            <input type="range" class="control-slider" id="ctrl-glow" min="10" max="100" step="5" value="60">
+          </div>
+          <div class="control-group">
+            <label class="control-label">Border Radius: <span id="val-radius">14px</span></label>
+            <input type="range" class="control-slider" id="ctrl-radius" min="4" max="36" step="2" value="14">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Code Implementation -->
+      <div id="pg-tab-code" class="pg-tab-content">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span style="font-size:12px;color:var(--muted)">Production React &amp; Tailwind component source</span>
+          <button class="btn sm" id="btn-copy-pg-code">Copy Full Code</button>
+        </div>
+        <pre class="code-box" id="pg-code-display"></pre>
+      </div>
+
+      <!-- Tab 3: Installation -->
+      <div id="pg-tab-install" class="pg-tab-content">
+        <div class="code-box"># 1. Install required dependencies
+npm install gsap @types/three three lucide-react
+
+# 2. Add Tailwind configuration to tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        neonCyan: '#5eead4',
+        neonIndigo: '#818cf8',
+      }
+    }
+  }
+}</div>
+      </div>
+
+      <!-- Tab 4: Docs -->
+      <div id="pg-tab-docs" class="pg-tab-content">
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:13px;text-align:left">
+            <thead>
+              <tr style="border-bottom:1px solid var(--line);color:var(--a)">
+                <th style="padding:10px">Prop</th>
+                <th style="padding:10px">Type</th>
+                <th style="padding:10px">Default</th>
+                <th style="padding:10px">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:10px;font-family:monospace;color:#fff">label</td>
+                <td style="padding:10px;color:var(--b)">string</td>
+                <td style="padding:10px;color:var(--muted)">'Deploy'</td>
+                <td style="padding:10px">Text content rendered inside button</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:10px;font-family:monospace;color:#fff">glowColor</td>
+                <td style="padding:10px;color:var(--b)">string</td>
+                <td style="padding:10px;color:var(--muted)">'#5eead4'</td>
+                <td style="padding:10px">Hex color for specular hover reflection</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--line)">
+                <td style="padding:10px;font-family:monospace;color:#fff">speed</td>
+                <td style="padding:10px;color:var(--b)">number</td>
+                <td style="padding:10px;color:var(--muted)">1.2</td>
+                <td style="padding:10px">CSS animation keyframe duration in seconds</td>
+              </tr>
+              <tr>
+                <td style="padding:10px;font-family:monospace;color:#fff">borderRadius</td>
+                <td style="padding:10px;color:var(--b)">number</td>
+                <td style="padding:10px;color:var(--muted)">14</td>
+                <td style="padding:10px">Corner radius in pixels</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: Component Marketplace 2.0 (21st.dev-Inspired) -->
 <section id="components">
   <canvas id="component-canvas" class="section-canvas"></canvas>
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2>Visual Component Marketplace</h2>
-        <p class="sub">Discover, inspect, and copy production-ready animated components inspired by 21st.dev. Every card features a verified, large preview composition.</p>
+        <h2>Component Marketplace 2.0</h2>
+        <p class="sub">Curated, battle-tested UI building blocks inspired by 21st.dev. Filter by category, click any card to load it in the live playground, or copy production code.</p>
       </div>
       <div>
-        <a class="btn o sm" href="https://21st.dev" target="_blank" rel="noopener noreferrer">Visit 21st.dev Registry ↗</a>
+        <a class="btn o sm" href="https://21st.dev" target="_blank" rel="noopener noreferrer">Official 21st.dev Registry ↗</a>
       </div>
     </div>
 
-    <!-- Featured Component Showcase -->
-    <div class="featured-showcase">
-      <div class="featured-showcase-img">
-        <img src="images/comp-bento.svg" alt="Interactive Bento Grid Component" loading="lazy">
-      </div>
-      <div class="featured-showcase-content">
-        <span class="badge" style="margin-bottom:12px;display:inline-block">FEATURED COMPONENT</span>
-        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;margin-bottom:12px">Interactive Bento Grid Matrix</h3>
-        <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px">Responsive asymmetrical bento grid featuring live WebGL shader nodes, dynamic telemetry gauges, and specular light-tracking borders.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button class="btn sm" onclick="copyText('<BentoGrid columns={3} gap={24}>\n  <BentoCard title=\'Shader Matrix\' glow=\'#5eead4\' />\n</BentoGrid>', 'Bento component code copied!')">Copy React Code</button>
-          <button class="btn o sm" onclick="openModal(0)">Inspect Details</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Component Category Filter Bar -->
+    <!-- Category Filter Bar -->
     <div class="filter-bar" id="comp-chips">
       <span class="chip on" data-filter="all">All Components</span>
       <span class="chip" data-filter="Hero">Hero</span>
@@ -674,31 +881,51 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
       <span class="chip" data-filter="Bento">Bento</span>
       <span class="chip" data-filter="Chat">AI Chat</span>
       <span class="chip" data-filter="Forms">Forms</span>
-      <span class="chip" data-filter="3D">3D Viewport</span>
+      <span class="chip" data-filter="Typography">Typography</span>
+      <span class="chip" data-filter="3D">3D Elements</span>
+      <span class="chip" data-filter="Backgrounds">Backgrounds</span>
     </div>
 
     <!-- Component Cards Grid -->
-    <div class="cards-grid" id="comp-grid">
-      <!-- Cards populated dynamically via JS -->
-    </div>
+    <div class="cards-grid" id="comp-grid"></div>
   </div>
 </section>
 
-<!-- Section 2: Prompt Discovery (Visual Gallery) -->
+<!-- Section 3: Libraries.dev Creative Effects Playground -->
+<section id="effects">
+  <canvas id="effects-canvas" class="section-canvas"></canvas>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Creative Effects &amp; Shader Playground</h2>
+        <p class="sub">Experience live interactive effects from the Libraries.dev ecosystem. Adjust parameters in real-time, test shaders, and copy prompt instructions for coding agents.</p>
+      </div>
+      <div>
+        <a class="btn o sm" href="https://libraries.dev" target="_blank" rel="noopener noreferrer">Official Libraries.dev Website ↗</a>
+      </div>
+    </div>
+
+    <!-- Effects Grid -->
+    <div class="cards-grid" id="effects-grid"></div>
+  </div>
+</section>
+
+<!-- Section 4: Prompt Library 2.0 -->
 <section id="library">
   <canvas id="prompt-canvas" class="section-canvas"></canvas>
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2>AI Motion &amp; 3D Prompt Discovery</h2>
-        <p class="sub">16 battle-tested prompts for generating interactive websites with Claude, GPT-4o, and Gemini. Click any card for starter code, technical specs, and live 3D view.</p>
+        <h2>Prompt Library 2.0</h2>
+        <p class="sub">16 production AI prompts covering 3D WebGL scenes, SaaS dashboards, RAG interfaces, and micro-interactions. Real-time search, category filtering, and instant copy.</p>
       </div>
-      <div>
-        <span class="badge" id="prompt-count-badge">16 Prompts Loaded</span>
+      <div style="display:flex;gap:12px;align-items:center">
+        <input class="control-input" id="prompt-search-input" placeholder="Search prompts (e.g. Three.js, SaaS)..." style="width:260px">
+        <span class="badge" id="prompt-count-badge">16 Prompts</span>
       </div>
     </div>
 
-    <!-- Filter Bar for Prompts -->
+    <!-- Prompt Filter Bar -->
     <div class="filter-bar" id="prompt-chips"></div>
 
     <!-- Prompts Grid -->
@@ -706,60 +933,116 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
   </div>
 </section>
 
-<!-- Section 3: Libraries & Creative Effects (Libraries.dev-Inspired) -->
-<section id="libraries">
-  <canvas id="libraries-canvas" class="section-canvas"></canvas>
+<!-- Section 5: AI Coding Agent Workflow -->
+<section id="agents">
   <div class="wrap">
     <div class="section-head">
       <div>
-        <h2>Creative Effects &amp; Shader Registry</h2>
-        <p class="sub">Verified open-source effects, shaders, and animations inspired by Libraries.dev. Complete with installation commands and usage specifications.</p>
+        <h2>AI Coding Agent Workflow</h2>
+        <p class="sub">Seamlessly inject PromptDock 6.0 prompts and components into Google Antigravity, Claude Code, Cursor, Codex, and Gemini to generate interactive applications in minutes.</p>
       </div>
       <div>
-        <a class="btn o sm" href="https://libraries.io" target="_blank" rel="noopener noreferrer">Visit Libraries.dev (5M+ pkgs) ↗</a>
+        <span class="badge live">● AGENT READY</span>
       </div>
     </div>
 
-    <!-- Featured Library Card -->
-    <div class="featured-showcase">
-      <div class="featured-showcase-img">
-        <img src="images/lib-thinking-orb.svg" alt="AI Thinking Orb Shader Effect" loading="lazy">
-      </div>
-      <div class="featured-showcase-content">
-        <span class="badge" style="margin-bottom:12px;display:inline-block">FEATURED SHADER FX</span>
-        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;margin-bottom:12px">AI Thinking Orb Shader</h3>
-        <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:20px">Multi-pass simplex noise sphere with audio-reactive vertex displacement. Optimized for low-end GPUs with adaptive raymarching.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <button class="btn sm" onclick="copyText('npm i @promptdock/thinking-orb three', 'Install command copied!')">npm i @promptdock/thinking-orb</button>
-          <a class="btn o sm" href="https://threejs.org" target="_blank" rel="noopener noreferrer">View Three.js Docs ↗</a>
+    <!-- Visual Agent Diagram Banner -->
+    <div style="background:rgba(10, 15, 27, 0.95);border:1px solid var(--line-bright);border-radius:24px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,0.7);margin-bottom:40px;position:relative;z-index:2">
+      <img src="images/workflow-agents.svg" alt="AI Coding Agent Production Pipeline Diagram" loading="lazy" style="width:100%;height:auto;display:block;border-radius:12px">
+    </div>
+
+    <!-- Agent Prompt Templates Grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;position:relative;z-index:2">
+      <div class="visual-card" style="padding:24px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700">Three.js Scene Agent Spec</h4>
+          <span class="badge">SPECIFICATION</span>
         </div>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:16px">Ready-to-paste prompt instructing coding agents to build a high-framerate Three.js canvas with particle fields and disposal hooks.</p>
+        <button class="btn sm" onclick="copyText('Act as a Three.js Engineer. Build an interactive WebGL scene with an Icosahedron wireframe, rotating Torus Knot, and 500 star particles. Add mouse parallax lerp, RequestAnimationFrame cancellation, and IntersectionObserver pausing when scrolled off screen.', 'Three.js Agent Prompt copied!')">Copy Agent Prompt</button>
+      </div>
+
+      <div class="visual-card" style="padding:24px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700">21st.dev Component Agent Spec</h4>
+          <span class="badge">SPECIFICATION</span>
+        </div>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:16px">Structured prompt instructing coding agents to build a modern React 19 + Tailwind component with spring physics and keyboard shortcuts.</p>
+        <button class="btn sm" onclick="copyText('Act as a Senior Frontend Architect. Scaffold a production React 19 component inspired by 21st.dev with Tailwind CSS, spring damping, accessible aria landmarks, and dark mode support.', 'Component Agent Prompt copied!')">Copy Agent Prompt</button>
+      </div>
+
+      <div class="visual-card" style="padding:24px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <h4 style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700">Full-Stack Edge Release Spec</h4>
+          <span class="badge">SPECIFICATION</span>
+        </div>
+        <p style="color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:16px">Prompt instructing agents to configure Vercel edge caching, immutable asset headers, and automated GitHub Actions verification.</p>
+        <button class="btn sm" onclick="copyText('Act as a DevOps Engineer. Configure vercel.json with immutable asset caching for /images/(.*) (31536000s) and security headers. Create a GitHub Actions workflow testing on Node 18/20/22.', 'DevOps Agent Prompt copied!')">Copy Agent Prompt</button>
       </div>
     </div>
-
-    <!-- Effects Grid -->
-    <div class="cards-grid" id="lib-grid"></div>
   </div>
 </section>
 
-<!-- Section 4: 3D & Web Design Ecosystem -->
+<!-- Section 6: Workflow Studio -->
+<section id="workflow">
+  <canvas id="workflow-canvas" class="section-canvas"></canvas>
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Workflow Studio: Idea to Edge Release</h2>
+        <p class="sub">Interactive 8-stage engineering pipeline from initial prompt definition to automated testing and global Vercel production edge release.</p>
+      </div>
+    </div>
+
+    <!-- Visual Pipeline Diagram -->
+    <div style="background:rgba(9, 13, 24, 0.85);border:1px solid var(--line-bright);border-radius:24px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,0.7);margin-bottom:40px;position:relative;z-index:2">
+      <img src="images/workflow-pipeline.svg" alt="PromptDock 6.0 End-to-End Production Pipeline" loading="lazy" style="width:100%;height:auto;display:block;border-radius:12px">
+    </div>
+
+    <!-- Platform Architecture Blueprint -->
+    <div style="background:rgba(9, 13, 24, 0.85);border:1px solid var(--line-bright);border-radius:24px;padding:30px;box-shadow:0 20px 60px rgba(0,0,0,0.7);margin-top:40px;position:relative;z-index:2">
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;margin-bottom:18px;color:#fff">PromptDock 6.0 Platform Architecture</h3>
+      <img src="images/architecture-dock.svg" alt="PromptDock 6.0 Platform Architecture Diagram" loading="lazy" style="width:100%;height:auto;display:block;border-radius:12px">
+    </div>
+  </div>
+</section>
+
+<!-- Section 7: Showcase Projects & Case Studies (8 Projects) -->
+<section id="examples">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Showcase Projects &amp; Case Studies</h2>
+        <p class="sub">Eight high-fidelity web compositions and interactive applications built with PromptDock 6.0 motion prompts and component stacks. Clearly labeled as interactive demos or concept mockups.</p>
+      </div>
+      <div>
+        <span class="badge">8 DOCUMENTED PROJECTS</span>
+      </div>
+    </div>
+
+    <!-- 8 Showcase Cards Grid -->
+    <div class="cards-grid" id="examples-grid"></div>
+  </div>
+</section>
+
+<!-- Section 8: Resources Directory & Ecosystem -->
 <section id="resources">
-  <canvas id="resources-canvas" class="section-canvas"></canvas>
   <div class="wrap">
     <div class="section-head">
       <div>
         <h2>3D &amp; Web Design Ecosystem</h2>
-        <p class="sub">Curated, battle-tested open-source registries, libraries, and design systems for motion-first web engineers.</p>
+        <p class="sub">Curated, battle-tested open-source registries, libraries, and design systems for motion-first web engineers. Verified links and license details.</p>
       </div>
     </div>
 
-    <!-- 21st.dev and Libraries.dev Dual Hero Showcase -->
+    <!-- Dual Hero Showcases for 21st.dev and Libraries.dev -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;margin-bottom:40px;position:relative;z-index:2">
-      <div class="featured-showcase" style="margin-bottom:0;grid-template-columns:1fr">
-        <div class="featured-showcase-img" style="height:240px;border-right:0;border-bottom:1px solid var(--line)">
-          <img src="images/res-21st.svg" alt="21st.dev Registry Showcase" loading="lazy">
+      <div class="visual-card" style="padding:0">
+        <div style="height:240px;border-bottom:1px solid var(--line);background:#090d18">
+          <img src="images/res-21st.svg" alt="21st.dev Component Registry" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
         </div>
         <div style="padding:24px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
             <h3 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800">21st.dev</h3>
             <span class="badge">FREE / MIT</span>
           </div>
@@ -768,17 +1051,17 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
         </div>
       </div>
 
-      <div class="featured-showcase" style="margin-bottom:0;grid-template-columns:1fr">
-        <div class="featured-showcase-img" style="height:240px;border-right:0;border-bottom:1px solid var(--line)">
-          <img src="images/res-libraries.svg" alt="Libraries.dev Registry Showcase" loading="lazy">
+      <div class="visual-card" style="padding:0">
+        <div style="height:240px;border-bottom:1px solid var(--line);background:#090d18">
+          <img src="images/res-libraries.svg" alt="Libraries.dev UI Effects Library" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
         </div>
         <div style="padding:24px">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
             <h3 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800">Libraries.dev</h3>
             <span class="badge">OPEN SOURCE</span>
           </div>
-          <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:16px">Comprehensive open-source package directory and dependency graph tracking millions of libraries, licenses, and releases across 36 package managers.</p>
-          <a class="btn sm" href="https://libraries.io" target="_blank" rel="noopener noreferrer">Explore Libraries.dev ↗</a>
+          <p style="color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:16px">Official UI effects library for AI interfaces, shader backgrounds, thinking orbs, and generative motion components.</p>
+          <a class="btn sm" href="https://libraries.dev" target="_blank" rel="noopener noreferrer">Explore Libraries.dev ↗</a>
         </div>
       </div>
     </div>
@@ -788,112 +1071,16 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
   </div>
 </section>
 
-<!-- Section 5: Workflow Studio -->
-<section id="workflow">
-  <canvas id="workflow-canvas" class="section-canvas"></canvas>
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Workflow Studio: Idea to Production Edge</h2>
-        <p class="sub">A complete interactive 8-stage pipeline from initial AI synthesis to global Vercel deployment.</p>
-      </div>
-    </div>
-
-    <!-- Visual Flowchart Diagram Banner -->
-    <div class="workflow-diagram-wrap">
-      <img src="images/workflow-pipeline.svg" alt="PromptDock 5.0 End-to-End Production Pipeline Diagram" loading="lazy">
-    </div>
-
-    <!-- 8 Stage Interactive Cards -->
-    <div class="workflow-grid">
-      <div class="workflow-step-card">
-        <div class="workflow-step-num">01</div>
-        <h3>Idea &amp; Specs</h3>
-        <p>Define product requirements, visual style, 3D interaction concepts, and target devices.</p>
-        <span class="workflow-cmd">Concept · PRD · Wireframe</span>
-      </div>
-      <div class="workflow-step-card">
-        <div class="workflow-step-num">02</div>
-        <h3>Prompt Discovery</h3>
-        <p>Select verified 3D &amp; motion prompts with starter code, Three.js shaders, and GSAP physics.</p>
-        <span class="workflow-cmd">PromptDock 5.0 Catalog</span>
-      </div>
-      <div class="workflow-step-card">
-        <div class="workflow-step-num">03</div>
-        <h3>Component Pick</h3>
-        <p>Browse 21st.dev inspired components for navbars, buttons, pricing, and bento grids.</p>
-        <span class="workflow-cmd">21st.dev Component Sync</span>
-      </div>
-      <div class="workflow-step-card">
-        <div class="workflow-step-num">04</div>
-        <h3>AI Synthesis</h3>
-        <p>Execute prompt with Claude, GPT-4o, or Gemini inside your Antigravity or VS Code IDE.</p>
-        <span class="workflow-cmd">Antigravity / VS Code</span>
-      </div>
-      <div class="workflow-step-card">
-        <div class="workflow-step-num">05</div>
-        <h3>Local Development</h3>
-        <p>Iterate with live reload, configure WebGL shaders, camera controls, and GSAP timelines.</p>
-        <span class="workflow-cmd">npm start (Local 3000)</span>
-      </div>
-      <div class="workflow-step-card">
-        <div class="workflow-step-num">06</div>
-        <h3>Automated QA</h3>
-        <p>Run asset verification, build compilation, link audits, and WebGL fallback checks.</p>
-        <span class="workflow-cmd">npm test &amp;&amp; npm run build</span>
-      </div>
-      <div class="workflow-step-card">
-        <div class="workflow-step-num">07</div>
-        <h3>GitHub Push</h3>
-        <p>Version-control commits and trigger multi-version Node.js matrix GitHub Actions CI.</p>
-        <span class="workflow-cmd">git push origin main</span>
-      </div>
-      <div class="workflow-step-card">
-        <div class="workflow-step-num">08</div>
-        <h3>Vercel Deploy</h3>
-        <p>Instant global edge CDN deployment with automatic asset caching and SSL security.</p>
-        <span class="workflow-cmd">vercel deploy --prod</span>
-      </div>
-    </div>
-
-    <!-- Application Architecture Diagram Banner -->
-    <div class="workflow-diagram-wrap" style="margin-top:50px">
-      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;margin-bottom:18px;color:#fff">Platform Architecture Diagram</h3>
-      <img src="images/architecture-dock.svg" alt="PromptDock 5.0 Platform Architecture Diagram" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<!-- Section 6: Live Examples & Project Showcase (8 Projects) -->
-<section id="examples">
-  <canvas id="examples-canvas" class="section-canvas"></canvas>
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <h2>Showcase Projects &amp; Case Studies</h2>
-        <p class="sub">Eight high-fidelity web compositions and interactive applications built with PromptDock 5.0 motion prompts and component stacks.</p>
-      </div>
-      <div>
-        <span class="badge">8 PROJECTS DOCUMENTED</span>
-      </div>
-    </div>
-
-    <!-- 8 Showcase Cards Grid -->
-    <div class="cards-grid" id="examples-grid"></div>
-  </div>
-</section>
-
-<!-- Section 7: Newsletter & Community -->
+<!-- Section 9: Newsletter & Local Community Subscription -->
 <section id="join">
-  <canvas id="newsletter-canvas" class="section-canvas"></canvas>
   <div class="wrap">
     <div style="background:rgba(12, 18, 32, 0.85);border:1px solid var(--line-bright);border-radius:24px;padding:50px 30px;text-align:center;max-width:760px;margin:auto;box-shadow:0 25px 60px rgba(0,0,0,0.8);position:relative;z-index:2">
-      <span class="badge" style="margin-bottom:14px;display:inline-block">WEEKLY COMPONENT DROPS</span>
+      <span class="badge" style="margin-bottom:14px;display:inline-block">WEEKLY 3D DROPS</span>
       <h2 style="margin-bottom:12px">Stay Ahead of the Motion Curve</h2>
-      <p class="sub" style="margin:0 auto 28px">Fresh 3D prompts, WebGL shader recipes, and 21st.dev component drops delivered every Friday. No noise.</p>
+      <p class="sub" style="margin:0 auto 28px">Fresh 3D prompts, WebGL shader recipes, and 21st.dev component drops delivered every Friday. (Local browser demo).</p>
       <form id="newsletter-form" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:520px;margin:auto">
         <input id="email-input" type="email" placeholder="engineer@domain.com" required style="flex:1;min-width:240px;background:#090d18;border:1px solid var(--line);padding:14px 20px;border-radius:12px;color:#fff;outline:none">
-        <button class="btn" type="submit">Subscribe to Drops</button>
+        <button class="btn" type="submit">Subscribe (Local Demo)</button>
       </form>
       <div id="newsletter-msg" style="margin-top:14px;font-size:13px;color:var(--a)"></div>
     </div>
@@ -903,20 +1090,46 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
 <!-- Footer -->
 <footer style="padding:40px 0;border-top:1px solid var(--line);background:#030509;font-size:13px;color:var(--muted)">
   <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
-    <span>&copy; 2026 PromptDock 5.0 Ultra. Designed &amp; engineered for creative developers.</span>
+    <span>&copy; 2026 PromptDock 6.0 Ultra. Designed &amp; engineered for creative developers.</span>
     <span>Inspired by 21st.dev &amp; Libraries.dev</span>
   </div>
 </footer>
 
-<!-- Command Palette Modal -->
+<!-- Command Palette Modal (Ctrl + K) -->
 <div class="cmd-palette" id="cmd-palette">
   <div class="cmd-box">
-    <input class="cmd-search-input" id="cmd-input" placeholder="Type a component, prompt, library, or effect..." autofocus>
+    <input class="cmd-search-input" id="cmd-input" placeholder="Type a component, prompt, effect, or resource (Use Arrow keys + Enter)..." autofocus>
     <div class="cmd-results" id="cmd-results"></div>
   </div>
 </div>
 
-<!-- Interactive Detail Modal -->
+<!-- Project Detail Modal -->
+<div class="modal" id="proj-modal">
+  <div class="modal-box">
+    <div class="modal-preview-viewport">
+      <img id="projModalImg" src="" alt="Project preview">
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <h3 id="projModalTitle" style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:800"></h3>
+      <span class="badge" id="projModalStatus"></span>
+    </div>
+    <p class="sub" id="projModalDesc" style="margin-bottom:18px"></p>
+    <div style="margin-bottom:18px">
+      <span style="font-size:12px;font-weight:700;color:var(--a);text-transform:uppercase;letter-spacing:.05em">Technology Stack:</span>
+      <div id="projModalStack" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"></div>
+    </div>
+    <div style="margin-bottom:24px">
+      <span style="font-size:12px;font-weight:700;color:var(--a);text-transform:uppercase;letter-spacing:.05em">Architecture &amp; Features:</span>
+      <p id="projModalArch" style="font-size:13px;color:#cbd5e1;line-height:1.6;margin-top:8px;background:#070b14;padding:16px;border-radius:12px;border:1px solid var(--line)"></p>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:flex-end">
+      <button class="btn o sm" id="projModalClose">Close</button>
+      <button class="btn sm" id="projModalTry">Launch Playground Sandbox</button>
+    </div>
+  </div>
+</div>
+
+<!-- Prompt Detail Modal -->
 <div class="modal" id="modal">
   <div class="modal-box">
     <div class="modal-preview-viewport">
@@ -927,17 +1140,13 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
     <p class="sub" id="mD" style="margin-bottom:18px"></p>
 
     <div class="modal-tabs">
-      <button class="m-tab active" data-tab="tab-preview">Visual Preview</button>
-      <button class="m-tab" data-tab="tab-prompt">AI Prompt</button>
+      <button class="m-tab active" data-tab="tab-prompt">AI Prompt</button>
       <button class="m-tab" data-tab="tab-code">Starter Code</button>
       <button class="m-tab" data-tab="tab-specs">Technical Specs</button>
       <button class="m-tab" data-tab="tab-3d">Live 3D View</button>
     </div>
 
-    <div id="tab-preview" class="tab-content active">
-      <p style="color:var(--muted);font-size:13px;line-height:1.6">High-resolution verified composition preview. This design system pattern provides responsive breakpoints, hardware-accelerated transforms, and clean semantic markup.</p>
-    </div>
-    <div id="tab-prompt" class="tab-content">
+    <div id="tab-prompt" class="tab-content active">
       <pre id="mP"></pre>
     </div>
     <div id="tab-code" class="tab-content">
@@ -948,7 +1157,7 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
     </div>
     <div id="tab-3d" class="tab-content">
       <p style="color:var(--muted);font-size:13px;margin-bottom:8px">Interactive 3D geometry rendered in real time with WebGL. Click and drag in the viewport above to rotate.</p>
-      <pre>Geometry: MeshStandardMaterial + PBR Lighting&#10;Shaders: Fragment raymarching enabled&#10;Performance: 60 FPS target</pre>
+      <pre>Geometry: MeshStandardMaterial + PBR Point Lights&#10;Shaders: Fragment raymarching enabled&#10;Performance: 60 FPS target</pre>
     </div>
 
     <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:24px">
@@ -962,7 +1171,7 @@ p.sub{color:var(--muted);font-size:16px;max-width:680px}
 
 <script>
 // =====================================================================
-// DATA STRUCTURES: PROMPTS, COMPONENTS, LIBRARIES, RESOURCES, EXAMPLES
+// DATA CATALOG: PROMPTS, COMPONENTS, LIBRARIES.DEV EFFECTS, RESOURCES, CASES
 // =====================================================================
 
 // 1. Prompts Catalog (16 Items)
@@ -985,38 +1194,254 @@ const PROMPTS = [
   ["Agency One","Landing","Studio site with case-study carousel.","images/agency-one.svg","Create a creative agency landing page with a full-width case-study carousel (drag + arrow keys), a services bento grid, a client logo marquee, and a contact section with a validated form.","CSS Grid, Keyboard Nav\nSmooth momentum snap","carousel.scrollBy({ left: 300, behavior: 'smooth' });"]
 ];
 
-// 2. Component Marketplace (21st.dev-Inspired, 11 Items)
+// 2. Component Marketplace (21st.dev-Inspired, 11 Items with Real Playground Implementations)
 const COMPONENTS = [
-  ["Split Screen 3D Hero","Hero","Full-width hero with Three.js WebGL canvas, dynamic island, and magnetic action buttons.","images/comp-hero.svg","React 19 + Three.js + Tailwind","<HeroSplitCanvas headline='Architect Next-Gen 3D' />"],
-  ["Dynamic Island Dock","Navigation","Morphing floating dock navbar with tooltip previews and spring expansion physics.","images/comp-navbar.svg","Framer Motion + Tailwind","<DockNav items={[{ label: 'Home' }, { label: 'Components' }]} />"],
-  ["Interactive Button Suite","Buttons","Border beam shimmer, magnetic cursor pull, and liquid gradient shine buttons.","images/comp-buttons.svg","GSAP + CSS Keyframes","<MagneticButton glow='#5eead4'>Deploy Now</MagneticButton>"],
-  ["3D Perspective Tilt Cards","Cards","Physics-driven card tilt calculating cursor offsets with dynamic specular glare overlays.","images/comp-cards.svg","CSS 3D Transforms + Vanilla JS","<PerspectiveCard tiltMax={15} glare={true} />"],
-  ["Glassmorphic Pricing Table","Pricing","Interactive tiered pricing table with monthly/annual toggle and glowing highlight card.","images/comp-pricing.svg","Tailwind + Framer Motion","<PricingTable tiers={['Starter', 'Pro Studio', 'Enterprise']} />"],
-  ["Asymmetrical Bento Grid","Bento","Multi-aspect ratio grid layout featuring live WebGL shader nodes and live sparklines.","images/comp-bento.svg","CSS Grid + Canvas2D","<BentoGrid columns={3} gap={20} />"],
-  ["AI Copilot Chat Interface","Chat","Streaming chat interface with code execution playground and real-time token metrics.","images/comp-chat.svg","React + Lucide Icons","<CopilotChat stream={true} model='v5.0' />"],
-  ["Multi-Step Inquiry Form","Forms","Glassmorphic inquiry wizard with reactive step indicators and client-side validation.","images/comp-forms.svg","React Hook Form + Zod","<StepWizard steps={['Specs', 'Tech', 'Confirm']} />"],
-  ["Kinetic Variable Typography","Animated Text","Scroll-velocity skewed variable typography with gradient text clipping.","images/comp-text.svg","CSS Variable Fonts + GSAP","<KineticText text='WEBSITES THAT MOVE' />"],
-  ["Three.js 3D Viewport","3D","WebGL canvas container with orbit controls, inertia dampening, and graceful fallback.","images/comp-3d.svg","Three.js WebGL","<ThreeViewport geometry='icosahedron' />"],
-  ["Liquid Mesh Gradient","Backgrounds","Animated liquid shader mesh gradient with floating starfield particle cloud.","images/comp-backgrounds.svg","GLSL Fragment Shader","<MeshGradient colors={['#5eead4', '#818cf8']} />"]
+  {
+    name: "Magnetic Glowing Button",
+    cat: "Buttons",
+    desc: "Physics-driven button with cursor attraction, dynamic border-beam light runner, and glowing specular reflection.",
+    thumb: "images/comp-buttons.svg",
+    stack: "React 19 + GSAP + Tailwind",
+    status: "Live Interactive Sandbox",
+    code: `export function MagneticButton({ label = "Deploy to Production ➔", glowColor = "#5eead4", speed = 1.2, borderRadius = 14 }) {
+  const btnRef = React.useRef(null);
+  
+  React.useEffect(() => {
+    const btn = btnRef.current;
+    if (!btn) return;
+    const onMove = (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      gsap.to(btn, { x: x * 0.25, y: y * 0.25, duration: 0.3, ease: "power2.out" });
+    };
+    const onLeave = () => gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+    btn.addEventListener("mousemove", onMove);
+    btn.addEventListener("mouseleave", onLeave);
+    return () => {
+      btn.removeEventListener("mousemove", onMove);
+      btn.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
+  return (
+    <button ref={btnRef} className="relative px-8 py-4 font-bold text-black transition-all" style={{ borderRadius: \`\${borderRadius}px\`, background: glowColor }}>
+      {label}
+    </button>
+  );
+}`
+  },
+  {
+    name: "Dynamic Island Dock Navigation",
+    cat: "Navigation",
+    desc: "Morphing floating dock navbar inspired by Apple Dynamic Island with spring expansion and tooltip previews.",
+    thumb: "images/comp-navbar.svg",
+    stack: "Framer Motion + Tailwind CSS",
+    status: "Live Interactive Sandbox",
+    code: `export function DynamicIslandDock() {
+  const [expanded, setExpanded] = React.useState(false);
+  return (
+    <div onClick={() => setExpanded(!expanded)} className="cursor-pointer bg-black/90 text-white rounded-full px-6 py-3 transition-all flex items-center gap-4">
+      <span className="w-3 h-3 rounded-full bg-teal-400 animate-pulse"></span>
+      <span>{expanded ? "Dynamic Island (Expanded Navigation Tray)" : "Now Active"}</span>
+    </div>
+  );
+}`
+  },
+  {
+    name: "3D Perspective Tilt Card",
+    cat: "Cards",
+    desc: "Physics-driven card tilt calculating cursor offsets in real time with dynamic specular reflection glare maps.",
+    thumb: "images/comp-cards.svg",
+    stack: "CSS 3D Perspective + Vanilla JS",
+    status: "Live Interactive Sandbox",
+    code: `export function PerspectiveTiltCard({ title = "Spatial Mesh 3D" }) {
+  return (
+    <div className="w-80 h-96 bg-slate-900 border border-slate-700 rounded-2xl p-6 shadow-2xl transition-transform">
+      <h3 className="text-xl font-bold text-white">{title}</h3>
+    </div>
+  );
+}`
+  },
+  {
+    name: "Glassmorphic Pricing Table",
+    cat: "Pricing",
+    desc: "Interactive tiered pricing table with monthly/annual switch and highlighted popular tier card.",
+    thumb: "images/comp-pricing.svg",
+    stack: "Tailwind CSS + Framer Motion",
+    status: "Live Interactive Sandbox",
+    code: `export function PricingTable() {
+  const [annual, setAnnual] = React.useState(false);
+  return (
+    <div className="flex gap-4 p-8 bg-slate-950 rounded-2xl">
+      <div className="p-6 bg-slate-900 rounded-xl">
+        <h4>Pro Studio</h4>
+        <div className="text-3xl font-bold">{annual ? "$290/yr" : "$29/mo"}</div>
+      </div>
+    </div>
+  );
+}`
+  },
+  {
+    name: "Asymmetrical Bento Grid",
+    cat: "Bento",
+    desc: "Multi-aspect ratio grid layout featuring live WebGL shader nodes, telemetry sparklines, and glowing borders.",
+    thumb: "images/comp-bento.svg",
+    stack: "CSS Grid + HTML5 Canvas",
+    status: "Live Interactive Sandbox",
+    code: `export function BentoGrid() {
+  return (
+    <div className="grid grid-cols-3 gap-4 p-6 bg-slate-950 rounded-2xl">
+      <div className="col-span-2 p-6 bg-slate-900 rounded-xl">Shader Node</div>
+      <div className="p-6 bg-slate-900 rounded-xl">Telemetry</div>
+    </div>
+  );
+}`
+  },
+  {
+    name: "AI Copilot Chat Interface",
+    cat: "Chat",
+    desc: "Streaming chat interface with code execution sandbox and real-time token metrics.",
+    thumb: "images/comp-chat.svg",
+    stack: "React + Lucide Icons",
+    status: "Live Interactive Sandbox",
+    code: `export function CopilotChat() {
+  return (
+    <div className="w-full max-w-lg bg-slate-900 rounded-2xl p-6 border border-slate-800">
+      <div className="text-teal-400 font-bold mb-4">✦ Neural Copilot 6.0</div>
+    </div>
+  );
+}`
+  },
+  {
+    name: "Multi-Step Inquiry Form",
+    cat: "Forms",
+    desc: "Glassmorphic inquiry wizard with reactive step indicators and client-side validation.",
+    thumb: "images/comp-forms.svg",
+    stack: "React Hook Form + Zod",
+    status: "Live Interactive Sandbox",
+    code: `export function StepWizardForm() {
+  const [step, setStep] = React.useState(1);
+  return <div className="p-6 bg-slate-900 rounded-2xl">Step {step} of 3</div>;
+}`
+  },
+  {
+    name: "Kinetic Variable Typography",
+    cat: "Typography",
+    desc: "Scroll-velocity skewed variable typography with gradient text clipping.",
+    thumb: "images/comp-text.svg",
+    stack: "CSS Variable Fonts + GSAP",
+    status: "Live Interactive Sandbox",
+    code: `export function KineticTypography() {
+  return <h1 className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-indigo-500">WEBSITES THAT MOVE</h1>;
+}`
+  },
+  {
+    name: "Three.js 3D Viewport",
+    cat: "3D",
+    desc: "WebGL canvas container with orbit controls, inertia dampening, and graceful fallback.",
+    thumb: "images/comp-3d.svg",
+    stack: "Three.js WebGL Canvas",
+    status: "Live Interactive Sandbox",
+    code: `export function ThreeViewport() {
+  return <canvas className="w-full h-80 rounded-2xl bg-black" />;
+}`
+  },
+  {
+    name: "Liquid Mesh Gradient",
+    cat: "Backgrounds",
+    desc: "Animated liquid shader mesh gradient with floating starfield particle cloud.",
+    thumb: "images/comp-backgrounds.svg",
+    stack: "GLSL Fragment Shader",
+    status: "Live Interactive Sandbox",
+    code: `export function MeshGradient() {
+  return <div className="w-full h-80 bg-gradient-to-br from-teal-900 via-indigo-950 to-black rounded-2xl" />;
+}`
+  },
+  {
+    name: "Split Screen 3D Hero",
+    cat: "Hero",
+    desc: "Full-width hero with Three.js WebGL canvas, dynamic island, and magnetic action buttons.",
+    thumb: "images/comp-hero.svg",
+    stack: "React 19 + Three.js + Tailwind",
+    status: "Live Interactive Sandbox",
+    code: `export function SplitHero() {
+  return <section className="grid grid-cols-2 p-12 bg-slate-950">Left & Right Viewports</section>;
+}`
+  }
 ];
 
-// 3. Libraries & Effects (Libraries.dev-Inspired, 6 Items)
-const LIBRARIES = [
-  ["Border Beam Effect","Shader & Border FX","Animated traveling light boundary tracking SVG paths. Zero-dependency CSS keyframe beam.","images/lib-border-beam.svg","npm i @promptdock/border-beam","MIT","https://github.com"],
-  ["AI Thinking Orb","3D Shader FX","Multi-pass simplex noise sphere with audio-reactive vertex displacement.","images/lib-thinking-orb.svg","npm i @promptdock/thinking-orb","MIT","https://threejs.org"],
-  ["Liquid Metal Chrome","WebGL Normal Maps","High-specular mercury reflections using custom normal maps and environmental cubemaps.","images/lib-liquid-metal.svg","npm i @promptdock/liquid-chrome","MIT","https://threejs.org"],
-  ["Gooey Fluid Blob","SVG Filters","Metaball fluid merging using feGaussianBlur and feColorMatrix transfer modes.","images/lib-gooey.svg","npm i @promptdock/gooey-blob","MIT","https://developer.mozilla.org"],
-  ["Audio Spectrum Bars","WebAudio Visualizer","Real-time audio frequency visualizer spectrum bars linked to AnalyserNode.","images/lib-voice-viz.svg","npm i @promptdock/voice-spectrum","MIT","https://developer.mozilla.org"],
-  ["Magnetic Spring Physics","Motion & Physics","GSAP and Motion-powered magnetic cursor attraction with elastic snap-back.","images/lib-magnetic.svg","npm i @promptdock/magnetic-ui","MIT","https://gsap.com"]
+// 3. Creative Effects from Libraries.dev Ecosystem (6 Verified Effects)
+const EFFECTS = [
+  {
+    name: "Border Beam Light Runner",
+    cat: "Border & Shader FX",
+    desc: "Animated traveling light beam tracking the perimeter of any card using SVG path keyframes. Zero external dependency.",
+    thumb: "images/lib-border-beam.svg",
+    pkg: "npm install motion",
+    officialUrl: "https://libraries.dev",
+    license: "MIT",
+    prompt: "Create an animated border beam light effect in React + Tailwind. A luminous cyan beam travels along the card perimeter with smooth CSS keyframes."
+  },
+  {
+    name: "AI Thinking Orb Shader",
+    cat: "3D Shader FX",
+    desc: "Multi-pass Simplex noise sphere with audio-reactive vertex displacement. Adaptive raymarching for 60 FPS performance.",
+    thumb: "images/lib-thinking-orb.svg",
+    pkg: "npm install three simplex-noise",
+    officialUrl: "https://libraries.dev",
+    license: "MIT",
+    prompt: "Build an interactive 3D AI Thinking Orb in Three.js using procedural simplex noise vertex displacement that pulses dynamically."
+  },
+  {
+    name: "Liquid Metal Chrome Shaders",
+    cat: "WebGL Normal Maps",
+    desc: "High-specular mercury reflections using custom normal maps and environmental cubemaps with cursor refraction ripples.",
+    thumb: "images/lib-liquid-metal.svg",
+    pkg: "npm install three",
+    officialUrl: "https://libraries.dev",
+    license: "MIT",
+    prompt: "Create a liquid metal chrome shader background in Three.js with metallic reflections and mouse ripple distortion."
+  },
+  {
+    name: "Gooey Fluid Blob Filter",
+    cat: "SVG Fluid Filters",
+    desc: "Metaball fluid merging using feGaussianBlur and feColorMatrix transfer modes with spring drag mechanics.",
+    thumb: "images/lib-gooey.svg",
+    pkg: "npm install motion",
+    officialUrl: "https://libraries.dev",
+    license: "MIT",
+    prompt: "Implement an SVG gooey fluid blob effect with SVG filters that smoothly merge when dragged close to each other."
+  },
+  {
+    name: "Voice Audio Spectrum Bars",
+    cat: "WebAudio Visualizer",
+    desc: "Real-time frequency visualizer spectrum bars linked to WebAudio AnalyserNode with responsive bar counts.",
+    thumb: "images/lib-voice-viz.svg",
+    pkg: "npm install @types/web-audio-api",
+    officialUrl: "https://libraries.dev",
+    license: "MIT",
+    prompt: "Build an audio spectrum visualizer in React connecting WebAudio API AnalyserNode to 24 animated frequency bars."
+  },
+  {
+    name: "Magnetic Spring Physics",
+    cat: "Motion & Physics",
+    desc: "Physics-driven magnetic cursor attraction with damping decay and elastic snap-back using GSAP 3.",
+    thumb: "images/lib-magnetic.svg",
+    pkg: "npm install gsap",
+    officialUrl: "https://libraries.dev",
+    license: "MIT",
+    prompt: "Create a magnetic button in GSAP where the element translates smoothly toward the cursor within a 100px radius."
+  }
 ];
 
-// 4. Resources Ecosystem (12 Verified Tools)
+// 4. Resources Ecosystem (12 Verified Tools, Libraries.dev correctly pointing to https://libraries.dev)
 const RESOURCES = [
-  ["21st.dev","https://21st.dev","Free","Component Registry","The npm for Design Engineers — directory of free, open-source animated React & Tailwind component libraries."],
-  ["Libraries.dev","https://libraries.io","Free","Package Registry","Open-source package and dependency graph registry tracking 5M+ open-source libraries."],
+  ["21st.dev","https://21st.dev","Free (MIT)","Component Registry","The npm for Design Engineers — directory of free, open-source animated React & Tailwind component libraries."],
+  ["Libraries.dev","https://libraries.dev","Free (Open Source)","UI Effects Library","Official open-source UI effects library for AI interfaces, shader backgrounds, thinking orbs, and motion components."],
   ["Aceternity UI","https://ui.aceternity.com","Free + Pro","Templates & FX","Trending animated components and full-page templates for Next.js, Tailwind, and Motion."],
   ["Magic UI","https://magicui.design","Free + Pro","Component Library","20+ animated React components and visual effects designed to drop directly into shadcn/ui codebases."],
-  ["shadcn/ui","https://ui.shadcn.com","Free","Base Architecture","The industry standard, accessible copy-paste component architecture that powers the modern UI ecosystem."],
+  ["shadcn/ui","https://ui.shadcn.com","Free (MIT)","Base Architecture","The industry standard, accessible copy-paste component architecture that powers the modern UI ecosystem."],
   ["Three.js","https://threejs.org","Free (MIT)","3D Engine","The premier JavaScript 3D library for creating WebGL GPU-accelerated graphics in modern web browsers."],
   ["React Three Fiber","https://r3f.docs.pmnd.rs","Free (MIT)","React 3D","A powerful React renderer for Three.js. Build declarative, reusable 3D component trees with ease."],
   ["GSAP","https://gsap.com","Free (Standard)","Animation Engine","High-performance JavaScript animation engine for smooth, complex timeline sequencing and ScrollTrigger."],
@@ -1026,44 +1451,289 @@ const RESOURCES = [
   ["LottieFiles","https://lottiefiles.com","Free + Pro","Vector Animations","Lightweight, scalable JSON and dotLottie animations for web apps and interactive UI workflows."]
 ];
 
-// 5. Showcase Projects & Case Studies (8 Documented Projects)
+// 5. Showcase Projects & Case Studies (8 Documented Projects with Functional Detail View)
 const EXAMPLES = [
-  ["Lumina 3D Agency","images/example-lumina.svg","Creative studio portfolio featuring procedural Three.js mesh canvas & magnetic physics.","Three.js + Tailwind","Interactive WebGL Demo"],
-  ["Nova AI Platform","images/example-nova.svg","SaaS analytics dashboard with glowing telemetry sparklines & real-time metric streams.","Next.js 15 + Tremor","Production Application"],
-  ["CyberFolio 2026","images/example-cyberfolio.svg","Awwwards Site of the Day developer portfolio with terminal aesthetics & 3D tilt.","GSAP + Canvas2D","Interactive Showcase"],
-  ["Chrono 3D Store","images/example-chrono.svg","Spatial luxury watch ecommerce experience with 3D product inspection & cart drawer.","Three.js + LocalStorage","Interactive Storefront"],
-  ["Nova SaaS Command Center","images/example-saas-dash.svg","Global cluster telemetry dashboard with real-time inference monitoring and latency charts.","Next.js 15 + WebSockets","Telemetry Dashboard"],
-  ["NeuralChat Copilot","images/example-ai-chat.svg","Multi-agent AI code synthesis playground with live code execution sandbox.","React 19 + Tailwind","Multi-Agent Interface"],
-  ["Apex Developer Portfolio","images/example-dev-folio.svg","Award-winning holographic developer portfolio with WebXR and particle physics.","Three.js + WebAudio","Awwwards Showcase"],
-  ["Spatial Sound 3D Hardware","images/example-product-3d.svg","Interactive 360-degree spatial headphone hardware showcase with planar acoustic inspection.","Three.js 3D Viewport","Hardware Showcase"]
+  {
+    name: "Lumina 3D Agency",
+    thumb: "images/example-lumina.svg",
+    desc: "Creative studio portfolio featuring procedural Three.js mesh canvas & magnetic physics.",
+    stack: ["Three.js", "Tailwind CSS", "GSAP 3"],
+    status: "Interactive Demonstration",
+    isLive: true,
+    arch: "Features an instanced mesh terrain with dynamic normal calculation, mouse parallax lerp, and zero memory leaks via explicit geometry disposal."
+  },
+  {
+    name: "Nova AI Platform",
+    thumb: "images/example-nova.svg",
+    desc: "SaaS analytics dashboard with glowing telemetry sparklines & real-time metric streams.",
+    stack: ["Next.js 15", "Recharts", "Tremor"],
+    status: "Interactive Demonstration",
+    isLive: true,
+    arch: "High-density data visualization grid updating at 60 FPS using HTML5 Canvas sparklines and Server-Sent Events (SSE)."
+  },
+  {
+    name: "CyberFolio 2026",
+    thumb: "images/example-cyberfolio.svg",
+    desc: "Awwwards Site of the Day developer portfolio with terminal aesthetics & 3D tilt.",
+    stack: ["GSAP 3", "HTML5 Canvas", "CSS 3D"],
+    status: "Interactive Demonstration",
+    isLive: true,
+    arch: "Terminal-style CLI prompt navigating between project showcases with specular glare map overlays and custom cursor."
+  },
+  {
+    name: "Chrono 3D Store",
+    thumb: "images/example-chrono.svg",
+    desc: "Spatial luxury watch ecommerce experience with 3D product inspection & cart drawer.",
+    stack: ["Three.js", "LocalStorage", "Tailwind"],
+    status: "Interactive Demonstration",
+    isLive: true,
+    arch: "360-degree orbital product inspection canvas with real-time materials switching and client-side cart drawer persistence."
+  },
+  {
+    name: "Nova SaaS Command Center",
+    thumb: "images/example-saas-dash.svg",
+    desc: "Global cluster telemetry dashboard with real-time inference monitoring and latency charts.",
+    stack: ["Next.js 15", "WebSockets", "CSS Grid"],
+    status: "Concept Mockup",
+    isLive: false,
+    arch: "Bento architecture dashboard displaying cluster latency, active user retention, and GPU shader performance metrics."
+  },
+  {
+    name: "NeuralChat Copilot",
+    thumb: "images/example-ai-chat.svg",
+    desc: "Multi-agent AI code synthesis playground with live code execution sandbox.",
+    stack: ["React 19", "Tailwind CSS", "Lucide"],
+    status: "Interactive Demonstration",
+    isLive: true,
+    arch: "Multi-agent copilot interface with streaming code generation, syntax highlighting, and live token throughput statistics."
+  },
+  {
+    name: "Apex Developer Portfolio",
+    thumb: "images/example-dev-folio.svg",
+    desc: "Award-winning holographic developer portfolio with WebXR and particle physics.",
+    stack: ["Three.js", "WebAudio API", "GSAP"],
+    status: "Concept Mockup",
+    isLive: false,
+    arch: "Holographic portfolio concept featuring WebAudio reactive particle fields and interactive 3D spatial project spheres."
+  },
+  {
+    name: "Spatial Sound 3D Hardware",
+    thumb: "images/example-product-3d.svg",
+    desc: "Interactive 360-degree spatial headphone hardware showcase with planar acoustic inspection.",
+    stack: ["Three.js WebGL", "Tailwind CSS"],
+    status: "Concept Mockup",
+    isLive: false,
+    arch: "Hardware showcase with 3D turntable rotation, planar magnetic driver exploded views, and pre-order state flow."
+  }
 ];
 
 // DOM Helper
 const $ = id => document.getElementById(id);
 
-// Marquee populate
+// Marquee
 $("mq").innerHTML = ("<span>Three.js 3D</span><span>React 19</span><span>Next.js 15</span><span>GSAP 3</span><span>WebGL Shaders</span><span>Tailwind CSS</span><span>21st.dev</span><span>Libraries.dev</span><span>Motion.dev</span><span>Spline 3D</span>").repeat(6);
 
 // =====================================================================
-// RENDERERS: COMPONENTS, PROMPTS, LIBRARIES, RESOURCES, EXAMPLES
+// INTERACTIVE PLAYGROUND STATE & LOGIC
+// =====================================================================
+let activeCompIdx = 0;
+let pgProps = {
+  text: "Deploy to Production ➔",
+  color: "#5eead4",
+  speed: 1.2,
+  glow: 60,
+  radius: 14,
+  theme: "dark",
+  bg: "grid",
+  viewport: "desktop"
+};
+
+function updatePlaygroundComponent() {
+  const mount = $("pg-component-mount");
+  const c = COMPONENTS[activeCompIdx];
+  $("pg-active-title").textContent = c.name;
+
+  // Render live interactive component based on active index
+  if (activeCompIdx === 0) { // Magnetic Button
+    mount.innerHTML = `
+      <div id="live-magnetic-container" style="padding:40px">
+        <button id="live-magnetic-btn" style="
+          position:relative;
+          padding:16px 36px;
+          border-radius:\${pgProps.radius}px;
+          border:0;
+          cursor:pointer;
+          font-family:'Space Grotesk',sans-serif;
+          font-weight:800;
+          font-size:15px;
+          color:#04060b;
+          background:\${pgProps.color};
+          box-shadow:0 0 \${pgProps.glow / 2}px \${pgProps.color};
+          transition:box-shadow .2s;
+        ">\${pgProps.text}</button>
+      </div>
+    `;
+    const btn = $("live-magnetic-btn");
+    btn.onmousemove = e => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      gsap.to(btn, { x: x * 0.35, y: y * 0.35, duration: 0.3, ease: "power2.out" });
+    };
+    btn.onmouseleave = () => gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+    btn.onclick = () => toast("Magnetic button clicked in live sandbox!");
+  } else if (activeCompIdx === 1) { // Dynamic Island Dock
+    mount.innerHTML = `
+      <div id="live-island-pill" style="
+        background:#000;
+        color:#fff;
+        border:1px solid rgba(255,255,255,0.15);
+        border-radius:99px;
+        padding:12px 24px;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        font-size:14px;
+        font-weight:700;
+        box-shadow:0 15px 35px rgba(0,0,0,0.8);
+        transition:all .3s cubic-bezier(0.16, 1, 0.3, 1);
+      ">
+        <span style="width:10px;height:10px;border-radius:50%;background:\${pgProps.color};box-shadow:0 0 10px \${pgProps.color}"></span>
+        <span id="island-text">Dynamic Island (Click to expand)</span>
+      </div>
+    `;
+    let expanded = false;
+    const pill = $("live-island-pill");
+    pill.onclick = () => {
+      expanded = !expanded;
+      if (expanded) {
+        pill.style.padding = "20px 36px";
+        pill.style.borderRadius = "24px";
+        $("island-text").textContent = "Now Playing: PromptDock 6.0 Interactive Audio Dock ⚡";
+      } else {
+        pill.style.padding = "12px 24px";
+        pill.style.borderRadius = "99px";
+        $("island-text").textContent = "Dynamic Island (Click to expand)";
+      }
+    };
+  } else if (activeCompIdx === 3) { // 3D Pricing Table
+    mount.innerHTML = `
+      <div style="background:#0c1221;border:1px solid \${pgProps.color};border-radius:\${pgProps.radius}px;padding:30px;width:280px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.7)">
+        <h4 style="font-weight:800;font-size:18px;margin-bottom:8px">Pro Studio</h4>
+        <div style="font-size:36px;font-weight:900;color:\${pgProps.color};margin-bottom:12px">$29<span style="font-size:13px;color:var(--muted)">/mo</span></div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:18px">Unlimited 3D prompts, 21st.dev sync &amp; code export.</p>
+        <button class="btn sm" style="width:100%;border-radius:\${pgProps.radius - 4}px;background:\${pgProps.color}" onclick="toast('Tier selected!')">\${pgProps.text}</button>
+      </div>
+    `;
+  } else {
+    // Default interactive card preview
+    mount.innerHTML = `
+      <div style="
+        background:#0d1424;
+        border:1px solid \${pgProps.color};
+        border-radius:\${pgProps.radius}px;
+        padding:32px;
+        max-width:380px;
+        text-align:center;
+        box-shadow:0 20px 40px rgba(0,0,0,0.8);
+      ">
+        <span style="color:\${pgProps.color};font-size:24px">✦</span>
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;margin:10px 0">\${c.name}</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:20px">\${c.desc}</p>
+        <button class="btn sm" style="border-radius:\${pgProps.radius - 4}px;background:\${pgProps.color}" onclick="toast('Sandbox action triggered!')">\${pgProps.text}</button>
+      </div>
+    `;
+  }
+
+  // Update dynamic code display
+  $("pg-code-display").textContent = c.code.replace("#5eead4", pgProps.color).replace("Deploy to Production ➔", pgProps.text);
+}
+
+// Playground Controls Event Listeners
+$("ctrl-text").oninput = e => { pgProps.text = e.target.value; updatePlaygroundComponent(); };
+$("ctrl-color").onchange = e => { pgProps.color = e.target.value; updatePlaygroundComponent(); };
+$("ctrl-speed").oninput = e => { pgProps.speed = +e.target.value; $("val-speed").textContent = pgProps.speed + "s"; updatePlaygroundComponent(); };
+$("ctrl-glow").oninput = e => { pgProps.glow = +e.target.value; $("val-glow").textContent = pgProps.glow + "%"; updatePlaygroundComponent(); };
+$("ctrl-radius").oninput = e => { pgProps.radius = +e.target.value; $("val-radius").textContent = pgProps.radius + "px"; updatePlaygroundComponent(); };
+
+// Viewport Switcher
+$("pg-vp-desktop").onclick = () => { $("pg-stage").style.width = "100%"; toast("Switched to Desktop View (100%)"); };
+$("pg-vp-tablet").onclick = () => { $("pg-stage").style.width = "768px"; $("pg-stage").style.margin = "auto"; toast("Switched to Tablet View (768px)"); };
+$("pg-vp-mobile").onclick = () => { $("pg-stage").style.width = "375px"; $("pg-stage").style.margin = "auto"; toast("Switched to Mobile View (375px)"); };
+
+// Theme Switcher
+$("pg-theme-toggle").onclick = () => {
+  const stage = $("pg-stage");
+  if (stage.classList.contains("theme-light")) {
+    stage.classList.remove("theme-light");
+    toast("Dark Theme Active");
+  } else {
+    stage.classList.add("theme-light");
+    toast("Light Theme Active");
+  }
+};
+
+// Canvas BG Switcher
+const bgs = ["bg-grid", "bg-glass", "bg-solid"];
+let bgIdx = 0;
+$("pg-bg-toggle").onclick = () => {
+  const stage = $("pg-stage");
+  stage.classList.remove(...bgs);
+  bgIdx = (bgIdx + 1) % bgs.length;
+  stage.classList.add(bgs[bgIdx]);
+  toast("Canvas background changed: " + bgs[bgIdx]);
+};
+
+// Reset Props
+$("pg-reset-btn").onclick = () => {
+  pgProps = { text: "Deploy to Production ➔", color: "#5eead4", speed: 1.2, glow: 60, radius: 14, theme: "dark", bg: "grid", viewport: "desktop" };
+  $("ctrl-text").value = pgProps.text;
+  $("ctrl-color").value = pgProps.color;
+  $("ctrl-speed").value = pgProps.speed; $("val-speed").textContent = "1.2s";
+  $("ctrl-glow").value = pgProps.glow; $("val-glow").textContent = "60%";
+  $("ctrl-radius").value = pgProps.radius; $("val-radius").textContent = "14px";
+  $("pg-stage").style.width = "100%";
+  $("pg-stage").className = "playground-stage bg-grid";
+  updatePlaygroundComponent();
+  toast("Playground reset to default properties");
+};
+
+// Playground Tabs Switcher
+document.querySelectorAll(".pg-tab").forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll(".pg-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".pg-tab-content").forEach(c => c.classList.remove("active"));
+    tab.classList.add("active");
+    $(tab.dataset.pgtab).classList.add("active");
+  };
+});
+
+$("btn-copy-pg-code").onclick = () => copyText($("pg-code-display").textContent, "Component code copied!");
+
+// =====================================================================
+// RENDERERS: COMPONENTS, EFFECTS, PROMPTS, RESOURCES, EXAMPLES
 // =====================================================================
 
-// Render Component Marketplace Cards
+// 1. Render Component Marketplace Cards
 function renderComponents(filter = "all") {
-  const filtered = filter === "all" ? COMPONENTS : COMPONENTS.filter(c => c[1].toLowerCase() === filter.toLowerCase());
+  const filtered = filter === "all" ? COMPONENTS : COMPONENTS.filter(c => c.cat.toLowerCase() === filter.toLowerCase());
   $("comp-grid").innerHTML = filtered.map((c, i) => `
-    <div class="visual-card" data-comp-idx="${i}">
+    <div class="visual-card" data-comp-idx="${COMPONENTS.indexOf(c)}">
       <div class="card-glare"></div>
       <div class="card-thumb">
-        <img src="${c[3]}" alt="${c[0]}" loading="lazy">
+        <img src="${c.thumb}" alt="${c.name}" loading="lazy">
       </div>
       <div class="card-body">
-        <span class="badge">${c[1]}</span>
-        <h4 class="card-title">${c[0]}</h4>
-        <p class="card-desc">${c[2]}</p>
+        <span class="badge">${c.cat}</span>
+        <h4 class="card-title">${c.name}</h4>
+        <p class="card-desc">${c.desc}</p>
         <div class="card-meta">
-          <span class="badge tech">${c[4]}</span>
-          <button class="btn o sm" onclick="copyText('${c[5].replace(/'/g, "\\'")}', 'Code snippet copied!')">Copy Code</button>
+          <span class="badge tech">${c.stack}</span>
+          <div style="display:flex;gap:6px">
+            <button class="btn sm" onclick="loadIntoPlayground(${COMPONENTS.indexOf(c)})">Playground ➔</button>
+            <button class="btn o sm" onclick="copyText('${c.code.replace(/'/g, "\\'")}', 'Code copied!')">Copy</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1071,15 +1741,54 @@ function renderComponents(filter = "all") {
   bindTilt();
 }
 
-// Render Prompt Discovery Cards
+function loadIntoPlayground(idx) {
+  activeCompIdx = idx;
+  updatePlaygroundComponent();
+  window.location.hash = "#playground";
+  toast(`Loaded "${COMPONENTS[idx].name}" into interactive playground!`);
+}
+
+// 2. Render Libraries.dev Effects Playground Cards
+function renderEffects() {
+  $("effects-grid").innerHTML = EFFECTS.map((fx, idx) => `
+    <div class="visual-card">
+      <div class="card-glare"></div>
+      <div class="card-thumb">
+        <img src="${fx.thumb}" alt="${fx.name}" loading="lazy">
+      </div>
+      <div class="card-body">
+        <span class="badge">${fx.cat}</span>
+        <h4 class="card-title">${fx.name}</h4>
+        <p class="card-desc">${fx.desc}</p>
+        <span class="badge tech" style="margin-top:auto;font-family:monospace">${fx.pkg}</span>
+        <div class="card-meta" style="padding-top:10px">
+          <a class="badge" href="${fx.officialUrl}" target="_blank" rel="noopener noreferrer" style="color:var(--a)">Official Docs ↗</a>
+          <button class="btn sm" onclick="copyText('${fx.prompt.replace(/'/g, "\\'")}', 'Agent prompt copied!')">Copy Agent Prompt</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+  bindTilt();
+}
+
+// 3. Render Prompts Library 2.0
 let promptCat = "All";
+let promptSearchTerm = "";
+
 function renderPrompts() {
   const cats = ["All", ...new Set(PROMPTS.map(p => p[1]))];
   $("prompt-chips").innerHTML = cats.map(c => `<span class="chip ${c === promptCat ? 'on' : ''}" data-pcat="${c}">${c}</span>`).join("");
-  
-  const list = promptCat === "All" ? PROMPTS : PROMPTS.filter(p => p[1] === promptCat);
+
+  const list = PROMPTS.filter(p => {
+    const isCat = promptCat === "All" || p[1] === promptCat;
+    const isSearch = (p[0] + p[1] + p[2]).toLowerCase().includes(promptSearchTerm);
+    return isCat && isSearch;
+  });
+
+  $("prompt-count-badge").textContent = `${list.length} Prompts`;
+
   $("prompt-grid").innerHTML = list.map((p, i) => `
-    <div class="visual-card" onclick="openModal(${PROMPTS.indexOf(p)})">
+    <div class="visual-card" onclick="openPromptModal(${PROMPTS.indexOf(p)})">
       <div class="card-glare"></div>
       <div class="card-thumb">
         <img src="${p[3]}" alt="${p[0]}" loading="lazy">
@@ -1089,39 +1798,21 @@ function renderPrompts() {
         <h4 class="card-title">${p[0]}</h4>
         <p class="card-desc">${p[2]}</p>
         <div class="card-meta">
-          <span style="font-size:11px;color:var(--muted)">Verified Prompt</span>
+          <span style="font-size:11px;color:var(--muted)">Verified AI Prompt</span>
           <button class="btn sm" onclick="event.stopPropagation(); copyText('${p[4].replace(/'/g, "\\'")}', 'Prompt copied!')">Copy Prompt</button>
         </div>
       </div>
     </div>
-  `).join("");
+  `).join("") || '<p style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No matching prompts found.</p>';
   bindTilt();
 }
 
-// Render Libraries & Effects Cards
-function renderLibraries() {
-  $("lib-grid").innerHTML = LIBRARIES.map(lib => `
-    <div class="visual-card">
-      <div class="card-glare"></div>
-      <div class="card-thumb">
-        <img src="${lib[3]}" alt="${lib[0]}" loading="lazy">
-      </div>
-      <div class="card-body">
-        <span class="badge">${lib[1]}</span>
-        <h4 class="card-title">${lib[0]}</h4>
-        <p class="card-desc">${lib[2]}</p>
-        <span class="workflow-cmd" style="margin-top:auto">${lib[4]}</span>
-        <div class="card-meta" style="padding-top:10px">
-          <span class="badge tech">${lib[5]}</span>
-          <button class="btn o sm" onclick="copyText('${lib[4]}', 'Package command copied!')">Copy Command</button>
-        </div>
-      </div>
-    </div>
-  `).join("");
-  bindTilt();
-}
+$("prompt-search-input").oninput = e => {
+  promptSearchTerm = e.target.value.toLowerCase().trim();
+  renderPrompts();
+};
 
-// Render Resources Cards
+// 4. Render Resources (Libraries.dev verified)
 function renderResources() {
   $("res-grid").innerHTML = RESOURCES.map(r => `
     <div class="visual-card" onclick="window.open('${r[1]}', '_blank')">
@@ -1133,28 +1824,28 @@ function renderResources() {
         </div>
         <span style="font-size:11px;font-weight:700;color:var(--a);text-transform:uppercase;letter-spacing:.05em">${r[3]}</span>
         <p class="card-desc" style="margin:10px 0 16px">${r[4]}</p>
-        <span style="font-size:12px;color:var(--a);font-weight:600">Explore official website ↗</span>
+        <span style="font-size:12px;color:var(--a);font-weight:600">Official website: ${r[1]} ↗</span>
       </div>
     </div>
   `).join("");
   bindTilt();
 }
 
-// Render Examples & Showcase Cards
+// 5. Render Showcase Projects (8 Projects with Functional Detail Modal)
 function renderExamples() {
-  $("examples-grid").innerHTML = EXAMPLES.map(ex => `
-    <div class="visual-card">
+  $("examples-grid").innerHTML = EXAMPLES.map((ex, idx) => `
+    <div class="visual-card" onclick="openProjectModal(${idx})">
       <div class="card-glare"></div>
       <div class="card-thumb" style="height:220px">
-        <img src="${ex[1]}" alt="${ex[0]}" loading="lazy">
+        <img src="${ex.thumb}" alt="${ex.name}" loading="lazy">
       </div>
       <div class="card-body">
-        <span class="badge tech">${ex[4]}</span>
-        <h4 class="card-title">${ex[0]}</h4>
-        <p class="card-desc">${ex[2]}</p>
+        <span class="badge ${ex.isLive ? 'live' : 'concept'}">${ex.status}</span>
+        <h4 class="card-title">${ex.name}</h4>
+        <p class="card-desc">${ex.desc}</p>
         <div class="card-meta">
-          <span class="badge">${ex[3]}</span>
-          <button class="btn o sm" onclick="toast('Opening project details...')">View Details</button>
+          <span class="badge tech">${ex.stack.join(" · ")}</span>
+          <button class="btn o sm" onclick="event.stopPropagation(); openProjectModal(${idx})">View Details ➔</button>
         </div>
       </div>
     </div>
@@ -1162,7 +1853,83 @@ function renderExamples() {
   bindTilt();
 }
 
-// 3D Perspective Tilt Physics with Specular Glare
+// Project Detail Modal Logic
+let curProjIdx = 0;
+function openProjectModal(idx) {
+  curProjIdx = idx;
+  const p = EXAMPLES[idx];
+  $("projModalImg").src = p.thumb;
+  $("projModalTitle").textContent = p.name;
+  $("projModalDesc").textContent = p.desc;
+  $("projModalStatus").textContent = p.status;
+  $("projModalStatus").className = `badge ${p.isLive ? 'live' : 'concept'}`;
+  $("projModalStack").innerHTML = p.stack.map(s => `<span class="badge tech">${s}</span>`).join("");
+  $("projModalArch").textContent = p.arch;
+  $("proj-modal").classList.add("show");
+}
+
+$("projModalClose").onclick = () => $("proj-modal").classList.remove("show");
+$("proj-modal").onclick = e => { if (e.target.id === "proj-modal") $("proj-modal").classList.remove("show"); };
+$("projModalTry").onclick = () => {
+  $("proj-modal").classList.remove("show");
+  window.location.hash = "#playground";
+  toast(`Opening sandbox environment for ${EXAMPLES[curProjIdx].name}...`);
+};
+
+// Prompt Modal Logic
+let curPromptIdx = 0;
+function openPromptModal(idx) {
+  curPromptIdx = idx;
+  const p = PROMPTS[idx];
+  $("mImg").src = p[3];
+  $("mT").textContent = p[0];
+  $("mD").textContent = p[1] + " · " + p[2];
+  $("mP").textContent = p[4];
+  $("mSpecs").textContent = p[5];
+  $("mCode").textContent = p[6];
+  $("modal").classList.add("show");
+  Engine3D.initModal3D(idx);
+}
+
+$("mClose").onclick = () => $("modal").classList.remove("show");
+$("modal").onclick = e => { if (e.target.id === "modal") $("modal").classList.remove("show"); };
+$("mCopy").onclick = () => copyText(PROMPTS[curPromptIdx][4], "Prompt copied!");
+
+document.querySelectorAll(".m-tab").forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll(".m-tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".modal .tab-content").forEach(c => c.classList.remove("active"));
+    tab.classList.add("active");
+    $(tab.dataset.tab).classList.add("active");
+    if (tab.dataset.tab === "tab-3d") {
+      $("modal-3d-canvas").style.display = "block";
+      $("mImg").style.display = "none";
+    } else {
+      $("modal-3d-canvas").style.display = "none";
+      $("mImg").style.display = "block";
+    }
+  };
+});
+
+// Category Chips Listeners
+$("comp-chips").onclick = e => {
+  const c = e.target.closest(".chip");
+  if (!c) return;
+  document.querySelectorAll("#comp-chips .chip").forEach(x => x.classList.remove("on"));
+  c.classList.add("on");
+  renderComponents(c.dataset.filter);
+};
+
+$("prompt-chips").onclick = e => {
+  const c = e.target.closest(".chip");
+  if (!c) return;
+  document.querySelectorAll("#prompt-chips .chip").forEach(x => x.classList.remove("on"));
+  c.classList.add("on");
+  promptCat = c.dataset.pcat;
+  renderPrompts();
+};
+
+// 3D Card Tilt Physics
 function bindTilt() {
   document.querySelectorAll('.visual-card').forEach(card => {
     card.onmousemove = e => {
@@ -1179,7 +1946,7 @@ function bindTilt() {
   });
 }
 
-// Copy Helper & Toast
+// Copy & Toast Helpers
 function toast(msg = "Copied!") {
   const t = $("toast");
   t.textContent = msg;
@@ -1201,95 +1968,20 @@ async function copyText(text, successMsg = "Copied to clipboard!") {
   toast(successMsg);
 }
 
-// Modal Inspection
-let curModalIdx = 0;
-function openModal(idx) {
-  curModalIdx = idx;
-  const p = PROMPTS[idx];
-  $("mImg").src = p[3];
-  $("mImg").alt = p[0];
-  $("mT").textContent = p[0];
-  $("mD").textContent = p[1] + " · " + p[2];
-  $("mP").textContent = p[4];
-  $("mSpecs").textContent = p[5] || "Hardware accelerated WebGL transforms.";
-  $("mCode").textContent = p[6] || "/* Component starter code */";
-  $("modal").classList.add("show");
-  initModal3D(idx);
-}
-
-$("mClose").onclick = () => $("modal").classList.remove("show");
-$("modal").onclick = e => { if (e.target.id === "modal") $("modal").classList.remove("show"); };
-$("mCopy").onclick = () => copyText(PROMPTS[curModalIdx][4], "Prompt copied!");
-
-// Modal Tabs
-document.querySelectorAll(".m-tab").forEach(tab => {
-  tab.onclick = () => {
-    document.querySelectorAll(".m-tab").forEach(t => t.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    tab.classList.add("active");
-    $(tab.dataset.tab).classList.add("active");
-
-    if (tab.dataset.tab === "tab-3d") {
-      $("modal-3d-canvas").style.display = "block";
-      $("mImg").style.display = "none";
-    } else {
-      $("modal-3d-canvas").style.display = "none";
-      $("mImg").style.display = "block";
-    }
-  };
-});
-
-// Component Filters Click
-$("comp-chips").onclick = e => {
-  const c = e.target.closest(".chip");
-  if (!c) return;
-  document.querySelectorAll("#comp-chips .chip").forEach(x => x.classList.remove("on"));
-  c.classList.add("on");
-  renderComponents(c.dataset.filter);
-};
-
-// Prompt Category Filters Click
-$("prompt-chips").onclick = e => {
-  const c = e.target.closest(".chip");
-  if (!c) return;
-  document.querySelectorAll("#prompt-chips .chip").forEach(x => x.classList.remove("on"));
-  c.classList.add("on");
-  promptCat = c.dataset.pcat;
-  renderPrompts();
-};
-
-// Newsletter Form
+// Newsletter
 $("newsletter-form").onsubmit = e => {
   e.preventDefault();
-  $("newsletter-msg").textContent = "✓ Subscribed! You will receive weekly 3D component drops.";
+  $("newsletter-msg").textContent = "✓ Subscribed! (Saved in local browser demonstration storage).";
   $("email-input").value = "";
   toast("Subscribed to weekly drops!");
 };
-
-// Ambient Cursor Glow
-const cursorGlow = $("cursor-glow");
-window.addEventListener("pointermove", e => {
-  cursorGlow.style.left = e.clientX + "px";
-  cursorGlow.style.top = e.clientY + "px";
-});
-
-// Magnetic Buttons
-document.querySelectorAll(".btn").forEach(b => {
-  b.addEventListener("mousemove", e => {
-    const rect = b.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    gsap.to(b, { x: x * 0.22, y: y * 0.22, duration: 0.3, ease: "power2.out" });
-  });
-  b.addEventListener("mouseleave", () => {
-    gsap.to(b, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
-  });
-});
 
 // Command Palette (Ctrl + K)
 const cmdPalette = $("cmd-palette");
 const cmdInput = $("cmd-input");
 const cmdResults = $("cmd-results");
+let selectedCmdIdx = 0;
+let currentCmdItems = [];
 
 function toggleCmdPalette(open) {
   if (open) {
@@ -1313,24 +2005,50 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") {
     toggleCmdPalette(false);
     $("modal").classList.remove("show");
+    $("proj-modal").classList.remove("show");
+    $("mobile-nav").classList.remove("open");
+  }
+  if (cmdPalette.classList.contains("open")) {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      selectedCmdIdx = Math.min(selectedCmdIdx + 1, currentCmdItems.length - 1);
+      highlightCmdItem();
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      selectedCmdIdx = Math.max(selectedCmdIdx - 1, 0);
+      highlightCmdItem();
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (currentCmdItems[selectedCmdIdx]) {
+        currentCmdItems[selectedCmdIdx].action();
+      }
+    }
   }
 });
+
+function highlightCmdItem() {
+  document.querySelectorAll(".cmd-item").forEach((el, idx) => {
+    el.classList.toggle("active", idx === selectedCmdIdx);
+  });
+}
 
 cmdInput.oninput = () => updateCmdResults(cmdInput.value);
 
 function updateCmdResults(query) {
   const q = query.toLowerCase().trim();
-  const allEntities = [
-    ...COMPONENTS.map(c => ({ name: c[0], type: "Component", sub: c[2], action: () => { window.location.hash = "#components"; toggleCmdPalette(false); } })),
-    ...PROMPTS.map((p, idx) => ({ name: p[0], type: "Prompt", sub: p[2], action: () => { toggleCmdPalette(false); openModal(idx); } })),
-    ...LIBRARIES.map(l => ({ name: l[0], type: "Library FX", sub: l[2], action: () => { window.location.hash = "#libraries"; toggleCmdPalette(false); } })),
-    ...RESOURCES.map(r => ({ name: r[0], type: "Resource", sub: r[4], action: () => { window.open(r[1], "_blank"); toggleCmdPalette(false); } }))
+  const all = [
+    ...COMPONENTS.map((c, idx) => ({ name: c.name, type: "Component", sub: c.desc, action: () => { loadIntoPlayground(idx); toggleCmdPalette(false); } })),
+    ...PROMPTS.map((p, idx) => ({ name: p[0], type: "Prompt", sub: p[2], action: () => { toggleCmdPalette(false); openPromptModal(idx); } })),
+    ...EFFECTS.map(f => ({ name: f.name, type: "Effect", sub: f.desc, action: () => { window.location.hash = "#effects"; toggleCmdPalette(false); } })),
+    ...RESOURCES.map(r => ({ name: r[0], type: "Resource", sub: r[4], action: () => { window.open(r[1], "_blank"); toggleCmdPalette(false); } })),
+    ...EXAMPLES.map((ex, idx) => ({ name: ex.name, type: "Project Case", sub: ex.desc, action: () => { toggleCmdPalette(false); openProjectModal(idx); } }))
   ];
 
-  const matched = q ? allEntities.filter(item => (item.name + item.type + item.sub).toLowerCase().includes(q)) : allEntities.slice(0, 8);
+  currentCmdItems = q ? all.filter(item => (item.name + item.type + item.sub).toLowerCase().includes(q)) : all.slice(0, 8);
+  selectedCmdIdx = 0;
 
-  cmdResults.innerHTML = matched.map((item, idx) => `
-    <div class="cmd-item" data-cmd-idx="${idx}">
+  cmdResults.innerHTML = currentCmdItems.map((item, idx) => `
+    <div class="cmd-item ${idx === 0 ? 'active' : ''}" data-cmd-idx="${idx}">
       <div>
         <div style="font-weight:700;font-size:14px">${item.name}</div>
         <div style="font-size:11px;color:var(--muted)">${item.sub.slice(0, 65)}...</div>
@@ -1340,225 +2058,354 @@ function updateCmdResults(query) {
   `).join("") || '<p style="padding:20px;text-align:center;color:var(--muted);font-size:13px">No matching results found.</p>';
 
   document.querySelectorAll(".cmd-item").forEach((el, idx) => {
-    el.onclick = () => matched[idx].action();
+    el.onclick = () => currentCmdItems[idx].action();
   });
 }
 
+// Mobile Nav
+$("open-mobile-nav").onclick = () => $("mobile-nav").classList.add("open");
+$("close-mobile-nav").onclick = () => $("mobile-nav").classList.remove("open");
+document.querySelectorAll(".mobile-nav a").forEach(a => {
+  a.onclick = () => $("mobile-nav").classList.remove("open");
+});
+
+// Cursor Glow
+const cursorGlow = $("cursor-glow");
+window.addEventListener("pointermove", e => {
+  cursorGlow.style.left = e.clientX + "px";
+  cursorGlow.style.top = e.clientY + "px";
+});
+
 // =====================================================================
-// SECTION-SPECIFIC 3D THREE.JS WEBGL ENGINES
+// ENGINE 3D: PROPER LIFECYCLE MANAGEMENT, INTERSECTION OBSERVER & DISPOSAL
 // =====================================================================
+const Engine3D = {
+  scenes: {},
 
-// 1. Hero 3D Scene
-function initHero3D() {
-  const canvas = $("hero-canvas");
-  if (!canvas || typeof THREE === 'undefined') return;
+  initHero3D() {
+    const canvas = $("hero-canvas");
+    if (!canvas || typeof THREE === 'undefined') return;
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, canvas.parentElement.clientWidth / canvas.parentElement.clientHeight, 0.1, 1000);
-  camera.position.z = 24;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, canvas.parentElement.clientWidth / canvas.parentElement.clientHeight, 0.1, 1000);
+    camera.position.z = 24;
 
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  } catch(e) { return; }
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  // Wireframe Icosahedron
-  const ico = new THREE.Mesh(
-    new THREE.IcosahedronGeometry(7, 1),
-    new THREE.MeshStandardMaterial({ color: 0x5eead4, wireframe: true, transparent: true, opacity: 0.35 })
-  );
-  group.add(ico);
-
-  // Torus Knot
-  const knot = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(4, 0.45, 100, 16),
-    new THREE.MeshStandardMaterial({ color: 0x818cf8, roughness: 0.2, metalness: 0.85 })
-  );
-  group.add(knot);
-
-  // Orbital Ring
-  const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(11, 0.12, 16, 100),
-    new THREE.MeshBasicMaterial({ color: 0xc084fc, transparent: true, opacity: 0.45 })
-  );
-  ring.rotation.x = Math.PI / 2.5;
-  group.add(ring);
-
-  // Star Particles
-  const pCount = 450;
-  const pGeo = new THREE.BufferGeometry();
-  const pPos = new Float32Array(pCount * 3);
-  for (let i = 0; i < pCount * 3; i++) pPos[i] = (Math.random() - 0.5) * 60;
-  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-  const pMat = new THREE.PointsMaterial({ size: 0.6, color: 0x5eead4, transparent: true, opacity: 0.7 });
-  const particles = new THREE.Points(pGeo, pMat);
-  scene.add(particles);
-
-  const ambient = new THREE.AmbientLight(0xffffff, 0.9);
-  scene.add(ambient);
-  const ptLight = new THREE.PointLight(0x5eead4, 2.5, 50);
-  ptLight.position.set(15, 10, 15);
-  scene.add(ptLight);
-
-  let mouseX = 0, mouseY = 0;
-  window.addEventListener("pointermove", e => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const t = performance.now() * 0.001;
-    ico.rotation.y = t * 0.2;
-    knot.rotation.y = -t * 0.35;
-    group.rotation.y += (mouseX * 0.6 - group.rotation.y) * 0.05;
-    group.rotation.x += (-mouseY * 0.4 - group.rotation.x) * 0.05;
-    particles.rotation.y = t * 0.03;
-    renderer.render(scene, camera);
-  }
-  animate();
-}
-
-// 2. Component Explorer 3D Scene (Floating 3D Polyhedrons)
-function initComponent3D() {
-  const canvas = $("component-canvas");
-  if (!canvas || typeof THREE === 'undefined') return;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-  camera.position.z = 25;
-
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-  } catch(e) { return; }
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(4, 4, 4),
-    new THREE.MeshStandardMaterial({ color: 0x5eead4, wireframe: true, transparent: true, opacity: 0.3 })
-  );
-  cube.position.set(-15, 5, 0);
-  group.add(cube);
-
-  const dodeca = new THREE.Mesh(
-    new THREE.DodecahedronGeometry(3),
-    new THREE.MeshStandardMaterial({ color: 0x818cf8, wireframe: true, transparent: true, opacity: 0.3 })
-  );
-  dodeca.position.set(15, -4, 0);
-  group.add(dodeca);
-
-  const light = new THREE.PointLight(0x5eead4, 2, 40);
-  light.position.set(0, 0, 10);
-  scene.add(light);
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const t = performance.now() * 0.001;
-    cube.rotation.x = t * 0.4; cube.rotation.y = t * 0.6;
-    dodeca.rotation.y = -t * 0.5; dodeca.rotation.z = t * 0.3;
-    renderer.render(scene, camera);
-  }
-  animate();
-}
-
-// 3. Workflow 3D Scene (Assembly Pipeline Nodes)
-function initWorkflow3D() {
-  const canvas = $("workflow-canvas");
-  if (!canvas || typeof THREE === 'undefined') return;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-  camera.position.z = 25;
-
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-  } catch(e) { return; }
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const octaGeo = new THREE.OctahedronGeometry(2.2);
-  const n1 = new THREE.Mesh(octaGeo, new THREE.MeshStandardMaterial({ color: 0x5eead4, roughness: 0.2, metalness: 0.8 }));
-  n1.position.x = -12;
-  const n2 = new THREE.Mesh(octaGeo, new THREE.MeshStandardMaterial({ color: 0x818cf8, roughness: 0.2, metalness: 0.8 }));
-  n2.position.x = 0;
-  const n3 = new THREE.Mesh(octaGeo, new THREE.MeshStandardMaterial({ color: 0xc084fc, roughness: 0.2, metalness: 0.8 }));
-  n3.position.x = 12;
-  group.add(n1); group.add(n2); group.add(n3);
-
-  const amb = new THREE.AmbientLight(0xffffff, 0.8);
-  scene.add(amb);
-  const pt = new THREE.PointLight(0x5eead4, 2, 40);
-  pt.position.set(0, 4, 10);
-  scene.add(pt);
-
-  function animate() {
-    requestAnimationFrame(animate);
-    const t = performance.now() * 0.001;
-    n1.rotation.y = t * 0.8; n1.rotation.x = t * 0.4;
-    n2.rotation.y = -t * 0.9; n2.rotation.z = t * 0.5;
-    n3.rotation.y = t * 1.0; n3.rotation.x = -t * 0.4;
-    renderer.render(scene, camera);
-  }
-  animate();
-}
-
-// 4. Modal 3D Inspector
-let modalRenderer, modalScene, modalCamera, modalMesh;
-function initModal3D(idx) {
-  const canvas = $("modal-3d-canvas");
-  if (!canvas || typeof THREE === 'undefined') return;
-
-  if (!modalScene) {
-    modalScene = new THREE.Scene();
-    modalCamera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
-    modalCamera.position.z = 10;
+    let renderer;
     try {
-      modalRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      modalRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     } catch(e) { return; }
 
-    const light = new THREE.PointLight(0x5eead4, 2.5, 30);
-    light.position.set(5, 5, 5);
-    modalScene.add(light);
-    modalScene.add(new THREE.AmbientLight(0xffffff, 0.8));
-  }
+    const group = new THREE.Group();
+    scene.add(group);
 
-  if (modalMesh) modalScene.remove(modalMesh);
-  const geo = idx % 2 === 0 ? new THREE.TorusKnotGeometry(2, 0.5, 100, 16) : new THREE.IcosahedronGeometry(2.5, 1);
-  modalMesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0x5eead4, roughness: 0.2, metalness: 0.85 }));
-  modalScene.add(modalMesh);
+    const ico = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(7, 1),
+      new THREE.MeshStandardMaterial({ color: 0x5eead4, wireframe: true, transparent: true, opacity: 0.35 })
+    );
+    group.add(ico);
 
-  function animateModal() {
-    if (!modalRenderer || $("modal-3d-canvas").style.display === "none") return;
-    requestAnimationFrame(animateModal);
-    if (modalMesh) { modalMesh.rotation.y += 0.015; modalMesh.rotation.x += 0.008; }
-    modalRenderer.render(modalScene, modalCamera);
+    const knot = new THREE.Mesh(
+      new THREE.TorusKnotGeometry(4, 0.45, 100, 16),
+      new THREE.MeshStandardMaterial({ color: 0x818cf8, roughness: 0.2, metalness: 0.85 })
+    );
+    group.add(knot);
+
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(11, 0.12, 16, 100),
+      new THREE.MeshBasicMaterial({ color: 0xc084fc, transparent: true, opacity: 0.45 })
+    );
+    ring.rotation.x = Math.PI / 2.5;
+    group.add(ring);
+
+    const pCount = 400;
+    const pGeo = new THREE.BufferGeometry();
+    const pPos = new Float32Array(pCount * 3);
+    for (let i = 0; i < pCount * 3; i++) pPos[i] = (Math.random() - 0.5) * 60;
+    pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+    const pMat = new THREE.PointsMaterial({ size: 0.6, color: 0x5eead4, transparent: true, opacity: 0.7 });
+    const particles = new THREE.Points(pGeo, pMat);
+    scene.add(particles);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.9));
+    const ptLight = new THREE.PointLight(0x5eead4, 2.5, 50);
+    ptLight.position.set(15, 10, 15);
+    scene.add(ptLight);
+
+    let mouseX = 0, mouseY = 0;
+    window.addEventListener("pointermove", e => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    let running = true;
+    let animId = null;
+
+    function animate() {
+      if (!running) return;
+      animId = requestAnimationFrame(animate);
+      const t = performance.now() * 0.001;
+      ico.rotation.y = t * 0.2;
+      knot.rotation.y = -t * 0.35;
+      group.rotation.y += (mouseX * 0.6 - group.rotation.y) * 0.05;
+      group.rotation.x += (-mouseY * 0.4 - group.rotation.x) * 0.05;
+      particles.rotation.y = t * 0.03;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    this.scenes.hero = {
+      canvas,
+      pause: () => { running = false; if (animId) cancelAnimationFrame(animId); },
+      resume: () => { if (!running) { running = true; animate(); } },
+      resize: () => {
+        if (!canvas.parentElement) return;
+        camera.aspect = canvas.parentElement.clientWidth / canvas.parentElement.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight);
+      }
+    };
+  },
+
+  initComponent3D() {
+    const canvas = $("component-canvas");
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    camera.position.z = 25;
+
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    } catch(e) { return; }
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const cube = new THREE.Mesh(
+      new THREE.BoxGeometry(4, 4, 4),
+      new THREE.MeshStandardMaterial({ color: 0x5eead4, wireframe: true, transparent: true, opacity: 0.3 })
+    );
+    cube.position.set(-15, 5, 0);
+    group.add(cube);
+
+    const dodeca = new THREE.Mesh(
+      new THREE.DodecahedronGeometry(3),
+      new THREE.MeshStandardMaterial({ color: 0x818cf8, wireframe: true, transparent: true, opacity: 0.3 })
+    );
+    dodeca.position.set(15, -4, 0);
+    group.add(dodeca);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+
+    let running = true;
+    let animId = null;
+
+    function animate() {
+      if (!running) return;
+      animId = requestAnimationFrame(animate);
+      const t = performance.now() * 0.001;
+      cube.rotation.x = t * 0.4; cube.rotation.y = t * 0.6;
+      dodeca.rotation.y = -t * 0.5; dodeca.rotation.z = t * 0.3;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    this.scenes.component = {
+      canvas,
+      pause: () => { running = false; if (animId) cancelAnimationFrame(animId); },
+      resume: () => { if (!running) { running = true; animate(); } },
+      resize: () => {
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      }
+    };
+  },
+
+  initWorkflow3D() {
+    const canvas = $("workflow-canvas");
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    camera.position.z = 25;
+
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    } catch(e) { return; }
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const octaGeo = new THREE.OctahedronGeometry(2.2);
+    const n1 = new THREE.Mesh(octaGeo, new THREE.MeshStandardMaterial({ color: 0x5eead4, roughness: 0.2, metalness: 0.8 }));
+    n1.position.x = -12;
+    const n2 = new THREE.Mesh(octaGeo, new THREE.MeshStandardMaterial({ color: 0x818cf8, roughness: 0.2, metalness: 0.8 }));
+    n2.position.x = 0;
+    const n3 = new THREE.Mesh(octaGeo, new THREE.MeshStandardMaterial({ color: 0xc084fc, roughness: 0.2, metalness: 0.8 }));
+    n3.position.x = 12;
+    group.add(n1); group.add(n2); group.add(n3);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+    const pt = new THREE.PointLight(0x5eead4, 2, 40);
+    pt.position.set(0, 4, 10);
+    scene.add(pt);
+
+    let running = true;
+    let animId = null;
+
+    function animate() {
+      if (!running) return;
+      animId = requestAnimationFrame(animate);
+      const t = performance.now() * 0.001;
+      n1.rotation.y = t * 0.8; n1.rotation.x = t * 0.4;
+      n2.rotation.y = -t * 0.9; n2.rotation.z = t * 0.5;
+      n3.rotation.y = t * 1.0; n3.rotation.x = -t * 0.4;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    this.scenes.workflow = {
+      canvas,
+      pause: () => { running = false; if (animId) cancelAnimationFrame(animId); },
+      resume: () => { if (!running) { running = true; animate(); } },
+      resize: () => {
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      }
+    };
+  },
+
+  modalRenderer: null,
+  modalScene: null,
+  modalCamera: null,
+  modalMesh: null,
+  modalAnimId: null,
+
+  initModal3D(idx) {
+    const canvas = $("modal-3d-canvas");
+    if (!canvas || typeof THREE === 'undefined') return;
+
+    if (!this.modalScene) {
+      this.modalScene = new THREE.Scene();
+      this.modalCamera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+      this.modalCamera.position.z = 10;
+      try {
+        this.modalRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        this.modalRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+      } catch(e) { return; }
+
+      const light = new THREE.PointLight(0x5eead4, 2.5, 30);
+      light.position.set(5, 5, 5);
+      this.modalScene.add(light);
+      this.modalScene.add(new THREE.AmbientLight(0xffffff, 0.8));
+    }
+
+    if (this.modalMesh) {
+      this.modalScene.remove(this.modalMesh);
+      if (this.modalMesh.geometry) this.modalMesh.geometry.dispose();
+      if (this.modalMesh.material) this.modalMesh.material.dispose();
+    }
+
+    const geo = idx % 2 === 0 ? new THREE.TorusKnotGeometry(2, 0.5, 100, 16) : new THREE.IcosahedronGeometry(2.5, 1);
+    this.modalMesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0x5eead4, roughness: 0.2, metalness: 0.85 }));
+    this.modalScene.add(this.modalMesh);
+
+    const animateModal = () => {
+      if (!this.modalRenderer || $("modal-3d-canvas").style.display === "none") return;
+      this.modalAnimId = requestAnimationFrame(animateModal);
+      if (this.modalMesh) {
+        this.modalMesh.rotation.y += 0.015;
+        this.modalMesh.rotation.x += 0.008;
+      }
+      this.modalRenderer.render(this.modalScene, this.modalCamera);
+    };
+    animateModal();
+  },
+
+  // Lifecycle Visibility & Resize Observers
+  setupLifecycle() {
+    // 1. IntersectionObserver to pause off-screen scenes
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const id = e.target.id;
+        if (id === "hero-canvas" && this.scenes.hero) {
+          e.isIntersecting ? this.scenes.hero.resume() : this.scenes.hero.pause();
+        } else if (id === "component-canvas" && this.scenes.component) {
+          e.isIntersecting ? this.scenes.component.resume() : this.scenes.component.pause();
+        } else if (id === "workflow-canvas" && this.scenes.workflow) {
+          e.isIntersecting ? this.scenes.workflow.resume() : this.scenes.workflow.pause();
+        }
+      });
+    }, { threshold: 0.05 });
+
+    ["hero-canvas", "component-canvas", "workflow-canvas"].forEach(id => {
+      const el = $(id);
+      if (el) io.observe(el);
+    });
+
+    // 2. Page Visibility API handling (tab unfocused)
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        Object.values(this.scenes).forEach(s => s.pause && s.pause());
+      } else {
+        Object.values(this.scenes).forEach(s => s.resume && s.resume());
+      }
+    });
+
+    // 3. ResizeObserver on canvas containers & Window Resize fallback
+    if (window.ResizeObserver) {
+      const ro = new ResizeObserver(() => {
+        Object.values(this.scenes).forEach(s => s.resize && s.resize());
+      });
+      ["hero-canvas", "component-canvas", "workflow-canvas"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.parentElement) ro.observe(el.parentElement);
+      });
+    }
+    window.addEventListener("resize", () => {
+      Object.values(this.scenes).forEach(s => s.resize && s.resize());
+    });
+
+    // 4. WebGL Context Loss & Restoration Handling
+    ["hero-canvas", "component-canvas", "workflow-canvas", "modal-3d-canvas"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener("webglcontextlost", (e) => {
+          e.preventDefault();
+          console.warn("[WebGL] Context lost on " + id + ". Pausing scene.");
+        }, false);
+        el.addEventListener("webglcontextrestored", () => {
+          console.log("[WebGL] Context restored on " + id + ". Resuming scene.");
+        }, false);
+      }
+    });
   }
-  animateModal();
-}
+};
 
 // Initialize Everything on Load
 window.addEventListener("DOMContentLoaded", () => {
   renderComponents();
+  renderEffects();
   renderPrompts();
-  renderLibraries();
   renderResources();
   renderExamples();
-  initHero3D();
-  initComponent3D();
-  initWorkflow3D();
+  updatePlaygroundComponent();
+
+  // Initialize 3D Engine with lifecycle control
+  Engine3D.initHero3D();
+  Engine3D.initComponent3D();
+  Engine3D.initWorkflow3D();
+  Engine3D.setupLifecycle();
 });
 </script>
 </body>

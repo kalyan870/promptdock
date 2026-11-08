@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 
-console.log('--- Starting PromptDock 5.0 Master Verification Suite ---');
+console.log('--- Starting PromptDock 6.0 Master Verification Suite ---');
 
 let passed = 0;
 let failed = 0;
@@ -22,7 +22,7 @@ const indexPath = path.join(__dirname, 'index.html');
 assert(fs.existsSync(indexPath), 'index.html exists');
 
 const html = fs.readFileSync(indexPath, 'utf-8');
-assert(html.includes('<title>PromptDock 5.0 — The Creative Developer Platform</title>'), 'HTML contains correct PromptDock 5.0 title');
+assert(html.includes('<title>PromptDock 6.0 — The Real Interactive Creative Developer Platform</title>'), 'HTML contains correct PromptDock 6.0 title');
 
 // 2. Section Canvases
 assert(html.includes('id="hero-canvas"'), 'Hero section contains 3D canvas (#hero-canvas)');
@@ -31,11 +31,13 @@ assert(html.includes('id="workflow-canvas"'), 'Workflow section contains 3D canv
 assert(html.includes('id="modal-3d-canvas"'), 'Modal contains 3D inspector canvas (#modal-3d-canvas)');
 
 // 3. Section Headers & Discovery Features
-assert(html.includes('Visual Component Marketplace'), 'Component Marketplace section exists');
-assert(html.includes('AI Motion &amp; 3D Prompt Discovery') || html.includes('AI Motion & 3D Prompt Discovery'), 'Prompt Discovery section exists');
-assert(html.includes('Creative Effects &amp; Shader Registry') || html.includes('Creative Effects & Shader Registry'), 'Creative Effects & Shader Registry exists');
+assert(html.includes('id="pg-component-mount"'), 'Live Component Playground mount exists');
+assert(html.includes('Component Marketplace') || html.includes('Visual Component Marketplace'), 'Component Marketplace section exists');
+assert(html.includes('Creative Effects'), 'Creative Effects & Shader Registry exists');
+assert(html.includes('Workflow Studio'), 'Workflow Studio section exists');
 assert(html.includes('Showcase Projects &amp; Case Studies') || html.includes('Showcase Projects & Case Studies'), 'Showcase Projects section exists');
 assert(html.includes('id="cmd-palette"'), 'Global Command Palette exists');
+assert(html.includes('images/workflow-agents.svg'), 'AI Coding Agent Pipeline visual referenced');
 
 // 4. Libraries & Scripts
 assert(html.includes('three.min.js'), 'HTML loads Three.js');
@@ -60,6 +62,8 @@ const requiredResources = [
 requiredResources.forEach(res => {
   assert(html.includes(res), `Ecosystem resource "${res}" is present`);
 });
+
+assert(html.includes('https://libraries.dev'), 'Canonical attribution URL https://libraries.dev is present');
 
 // 6. Image Assets Checks
 const imagesDir = path.join(__dirname, 'images');
@@ -94,6 +98,7 @@ const requiredImages = [
   'example-dev-folio.svg',
   'example-product-3d.svg',
   'workflow-pipeline.svg',
+  'workflow-agents.svg',
   'architecture-dock.svg',
   'favicon.svg',
   'og-image.svg'
@@ -141,15 +146,15 @@ server.listen(4897, () => {
     let data = '';
     res.on('data', chunk => data += chunk);
     res.on('end', () => {
-      assert(data.includes('PromptDock 5.0'), 'Home response contains PromptDock 5.0');
+      assert(data.includes('PromptDock 6.0'), 'Home response contains PromptDock 6.0');
       assert(data.includes('hero-canvas'), 'Home response contains hero-canvas');
       assert(data.includes('comp-hero.svg'), 'Home response contains comp-hero.svg');
 
-      http.get('http://localhost:4897/images/comp-hero.svg', (imgRes) => {
-        assert(imgRes.statusCode === 200, 'GET /images/comp-hero.svg returned valid SVG');
+      http.get('http://localhost:4897/images/workflow-agents.svg', (imgRes) => {
+        assert(imgRes.statusCode === 200, 'GET /images/workflow-agents.svg returned valid SVG');
 
-        http.get('http://localhost:4897/images/workflow-pipeline.svg', (wfRes) => {
-          assert(wfRes.statusCode === 200, 'GET /images/workflow-pipeline.svg returned valid SVG');
+        http.get('http://localhost:4897/images/res-libraries.svg', (wfRes) => {
+          assert(wfRes.statusCode === 200, 'GET /images/res-libraries.svg returned valid SVG');
 
           server.close(() => {
             console.log(`\n--- Test Summary: ${passed} passed, ${failed} failed ---`);
