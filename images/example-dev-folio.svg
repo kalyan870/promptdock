@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="100%" height="100%">
+  <rect width="900" height="650" fill="#070a12"/>
+  <rect x="40" y="40" width="820" height="570" rx="16" fill="#0a0f1d" stroke="#1e2a42" stroke-width="2"/>
+  <circle cx="70" cy="70" r="6" fill="#ef4444"/><circle cx="90" cy="70" r="6" fill="#f59e0b"/><circle cx="110" cy="70" r="6" fill="#10b981"/>
+  <text x="140" y="75" fill="#94a3b8" font-family="system-ui" font-size="13">Apex Creative Developer Portfolio 2026</text>
+  <g transform="translate(80, 130)">
+    <rect x="0" y="0" width="160" height="26" rx="13" fill="#142138" stroke="#243754"/>
+    <text x="20" y="17" fill="#5eead4" font-family="system-ui" font-weight="700" font-size="11">✦ CREATIVE DEV &amp; THREE.JS</text>
+    <text x="0" y="75" fill="#ffffff" font-family="system-ui" font-weight="900" font-size="44">ALEXANDRA CHEN</text>
+    <text x="0" y="115" fill="#818cf8" font-family="system-ui" font-weight="700" font-size="22">Interactive 3D Graphics &amp; Creative Web Architect</text>
+    <text x="0" y="155" fill="#94a3b8" font-family="system-ui" font-size="14">Winner of 4x Awwwards Site of the Day, FWA of the Month, and CSSDA Special Kudos.</text>
+  </g>
+  <g transform="translate(80, 320)">
+    <rect x="0" y="0" width="230" height="220" rx="14" fill="#10192e" stroke="#223352"/>
+    <rect x="15" y="15" width="200" height="110" rx="10" fill="#18253f"/>
+    <text x="20" y="155" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="14">Cyberverse 2026</text>
+    <text x="20" y="180" fill="#5eead4" font-family="system-ui" font-size="12">WebGL + WebAudio + GSAP</text>
+  </g>
+  <g transform="translate(330, 320)">
+    <rect x="0" y="0" width="230" height="220" rx="14" fill="#10192e" stroke="#5eead4" stroke-width="2"/>
+    <rect x="15" y="15" width="200" height="110" rx="10" fill="#18253f"/>
+    <text x="20" y="155" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="14">HoloSphere XR</text>
+    <text x="20" y="180" fill="#5eead4" font-family="system-ui" font-size="12">React Three Fiber + WebXR</text>
+  </g>
+  <g transform="translate(580, 320)">
+    <rect x="0" y="0" width="230" height="220" rx="14" fill="#10192e" stroke="#223352"/>
+    <rect x="15" y="15" width="200" height="110" rx="10" fill="#18253f"/>
+    <text x="20" y="155" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="14">Quantum Engine</text>
+    <text x="20" y="180" fill="#818cf8" font-family="system-ui" font-size="12">Three.js Particle Physics</text>
+  </g>
+</svg>

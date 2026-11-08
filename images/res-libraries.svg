@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" width="100%" height="100%">
+  <rect width="720" height="520" fill="#070a12"/>
+  <rect x="40" y="40" width="640" height="440" rx="16" fill="#0c1221" stroke="#1f2d48" stroke-width="2"/>
+  <rect x="80" y="80" width="50" height="50" rx="12" fill="#818cf8"/>
+  <text x="94" y="114" fill="#030712" font-family="system-ui" font-weight="900" font-size="24">L</text>
+  <text x="145" y="105" fill="#ffffff" font-family="system-ui" font-weight="800" font-size="24">Libraries.dev</text>
+  <text x="145" y="125" fill="#818cf8" font-family="system-ui" font-weight="600" font-size="13">Open Source Package &amp; Dependency Graph Registry</text>
+  <g transform="translate(360, 260)">
+    <circle cx="0" cy="0" r="45" fill="#1e293b" stroke="#818cf8" stroke-width="2"/>
+    <text x="-32" y="5" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="12">core-pkg</text>
+    <circle cx="-130" cy="-60" r="30" fill="#151e30" stroke="#5eead4" stroke-width="1.5"/>
+    <line x1="-100" y1="-45" x2="-35" y2="-15" stroke="#5eead4" stroke-width="1.5"/>
+    <circle cx="130" cy="-40" r="30" fill="#151e30" stroke="#38bdf8" stroke-width="1.5"/>
+    <line x1="100" y1="-30" x2="35" y2="-10" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="0" cy="90" r="28" fill="#151e30" stroke="#a855f7" stroke-width="1.5"/>
+    <line x1="0" y1="62" x2="0" y2="45" stroke="#a855f7" stroke-width="1.5"/>
+  </g>
+  <rect x="80" y="375" width="540" height="50" rx="12" fill="#121a2c" stroke="#22324f"/>
+  <text x="110" y="405" fill="#cbd5e1" font-family="system-ui" font-size="13">Official registry source: https://libraries.io · 5M+ packages indexed</text>
+</svg>
