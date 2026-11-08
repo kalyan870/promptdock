@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="#07090f"/>
+  <circle cx="80" cy="70" r="26" fill="url(#g3)"/>
+  <rect x="120" y="58" width="150" height="12" rx="4" fill="#eef1f8"/>
+  <rect x="120" y="76" width="100" height="8" rx="3" fill="#8d95aa"/>
+  <rect x="40" y="115" width="320" height="95" rx="8" fill="#0a0d15" stroke="#202638"/>
+  <text x="60" y="145" font-family="monospace" font-size="12" fill="#f472b6">&gt; const dev = new Creator();</text>
+  <text x="60" y="168" font-family="monospace" font-size="12" fill="#fb923c">&gt; dev.ship({ animated: true });</text>
+  <text x="60" y="190" font-family="monospace" font-size="12" fill="#34d399">&gt; Live at production ✨</text>
+</svg>

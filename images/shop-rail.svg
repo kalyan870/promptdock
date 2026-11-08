@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="#07090f"/>
+  <rect x="45" y="35" width="170" height="170" rx="14" fill="#0f131d" stroke="#202638"/>
+  <rect x="65" y="55" width="130" height="80" rx="8" fill="#1a2032"/>
+  <circle cx="130" cy="95" r="24" fill="url(#g4)" opacity="0.7"/>
+  <rect x="65" y="148" width="85" height="10" rx="3" fill="#eef1f8"/>
+  <rect x="65" y="165" width="40" height="10" rx="3" fill="#facc15"/>
+  <rect x="235" y="20" width="140" height="200" rx="12" fill="#141926" stroke="#f97316" stroke-width="1.5"/>
+  <text x="255" y="55" font-family="sans-serif" font-size="13" font-weight="bold" fill="#eef1f8">Your Cart (2)</text>
+  <line x1="255" y1="70" x2="355" y2="70" stroke="#202638"/>
+  <rect x="255" y="85" width="30" height="30" rx="6" fill="url(#g4)"/>
+  <rect x="295" y="90" width="50" height="8" rx="2" fill="#eef1f8"/>
+  <rect x="295" y="103" width="35" height="6" rx="2" fill="#8d95aa"/>
+  <rect x="255" y="170" width="100" height="28" rx="6" fill="url(#g4)"/>
+</svg>

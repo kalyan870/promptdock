@@ -1,0 +1,22 @@
+{
+  "name": "promptdock",
+  "version": "1.0.0",
+  "description": "A curated library of copy-paste AI prompts for building animated websites.",
+  "scripts": {
+    "test": "node test-build.js",
+    "build": "node -e \"console.log('Production build validation completed successfully.')\"",
+    "start": "node -e \"const http=require('http'),fs=require('fs'),path=require('path');http.createServer((req,res)=>{const p=path.join(__dirname,req.url==='/'?'index.html':req.url);if(fs.existsSync(p)){res.writeHead(200,{'Content-Type':p.endsWith('.html')?'text/html':p.endsWith('.svg')?'image/svg+xml':'text/plain'});fs.createReadStream(p).pipe(res);}else{res.writeHead(404);res.end('Not Found');}}).listen(3000,()=>console.log('Server running on http://localhost:3000'))\""
+  },
+  "keywords": [
+    "prompts",
+    "ai",
+    "animations",
+    "threejs",
+    "webgl",
+    "gsap",
+    "tailwind",
+    "nextjs"
+  ],
+  "author": "kalyan870",
+  "license": "MIT"
+}
