@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PromptDock - Prompts for websites that move</title>
-<meta name="description" content="A library of copy-paste AI prompts for building animated websites.">
+<meta name="description" content="A library of copy-paste AI prompts and free resources for building animated websites.">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
 <!-- OpenGraph / Social Meta Tags -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="PromptDock - Prompts for websites that move">
-<meta property="og:description" content="A library of copy-paste AI prompts for building animated websites.">
+<meta property="og:description" content="A library of copy-paste AI prompts and free resources for building animated websites.">
 <meta property="og:image" content="images/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PromptDock - Prompts for websites that move">
-<meta name="twitter:description" content="A library of copy-paste AI prompts for building animated websites.">
+<meta name="twitter:description" content="A library of copy-paste AI prompts and free resources for building animated websites.">
 <meta name="twitter:image" content="images/og-image.svg">
 
 <style>
@@ -70,6 +70,15 @@ h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.02em}
 .tag-badge{background:#151b28;padding:4px 10px;border-radius:6px;border:1px solid var(--line);font-size:11px;font-weight:600;letter-spacing:.02em}
 .copy{background:#1a2032;border:1px solid var(--line);color:var(--text);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s}
 .copy:hover{background:var(--a);color:#06080d;border-color:var(--a)}
+.res{display:flex;flex-direction:column;justify-content:space-between;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;transition:transform .25s,border-color .25s,box-shadow .25s}
+.res:hover{transform:translateY(-6px);border-color:var(--a);box-shadow:0 10px 30px rgba(94,234,212,0.08)}
+.res h3{font-size:18px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.res p{color:var(--muted);font-size:14px;margin:10px 0 18px;line-height:1.5;flex-grow:1}
+.pill{font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--a);white-space:nowrap;font-weight:600}
+.pill.fm{color:#fbbf24;border-color:#fbbf2433}
+.pill.od{color:#38bdf8;border-color:#38bdf833}
+.visit{font-size:13px;font-weight:600;color:var(--b);display:inline-flex;align-items:center;gap:4px;transition:gap .2s}
+.res:hover .visit{gap:8px;color:var(--a)}
 .reveal{opacity:0;transform:translateY(30px);transition:all .7s}
 .reveal.in{opacity:1;transform:none}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
@@ -95,13 +104,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .box pre{white-space:pre-wrap;background:#0a0d15;border:1px solid var(--line);border-radius:12px;padding:16px;font-size:13px;color:#cfd6ea;margin:14px 0;font-family:ui-monospace,Consolas,monospace}
 .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--a);color:#06080d;padding:10px 20px;border-radius:99px;font-weight:700;transition:.3s;z-index:60}
 .toast.show{transform:translate(-50%,0)}
-@media(max-width:700px){.links{display:none}}
+@media(max-width:760px){.links{display:none}}
 </style>
 </head>
 <body>
 <nav><div class="wrap">
   <a class="logo" href="#"><i></i>PromptDock</a>
-  <div class="links"><a href="#library">Library</a><a href="#how">How it works</a><a href="#join">Newsletter</a></div>
+  <div class="links"><a href="#library">Library</a><a href="#resources">Free resources</a><a href="#how">How it works</a><a href="#join">Newsletter</a></div>
   <a class="btn" href="#library">Browse prompts</a>
 </div></nav>
 
@@ -111,7 +120,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     <div class="tag">New prompts every Friday</div>
     <h1>Prompts for websites that <span>actually move.</span></h1>
     <p class="lead">Copy a prompt, paste it into your AI tool, and ship a scroll-driven site in an afternoon.</p>
-    <div class="cta"><a class="btn" href="#library">Browse the library</a><a class="btn o" href="#how">How it works</a></div>
+    <div class="cta"><a class="btn" href="#library">Browse the library</a><a class="btn o" href="#resources">Free resources</a></div>
   </div>
 </header>
 
@@ -125,6 +134,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   <div class="cards" id="cards"></div>
 </div></section>
 
+<section id="resources"><div class="wrap">
+  <h2 class="reveal">Free resources</h2>
+  <p class="sub reveal">Real, copy-paste code and open-source UI libraries for the same animated look. Check each site's license before using it in a live project.</p>
+  <div class="cards" id="res"></div>
+</div></section>
+
 <section id="how"><div class="wrap">
   <h2 class="reveal">Copy, paste, launch.</h2>
   <p class="sub reveal">Three steps from blank tab to live site.</p>
@@ -134,9 +149,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     <div class="step reveal"><b>03</b><h3>Launch it live</h3><p>Edit the copy, push to GitHub, deploy on Vercel.</p></div>
   </div>
   <div class="stats reveal">
-    <div><b data-n="12">0</b><span>Prompts</span></div>
-    <div><b data-n="5">0</b><span>Categories</span></div>
-    <div><b data-n="100" data-suf="%">0</b><span>Free to copy</span></div>
+    <div><b id="sP" data-n="0">0</b><span>Prompts</span></div>
+    <div><b id="sC" data-n="0">0</b><span>Categories</span></div>
+    <div><b id="sR" data-n="0">0</b><span>Free resources</span></div>
     <div><b data-n="1" data-suf="/wk">0</b><span>Fresh drops</span></div>
   </div>
 </div></section>
@@ -175,16 +190,40 @@ const P=[
  ["Menu Board","Ecommerce","Restaurant menu with sticky category tabs.","#fbbf24,#ef4444","Create a restaurant site with a sticky category tab bar that highlights as you scroll, menu items with price and dietary tags, and a reservation form that stores requests in localStorage.","images/menu-board.svg"],
  ["Glass Cards","Hero","Glassmorphism feature cards over a gradient.","#67e8f9,#a5b4fc","Design a hero followed by 3 glassmorphism feature cards (backdrop-filter blur, 1px translucent border, soft shadow). Cards tilt in 3D toward the cursor on hover and reset smoothly on leave.","images/glass-cards.svg"]
 ];
+
+const R=[
+ ["21st.dev","https://21st.dev","Free","The npm for Design Engineers — directory of free, open-source animated React & Tailwind component libraries."],
+ ["Libraries.dev","https://libraries.dev","Free","Production-ready open-source React UI effect libraries tailored for AI interfaces, voice visualizers, and glowing shaders."],
+ ["Aceternity UI","https://ui.aceternity.com","Free + Pro","Animated sections, effects and full-page templates for Next.js, Tailwind, and Framer Motion."],
+ ["Magic UI","https://magicui.design","Free + Pro","20+ animated React components and effects that drop smoothly into any shadcn/ui project."],
+ ["Spectrum UI","https://github.com/arihantcodes/spectrum-ui","Free","250+ animated components, blocks, and templates built on shadcn/ui under Apache 2.0 license."],
+ ["shadcn/ui","https://ui.shadcn.com","Free","The accessible, copy-paste component architecture that modern web animation libraries extend."],
+ ["MotionSites","https://motionsites.ai","Freemium","Curated prompt and design library for animated hero sections with instant copy."],
+ ["Libraries.io","https://libraries.io","Open Data","Search and discover open-source packages, dependency trees, and licenses across 30+ package managers."]
+];
+
 const cats=["All",...new Set(P.map(p=>p[1]))];
 let cat="All",term="";
 const $=id=>document.getElementById(id);
 
-$("mq").innerHTML=("<span>React</span><span>Next.js</span><span>Tailwind</span><span>GSAP</span><span>Three.js</span><span>WebGL</span><span>Vercel</span>").repeat(8);
+$("mq").innerHTML=("<span>React</span><span>Next.js</span><span>Tailwind</span><span>GSAP</span><span>Three.js</span><span>WebGL</span><span>Vercel</span><span>21st.dev</span><span>Libraries.dev</span>").repeat(6);
 $("count").textContent=P.length;
+$("sP").dataset.n=P.length;
+$("sC").dataset.n=cats.length-1;
+$("sR").dataset.n=R.length;
 $("chips").innerHTML=cats.map(c=>`<span class="chip ${c==="All"?"on":""}" data-c="${c}">${c}</span>`).join("");
 
+$("res").innerHTML=R.map(r=>{
+  const pillClass = r[2]==="Free" ? "" : r[2]==="Open Data" ? "od" : "fm";
+  return `<a class="res reveal" href="${r[1]}" target="_blank" rel="noopener noreferrer">
+    <h3>${r[0]}<span class="pill ${pillClass}">${r[2]}</span></h3>
+    <p>${r[3]}</p>
+    <span class="visit">Visit site &rarr;</span>
+  </a>`;
+}).join("");
+
 function draw(){
-  const list=P.filter(p=>(cat==="All"||p[1]===cat)&&(p[0]+p[2]).toLowerCase().includes(term));
+  const list=P.filter(p=>(cat==="All"||p[1]===cat)&&(p[0]+p[1]+p[2]).toLowerCase().includes(term));
   $("cards").innerHTML=list.map(p=>{const i=P.indexOf(p),g=p[3].split(",");
     return `<div class="card reveal" data-i="${i}">
     <div class="thumb" style="background:radial-gradient(circle at 30% 30%,${g[0]},transparent 60%),radial-gradient(circle at 75% 70%,${g[1]},transparent 60%),#0a0d15">
@@ -233,6 +272,7 @@ const cio=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)retur
 document.querySelectorAll("[data-n]").forEach(el=>cio.observe(el));
 
 draw();
+observe();
 </script>
 </body>
 </html>

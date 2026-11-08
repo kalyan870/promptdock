@@ -22,6 +22,9 @@ const html = fs.readFileSync(indexPath, 'utf-8');
 assert(html.includes('<title>PromptDock'), 'HTML contains correct title');
 assert(html.includes('images/favicon.svg'), 'HTML links to favicon');
 assert(html.includes('images/og-image.svg'), 'HTML includes social meta preview image');
+assert(html.includes('id="resources"'), 'HTML includes Free Resources section');
+assert(html.includes('21st.dev'), 'HTML includes 21st.dev integration');
+assert(html.includes('Libraries.dev'), 'HTML includes Libraries.dev integration');
 
 // 2. Check all 12 prompt images + meta images exist
 const imagesDir = path.join(__dirname, 'images');
@@ -66,11 +69,11 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(4892, async () => {
-  console.log('[INFO] Test server listening on http://localhost:4892');
+server.listen(4893, async () => {
+  console.log('[INFO] Test server listening on http://localhost:4893');
   try {
     const checkUrl = (urlPath) => new Promise((resolve, reject) => {
-      http.get(`http://localhost:4892${urlPath}`, (res) => {
+      http.get(`http://localhost:4893${urlPath}`, (res) => {
         let data = '';
         res.on('data', chunk => data += chunk);
         res.on('end', () => resolve({ statusCode: res.statusCode, data }));
@@ -79,7 +82,8 @@ server.listen(4892, async () => {
 
     const homeRes = await checkUrl('/');
     assert(homeRes.statusCode === 200, 'GET / returned HTTP 200');
-    assert(homeRes.data.includes('PromptDock'), 'Home response contains PromptDock content');
+    assert(homeRes.data.includes('21st.dev'), 'Home response contains 21st.dev');
+    assert(homeRes.data.includes('Libraries.dev'), 'Home response contains Libraries.dev');
 
     const imgRes = await checkUrl('/images/aurora-hero.svg');
     assert(imgRes.statusCode === 200, 'GET /images/aurora-hero.svg returned HTTP 200');
