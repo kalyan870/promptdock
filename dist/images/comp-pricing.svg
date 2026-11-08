@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="100%" height="100%">
+  <rect width="900" height="650" fill="#080c16"/>
+  <rect x="60" y="50" width="780" height="550" rx="16" fill="#0d1424" stroke="#1e293f" stroke-width="2"/>
+  <text x="330" y="110" fill="#ffffff" font-family="system-ui" font-weight="800" font-size="26">3D Glass Pricing Table</text>
+  <g transform="translate(370, 130)">
+    <rect x="0" y="0" width="160" height="36" rx="18" fill="#141e33" stroke="#2a3955"/>
+    <rect x="4" y="4" width="76" height="28" rx="14" fill="#5eead4"/>
+    <text x="24" y="23" fill="#040711" font-family="system-ui" font-weight="700" font-size="12">Monthly</text>
+    <text x="96" y="23" fill="#94a3b8" font-family="system-ui" font-weight="600" font-size="12">Annual</text>
+  </g>
+  <g transform="translate(90, 195)">
+    <rect x="0" y="30" width="220" height="320" rx="14" fill="#11192b" stroke="#1f2c45"/>
+    <text x="30" y="70" fill="#94a3b8" font-family="system-ui" font-weight="700" font-size="16">STARTER</text>
+    <text x="30" y="115" fill="#ffffff" font-family="system-ui" font-weight="800" font-size="34">$0</text>
+    <text x="80" y="115" fill="#64748b" font-family="system-ui" font-size="13">/forever</text>
+    <rect x="30" y="140" width="160" height="2" fill="#1f2c45"/>
+    <text x="30" y="175" fill="#cbd5e1" font-family="system-ui" font-size="12">✓ 16 Public Prompts</text>
+    <text x="30" y="205" fill="#cbd5e1" font-family="system-ui" font-size="12">✓ 3D Shaders &amp; SVGs</text>
+    <text x="30" y="235" fill="#64748b" font-family="system-ui" font-size="12">✗ Private Workspaces</text>
+    <rect x="30" y="280" width="160" height="40" rx="8" fill="#18233a" stroke="#2d3d5c"/>
+    <text x="75" y="305" fill="#ffffff" font-family="system-ui" font-weight="600" font-size="13">Get Free</text>
+    <g transform="translate(250, 0)">
+      <rect x="0" y="0" width="240" height="370" rx="16" fill="#141f36" stroke="#5eead4" stroke-width="2"/>
+      <rect x="70" y="-12" width="100" height="24" rx="12" fill="#5eead4"/>
+      <text x="85" y="4" fill="#040711" font-family="system-ui" font-weight="800" font-size="10">MOST POPULAR</text>
+      <text x="30" y="55" fill="#5eead4" font-family="system-ui" font-weight="700" font-size="16">PRO STUDIO</text>
+      <text x="30" y="105" fill="#ffffff" font-family="system-ui" font-weight="800" font-size="36">$29</text>
+      <text x="100" y="105" fill="#64748b" font-family="system-ui" font-size="13">/month</text>
+      <rect x="30" y="130" width="180" height="2" fill="#253554"/>
+      <text x="30" y="165" fill="#ffffff" font-family="system-ui" font-size="13">✓ Unlimited 3D Prompts</text>
+      <text x="30" y="195" fill="#ffffff" font-family="system-ui" font-size="13">✓ 21st.dev Component Sync</text>
+      <text x="30" y="225" fill="#ffffff" font-family="system-ui" font-size="13">✓ Commercial License</text>
+      <text x="30" y="255" fill="#ffffff" font-family="system-ui" font-size="13">✓ Priority Cloud Export</text>
+      <rect x="30" y="300" width="180" height="44" rx="10" fill="#5eead4"/>
+      <text x="75" y="327" fill="#040711" font-family="system-ui" font-weight="700" font-size="14">Upgrade to Pro</text>
+    </g>
+    <g transform="translate(510, 30)">
+      <rect x="0" y="0" width="220" height="320" rx="14" fill="#11192b" stroke="#1f2c45"/>
+      <text x="30" y="40" fill="#94a3b8" font-family="system-ui" font-weight="700" font-size="16">ENTERPRISE</text>
+      <text x="30" y="85" fill="#ffffff" font-family="system-ui" font-weight="800" font-size="34">$199</text>
+      <text x="120" y="85" fill="#64748b" font-family="system-ui" font-size="13">/mo</text>
+      <rect x="30" y="110" width="160" height="2" fill="#1f2c45"/>
+      <text x="30" y="145" fill="#cbd5e1" font-family="system-ui" font-size="12">✓ Dedicated Pipeline</text>
+      <text x="30" y="175" fill="#cbd5e1" font-family="system-ui" font-size="12">✓ Custom 3D Shaders</text>
+      <text x="30" y="205" fill="#cbd5e1" font-family="system-ui" font-size="12">✓ SLA 99.99% Uptime</text>
+      <rect x="30" y="250" width="160" height="40" rx="8" fill="#18233a" stroke="#2d3d5c"/>
+      <text x="65" y="275" fill="#ffffff" font-family="system-ui" font-weight="600" font-size="13">Talk to Sales</text>
+    </g>
+  </g>
+</svg>

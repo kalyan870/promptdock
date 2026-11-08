@@ -1,134 +1,101 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-console.log('--- Starting PromptDock 7.1 Data & Catalog Typechecker ---');
-let errors = 0;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const indexPath = path.join(__dirname, 'index.html');
-const html = fs.readFileSync(indexPath, 'utf-8');
+console.log('--- Starting PromptDock 7.2 Data & Catalog Typechecker ---');
 
-// 1. Verify CATEGORIES
-const catMatch = html.match(/const CATEGORIES\s*=\s*(\[[\s\S]*?\]);/);
-if (!catMatch) {
-  console.error('[TYPE FAIL] CATEGORIES array not found in index.html');
-  errors++;
-} else {
-  try {
-    const cats = eval(catMatch[1]);
-    console.log(`Checking ${cats.length} CATEGORIES entries...`);
-    const expected = [
-      "All Visuals",
-      "3D Hero Experiences",
-      "3D Backgrounds",
-      "Particles and Physics",
-      "3D Product Experiences",
-      "Motion and Scroll Experiences",
-      "3D UI Components",
-      "Shaders and Materials",
-      "AI and Technology Visuals"
-    ];
-    expected.forEach(c => {
-      if (!cats.includes(c)) {
-        console.error(`[TYPE FAIL] Missing required category: "${c}"`);
-        errors++;
-      }
-    });
-    console.log(`[TYPE PASS] All 8 required 3D disciplines present in CATEGORIES`);
-  } catch (err) {
-    console.error(`[TYPE FAIL] Failed to parse CATEGORIES: ${err.message}`);
-    errors++;
-  }
-}
+// 1. Read visuals.ts and scene-factory.ts
+const visualsPath = path.join(__dirname, 'src/data/visuals.ts');
+const factoryPath = path.join(__dirname, 'src/engine/scene-factory.ts');
 
-// 2. Verify VISUALS catalog with dedicated sceneType
-const vIdx = html.indexOf('const VISUALS =');
-const vEndIdx = html.indexOf('// Active State', vIdx);
-if (vIdx === -1 || vEndIdx === -1) {
-  console.error('[TYPE FAIL] VISUALS array bounds not found in index.html');
-  errors++;
-} else {
-  try {
-    const vCode = html.substring(vIdx + 15, html.lastIndexOf('];', vEndIdx) + 1);
-    const visuals = eval(vCode);
-    console.log(`Checking ${visuals.length} VISUALS catalog items...`);
-    if (visuals.length < 30) {
-      console.error(`[TYPE FAIL] Expected at least 30 visuals, found ${visuals.length}`);
-      errors++;
-    }
-
-    const requiredKeys = ['id', 'name', 'cat', 'desc', 'thumb', 'tech', 'anim', 'interact', 'perf', 'perfTier', 'placement', 'sceneType', 'defaultProps'];
-    visuals.forEach((v, idx) => {
-      requiredKeys.forEach(k => {
-        if (v[k] === undefined || v[k] === null || v[k] === '') {
-          console.error(`[TYPE FAIL] VISUALS[${idx}] missing required property "${k}"`);
-          errors++;
-        }
-      });
-      // Check defaultProps has color, speed, density, glow, cam
-      const propKeys = ['color', 'speed', 'density', 'glow', 'cam'];
-      propKeys.forEach(pk => {
-        if (v.defaultProps[pk] === undefined) {
-          console.error(`[TYPE FAIL] VISUALS[${idx}] defaultProps missing "${pk}"`);
-          errors++;
-        }
-      });
-    });
-    console.log(`[TYPE PASS] All ${visuals.length} 3D visuals strictly conform to schema with dedicated sceneType`);
-  } catch (err) {
-    console.error(`[TYPE FAIL] Failed to parse VISUALS: ${err.message}`);
-    errors++;
-  }
-}
-
-// 3. Verify Functions & SceneFactory
-const requiredFunctions = [
-  'generateCompletePrompt',
-  'generateCombinedPrompt',
-  'loadVisualIntoPromptBuilder',
-  'SceneFactory.createScene',
-  'Engine3D.initHero',
-  'Engine3D.initInspector',
-  'Engine3D.setupLifecycle'
-];
-requiredFunctions.forEach(fn => {
-  if (!html.includes(fn)) {
-    console.error(`[TYPE FAIL] Missing essential function: "${fn}"`);
-    errors++;
-  } else {
-    console.log(`[TYPE PASS] Function verified: "${fn}"`);
-  }
-});
-
-// 4. Verify Absolute Removal of Modification Feature
-if (html.includes('id="modify-website"') || html.includes('generateModificationPrompt') || html.includes('loadVisualIntoModifier')) {
-  console.error('[TYPE FAIL] Obsolete modification feature found in index.html!');
-  errors++;
-} else {
-  console.log('[TYPE PASS] Verified 0 obsolete modification references in index.html');
-}
-
-// 5. Verify 3D Engine Lifecycle Hooks
-const lifecycleHooks = [
-  'IntersectionObserver',
-  'visibilitychange',
-  'ResizeObserver',
-  'cancelAnimationFrame',
-  'webglcontextlost',
-  'webglcontextrestored'
-];
-lifecycleHooks.forEach(hook => {
-  if (!html.includes(hook)) {
-    console.error(`[TYPE FAIL] Missing lifecycle hook: "${hook}"`);
-    errors++;
-  } else {
-    console.log(`[TYPE PASS] 3D Engine lifecycle hook verified: "${hook}"`);
-  }
-});
-
-if (errors > 0) {
-  console.error(`--- Typechecker failed with ${errors} error(s) ---`);
+if (!fs.existsSync(visualsPath) || !fs.existsSync(factoryPath)) {
+  console.error('[TYPE FAIL] Missing visuals.ts or scene-factory.ts');
   process.exit(1);
-} else {
-  console.log('--- PromptDock 7.1 Typechecker PASSED (0 errors) ---');
-  process.exit(0);
 }
+
+const visualsCode = fs.readFileSync(visualsPath, 'utf-8');
+const factoryCode = fs.readFileSync(factoryPath, 'utf-8');
+
+// 2. Extract sceneTypes from visuals.ts
+const sceneTypeMatches = visualsCode.match(/sceneType:\s*"([^"]+)"/g) || [];
+const sceneTypes = sceneTypeMatches.map(m => m.split('"')[1]);
+
+console.log(`[TYPE INFO] Found ${sceneTypes.length} visual entries in src/data/visuals.ts`);
+
+if (sceneTypes.length !== 30) {
+  console.error(`[TYPE FAIL] Expected exactly 30 visuals, found ${sceneTypes.length}`);
+  process.exit(1);
+}
+
+const uniqueTypes = new Set(sceneTypes);
+if (uniqueTypes.size !== 30) {
+  console.error(`[TYPE FAIL] Expected 30 unique sceneTypes, found ${uniqueTypes.size}`);
+  process.exit(1);
+}
+
+// 3. Verify every sceneType has an explicit SceneFactory.register() call
+const missingRegistrations = [];
+for (const st of sceneTypes) {
+  const registerRegex = new RegExp(`SceneFactory\\.register\\(\\s*['"]${st}['"]`);
+  if (!registerRegex.test(factoryCode)) {
+    missingRegistrations.push(st);
+  }
+}
+
+if (missingRegistrations.length > 0) {
+  console.error(`[TYPE FAIL] Missing explicit scene implementations for: ${missingRegistrations.join(', ')}`);
+  process.exit(1);
+}
+console.log(`[TYPE PASS] All 30 visual sceneTypes have dedicated SceneFactory registrations`);
+
+// 4. Specifically verify the 14 previously missing and 2 separated scene types
+const requiredSpecificScenes = [
+  'reactiveParticles',
+  'magneticAttractor',
+  'flowField',
+  'hardwareTerminal',
+  'scrollCameraTrack',
+  'multiplaneParallax',
+  'sectionDissolve',
+  'tiltCardStack',
+  'morphingPill',
+  'magneticButtonMesh',
+  'borderBeamRunner',
+  'liquidChromeMesh',
+  'glassRefractionPrism',
+  'gooeyCluster',
+  'galaxy',
+  'curlVortex',
+  'neuralNet',
+  'neuralGraph'
+];
+
+for (const reqScene of requiredSpecificScenes) {
+  if (!factoryCode.includes(`SceneFactory.register('${reqScene}'`)) {
+    console.error(`[TYPE FAIL] Dedicated scene required but missing: ${reqScene}`);
+    process.exit(1);
+  }
+}
+console.log(`[TYPE PASS] All 14 dedicated and 4 separated scene types explicitly confirmed`);
+
+// 5. Verify cleanGroup clears _customUpdate to prevent memory leaks
+if (!factoryCode.includes('group._customUpdate = null;')) {
+  console.error('[TYPE FAIL] SceneFactory.cleanGroup must reset group._customUpdate to null');
+  process.exit(1);
+}
+console.log('[TYPE PASS] SceneFactory.cleanGroup properly clears _customUpdate hook');
+
+// 6. Verify absolute absence of website modification feature
+const forbiddenTokens = ['modify-website', 'generateModificationPrompt', 'docs/modification-engine.md'];
+for (const tok of forbiddenTokens) {
+  if (visualsCode.includes(tok) || factoryCode.includes(tok)) {
+    console.error(`[TYPE FAIL] Obsolete website modification token found: "${tok}"`);
+    process.exit(1);
+  }
+}
+console.log('[TYPE PASS] Verified 0 obsolete website modification references');
+
+console.log('--- PromptDock 7.2 Typechecker PASSED (0 errors) ---');

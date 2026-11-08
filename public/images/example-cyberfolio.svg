@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cyberG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="#07090f"/>
+  <rect x="25" y="25" width="350" height="190" rx="16" fill="#0f131d" stroke="#c084fc" stroke-width="1.5"/>
+  <!-- Terminal Code -->
+  <text x="45" y="65" font-family="monospace" font-size="13" fill="#a855f7">&gt; Creative Developer Portfolio</text>
+  <text x="45" y="90" font-family="monospace" font-size="12" fill="#8d95aa">Stack: Next.js 15, Three.js, GSAP</text>
+  <rect x="45" y="115" width="140" height="80" rx="8" fill="#151b28" stroke="#202638"/>
+  <circle cx="115" cy="155" r="22" fill="url(#cyberG)" opacity="0.8"/>
+  <rect x="200" y="115" width="155" height="80" rx="8" fill="#151b28" stroke="#202638"/>
+  <text x="215" y="145" font-family="sans-serif" font-size="12" font-weight="bold" fill="#eef1f8">AWWWARDS SOTD</text>
+  <text x="215" y="165" font-family="sans-serif" font-size="11" fill="#ec4899">★ 8.84 Score</text>
+</svg>

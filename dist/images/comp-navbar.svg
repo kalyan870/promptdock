@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="100%" height="100%">
+  <rect width="900" height="650" fill="#070a12"/>
+  <rect x="60" y="60" width="780" height="530" rx="16" fill="#0c111e" stroke="#1d263b" stroke-width="2"/>
+  <circle cx="700" cy="200" r="180" fill="#818cf8" opacity="0.18" filter="blur(50px)"/>
+  <g transform="translate(180, 160)">
+    <rect x="0" y="0" width="540" height="76" rx="38" fill="#121a2be6" stroke="#2e3d5b" stroke-width="2" filter="drop-shadow(0 20px 35px rgba(0,0,0,0.6))"/>
+    <circle cx="50" cy="38" r="20" fill="#5eead4"/>
+    <rect x="110" y="24" width="70" height="28" rx="14" fill="#5eead4" opacity="0.2"/>
+    <text x="126" y="43" fill="#5eead4" font-family="system-ui" font-weight="700" font-size="13">Home</text>
+    <text x="210" y="43" fill="#94a3b8" font-family="system-ui" font-weight="600" font-size="13">Components</text>
+    <text x="330" y="43" fill="#94a3b8" font-family="system-ui" font-weight="600" font-size="13">Showcase</text>
+    <text x="430" y="43" fill="#94a3b8" font-family="system-ui" font-weight="600" font-size="13">Docs</text>
+    <rect x="490" y="22" width="32" height="32" rx="16" fill="#1f2c44"/>
+    <path d="M500,38 L512,38 M506,32 L512,38 L506,44" stroke="#5eead4" stroke-width="2" fill="none"/>
+  </g>
+  <rect x="140" y="300" width="280" height="18" rx="9" fill="#1a253a"/>
+  <rect x="140" y="335" width="460" height="12" rx="6" fill="#141c2c"/>
+  <rect x="140" y="360" width="380" height="12" rx="6" fill="#141c2c"/>
+  <rect x="140" y="410" width="180" height="120" rx="12" fill="#111928" stroke="#1f2c42"/>
+  <rect x="340" y="410" width="180" height="120" rx="12" fill="#111928" stroke="#1f2c42"/>
+  <rect x="540" y="410" width="220" height="120" rx="12" fill="#111928" stroke="#1f2c42"/>
+</svg>

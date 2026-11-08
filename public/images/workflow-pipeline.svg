@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="100%" height="100%">
+  <rect width="1200" height="600" fill="#070a12"/>
+  <text x="60" y="60" fill="#ffffff" font-family="system-ui" font-weight="800" font-size="28">PromptDock 5.0 End-to-End Production Pipeline</text>
+  <text x="60" y="90" fill="#94a3b8" font-family="system-ui" font-size="14">From initial AI synthesis to award-winning global Vercel production edge</text>
+  <g transform="translate(60, 130)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#0e1526" stroke="#1f2d48" stroke-width="2"/>
+    <circle cx="40" cy="40" r="20" fill="#5eead4"/>
+    <text x="33" y="47" fill="#040711" font-family="system-ui" font-weight="900" font-size="16">01</text>
+    <text x="75" y="45" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Idea &amp; Specs</text>
+    <text x="25" y="85" fill="#94a3b8" font-family="system-ui" font-size="12">Define design goals, visual style, 3D interaction concepts, and target audience.</text>
+    <rect x="25" y="130" width="190" height="28" rx="6" fill="#162238"/>
+    <text x="35" y="148" fill="#5eead4" font-family="monospace" font-size="11">Concept · PRD · Wireframe</text>
+  </g>
+  <g transform="translate(340, 130)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#0e1526" stroke="#5eead4" stroke-width="2"/>
+    <circle cx="40" cy="40" r="20" fill="#5eead4"/>
+    <text x="33" y="47" fill="#040711" font-family="system-ui" font-weight="900" font-size="16">02</text>
+    <text x="75" y="45" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Prompt Discovery</text>
+    <text x="25" y="85" fill="#94a3b8" font-family="system-ui" font-size="12">Select verified 3D &amp; animation prompts with starter code and shaders.</text>
+    <rect x="25" y="130" width="190" height="28" rx="6" fill="#162238"/>
+    <text x="35" y="148" fill="#5eead4" font-family="monospace" font-size="11">PromptDock 5.0 Library</text>
+  </g>
+  <g transform="translate(620, 130)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#0e1526" stroke="#1f2d48" stroke-width="2"/>
+    <circle cx="40" cy="40" r="20" fill="#818cf8"/>
+    <text x="33" y="47" fill="#040711" font-family="system-ui" font-weight="900" font-size="16">03</text>
+    <text x="75" y="45" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Component Pick</text>
+    <text x="25" y="85" fill="#94a3b8" font-family="system-ui" font-size="12">Browse 21st.dev inspired marketplace for buttons, bento grids, and dynamic heroes.</text>
+    <rect x="25" y="130" width="190" height="28" rx="6" fill="#162238"/>
+    <text x="35" y="148" fill="#818cf8" font-family="monospace" font-size="11">21st.dev Registry Sync</text>
+  </g>
+  <g transform="translate(900, 130)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#0e1526" stroke="#1f2d48" stroke-width="2"/>
+    <circle cx="40" cy="40" r="20" fill="#38bdf8"/>
+    <text x="33" y="47" fill="#040711" font-family="system-ui" font-weight="900" font-size="16">04</text>
+    <text x="75" y="45" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">AI Synthesis</text>
+    <text x="25" y="85" fill="#94a3b8" font-family="system-ui" font-size="12">Execute AI generation prompt with Claude, GPT-4o, or Gemini in your coding IDE.</text>
+    <rect x="25" y="130" width="190" height="28" rx="6" fill="#162238"/>
+    <text x="35" y="148" fill="#38bdf8" font-family="monospace" font-size="11">Antigravity / VS Code</text>
+  </g>
+  <g transform="translate(60, 360)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#0e1526" stroke="#1f2d48" stroke-width="2"/>
+    <circle cx="40" cy="40" r="20" fill="#f59e0b"/>
+    <text x="33" y="47" fill="#040711" font-family="system-ui" font-weight="900" font-size="16">05</text>
+    <text x="75" y="45" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Local Dev</text>
+    <text x="25" y="85" fill="#94a3b8" font-family="system-ui" font-size="12">Iterate with live reload, configure WebGL shaders, camera controls &amp; GSAP timelines.</text>
+    <rect x="25" y="130" width="190" height="28" rx="6" fill="#162238"/>
+    <text x="35" y="148" fill="#f59e0b" font-family="monospace" font-size="11">npm run dev / start</text>
+  </g>
+  <g transform="translate(340, 360)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#0e1526" stroke="#1f2d48" stroke-width="2"/>
+    <circle cx="40" cy="40" r="20" fill="#10b981"/>
+    <text x="33" y="47" fill="#040711" font-family="system-ui" font-weight="900" font-size="16">06</text>
+    <text x="75" y="45" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Automated QA</text>
+    <text x="25" y="85" fill="#94a3b8" font-family="system-ui" font-size="12">Run asset verification, build compilation, link audits, and WebGL fallback checks.</text>
+    <rect x="25" y="130" width="190" height="28" rx="6" fill="#162238"/>
+    <text x="35" y="148" fill="#10b981" font-family="monospace" font-size="11">npm test &amp; npm run build</text>
+  </g>
+  <g transform="translate(620, 360)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#0e1526" stroke="#1f2d48" stroke-width="2"/>
+    <circle cx="40" cy="40" r="20" fill="#e2e8f0"/>
+    <text x="33" y="47" fill="#040711" font-family="system-ui" font-weight="900" font-size="16">07</text>
+    <text x="75" y="45" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">GitHub Push</text>
+    <text x="25" y="85" fill="#94a3b8" font-family="system-ui" font-size="12">Version-control commits, trigger multi-version Node.js matrix GitHub Actions CI.</text>
+    <rect x="25" y="130" width="190" height="28" rx="6" fill="#162238"/>
+    <text x="35" y="148" fill="#cbd5e1" font-family="monospace" font-size="11">git push origin main</text>
+  </g>
+  <g transform="translate(900, 360)">
+    <rect x="0" y="0" width="240" height="180" rx="16" fill="#0e1526" stroke="#5eead4" stroke-width="2"/>
+    <circle cx="40" cy="40" r="20" fill="#5eead4"/>
+    <text x="33" y="47" fill="#040711" font-family="system-ui" font-weight="900" font-size="16">08</text>
+    <text x="75" y="45" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Vercel Deploy</text>
+    <text x="25" y="85" fill="#94a3b8" font-family="system-ui" font-size="12">Instant global edge CDN deployment with automatic asset caching and SSL.</text>
+    <rect x="25" y="130" width="190" height="28" rx="6" fill="#162238"/>
+    <text x="35" y="148" fill="#5eead4" font-family="monospace" font-size="11">vercel deploy --prod</text>
+  </g>
+  <path d="M300,220 L340,220" stroke="#5eead4" stroke-width="3" fill="none"/>
+  <path d="M580,220 L620,220" stroke="#5eead4" stroke-width="3" fill="none"/>
+  <path d="M860,220 L900,220" stroke="#5eead4" stroke-width="3" fill="none"/>
+  <path d="M300,450 L340,450" stroke="#5eead4" stroke-width="3" fill="none"/>
+  <path d="M580,450 L620,450" stroke="#5eead4" stroke-width="3" fill="none"/>
+  <path d="M860,450 L900,450" stroke="#5eead4" stroke-width="3" fill="none"/>
+</svg>

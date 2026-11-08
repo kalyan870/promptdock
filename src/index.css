@@ -1,0 +1,41 @@
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #04060b;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #04060b;
+  color: #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #04060b;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Subtle Glow Effects */
+.glow-teal {
+  box-shadow: 0 0 25px rgba(94, 234, 212, 0.25);
+}
+.glow-sky {
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+}

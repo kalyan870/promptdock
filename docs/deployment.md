@@ -1,17 +1,26 @@
 # Deployment & Production Architecture
 
-PromptDock 7.1 is hosted on Vercel's Global Edge Network with custom HTTP security headers, asset compression, and immutable caching.
+PromptDock 7.2 is deployed on Vercel's Global Edge Network, serving compiled React 19 + TypeScript assets from `dist/` with immutable asset caching and custom security headers.
 
 ## Vercel Configuration (`vercel.json`)
 
 ```json
 {
   "version": 2,
-  "outputDirectory": ".",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "headers": [
     {
       "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -31,9 +40,13 @@ PromptDock 7.1 is hosted on Vercel's Global Edge Network with custom HTTP securi
 }
 ```
 
-## Production Deployment Command
+## Production Deployment Workflow
 
 ```bash
+# 1. Run full validation pipeline
+npm run validate
+
+# 2. Deploy to Vercel production
 vercel deploy --prod --yes
 ```
 

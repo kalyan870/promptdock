@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="100%" height="100%">
+  <rect width="900" height="650" fill="#070a12"/>
+  <rect x="60" y="60" width="780" height="530" rx="16" fill="#0c111e" stroke="#1d263b" stroke-width="2"/>
+  <text x="100" y="120" fill="#ffffff" font-family="system-ui" font-weight="800" font-size="24">3D Perspective Cards</text>
+  <text x="100" y="150" fill="#94a3b8" font-family="system-ui" font-size="14">Physics-driven tilt with dynamic specular reflection glare maps</text>
+  <g transform="translate(100, 190)">
+    <g transform="rotate(-4) scale(0.96)">
+      <rect x="0" y="0" width="200" height="300" rx="16" fill="#131c30" stroke="#253554" stroke-width="2"/>
+      <rect x="20" y="20" width="160" height="110" rx="10" fill="#1a2742"/>
+      <circle cx="100" cy="75" r="28" fill="#5eead4" opacity="0.3"/>
+      <rect x="25" y="150" width="100" height="14" rx="7" fill="#5eead4"/>
+      <rect x="25" y="180" width="140" height="8" rx="4" fill="#475569"/>
+      <rect x="25" y="200" width="110" height="8" rx="4" fill="#334155"/>
+      <rect x="25" y="240" width="150" height="34" rx="8" fill="#1f2d47"/>
+    </g>
+    <g transform="translate(240, -15)">
+      <rect x="0" y="0" width="220" height="330" rx="18" fill="#15213b" stroke="#5eead4" stroke-width="2"/>
+      <rect x="20" y="20" width="180" height="120" rx="12" fill="#1e293b"/>
+      <polygon points="110,45 150,110 70,110" fill="#5eead4"/>
+      <text x="25" y="175" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Spatial Mesh 3D</text>
+      <text x="25" y="200" fill="#94a3b8" font-family="system-ui" font-size="12">Interactive raymarching</text>
+      <rect x="25" y="225" width="60" height="20" rx="6" fill="#5eead4" opacity="0.2"/>
+      <text x="35" y="239" fill="#5eead4" font-family="system-ui" font-weight="600" font-size="10">THREE.JS</text>
+      <rect x="25" y="265" width="170" height="38" rx="10" fill="#5eead4"/>
+      <text x="75" y="289" fill="#040711" font-family="system-ui" font-weight="700" font-size="13">Inspect Card</text>
+    </g>
+    <g transform="translate(510, 0) rotate(4) scale(0.96)">
+      <rect x="0" y="0" width="200" height="300" rx="16" fill="#131c30" stroke="#253554" stroke-width="2"/>
+      <rect x="20" y="20" width="160" height="110" rx="10" fill="#1a2742"/>
+      <circle cx="100" cy="75" r="28" fill="#818cf8" opacity="0.3"/>
+      <rect x="25" y="150" width="100" height="14" rx="7" fill="#818cf8"/>
+      <rect x="25" y="180" width="140" height="8" rx="4" fill="#475569"/>
+      <rect x="25" y="200" width="110" height="8" rx="4" fill="#334155"/>
+      <rect x="25" y="240" width="150" height="34" rx="8" fill="#1f2d47"/>
+    </g>
+  </g>
+  <text x="320" y="560" fill="#5eead4" font-family="system-ui" font-weight="600" font-size="13">✦ Move cursor over cards for dynamic 3D angle tilting &amp; specular glare</text>
+</svg>

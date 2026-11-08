@@ -1,72 +1,84 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-console.log('--- Starting PromptDock 7.1 Code Linter ---');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+console.log('--- Starting PromptDock 7.2 Code Linter ---');
+
 let errors = 0;
 
-const indexPath = path.join(__dirname, 'index.html');
-if (!fs.existsSync(indexPath)) {
-  console.error('[LINT FAIL] index.html missing!');
-  process.exit(1);
+function check(desc, condition) {
+  if (condition) {
+    console.log(`[LINT PASS] ${desc}`);
+  } else {
+    console.error(`[LINT FAIL] ${desc}`);
+    errors++;
+  }
 }
 
+// 1. Check index.html
+const indexPath = path.join(__dirname, 'index.html');
+check('index.html exists', fs.existsSync(indexPath));
 const html = fs.readFileSync(indexPath, 'utf-8');
 
-// 1. Tag balance check for critical tags
-const tagsToCheck = ['html', 'head', 'body', 'header', 'nav', 'main', 'footer'];
-for (const tag of tagsToCheck) {
-  const openCount = (html.match(new RegExp(`<${tag}[>\\s]`, 'gi')) || []).length;
-  const closeCount = (html.match(new RegExp(`</${tag}>`, 'gi')) || []).length;
-  if (openCount !== closeCount) {
-    console.error(`[LINT FAIL] Mismatched tag <${tag}>: opened ${openCount} times, closed ${closeCount} times`);
-    errors++;
-  } else {
-    console.log(`[LINT PASS] Tag balance <${tag}>: ${openCount} open, ${closeCount} close`);
-  }
+check('index.html contains DOCTYPE', html.includes('<!DOCTYPE html>'));
+check('index.html contains PromptDock 7.2 title', html.includes('PromptDock 7.2'));
+check('index.html contains root mount div', html.includes('<div id="root"></div>'));
+check('index.html loads main.tsx', html.includes('/src/main.tsx'));
+check('index.html includes favicon link', html.includes('/images/favicon.svg'));
+
+// Tag balance checks in index.html
+const tags = ['html', 'head', 'body'];
+for (const t of tags) {
+  const openCount = (html.match(new RegExp(`<${t}[^>]*>`, 'gi')) || []).length;
+  const closeCount = (html.match(new RegExp(`</${t}>`, 'gi')) || []).length;
+  check(`Tag balance <${t}>: ${openCount} open, ${closeCount} close`, openCount === 1 && closeCount === 1);
 }
 
-// 2. Check for missing alt attributes on images
-const imgMatches = html.match(/<img [^>]*>/gi) || [];
-let missingAlt = 0;
-for (const img of imgMatches) {
-  if (!img.includes('alt=')) {
-    missingAlt++;
-  }
-}
-if (missingAlt > 0) {
-  console.warn(`[LINT WARN] ${missingAlt} <img> tags missing alt attributes`);
-} else {
-  console.log(`[LINT PASS] All ${imgMatches.length} <img> tags have alt attributes`);
+// 2. Check React component tree files
+const requiredComponents = [
+  'src/App.tsx',
+  'src/main.tsx',
+  'src/data/visuals.ts',
+  'src/engine/scene-factory.ts',
+  'src/components/hero/HorizonHeroSection.tsx',
+  'src/components/navigation/Header.tsx',
+  'src/components/workflow/WorkflowSection.tsx',
+  'src/components/gallery/GallerySection.tsx',
+  'src/components/inspector/InspectorSection.tsx',
+  'src/components/prompt-generator/PromptGeneratorSection.tsx',
+  'src/components/visual-composer/VisualComposerSection.tsx',
+  'src/components/footer/Footer.tsx'
+];
+
+for (const comp of requiredComponents) {
+  const p = path.join(__dirname, comp);
+  check(`Component exists: ${comp}`, fs.existsSync(p));
 }
 
-// 3. Verify internal anchor references
-const hrefMatches = [...html.matchAll(/href="#([a-zA-Z0-9_-]+)"/g)].map(m => m[1]);
-const uniqueAnchors = [...new Set(hrefMatches)];
-for (const anchor of uniqueAnchors) {
-  if (!html.includes(`id="${anchor}"`)) {
-    console.error(`[LINT FAIL] Broken anchor link: href="#${anchor}" has no matching id="${anchor}"`);
-    errors++;
-  }
-}
-console.log(`[LINT PASS] Verified ${uniqueAnchors.length} internal navigation anchor targets`);
+// 3. Verify 21st.dev Scott Clayton Horizon Hero attribution
+const heroCode = fs.readFileSync(path.join(__dirname, 'src/components/hero/HorizonHeroSection.tsx'), 'utf-8');
+check('Hero component contains Scott Clayton author credit', heroCode.includes('Scott Clayton'));
+check('Hero component contains @lovesickfromthe6ix credit', heroCode.includes('lovesickfromthe6ix'));
+check('Hero component contains MIT license attribution', heroCode.includes('MIT'));
+check('Hero component contains 21st.dev reference', heroCode.includes('21st.dev'));
 
-// 4. Verify script tags don't have syntax errors in inline script
-const scriptBlocks = [...html.matchAll(/<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/gi)];
-for (let i = 0; i < scriptBlocks.length; i++) {
-  const code = scriptBlocks[i][1];
-  try {
-    new Function(code);
-    console.log(`[LINT PASS] Inline script block #${i + 1} syntax is valid`);
-  } catch (err) {
-    console.error(`[LINT FAIL] Syntax error in script block #${i + 1}: ${err.message}`);
-    errors++;
-  }
-}
+// 4. Verify absolute removal of Modify Website feature
+const allCode = [
+  html,
+  heroCode,
+  fs.readFileSync(path.join(__dirname, 'src/App.tsx'), 'utf-8'),
+  fs.readFileSync(path.join(__dirname, 'src/components/prompt-generator/PromptGeneratorSection.tsx'), 'utf-8')
+].join('\n');
+
+check('No modify-website element in application', !allCode.includes('id="modify-website"'));
+check('No generateModificationPrompt function in application', !allCode.includes('generateModificationPrompt'));
 
 if (errors > 0) {
-  console.error(`--- Linter failed with ${errors} error(s) ---`);
+  console.error(`\n--- PromptDock 7.2 Linter FAILED with ${errors} error(s) ---`);
   process.exit(1);
-} else {
-  console.log('--- PromptDock 6.0 Linter PASSED (0 errors) ---');
-  process.exit(0);
 }
+
+console.log('--- PromptDock 7.2 Linter PASSED (0 errors) ---');

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 550" width="100%" height="100%">
+  <defs>
+    <linearGradient id="agentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="50%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="550" fill="#070a12"/>
+  <text x="60" y="55" fill="#ffffff" font-family="system-ui" font-weight="800" font-size="26">AI Coding Agent Production Pipeline</text>
+  <text x="60" y="85" fill="#94a3b8" font-family="system-ui" font-size="14">How developers leverage PromptDock 6.0 prompts with Google Antigravity, Claude Code, Cursor, and Gemini</text>
+  
+  <!-- Step 1: PromptDock Spec Selection -->
+  <g transform="translate(60, 130)">
+    <rect x="0" y="0" width="250" height="260" rx="16" fill="#0e1526" stroke="#5eead4" stroke-width="2"/>
+    <circle cx="40" cy="40" r="18" fill="#5eead4"/>
+    <text x="34" y="46" fill="#040711" font-family="system-ui" font-weight="900" font-size="15">1</text>
+    <text x="75" y="46" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Select Prompt &amp; FX</text>
+    <text x="25" y="90" fill="#94a3b8" font-family="system-ui" font-size="13">Browse 16+ verified 3D prompts, 21st.dev components, and Libraries.dev effects.</text>
+    <rect x="25" y="150" width="200" height="85" rx="10" fill="#141f33"/>
+    <text x="35" y="175" fill="#5eead4" font-family="monospace" font-size="11">PromptDock 6.0</text>
+    <text x="35" y="200" fill="#cbd5e1" font-family="monospace" font-size="10">• Copy System Prompt</text>
+    <text x="35" y="218" fill="#cbd5e1" font-family="monospace" font-size="10">• Copy Component Code</text>
+  </g>
+
+  <!-- Step 2: Inject into Coding Agent -->
+  <g transform="translate(350, 130)">
+    <rect x="0" y="0" width="250" height="260" rx="16" fill="#0e1526" stroke="#818cf8" stroke-width="2"/>
+    <circle cx="40" cy="40" r="18" fill="#818cf8"/>
+    <text x="34" y="46" fill="#040711" font-family="system-ui" font-weight="900" font-size="15">2</text>
+    <text x="75" y="46" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Inject into Agent</text>
+    <text x="25" y="90" fill="#94a3b8" font-family="system-ui" font-size="13">Deliver prompt to your autonomous coding agent with full architectural constraints.</text>
+    <rect x="25" y="150" width="200" height="85" rx="10" fill="#141f33"/>
+    <text x="35" y="175" fill="#818cf8" font-family="monospace" font-size="11">Compatible Agents</text>
+    <text x="35" y="200" fill="#cbd5e1" font-family="monospace" font-size="10">• Google Antigravity</text>
+    <text x="35" y="218" fill="#cbd5e1" font-family="monospace" font-size="10">• Claude Code / Cursor</text>
+  </g>
+
+  <!-- Step 3: Synthesis & Local QA -->
+  <g transform="translate(640, 130)">
+    <rect x="0" y="0" width="250" height="260" rx="16" fill="#0e1526" stroke="#38bdf8" stroke-width="2"/>
+    <circle cx="40" cy="40" r="18" fill="#38bdf8"/>
+    <text x="34" y="46" fill="#040711" font-family="system-ui" font-weight="900" font-size="15">3</text>
+    <text x="75" y="46" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Iterate &amp; Validate</text>
+    <text x="25" y="90" fill="#94a3b8" font-family="system-ui" font-size="13">Agent writes component code, runs local automated tests, and validates WebGL 3D scenes.</text>
+    <rect x="25" y="150" width="200" height="85" rx="10" fill="#141f33"/>
+    <text x="35" y="175" fill="#38bdf8" font-family="monospace" font-size="11">Self-Healing QA</text>
+    <text x="35" y="200" fill="#cbd5e1" font-family="monospace" font-size="10">• npm test (assertions)</text>
+    <text x="35" y="218" fill="#cbd5e1" font-family="monospace" font-size="10">• npm run build</text>
+  </g>
+
+  <!-- Step 4: Production Release -->
+  <g transform="translate(930, 130)">
+    <rect x="0" y="0" width="230" height="260" rx="16" fill="#0e1526" stroke="#5eead4" stroke-width="2"/>
+    <circle cx="40" cy="40" r="18" fill="url(#agentGrad)"/>
+    <text x="34" y="46" fill="#040711" font-family="system-ui" font-weight="900" font-size="15">4</text>
+    <text x="75" y="46" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="16">Deploy &amp; Scale</text>
+    <text x="25" y="90" fill="#94a3b8" font-family="system-ui" font-size="13">Atomic push to GitHub and zero-downtime global edge deployment on Vercel.</text>
+    <rect x="25" y="150" width="180" height="85" rx="10" fill="#141f33"/>
+    <text x="35" y="175" fill="#5eead4" font-family="monospace" font-size="11">Live Worldwide</text>
+    <text x="35" y="200" fill="#cbd5e1" font-family="monospace" font-size="10">• git push origin main</text>
+    <text x="35" y="218" fill="#cbd5e1" font-family="monospace" font-size="10">• Vercel Global Edge</text>
+  </g>
+
+  <!-- Connecting Arrows -->
+  <path d="M310,260 L350,260" stroke="#5eead4" stroke-width="3" fill="none"/>
+  <path d="M600,260 L640,260" stroke="#818cf8" stroke-width="3" fill="none"/>
+  <path d="M890,260 L930,260" stroke="#38bdf8" stroke-width="3" fill="none"/>
+
+  <!-- Footer Tip -->
+  <g transform="translate(60, 440)">
+    <rect x="0" y="0" width="1100" height="60" rx="12" fill="#0d1424" stroke="#1f2c45"/>
+    <text x="30" y="35" fill="#5eead4" font-family="system-ui" font-weight="700" font-size="14">✦ AGENT PRO-TIP:</text>
+    <text x="175" y="35" fill="#cbd5e1" font-family="system-ui" font-size="13">PromptDock 6.0 prompt templates contain exact library imports, CSS design tokens, and GPU disposal routines to prevent agent hallucinations.</text>
+  </g>
+</svg>

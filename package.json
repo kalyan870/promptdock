@@ -1,33 +1,52 @@
 {
   "name": "promptdock",
-  "version": "7.1.0",
-  "description": "PromptDock 7.1 — Premium 3D Visual Prompt Studio. Discover the visual. Copy the prompt. Build it with AI.",
+  "version": "7.2.0",
+  "type": "module",
+  "description": "PromptDock 7.2 — Premium 3D Visual Prompt Studio. 21st.dev 3D Horizon Hero Integration and Complete Scene Engine.",
   "scripts": {
-    "dev": "node -e \"const http=require('http'),fs=require('fs'),path=require('path');http.createServer((req,res)=>{const p=path.join(__dirname,req.url==='/'?'index.html':req.url);if(fs.existsSync(p)){res.writeHead(200,{'Content-Type':p.endsWith('.html')?'text/html':p.endsWith('.svg')?'image/svg+xml':'text/plain'});fs.createReadStream(p).pipe(res);}else{res.writeHead(404);res.end('Not Found');}}).listen(3000,()=>console.log('Dev server running on http://localhost:3000'))\"",
-    "start": "npm run dev",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build && node build.js",
+    "preview": "vite preview",
     "lint": "node lint.js",
     "typecheck": "node typecheck.js",
     "test": "node test-build.js",
-    "test:e2e": "node test-e2e.js",
-    "build": "node build.js",
-    "validate": "node lint.js && node typecheck.js && node test-build.js && node test-e2e.js && node build.js"
+    "test:e2e": "node --experimental-strip-types test-e2e.ts",
+    "validate": "node lint.js && node typecheck.js && node test-build.js && node --experimental-strip-types test-e2e.ts && npm run build"
   },
   "keywords": [
     "promptdock",
     "3d-website",
     "prompt-studio",
+    "21st-dev",
+    "horizon-hero",
     "threejs",
     "webgl",
-    "react-three-fiber",
+    "react",
+    "vite",
+    "typescript",
+    "gsap",
     "ai-prompts",
     "claude",
     "chatgpt",
     "cursor",
     "antigravity",
-    "gemini",
-    "codex",
-    "shaders"
+    "gemini"
   ],
   "author": "kalyan870",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "gsap": "^3.12.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "three": "^0.174.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@types/three": "^0.174.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.3",
+    "vite": "^8.3.6"
+  }
 }

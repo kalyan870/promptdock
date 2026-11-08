@@ -1,15 +1,17 @@
-# PromptDock 7.1 — Premium 3D Visual Prompt Studio
+# PromptDock 7.2 — Premium 3D Visual Prompt Studio
 
 <p align="center">
-  <img src="images/comp-hero.svg" alt="PromptDock 7.1 3D Discovery Studio" width="100%" style="border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);" />
+  <img src="images/comp-hero.svg" alt="PromptDock 7.2 3D Discovery Studio" width="100%" style="border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);" />
 </p>
 
 <p align="center">
   <a href="https://promptdock-eight.vercel.app"><img src="https://img.shields.io/badge/Production-Live-5eead4?style=for-the-badge&logo=vercel&logoColor=04060b" alt="Production Vercel"></a>
   <a href="https://github.com/kalyan870/promptdock/actions"><img src="https://img.shields.io/badge/CI-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white" alt="CI Status"></a>
-  <img src="https://img.shields.io/badge/Release-7.1.0-38bdf8?style=for-the-badge" alt="Release 7.1.0">
-  <img src="https://img.shields.io/badge/Three.js-r128-818cf8?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js">
-  <img src="https://img.shields.io/badge/WebGL-2.0-c084fc?style=for-the-badge" alt="WebGL 2.0">
+  <img src="https://img.shields.io/badge/Release-7.2.0-38bdf8?style=for-the-badge" alt="Release 7.2.0">
+  <img src="https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react&logoColor=black" alt="React 19">
+  <img src="https://img.shields.io/badge/Vite-8.3-646cff?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
+  <img src="https://img.shields.io/badge/Three.js-r174-818cf8?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js">
+  <img src="https://img.shields.io/badge/21st.dev-Horizon_Hero-c084fc?style=for-the-badge" alt="21st.dev">
   <img src="https://img.shields.io/badge/License-MIT-a78bfa?style=for-the-badge" alt="MIT License">
 </p>
 
@@ -19,10 +21,66 @@
 
 > **"Discover the visual. Copy the prompt. Build it with AI."**
 
-**PromptDock 7.1** is a focused, high-precision **3D Website Visual Prompt Studio**. Visitors discover interactive 3D visual effects, preview and customize them in a real-time WebGL sandbox, and generate complete, framework-aware AI implementation prompts ready to copy and paste into any AI coding assistant.
+**PromptDock 7.2** is a client-ready, high-performance **3D Website Visual Prompt Studio**. Designed specifically for creative developers and AI coding agents, it brings together an authentic **21st.dev 3D Horizon Hero Section**, 30 curated Three.js WebGL effects across 8 creative disciplines, real-time procedural parameter inspection, parameter-transferred AI build prompts, and multi-effect synthesis.
 
 - **Production Live Platform**: [https://promptdock-eight.vercel.app](https://promptdock-eight.vercel.app)
 - **GitHub Repository**: [https://github.com/kalyan870/promptdock](https://github.com/kalyan870/promptdock)
+
+---
+
+## 🚀 What's New in PromptDock 7.2
+
+### 1. 21st.dev 3D Horizon Hero Section Integration
+- Integrated the community-acclaimed **Horizon Hero Section** component authored by **Scott Clayton** (`@lovesickfromthe6ix`) under the MIT License from [21st.dev](https://21st.dev/@lovesickfromthe6ix/components/horizon-hero-section).
+- **Left Side**: PromptDock 7.2 studio branding, typography, CTAs, and coding assistant compatibility indicators (Antigravity, Claude Code, Cursor, Codex, Gemini, ChatGPT, Windsurf).
+- **Right Side / Viewport**: The authentic interactive Horizon WebGL canvas featuring:
+  - 3-tier twinkling starfield with custom vertex/fragment shaders.
+  - Procedural animated nebula plane with elevation wave displacement and dual-color mixing.
+  - 4 procedural mountain depth planes with layer parallax.
+  - Atmosphere glow sphere with Fresnel rim lighting.
+  - Mouse-responsive cursor parallax and scroll-coupled camera progression.
+
+### 2. Complete React 19 + TypeScript + Vite Production Architecture
+- Migrated from a monolithic inline file to a clean, modular React + TypeScript + Vite architecture compiling into `dist/`.
+- Modular component hierarchy (`src/components/`, `src/engine/`, `src/data/`).
+- Full type safety with zero runtime overhead.
+
+### 3. Dedicated Implementations for ALL 30 Visual Scene Types
+- Built an explicit, dedicated Three.js scene implementation in `SceneFactory` for every single one of the 30 visuals in the catalog (zero generic fallbacks):
+  - **Particles & Physics**: `reactiveParticles` (spring repulsion), `magneticAttractor` (multi-core orbit swarm), `curlVortex` (turbulent fluid swirl), `flowField` (vector streamlines).
+  - **3D Products**: `headphone` (curved headband + ear cups), `chronoWatch` (luxury watch tourbillon with moving hands), `hardwareTerminal` (cyberpunk chassis + grid display).
+  - **Motion & Scroll**: `scrollCameraTrack` (spline curve with waypoint cameras), `multiplaneParallax` (4 depth layers), `sectionDissolve` (slicing facet transition).
+  - **3D UI Components**: `tiltCardStack` (spatial 3D cards), `morphingPill` (dynamic island capsule), `magneticButtonMesh` (specular interactive button), `borderBeamRunner` (perimeter laser beam).
+  - **Shaders & Materials**: `liquidChromeMesh` (high-specular fluid mercury), `glassRefractionPrism` (crystal prism with dispersion), `gooeyCluster` (organic merging metaballs).
+  - **AI & Tech**: `thinkingOrb` (nested pulsating spheres), `neuralGraph` (distributed signal packets), `voiceRing` (FFT equalizer ring), `telemetryGrid` (cylindrical matrix).
+  - **Differentiated Shared Scenes**: Separated `galaxy` (spiral arms with core) from `curlVortex` (turbulent advection), and `neuralNet` (structured lattice) from `neuralGraph` (dynamic packet transmission).
+
+### 4. GPU Memory Leak Prevention & Lifecycle Teardown
+- Enhanced `SceneFactory.cleanGroup()`:
+  - Clears `group._customUpdate = null` to prevent previous visual animation loops from persisting.
+  - Recursively traverses scene hierarchy and disposes all geometries, materials, material arrays, and allocated textures.
+  - Guarantees 0 memory leaks when users rapidly switch across 30 scenes in the Inspector.
+
+### 5. Detailed 18-Point AI Build Prompt Generator
+- Generates exhaustive 18-point engineering briefs ready for immediate pasting into code agents:
+  1. Role & Objective
+  2. Reference Visual Specification
+  3. Website Placement & Layout Constraints
+  4. Exact 3D Scene Architecture & WebGL Renderer
+  5. Geometry Configuration & Vertex Density
+  6. Material, PBR Specular & Shader Details
+  7. Lighting Setup (Ambient, Directional, Rim, Specular)
+  8. Camera Perspective, FOV & Distance Coordinates
+  9. Continuous Animation Loop & Mathematical Formulas
+  10. Pointer & Mouse Parallax Interactions (NDC Lerping)
+  11. Scroll-Driven Interactions & Velocity Coupling
+  12. Color Palette & Emissive Configurations
+  13. Target Framework & Exact Installation Commands
+  14. Responsive Layout & Mobile Viewport Rules
+  15. GPU Lifecycle, Throttling & Battery Conservation
+  16. Memory Disposal Protocol (geometry/material.dispose)
+  17. Mandatory Codebase Preservation Directives
+  18. Acceptance, Verification & Framerate Criteria
 
 ---
 
@@ -33,71 +91,37 @@
               ↓
 2. PREVIEW & CUSTOMISE IN REAL-TIME 3D INSPECTOR
               ↓
-3. GENERATE COMPLETE AI IMPLEMENTATION PROMPT (WITH CUSTOM SETTINGS PRESERVED)
+3. GENERATE COMPLETE 18-POINT AI BUILD PROMPT (WITH CUSTOM SETTINGS PRESERVED)
               ↓
 4. COPY PROMPT (1-CLICK)
               ↓
 5. PASTE INTO ANY AI CODING ASSISTANT & BUILD
 ```
 
-PromptDock prompts are framework-aware and engineered for all major AI coding assistants:
-- **Google Antigravity**
-- **Claude 3.7 / Claude Code**
-- **Cursor**
-- **OpenAI Codex / ChatGPT**
-- **Gemini 2.0 Flash**
-- **Windsurf**
-
----
-
-## 🚀 What's New in PromptDock 7.1
-
-1. **Complete Removal of Website Modification Functionality**:
-   - Streamlined focus exclusively on 3D visual discovery, preview, parameter tweaking, and AI build prompt generation.
-   - Removed all distracting modification UI, inputs, and unused endpoints.
-   - Preserved codebase-preservation instructions within the AI build prompt so agents know how to integrate cleanly into existing codebases.
-
-2. **Inspector Parameter Transfer to Prompt Generator**:
-   - Tweak primary accent color, speed, density, glow, and camera zoom in the Inspector; the AI Build Prompt Studio immediately incorporates your active custom configuration rather than reverting to defaults.
-   - Visible `#config-summary-bar` highlights all active values.
-
-3. **Effect-Specific 3D Scene Factories (`SceneFactory`)**:
-   - 30 distinct procedural Three.js scenes mapped through `v.sceneType`:
-     - *Aurora plasma waves*, *celestial orbital planets*, *abstract torus knots*, *spatial glass prisms*, *kinetic 3D typography*, *spiral galaxy dust*, *warp speed starfields*, *neural network synapsing meshes*, *cyberpunk procedural wireframe terrain*, *mouse-reactive particles*, *curl vortexes*, *spatial headphones*, *luxury chronograph turntables*, *holographic cyber terminals*, *liquid chrome metaballs*, *AI thinking orbs*, and more.
-
-4. **Live Real-Time FPS Measurement**:
-   - Computes real frame delta times using `performance.now()` in the WebGL render loop and displays live FPS in `#fps-display`.
-
-5. **Combine 3D Visuals Studio**:
-   - Select multiple complementary 3D visuals to generate a coordinated master prompt with unified `requestAnimationFrame` timing and harmonized lighting.
-
 ---
 
 ## 🛠️ Verification & Pipeline Commands
 
 ```bash
-# Install dependencies
-npm install
-
-# Run local development server
+# Start local development server with Vite
 npm run dev
 
-# Run code linter
+# Run code and component linter
 npm run lint
 
-# Run catalog & schema typechecker
+# Run schema, catalog, and lifecycle typechecker
 npm run typecheck
 
-# Run unit & filesystem tests
-npm test
+# Run unit, filesystem, and asset tests (HTTP 200)
+npm run test
 
-# Run end-to-end HTTP integration tests
+# Run 30-scene E2E integration test suite
 npm run test:e2e
 
-# Run production build
+# Run Vite production compiler and build manifest generator
 npm run build
 
-# Run all verification checks (100% pass required)
+# Run master verification pipeline (100% pass required)
 npm run validate
 ```
 
@@ -107,16 +131,17 @@ npm run validate
 
 - [`docs/product-overview.md`](docs/product-overview.md) — Product vision, tagline, and 5-step visual loop.
 - [`docs/visual-library.md`](docs/visual-library.md) — 30 curated 3D visuals catalog across 8 categories with `sceneType` mappings.
-- [`docs/prompt-engine.md`](docs/prompt-engine.md) — AI build prompt specification with parameter transfer.
+- [`docs/prompt-engine.md`](docs/prompt-engine.md) — 18-point detailed AI build prompt generator specification.
 - [`docs/visual-composer.md`](docs/visual-composer.md) — Combine 3D visuals studio & GPU loop budgeting.
 - [`docs/3d-rendering.md`](docs/3d-rendering.md) — WebGL 2.0 rendering engine, `SceneFactory`, and live FPS.
 - [`docs/performance.md`](docs/performance.md) — GPU lifecycle and performance optimization.
-- [`docs/architecture.md`](docs/architecture.md) — System architecture and topology.
-- [`docs/testing.md`](docs/testing.md) — Master verification and E2E test suites.
+- [`docs/architecture.md`](docs/architecture.md) — React + TypeScript + Vite system architecture.
+- [`docs/testing.md`](docs/testing.md) — Multi-tier verification and 159+ E2E test suites.
 - [`docs/deployment.md`](docs/deployment.md) — Vercel Edge CI/CD pipeline.
 
 ---
 
-## 📄 License
+## 📄 License & Attribution
 
-MIT License. Copyright (c) 2026 Kalyan.
+- **PromptDock**: MIT License. Copyright (c) 2026 Kalyan.
+- **Horizon Hero Section**: MIT License. Copyright (c) 2025 Scott Clayton (`@lovesickfromthe6ix`), published on [21st.dev](https://21st.dev/@lovesickfromthe6ix/components/horizon-hero-section).

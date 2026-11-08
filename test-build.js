@@ -1,8 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const http = require('http');
+import fs from 'fs';
+import path from 'path';
+import http from 'http';
+import { fileURLToPath } from 'url';
 
-console.log('--- Starting PromptDock 7.1 Master Verification Suite ---');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+console.log('--- Starting PromptDock 7.2 Master Verification Suite ---');
 
 let passed = 0;
 let failed = 0;
@@ -17,101 +21,40 @@ function assert(condition, message) {
   }
 }
 
-// 1. Filesystem & Core HTML Checks
-const indexPath = path.join(__dirname, 'index.html');
-assert(fs.existsSync(indexPath), 'index.html exists');
+// 1. Verify build output exists
+const distDir = path.join(__dirname, 'dist');
+assert(fs.existsSync(distDir), 'dist directory exists');
 
-const html = fs.readFileSync(indexPath, 'utf-8');
-assert(html.includes('<title>PromptDock 7.1 — 3D Website Visual Prompt Studio</title>'), 'HTML contains correct PromptDock 7.1 title');
-assert(html.includes('"Discover the visual. Copy the prompt. Build it with AI."'), 'HTML contains core product tagline');
+const distIndex = path.join(distDir, 'index.html');
+assert(fs.existsSync(distIndex), 'dist/index.html exists');
 
-// 2. Section Canvases & Interactive WebGL Viewports
-assert(html.includes('id="hero-canvas"'), 'Hero section contains 3D canvas (#hero-canvas)');
-assert(html.includes('id="inspector-canvas"'), 'Inspector section contains 3D canvas (#inspector-canvas)');
+const html = fs.readFileSync(distIndex, 'utf-8');
+assert(html.includes('PromptDock 7.2'), 'dist/index.html contains PromptDock 7.2');
+assert(html.includes('id="root"'), 'dist/index.html contains root mount div');
 
-// 3. Core Studios & Modules (Verified Removal of Modification Feature)
-assert(html.includes('id="gallery"'), '3D Visual Discovery Library section exists (#gallery)');
-assert(html.includes('id="inspector"'), '3D Visual Inspector section exists (#inspector)');
-assert(html.includes('id="prompt-generator"'), 'AI Build Prompt Studio section exists (#prompt-generator)');
-assert(html.includes('id="combine-visuals"'), 'Combine 3D Visuals section exists (#combine-visuals)');
-assert(html.includes('id="workflow"'), 'End-to-end 5-step workflow section exists (#workflow)');
-assert(html.includes('id="cmd-palette"'), 'Global Command Palette exists (#cmd-palette)');
-assert(!html.includes('id="modify-website"'), 'Modify Existing Website section has been completely removed');
-assert(!html.includes('generateModificationPrompt'), 'generateModificationPrompt function removed');
+// 2. Verify all 54 image assets in dist/images
+const imagesDir = path.join(distDir, 'images');
+assert(fs.existsSync(imagesDir), 'dist/images directory exists');
 
-// 4. Verify Parameter Transfer to Prompt Generator
-assert(html.includes('config-summary-bar'), 'Active Configuration Summary Bar exists in Build Prompt Studio');
-assert(html.includes('loadVisualIntoPromptBuilder'), 'loadVisualIntoPromptBuilder function exists');
+const files = fs.readdirSync(imagesDir);
+assert(files.length >= 50, `Found ${files.length} image assets in dist/images (expected >= 50)`);
 
-// 5. Libraries & Ecosystem
-assert(html.includes('three.min.js'), 'HTML loads Three.js CDN');
-assert(html.includes('gsap.min.js'), 'HTML loads GSAP CDN');
+for (const f of files) {
+  const stat = fs.statSync(path.join(imagesDir, f));
+  assert(stat.size > 100, `Asset dist/images/${f} size is valid (${stat.size} bytes)`);
+}
 
-const ecosystem = ['Three.js', 'React Three Fiber', 'Libraries.dev', '21st.dev'];
-ecosystem.forEach(res => {
-  assert(html.includes(res), `Ecosystem reference "${res}" is present`);
-});
-
-// 6. Image Assets Checks
-const imagesDir = path.join(__dirname, 'images');
-assert(fs.existsSync(imagesDir), 'images directory exists');
-
-const requiredImages = [
-  'aurora-hero.svg',
-  'orbit-scene.svg',
-  'comp-3d.svg',
-  'glass-cards.svg',
-  'kinetic-type.svg',
-  'particle-cloud.svg',
-  'halftone-tide.svg',
-  'ai-generator.svg',
-  'example-lumina.svg',
-  'motion-physics.svg',
-  'lib-magnetic.svg',
-  'workflow-3d.svg',
-  'example-product-3d.svg',
-  'example-chrono.svg',
-  'example-cyberfolio.svg',
-  'tidewave-landing.svg',
-  'folio-dark.svg',
-  'split-hero.svg',
-  'comp-cards.svg',
-  'dynamic-island.svg',
-  'comp-buttons.svg',
-  'lib-border-beam.svg',
-  'lib-liquid-metal.svg',
-  'lib-gooey.svg',
-  'lib-thinking-orb.svg',
-  'lib-voice-viz.svg',
-  'nexus-dashboard.svg',
-  'favicon.svg',
-  'og-image.svg'
-];
-
-requiredImages.forEach(img => {
-  const p = path.join(imagesDir, img);
-  const exists = fs.existsSync(p);
-  if (exists) {
-    const size = fs.statSync(p).size;
-    assert(size > 100, `Image asset ${img} exists and is valid (${size} bytes)`);
-  } else {
-    assert(false, `Image asset ${img} is missing`);
-  }
-});
-
-// 7. Local HTTP Server Integration Verification
+// 3. Start Ephemeral HTTP Server on Port 4897 to test real asset serving
 const server = http.createServer((req, res) => {
-  let reqPath = req.url === '/' ? 'index.html' : req.url;
-  reqPath = reqPath.split('?')[0];
-  const filePath = path.join(__dirname, reqPath);
+  const reqUrl = req.url === '/' ? '/index.html' : req.url;
+  const filePath = path.join(distDir, reqUrl);
 
-  if (fs.existsSync(filePath)) {
-    const ext = path.extname(filePath);
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     let contentType = 'text/plain';
-    if (ext === '.html') contentType = 'text/html';
-    if (ext === '.svg') contentType = 'image/svg+xml';
-    if (ext === '.js') contentType = 'text/javascript';
-    if (ext === '.css') contentType = 'text/css';
+    if (filePath.endsWith('.html')) contentType = 'text/html';
+    else if (filePath.endsWith('.svg')) contentType = 'image/svg+xml';
+    else if (filePath.endsWith('.js')) contentType = 'application/javascript';
+    else if (filePath.endsWith('.css')) contentType = 'text/css';
 
     res.writeHead(200, { 'Content-Type': contentType });
     fs.createReadStream(filePath).pipe(res);
@@ -124,38 +67,27 @@ const server = http.createServer((req, res) => {
 server.listen(4897, () => {
   console.log('[INFO] Test server listening on http://localhost:4897');
 
+  // Request root /
   http.get('http://localhost:4897/', (res) => {
     assert(res.statusCode === 200, 'GET / returned HTTP 200');
-
     let data = '';
     res.on('data', chunk => data += chunk);
     res.on('end', () => {
-      assert(data.includes('PromptDock 7.1'), 'Home response contains PromptDock 7.1');
-      assert(data.includes('hero-canvas'), 'Home response contains hero-canvas');
-      assert(data.includes('inspector-canvas'), 'Home response contains inspector-canvas');
+      assert(data.includes('PromptDock 7.2'), 'Response contains PromptDock 7.2');
+      assert(data.includes('root'), 'Response contains root div');
 
+      // Request an image asset
       http.get('http://localhost:4897/images/aurora-hero.svg', (imgRes) => {
-        assert(imgRes.statusCode === 200, 'GET /images/aurora-hero.svg returned valid SVG');
+        assert(imgRes.statusCode === 200, 'GET /images/aurora-hero.svg returned HTTP 200');
+        assert(imgRes.headers['content-type'] === 'image/svg+xml', 'Asset has image/svg+xml content-type');
 
-        http.get('http://localhost:4897/images/orbit-scene.svg', (orbitRes) => {
-          assert(orbitRes.statusCode === 200, 'GET /images/orbit-scene.svg returned valid SVG');
-
-          server.close(() => {
-            console.log(`\n--- Test Summary: ${passed} passed, ${failed} failed ---`);
-            if (failed > 0) {
-              console.error('Master Suite encountered failures!');
-              process.exit(1);
-            } else {
-              console.log('--- ALL Master Suite Verifications PASSED (100% Success) ---');
-              process.exit(0);
-            }
-          });
+        server.close(() => {
+          console.log(`\n--- Test Summary: ${passed} passed, ${failed} failed ---`);
+          if (failed > 0) process.exit(1);
+          console.log('--- ALL Master Suite Verifications PASSED (100% Success) ---');
+          process.exit(0);
         });
       });
     });
-  }).on('error', (err) => {
-    console.error('Server request error:', err);
-    server.close();
-    process.exit(1);
   });
 });

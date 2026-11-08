@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67e8f9"/>
+      <stop offset="100%" stop-color="#a5b4fc"/>
+    </linearGradient>
+    <filter id="gblur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+  <rect width="400" height="240" fill="#07090f"/>
+  <circle cx="140" cy="90" r="60" fill="#67e8f9" opacity="0.5" filter="url(#gblur)"/>
+  <circle cx="260" cy="150" r="70" fill="#a5b4fc" opacity="0.5" filter="url(#gblur)"/>
+  <g transform="rotate(-4 200 120)">
+    <rect x="70" y="45" width="260" height="150" rx="16" fill="#ffffff" fill-opacity="0.08" stroke="#67e8f9" stroke-width="1.5"/>
+    <circle cx="105" cy="80" r="15" fill="url(#g12)"/>
+    <rect x="135" y="75" width="120" height="12" rx="4" fill="#eef1f8"/>
+    <rect x="105" y="115" width="180" height="8" rx="3" fill="#8d95aa" opacity="0.6"/>
+    <rect x="105" y="132" width="140" height="8" rx="3" fill="#8d95aa" opacity="0.4"/>
+    <rect x="105" y="155" width="65" height="20" rx="6" fill="url(#g12)"/>
+  </g>
+</svg>

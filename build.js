@@ -1,36 +1,26 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-console.log('--- Starting PromptDock 7.1 Production Build Pipeline ---');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// 1. Verify index.html exists and is valid HTML
-const indexPath = path.join(__dirname, 'index.html');
+console.log('--- Starting PromptDock 7.2 Production Build Pipeline ---');
+
+// 1. Verify dist/index.html exists and is valid HTML
+const distDir = path.join(__dirname, 'dist');
+const indexPath = path.join(distDir, 'index.html');
 if (!fs.existsSync(indexPath)) {
-  console.error('[FAIL] index.html not found!');
+  console.error('[FAIL] dist/index.html not found! Run "vite build" first.');
   process.exit(1);
 }
 const html = fs.readFileSync(indexPath, 'utf-8');
-console.log(`[PASS] index.html read successfully (${html.length} bytes)`);
+console.log(`[PASS] dist/index.html read successfully (${html.length} bytes)`);
 
-// 2. Validate essential sections & elements
+// 2. Validate essential tokens
 const requiredTokens = [
-  'PromptDock 7.1',
-  'Discover the <span>next dimension</span> of web design.',
-  '"Discover the visual. Copy the prompt. Build it with AI."',
-  'hero-canvas',
-  'inspector-canvas',
-  'id="gallery"',
-  'id="inspector"',
-  'id="prompt-generator"',
-  'id="combine-visuals"',
-  'id="workflow"',
-  'three.min.js',
-  'gsap.min.js',
-  'generateCompletePrompt',
-  'generateCombinedPrompt',
-  'SceneFactory.createScene',
-  'config-summary-bar',
-  'fps-display'
+  'PromptDock 7.2',
+  'id="root"'
 ];
 
 for (const token of requiredTokens) {
@@ -41,24 +31,16 @@ for (const token of requiredTokens) {
 }
 console.log(`[PASS] All ${requiredTokens.length} required build tokens verified`);
 
-// Assert modify-website is completely removed
-if (html.includes('id="modify-website"') || html.includes('generateModificationPrompt')) {
-  console.error('[FAIL] Obsolete website modification feature found in build!');
-  process.exit(1);
-}
-console.log('[PASS] Confirmed obsolete modification feature is completely absent');
-
-// 3. Validate image assets referenced in index.html
-const imagesDir = path.join(__dirname, 'images');
+// 3. Validate image assets in dist/images/
+const imagesDir = path.join(distDir, 'images');
 const imageFiles = fs.readdirSync(imagesDir);
-console.log(`[PASS] Found ${imageFiles.length} image assets in images/`);
+console.log(`[PASS] Found ${imageFiles.length} image assets in dist/images/`);
 
-if (imageFiles.length < 25) {
-  console.error(`[FAIL] Expected at least 25 assets, found ${imageFiles.length}`);
+if (imageFiles.length < 50) {
+  console.error(`[FAIL] Expected at least 50 assets in dist/images, found ${imageFiles.length}`);
   process.exit(1);
 }
 
-// Check every file has size > 100 bytes
 for (const file of imageFiles) {
   const stat = fs.statSync(path.join(imagesDir, file));
   if (stat.size < 100) {
@@ -66,9 +48,9 @@ for (const file of imageFiles) {
     process.exit(1);
   }
 }
-console.log(`[PASS] All ${imageFiles.length} assets validated for non-zero integrity`);
+console.log(`[PASS] All ${imageFiles.length} assets in dist/images validated for non-zero integrity`);
 
-// 4. Verify documentation suite exists (9 core docs in 7.1)
+// 4. Verify documentation suite exists (9 core docs in 7.2)
 const docsDir = path.join(__dirname, 'docs');
 const expectedDocs = [
   'product-overview.md',
@@ -93,15 +75,17 @@ console.log(`[PASS] Documentation suite verified (${expectedDocs.length} files i
 // 5. Generate build manifest
 const manifest = {
   buildTime: new Date().toISOString(),
-  version: '7.1.0',
-  title: 'PromptDock 7.1 — Premium 3D Visual Prompt Studio',
+  version: '7.2.0',
+  title: 'PromptDock 7.2 — Premium 3D Visual Prompt Studio',
+  heroEngine: '21st.dev Horizon Hero Section (Scott Clayton, MIT License)',
   tagline: 'Discover the visual. Copy the prompt. Build it with AI.',
+  scenesCount: 30,
   assetsCount: imageFiles.length,
-  indexHtmlSize: html.length,
+  distHtmlSize: html.length,
   status: 'PRODUCTION_READY',
-  deploymentTarget: 'Vercel Edge'
+  deploymentTarget: 'Vercel Edge (dist/)'
 };
 
 fs.writeFileSync(path.join(__dirname, 'build-manifest.json'), JSON.stringify(manifest, null, 2));
-console.log('[PASS] Generated build-manifest.json (v7.1.0)');
-console.log('--- PromptDock 7.1 Production Build Pipeline Complete (SUCCESS) ---');
+console.log('[PASS] Generated build-manifest.json (v7.2.0)');
+console.log('--- PromptDock 7.2 Production Build Pipeline Complete (SUCCESS) ---');

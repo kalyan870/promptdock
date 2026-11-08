@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" width="100%" height="100%">
+  <rect width="900" height="650" fill="#070a12"/>
+  <rect x="40" y="40" width="820" height="570" rx="16" fill="#0d1424" stroke="#1f2c45" stroke-width="2"/>
+  <circle cx="70" cy="70" r="6" fill="#ef4444"/><circle cx="90" cy="70" r="6" fill="#f59e0b"/><circle cx="110" cy="70" r="6" fill="#10b981"/>
+  <text x="140" y="75" fill="#94a3b8" font-family="system-ui" font-size="13">NeuralChat Multi-Agent Copilot 5.0</text>
+  <rect x="40" y="95" width="220" height="515" fill="#090e1a" stroke="#192338"/>
+  <g transform="translate(60, 130)">
+    <circle cx="18" cy="18" r="16" fill="#5eead4"/>
+    <text x="45" y="16" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="13">Three.js Architect</text>
+    <text x="45" y="32" fill="#64748b" font-family="system-ui" font-size="11">Online · v5.0 Model</text>
+  </g>
+  <g transform="translate(60, 190)">
+    <circle cx="18" cy="18" r="16" fill="#818cf8"/>
+    <text x="45" y="16" fill="#ffffff" font-family="system-ui" font-weight="700" font-size="13">Tailwind Specialist</text>
+    <text x="45" y="32" fill="#64748b" font-family="system-ui" font-size="11">Online · v4.0 Engine</text>
+  </g>
+  <g transform="translate(285, 120)">
+    <rect x="0" y="0" width="530" height="70" rx="14" fill="#17223b"/>
+    <text x="20" y="40" fill="#ffffff" font-family="system-ui" font-size="14">Can you convert this mesh wireframe into an interactive 3D particle cloud?</text>
+  </g>
+  <g transform="translate(285, 210)">
+    <rect x="0" y="0" width="530" height="230" rx="14" fill="#121b2f" stroke="#253757"/>
+    <text x="25" y="35" fill="#5eead4" font-family="system-ui" font-weight="700" font-size="13">Copilot Generation:</text>
+    <rect x="25" y="50" width="480" height="150" rx="10" fill="#090d18" stroke="#1d2a40"/>
+    <text x="40" y="80" fill="#f87171" font-family="monospace" font-size="12">const count = 5000;</text>
+    <text x="40" y="105" fill="#60a5fa" font-family="monospace" font-size="12">const geometry = new THREE.BufferGeometry();</text>
+    <text x="40" y="130" fill="#34d399" font-family="monospace" font-size="12">const positions = new Float32Array(count * 3);</text>
+    <text x="40" y="155" fill="#a78bfa" font-family="monospace" font-size="12">geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));</text>
+  </g>
+  <g transform="translate(285, 470)">
+    <rect x="0" y="0" width="530" height="50" rx="25" fill="#16223b" stroke="#2d4063"/>
+    <text x="25" y="31" fill="#64748b" font-family="system-ui" font-size="13">Type your prompt for multi-agent 3D generation...</text>
+  </g>
+</svg>
