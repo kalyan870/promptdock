@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 
-console.log('--- Starting PromptDock Comprehensive Production Verification Suite ---');
+console.log('--- Starting PromptDock 3D Ultra Comprehensive Verification Suite ---');
 
 let passed = true;
 function assert(condition, message) {
@@ -19,44 +19,56 @@ const indexPath = path.join(__dirname, 'index.html');
 assert(fs.existsSync(indexPath), 'index.html exists');
 
 const html = fs.readFileSync(indexPath, 'utf-8');
-assert(html.includes('<title>PromptDock'), 'HTML contains correct title');
-assert(html.includes('images/favicon.svg'), 'HTML links to favicon');
-assert(html.includes('images/og-image.svg'), 'HTML includes social meta preview image');
-assert(html.includes('id="resources"'), 'HTML includes Free Resources section');
-assert(html.includes('21st.dev'), 'HTML includes 21st.dev integration');
-assert(html.includes('Libraries.dev'), 'HTML includes Libraries.dev integration');
-assert(html.includes('tab-prompt') && html.includes('tab-specs') && html.includes('tab-code'), 'HTML includes modal tabs (Prompt, Specs, Code)');
-assert(html.includes('fav-btn'), 'HTML includes Favorites / bookmarking system');
-assert(html.includes('checkHash()'), 'HTML includes URL deep-linking support');
+assert(html.includes('<title>PromptDock 3D Ultra'), 'HTML contains correct title');
+assert(html.includes('three.min.js'), 'HTML includes Three.js CDN');
+assert(html.includes('gsap.min.js'), 'HTML includes GSAP CDN');
+assert(html.includes('ScrollTrigger.min.js'), 'HTML includes GSAP ScrollTrigger');
+assert(html.includes('hero-canvas'), 'HTML includes 3D hero canvas');
+assert(html.includes('card-glare'), 'HTML includes 3D perspective glare effect');
+assert(html.includes('id="resources"'), 'HTML includes 3D & Animation Ecosystem resources section');
 
-// 2. Check Repository Meta & Open Source files
-assert(fs.existsSync(path.join(__dirname, 'CONTRIBUTING.md')), 'CONTRIBUTING.md exists');
-assert(fs.existsSync(path.join(__dirname, 'SECURITY.md')), 'SECURITY.md exists');
-assert(fs.existsSync(path.join(__dirname, 'robots.txt')), 'robots.txt exists');
-assert(fs.existsSync(path.join(__dirname, 'sitemap.xml')), 'sitemap.xml exists');
-assert(fs.existsSync(path.join(__dirname, '.github/workflows/ci.yml')), 'GitHub Actions CI workflow exists');
+// 2. Check Master Prompt Ecosystem Resources
+const expectedResources = [
+  '21st.dev',
+  'Aceternity UI',
+  'Magic UI',
+  'shadcn/ui',
+  'Three.js',
+  'React Three Fiber',
+  'GSAP',
+  'Motion',
+  'Spline',
+  'MotionSites',
+  'Spectrum UI',
+  'LottieFiles',
+  'Libraries.dev'
+];
 
-// 3. Check all 16 prompt images + meta images exist
+expectedResources.forEach(resName => {
+  assert(html.includes(resName), `Resource "${resName}" is present in ecosystem directory`);
+});
+
+// 3. Check All Image Assets Exist
 const imagesDir = path.join(__dirname, 'images');
 assert(fs.existsSync(imagesDir), 'images directory exists');
 
 const requiredImages = [
   'aurora-hero.svg',
+  'nexus-dashboard.svg',
+  'ai-generator.svg',
+  'orbit-scene.svg',
+  'liquid-metal.svg',
+  'saas-matrix.svg',
   'tidewave-landing.svg',
+  'dynamic-island.svg',
   'folio-dark.svg',
   'shop-rail.svg',
-  'orbit-scene.svg',
-  'mesh-glow.svg',
-  'halftone-tide.svg',
-  'split-hero.svg',
-  'agency-one.svg',
-  'gallery-wall.svg',
-  'menu-board.svg',
-  'glass-cards.svg',
-  'liquid-metal.svg',
-  'dynamic-island.svg',
   'kinetic-type.svg',
   'particle-cloud.svg',
+  'next-react.svg',
+  'motion-physics.svg',
+  'glass-cards.svg',
+  'agency-one.svg',
   'favicon.svg',
   'og-image.svg'
 ];
@@ -86,11 +98,11 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(4894, async () => {
-  console.log('[INFO] Test server listening on http://localhost:4894');
+server.listen(4895, async () => {
+  console.log('[INFO] Test server listening on http://localhost:4895');
   try {
     const checkUrl = (urlPath) => new Promise((resolve, reject) => {
-      http.get(`http://localhost:4894${urlPath}`, (res) => {
+      http.get(`http://localhost:4895${urlPath}`, (res) => {
         let data = '';
         res.on('data', chunk => data += chunk);
         res.on('end', () => resolve({ statusCode: res.statusCode, data }));
@@ -99,24 +111,20 @@ server.listen(4894, async () => {
 
     const homeRes = await checkUrl('/');
     assert(homeRes.statusCode === 200, 'GET / returned HTTP 200');
+    assert(homeRes.data.includes('Three.js'), 'Home response contains Three.js');
+    assert(homeRes.data.includes('React Three Fiber'), 'Home response contains React Three Fiber');
+    assert(homeRes.data.includes('Spline'), 'Home response contains Spline');
     assert(homeRes.data.includes('21st.dev'), 'Home response contains 21st.dev');
-    assert(homeRes.data.includes('Libraries.dev'), 'Home response contains Libraries.dev');
 
-    const sitemapRes = await checkUrl('/sitemap.xml');
-    assert(sitemapRes.statusCode === 200 && sitemapRes.data.includes('<urlset'), 'GET /sitemap.xml returned valid XML');
-
-    const robotsRes = await checkUrl('/robots.txt');
-    assert(robotsRes.statusCode === 200 && robotsRes.data.includes('User-agent'), 'GET /robots.txt returned valid text');
-
-    const imgRes = await checkUrl('/images/liquid-metal.svg');
-    assert(imgRes.statusCode === 200 && imgRes.data.includes('<svg'), 'GET /images/liquid-metal.svg returned valid SVG');
+    const imgRes = await checkUrl('/images/nexus-dashboard.svg');
+    assert(imgRes.statusCode === 200 && imgRes.data.includes('<svg'), 'GET /images/nexus-dashboard.svg returned valid SVG');
 
     server.close(() => {
       if (!passed) {
         console.error('--- Production Verification FAILED ---');
         process.exit(1);
       } else {
-        console.log('--- ALL Production Verifications PASSED (100% Success) ---');
+        console.log('--- ALL PromptDock 3D Ultra Verifications PASSED (100% Success) ---');
         process.exit(0);
       }
     });

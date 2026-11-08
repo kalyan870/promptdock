@@ -3,211 +3,462 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PromptDock - Prompts for websites that move</title>
-<meta name="description" content="A curated library of copy-paste AI prompts and 3D animated components for building modern interactive websites.">
+<title>PromptDock 3D Ultra — The Motion & AI Prompt Platform</title>
+<meta name="description" content="A futuristic, interactive AI Prompt and Web Design Resource Platform for building 3D, animated, scroll-driven websites that actually move.">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
 <!-- OpenGraph / Social Meta Tags -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="PromptDock - Prompts for websites that move">
-<meta property="og:description" content="A curated library of copy-paste AI prompts and 3D animated components for building modern interactive websites.">
+<meta property="og:title" content="PromptDock 3D Ultra — The Motion & AI Prompt Platform">
+<meta property="og:description" content="Curated copy-paste AI prompts, Three.js scenes, and open-source UI libraries for websites that actually move.">
 <meta property="og:image" content="images/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PromptDock - Prompts for websites that move">
-<meta name="twitter:description" content="A curated library of copy-paste AI prompts and 3D animated components for building modern interactive websites.">
+<meta name="twitter:title" content="PromptDock 3D Ultra — The Motion & AI Prompt Platform">
+<meta name="twitter:description" content="Curated copy-paste AI prompts, Three.js scenes, and open-source UI libraries for websites that actually move.">
 <meta name="twitter:image" content="images/og-image.svg">
 
-<!-- Three.js for 3D Interactive Graphics -->
+<!-- Google Fonts: Space Grotesk & Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Three.js & GSAP via CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
-:root{--bg:#07090f;--panel:#0f131d;--line:#202638;--text:#eef1f8;--muted:#8d95aa;--a:#5eead4;--b:#818cf8}
+:root{
+  --bg:#05070e;
+  --bg-deep:#020306;
+  --panel:rgba(15, 20, 32, 0.75);
+  --panel-solid:#0d121f;
+  --panel-hover:rgba(22, 30, 49, 0.85);
+  --line:rgba(255, 255, 255, 0.08);
+  --line-bright:rgba(94, 234, 212, 0.35);
+  --text:#f0f4fc;
+  --muted:#8b95ad;
+  --a:#5eead4;
+  --b:#818cf8;
+  --c:#c084fc;
+  --glow:0 0 24px rgba(94, 234, 212, 0.25);
+}
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;overflow-x:hidden}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+  overflow-x:hidden;
+  selection-background:var(--a);
+  selection-color:#05070e;
+}
+::selection{background:var(--a);color:#05070e}
 a{color:inherit;text-decoration:none}
-.wrap{width:min(1120px,92vw);margin:auto;position:relative;z-index:1}
-nav{position:sticky;top:0;z-index:40;backdrop-filter:blur(16px);background:#07090fcc;border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
-.logo{font-weight:800;font-size:20px;display:flex;gap:8px;align-items:center}
-.logo i{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 16px var(--a)}
-.links{display:flex;gap:24px;font-size:14px;color:var(--muted)}
+.wrap{width:min(1160px,92vw);margin:auto;position:relative;z-index:2}
+
+/* Ambient Cursor Glow */
+#cursor-glow{
+  position:fixed;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(94,234,212,0.06) 0%, rgba(129,140,248,0.04) 40%, transparent 70%);
+  pointer-events:none;
+  transform:translate(-50%, -50%);
+  z-index:1;
+  transition:opacity .3s;
+}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(20px);background:rgba(5, 7, 14, 0.75);border-bottom:1px solid var(--line);transition:background .3s}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:21px;display:flex;gap:10px;align-items:center;letter-spacing:-.02em}
+.logo-icon{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 0 20px rgba(94,234,212,0.5);display:grid;place-items:center;font-size:12px;color:#05070e}
+.links{display:flex;gap:26px;font-size:14px;font-weight:500;color:var(--muted)}
+.links a{transition:color .2s;position:relative;padding:4px 0}
 .links a:hover{color:var(--text)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--a),var(--b));color:#06080d;font-weight:700;padding:12px 22px;border-radius:12px;border:0;cursor:pointer;font-size:15px;transition:opacity .2s,transform .2s,box-shadow .2s}
-.btn:hover{opacity:.95;transform:translateY(-2px);box-shadow:0 8px 24px rgba(94,234,212,0.3)}
-.btn.o{background:transparent;color:var(--text);border:1px solid var(--line)}
-.btn.o:hover{border-color:var(--muted);box-shadow:none}
+.links a::after{content:'';position:absolute;bottom:0;left:0;width:0%;height:2px;background:linear-gradient(90deg,var(--a),var(--b));transition:width .25s}
+.links a:hover::after{width:100%}
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:linear-gradient(135deg,var(--a),var(--b));
+  color:#04060a;
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+  padding:12px 24px;
+  border-radius:12px;
+  border:0;
+  cursor:pointer;
+  font-size:14px;
+  transition:transform .2s,box-shadow .2s,opacity .2s;
+  box-shadow:0 4px 20px rgba(94,234,212,0.25);
+  position:relative;
+  overflow:hidden;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(94,234,212,0.4);opacity:.96}
+.btn.o{background:rgba(255,255,255,0.03);color:var(--text);border:1px solid var(--line);box-shadow:none;backdrop-filter:blur(8px)}
+.btn.o:hover{border-color:var(--a);color:var(--a);box-shadow:0 4px 20px rgba(94,234,212,0.15)}
 
 /* 3D Hero Section */
-.hero{position:relative;text-align:center;padding:120px 0 100px;overflow:hidden;min-height:560px;display:flex;align-items:center}
-#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.25;animation:drift 14s ease-in-out infinite alternate;z-index:0}
-.b1{width:460px;height:460px;background:var(--b);left:5%;top:-100px}
-.b2{width:420px;height:420px;background:var(--a);right:5%;top:30px;animation-delay:-6s}
-@keyframes drift{to{transform:translate(60px,50px) scale(1.15)}}
+.hero{
+  position:relative;
+  text-align:center;
+  padding:130px 0 110px;
+  overflow:hidden;
+  min-height:640px;
+  display:flex;
+  align-items:center;
+}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.hero-glow{position:absolute;border-radius:50%;filter:blur(120px);opacity:.2;pointer-events:none}
+.hg1{width:500px;height:500px;background:var(--b);left:10%;top:-100px}
+.hg2{width:460px;height:460px;background:var(--a);right:8%;bottom:-50px}
 
-.tag{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:rgba(15,19,29,0.7);backdrop-filter:blur(8px);padding:6px 14px;border-radius:99px;font-size:13px;color:var(--muted);margin-bottom:22px}
-.tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--a);box-shadow:0 0 8px var(--a);display:inline-block}
-h1{font-size:clamp(38px,7vw,72px);line-height:1.05;letter-spacing:-.03em;max-width:820px;margin:auto;text-shadow:0 4px 20px rgba(0,0,0,0.5)}
-h1 span{background:linear-gradient(135deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{color:var(--muted);max-width:580px;margin:20px auto 30px;font-size:18px}
-.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.marquee{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:16px 0;color:var(--muted);background:rgba(15,19,29,0.4)}
-.marquee div{display:inline-block;animation:scroll 24s linear infinite}
-.marquee span{margin:0 26px;font-size:14px;font-weight:600}
+.tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--line);
+  background:rgba(15,20,32,0.8);
+  backdrop-filter:blur(12px);
+  padding:7px 16px;
+  border-radius:99px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--text);
+  margin-bottom:24px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.4);
+}
+.tag-dot{width:8px;height:8px;border-radius:50%;background:var(--a);box-shadow:0 0 10px var(--a);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+
+h1{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(40px,7.5vw,76px);
+  line-height:1.04;
+  letter-spacing:-.035em;
+  max-width:880px;
+  margin:auto;
+  font-weight:900;
+}
+h1 span{background:linear-gradient(135deg,var(--a) 0%, var(--b) 50%, var(--c) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);max-width:620px;margin:22px auto 34px;font-size:18px;font-weight:400}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* Marquee */
+.marquee{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:16px 0;color:var(--muted);background:rgba(10,13,22,0.6);backdrop-filter:blur(10px)}
+.marquee div{display:inline-block;animation:scroll 26s linear infinite}
+.marquee span{margin:0 24px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
-section{padding:80px 0}
-h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.02em}
-.sub{color:var(--muted);margin:8px 0 26px}
-.search-bar-wrap{position:relative;width:100%;max-width:380px;margin-bottom:20px}
-.search{width:100%;background:var(--panel);border:1px solid var(--line);padding:11px 44px 11px 16px;border-radius:12px;color:var(--text);font:inherit;outline:none;transition:border-color .2s,box-shadow .2s}
-.search:focus{border-color:var(--a);box-shadow:0 0 16px rgba(94,234,212,0.15)}
-.kbd-badge{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;padding:2px 7px;border-radius:6px;background:#151b28;border:1px solid var(--line);color:var(--muted);font-family:inherit;pointer-events:none}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
-.chip{border:1px solid var(--line);background:var(--panel);padding:8px 16px;border-radius:99px;cursor:pointer;font-size:14px;color:var(--muted);transition:all .2s;user-select:none}
-.chip:hover{border-color:var(--muted);color:var(--text)}
-.chip.on{background:var(--text);color:#07090f;border-color:var(--text);font-weight:600}
+/* Sections */
+section{padding:90px 0;position:relative}
+h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4.5vw,46px);letter-spacing:-.025em;font-weight:800}
+.sub{color:var(--muted);margin:8px 0 28px;font-size:16px}
 
-/* 3D Perspective Grid & Card Tilt */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px;perspective:1200px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;position:relative;transform-style:preserve-3d;transition:transform .15s ease-out,border-color .25s,box-shadow .25s}
-.card:hover{border-color:#3b4562;box-shadow:0 16px 36px rgba(0,0,0,0.6),0 0 20px rgba(94,234,212,0.12)}
-.card-glare{position:absolute;inset:0;border-radius:18px;background:radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.14) 0%, transparent 60%);opacity:0;pointer-events:none;transition:opacity .25s;mix-blend-mode:overlay;z-index:6}
+/* Search & Filters */
+.search-controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:24px}
+.search-bar-wrap{position:relative;width:100%;max-width:400px}
+.search{
+  width:100%;
+  background:var(--panel);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--line);
+  padding:12px 48px 12px 18px;
+  border-radius:14px;
+  color:var(--text);
+  font:inherit;
+  outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.search:focus{border-color:var(--a);box-shadow:0 0 20px rgba(94,234,212,0.18)}
+.kbd-badge{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:11px;padding:3px 8px;border-radius:6px;background:#151b28;border:1px solid var(--line);color:var(--muted);pointer-events:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{
+  border:1px solid var(--line);
+  background:var(--panel);
+  backdrop-filter:blur(8px);
+  padding:8px 16px;
+  border-radius:99px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:500;
+  color:var(--muted);
+  transition:all .2s;
+  user-select:none;
+}
+.chip:hover{border-color:var(--muted);color:var(--text);transform:translateY(-1px)}
+.chip.on{background:linear-gradient(135deg,var(--a),var(--b));color:#04060a;border-color:transparent;font-weight:700;box-shadow:0 4px 16px rgba(94,234,212,0.25)}
+
+/* 3D Bento & Perspective Cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;perspective:1200px}
+.card{
+  background:var(--panel);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .12s ease-out,border-color .25s,box-shadow .25s;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+.card:hover{border-color:var(--line-bright);box-shadow:0 20px 45px rgba(0,0,0,0.7),0 0 25px rgba(94,234,212,0.15)}
+.card-glare{
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  background:radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.18) 0%, transparent 65%);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s;
+  mix-blend-mode:overlay;
+  z-index:6;
+}
 .card:hover .card-glare{opacity:1}
-.fav-btn{position:absolute;top:10px;right:10px;z-index:10;background:#07090fbb;backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:50%;width:32px;height:32px;display:grid;place-items:center;cursor:pointer;color:var(--muted);font-size:14px;transition:all .2s}
-.fav-btn:hover{color:#fbbf24;border-color:#fbbf24;transform:scale(1.1)}
-.fav-btn.active{color:#fbbf24;border-color:#fbbf24;background:#151b28}
-.thumb{height:165px;position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:#0a0d15;transform:translateZ(8px)}
-.thumb-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
-.card:hover .thumb-img{transform:scale(1.06)}
-.card .in{padding:18px;display:flex;flex-direction:column;flex-grow:1;transform:translateZ(16px)}
-.card h3{font-size:17px;font-weight:700}
-.card p{color:var(--muted);font-size:13px;margin:6px 0 14px;flex-grow:1}
+.fav-btn{
+  position:absolute;
+  top:12px;
+  right:12px;
+  z-index:10;
+  background:rgba(7,9,15,0.75);
+  backdrop-filter:blur(8px);
+  border:1px solid var(--line);
+  border-radius:50%;
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  color:var(--muted);
+  font-size:15px;
+  transition:all .2s;
+}
+.fav-btn:hover{color:#fbbf24;border-color:#fbbf24;transform:scale(1.15)}
+.fav-btn.active{color:#fbbf24;border-color:#fbbf24;background:#181d2a}
+.thumb{height:175px;position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:#090d18;transform:translateZ(8px)}
+.thumb-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.card:hover .thumb-img{transform:scale(1.08)}
+.card .in{padding:20px;display:flex;flex-direction:column;flex-grow:1;transform:translateZ(18px)}
+.card h3{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700}
+.card p{color:var(--muted);font-size:13px;margin:8px 0 16px;flex-grow:1;line-height:1.5}
 .row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
-.tag-badge{background:#151b28;padding:4px 10px;border-radius:6px;border:1px solid var(--line);font-size:11px;font-weight:600;letter-spacing:.02em}
-.copy{background:#1a2032;border:1px solid var(--line);color:var(--text);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s}
-.copy:hover{background:var(--a);color:#06080d;border-color:var(--a)}
+.tag-badge{background:#131826;padding:4px 10px;border-radius:7px;border:1px solid var(--line);font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--a)}
+.copy{
+  background:#182033;
+  border:1px solid var(--line);
+  color:var(--text);
+  padding:7px 15px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+  transition:all .2s;
+}
+.copy:hover{background:var(--a);color:#04060a;border-color:var(--a);box-shadow:0 0 14px rgba(94,234,212,0.3)}
 
-.res{display:flex;flex-direction:column;justify-content:space-between;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;transition:transform .25s,border-color .25s,box-shadow .25s}
-.res:hover{transform:translateY(-6px);border-color:var(--a);box-shadow:0 12px 32px rgba(94,234,212,0.1)}
-.res h3{font-size:18px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.res p{color:var(--muted);font-size:14px;margin:10px 0 18px;line-height:1.5;flex-grow:1}
+/* Free Resources Bento Grid */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.res{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:var(--panel);
+  backdrop-filter:blur(14px);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:24px;
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.res:hover{transform:translateY(-6px);border-color:var(--a);box-shadow:0 14px 35px rgba(94,234,212,0.12)}
+.res h3{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.res p{color:var(--muted);font-size:13.5px;margin:10px 0 18px;line-height:1.55;flex-grow:1}
 .pill{font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--a);white-space:nowrap;font-weight:600}
 .pill.fm{color:#fbbf24;border-color:#fbbf2433}
 .pill.od{color:#38bdf8;border-color:#38bdf833}
-.visit{font-size:13px;font-weight:600;color:var(--b);display:inline-flex;align-items:center;gap:4px;transition:gap .2s}
-.res:hover .visit{gap:8px;color:var(--a)}
+.visit{font-size:13px;font-weight:600;color:var(--b);display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+.res:hover .visit{gap:10px;color:var(--a)}
 
-.reveal{opacity:0;transform:translateY(30px);transition:all .7s}
-.reveal.in{opacity:1;transform:none}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.step{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px}
-.step b{font-size:44px;background:linear-gradient(135deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
-.step h3{margin:6px 0}
+/* Workflow Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.step{background:var(--panel);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:20px;padding:28px;position:relative;overflow:hidden}
+.step b{font-family:'Space Grotesk',sans-serif;font-size:46px;font-weight:900;background:linear-gradient(135deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent;display:block;line-height:1}
+.step h3{font-family:'Space Grotesk',sans-serif;margin:10px 0 6px;font-size:19px}
 .step p{color:var(--muted);font-size:14px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;margin-top:40px;text-align:center}
-.stats b{font-size:38px;display:block}
-.stats span{color:var(--muted);font-size:14px}
-.news{text-align:center;background:linear-gradient(135deg,#5eead41a,#818cf81a);border:1px solid var(--line);border-radius:26px;padding:60px 20px}
-.news form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
-.news input{background:var(--panel);border:1px solid var(--line);padding:13px 16px;border-radius:12px;color:var(--text);min-width:260px;font:inherit;outline:none}
-.news input:focus{border-color:var(--a)}
-#msg{margin-top:12px;color:var(--a);min-height:22px;font-size:14px}
-footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
-footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
-/* Modal with 3D Depth */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);display:none;place-items:center;z-index:60;padding:16px}
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-top:44px;text-align:center}
+.stat-box{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px}
+.stats b{font-family:'Space Grotesk',sans-serif;font-size:42px;display:block;font-weight:900;letter-spacing:-.02em}
+.stats span{color:var(--muted);font-size:14px;font-weight:500}
+
+/* Newsletter */
+.news{
+  text-align:center;
+  background:linear-gradient(135deg,rgba(94,234,212,0.08),rgba(129,140,248,0.08));
+  border:1px solid var(--line);
+  border-radius:28px;
+  padding:64px 24px;
+  backdrop-filter:blur(16px);
+}
+.news form{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.news input{background:var(--panel-solid);border:1px solid var(--line);padding:14px 18px;border-radius:12px;color:var(--text);min-width:280px;font:inherit;outline:none;transition:border-color .2s}
+.news input:focus{border-color:var(--a)}
+#msg{margin-top:14px;color:var(--a);min-height:22px;font-size:14px;font-weight:500}
+
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+
+/* Modal with 3D Depth & Tabs */
+.modal{position:fixed;inset:0;background:rgba(3,4,8,0.85);backdrop-filter:blur(12px);display:none;place-items:center;z-index:70;padding:18px}
 .modal.show{display:grid}
-.box{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:24px;width:min(680px,100%);max-height:88vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,0.8),0 0 30px rgba(94,234,212,0.15)}
-.modal-preview-container{width:100%;height:210px;border-radius:12px;overflow:hidden;margin-bottom:16px;border:1px solid var(--line);background:#0a0d15;position:relative}
+.box{
+  background:var(--panel-solid);
+  border:1px solid var(--line-bright);
+  border-radius:22px;
+  padding:26px;
+  width:min(720px,100%);
+  max-height:88vh;
+  overflow:auto;
+  box-shadow:0 30px 70px rgba(0,0,0,0.85),0 0 35px rgba(94,234,212,0.18);
+}
+.modal-preview-container{width:100%;height:220px;border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--line);background:#070a12;position:relative}
 .modal-img{width:100%;height:100%;object-fit:cover;display:block}
-#modal-3d-canvas{position:absolute;inset:0;width:100%;height:100%;display:none}
-.modal-tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin:14px 0}
-.m-tab{padding:8px 14px;border:0;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
+.modal-tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin:16px 0}
+.m-tab{padding:9px 16px;border:0;background:transparent;color:var(--muted);font:inherit;font-size:13.5px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
 .m-tab.active{color:var(--a);border-bottom-color:var(--a)}
 .tab-content{display:none}
 .tab-content.active{display:block}
-.box pre{white-space:pre-wrap;background:#0a0d15;border:1px solid var(--line);border-radius:12px;padding:16px;font-size:13px;color:#cfd6ea;margin:14px 0;font-family:ui-monospace,Consolas,monospace;line-height:1.6}
-.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--a);color:#06080d;padding:10px 22px;border-radius:99px;font-weight:700;transition:.3s;z-index:70;box-shadow:0 8px 24px rgba(94,234,212,0.3)}
+.box pre{white-space:pre-wrap;background:#060810;border:1px solid var(--line);border-radius:12px;padding:18px;font-size:13px;color:#cfd6ea;margin:14px 0;font-family:'JetBrains Mono',ui-monospace,monospace;line-height:1.65}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);background:var(--a);color:#04060a;padding:12px 26px;border-radius:99px;font-weight:700;transition:.3s;z-index:80;box-shadow:0 10px 30px rgba(94,234,212,0.4)}
 .toast.show{transform:translate(-50%,0)}
 @media(max-width:760px){.links{display:none}}
 </style>
 </head>
 <body>
+<div id="cursor-glow"></div>
+
 <nav><div class="wrap">
-  <a class="logo" href="#"><i></i>PromptDock</a>
-  <div class="links"><a href="#library">Library</a><a href="#resources">Free resources</a><a href="#how">How it works</a><a href="#join">Newsletter</a></div>
-  <a class="btn" href="#library">Browse prompts</a>
+  <a class="logo" href="#">
+    <div class="logo-icon">⚡</div>
+    PromptDock <span style="font-size:12px;background:linear-gradient(135deg,var(--a),var(--b));-webkit-background-clip:text;color:transparent;font-weight:900">3D ULTRA</span>
+  </a>
+  <div class="links">
+    <a href="#library">Prompt Library</a>
+    <a href="#resources">3D & UI Ecosystem</a>
+    <a href="#how">Workflow</a>
+    <a href="#join">Newsletter</a>
+  </div>
+  <a class="btn" href="#library">Explore Prompts</a>
 </div></nav>
 
 <header class="hero">
   <canvas id="hero-canvas"></canvas>
-  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="hero-glow hg1"></div>
+  <div class="hero-glow hg2"></div>
   <div class="wrap">
-    <div class="tag">Interactive 3D Motion Library</div>
+    <div class="tag">
+      <span class="tag-dot"></span>
+      Interactive WebGL & AI Motion Engine
+    </div>
     <h1>Prompts for websites that <span>actually move.</span></h1>
-    <p class="lead">Copy a prompt, paste it into your AI tool, and ship an immersive 3D, scroll-driven site in an afternoon.</p>
-    <div class="cta"><a class="btn" href="#library">Browse the library</a><a class="btn o" href="#resources">Free resources</a></div>
+    <p class="lead">Copy-paste production AI prompts, Three.js 3D environments, and modern motion libraries to ship interactive websites in hours.</p>
+    <div class="cta">
+      <a class="btn" href="#library">Browse Library</a>
+      <a class="btn o" href="#resources">3D & Motion Resources</a>
+    </div>
   </div>
 </header>
 
 <div class="marquee"><div id="mq"></div></div>
 
 <section id="library"><div class="wrap">
-  <h2 class="reveal">The library</h2>
-  <p class="sub reveal"><span id="count">0</span> prompts. Click a card to preview 3D interaction, or copy directly. Press <kbd>/</kbd> to search.</p>
-  <div class="search-bar-wrap">
-    <input class="search" id="q" placeholder="Search prompts..." aria-label="Search prompts">
-    <kbd class="kbd-badge">Ctrl K</kbd>
+  <div class="search-controls">
+    <div>
+      <h2>The Prompt Library</h2>
+      <p class="sub"><span id="count">0</span> prompts loaded. Click any card for 3D inspection, code snippets, or one-click copy.</p>
+    </div>
+    <div class="search-bar-wrap">
+      <input class="search" id="q" placeholder="Search prompts (e.g. Three.js, SaaS, Hero)..." aria-label="Search prompts">
+      <kbd class="kbd-badge">Ctrl K</kbd>
+    </div>
   </div>
   <div class="chips" id="chips"></div>
   <div class="cards" id="cards"></div>
 </div></section>
 
 <section id="resources"><div class="wrap">
-  <h2 class="reveal">Free resources</h2>
-  <p class="sub reveal">Real, copy-paste code and open-source UI libraries for the same animated look. Check each site's license before using it in a live project.</p>
-  <div class="cards" id="res"></div>
+  <h2>3D & Animation Ecosystem</h2>
+  <p class="sub">Curated, battle-tested open-source libraries and component registries for motion-first web engineers.</p>
+  <div class="res-grid" id="res"></div>
 </div></section>
 
 <section id="how"><div class="wrap">
-  <h2 class="reveal">Copy, paste, launch.</h2>
-  <p class="sub reveal">Three steps from blank tab to live site.</p>
+  <h2>Copy, Paste, Ship in 3D.</h2>
+  <p class="sub">A seamless pipeline from blank tab to award-winning interactive production.</p>
   <div class="steps">
-    <div class="step reveal"><b>01</b><h3>Pick a prompt</h3><p>Filter by category: hero, landing page, portfolio, background effect.</p></div>
-    <div class="step reveal"><b>02</b><h3>Paste into your AI</h3><p>Works with Claude, Cursor, v0 or any coding assistant.</p></div>
-    <div class="step reveal"><b>03</b><h3>Launch it live</h3><p>Edit the copy, push to GitHub, deploy on Vercel.</p></div>
+    <div class="step">
+      <b>01</b>
+      <h3>Select a 3D Concept</h3>
+      <p>Filter by category: Three.js shaders, WebGL canvas, Next.js 15, dynamic islands, or reactive dashboards.</p>
+    </div>
+    <div class="step">
+      <b>02</b>
+      <h3>Feed into your AI Engine</h3>
+      <p>Seamlessly integrates with Claude, Cursor, v0, ChatGPT, or Antigravity with production constraints included.</p>
+    </div>
+    <div class="step">
+      <b>03</b>
+      <h3>Deploy & Launch Live</h3>
+      <p>Zero configuration required. Push to GitHub and deploy to Vercel with high-performance caching.</p>
+    </div>
   </div>
-  <div class="stats reveal">
-    <div><b id="sP" data-n="0">0</b><span>Prompts</span></div>
-    <div><b id="sC" data-n="0">0</b><span>Categories</span></div>
-    <div><b id="sR" data-n="0">0</b><span>Free resources</span></div>
-    <div><b data-n="1" data-suf="/wk">0</b><span>Fresh drops</span></div>
+  <div class="stats">
+    <div class="stat-box"><b id="sP" data-n="0">0</b><span>Production Prompts</span></div>
+    <div class="stat-box"><b id="sC" data-n="0">0</b><span>Categories</span></div>
+    <div class="stat-box"><b id="sR" data-n="0">0</b><span>Ecosystem Resources</span></div>
+    <div class="stat-box"><b data-n="100" data-suf="%">0</b><span>Free & Open Source</span></div>
   </div>
 </div></section>
 
-<section id="join"><div class="wrap"><div class="news reveal">
-  <h2>Ride the wave.</h2>
-  <p class="sub">One email when fresh prompts drop. No spam.</p>
-  <form id="form"><input id="email" type="email" placeholder="you@email.com" required><button class="btn">Subscribe</button></form>
+<section id="join"><div class="wrap"><div class="news">
+  <h2>Stay Ahead of the Motion Curve</h2>
+  <p class="sub">Fresh 3D prompts, WebGL shader recipes, and component drops delivered every Friday. No noise.</p>
+  <form id="form">
+    <input id="email" type="email" placeholder="engineer@domain.com" required>
+    <button class="btn">Subscribe to Drops</button>
+  </form>
   <div id="msg"></div>
 </div></div></section>
 
-<footer><div class="wrap"><span>&copy; 2026 PromptDock. Built for learning.</span><span>Made for people who ship</span></div></footer>
+<footer><div class="wrap">
+  <span>&copy; 2026 PromptDock 3D Ultra. Built for creative developers.</span>
+  <span>Engineered for people who ship bold ideas</span>
+</div></footer>
 
+<!-- Interactive 3D Modal Inspector -->
 <div class="modal" id="modal"><div class="box">
   <div class="modal-preview-container">
     <img id="mImg" class="modal-img" src="" alt="Prompt preview">
-    <canvas id="modal-3d-canvas"></canvas>
   </div>
-  <h3 id="mT"></h3><p class="sub" id="mD" style="margin:4px 0"></p>
+  <h3 id="mT" style="font-family:'Space Grotesk',sans-serif;font-size:22px"></h3>
+  <p class="sub" id="mD" style="margin:4px 0 14px"></p>
   
   <div class="modal-tabs">
     <button class="m-tab active" data-tab="tab-prompt">AI Prompt</button>
-    <button class="m-tab" data-tab="tab-specs">Key Specs</button>
-    <button class="m-tab" data-tab="tab-code">Starter Snippet</button>
+    <button class="m-tab" data-tab="tab-specs">Technical Specs</button>
+    <button class="m-tab" data-tab="tab-code">Starter Code</button>
   </div>
 
   <div id="tab-prompt" class="tab-content active">
@@ -220,43 +471,51 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     <pre id="mCode"></pre>
   </div>
 
-  <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
-    <button class="btn o" id="mShare">Share link</button>
+  <div style="display:flex;gap:12px;justify-content:flex-end;margin-top:20px">
+    <button class="btn o" id="mShare">Share Link</button>
     <button class="btn o" id="mClose">Close</button>
-    <button class="btn" id="mCopy">Copy prompt</button>
+    <button class="btn" id="mCopy">Copy Prompt</button>
   </div>
 </div></div>
+
 <div class="toast" id="toast">Copied!</div>
 
 <script>
+// Comprehensive Master Prompt Catalog (All 10 Core Categories)
 const P=[
- ["Aurora Hero","Hero","Gradient hero with floating orbs and a magnetic CTA.","#5eead4,#818cf8","Build a full-screen hero section in Next.js + Tailwind. Dark background (#07090f), two blurred gradient orbs that drift slowly, a 72px tight-tracking headline with one gradient word, a short subtext, and two buttons. Add a magnetic hover effect on the primary button using mouse position. Respect prefers-reduced-motion.","images/aurora-hero.svg","Tech: Next.js + Tailwind CSS\nMotion: 3D interactive cursor drift + magnetic mouse inertia\nPerformance: Hardware-accelerated GPU transforms & blur\nA11y: Respects prefers-reduced-motion","<div class=\"relative min-h-screen bg-[#07090f] overflow-hidden flex items-center justify-center\">\n  <div class=\"absolute w-96 h-96 rounded-full bg-teal-400/20 blur-3xl animate-pulse\"></div>\n  <h1 class=\"text-6xl font-black text-white\">Move the <span class=\"text-teal-400\">web</span></h1>\n</div>"],
- ["Tidewave Landing","Landing","Scroll-driven landing page with reveal sections.","#38bdf8,#6366f1","Create a one-page landing site with 5 sections: hero, features grid, workflow steps, stats counter, newsletter. Use IntersectionObserver for fade-up reveals and animate stats counting up when visible. Mobile-first, max width 1120px, system font stack.","images/tidewave-landing.svg","Tech: Vanilla HTML5/CSS3/JS or React\nMotion: 3D perspective scroll reveals + numeric lerp counter\nA11y: Semantic landmarks, aria-live for counters","const io = new IntersectionObserver((entries) => {\n  entries.forEach(e => e.isIntersecting && e.target.classList.add('in'));\n}, { threshold: 0.15 });\ndocument.querySelectorAll('.reveal').forEach(el => io.observe(el));"],
+ ["Aurora Hero","Hero","Gradient hero with floating 3D orbs and magnetic CTA.","#5eead4,#818cf8","Build a full-screen hero section in Next.js + Tailwind. Dark background (#05070e), two blurred gradient orbs that drift slowly in 3D, a 72px tight-tracking headline with one gradient word, a short subtext, and two buttons. Add a magnetic hover effect on the primary button using mouse position. Respect prefers-reduced-motion.","images/aurora-hero.svg","Tech: Next.js + Tailwind CSS + GSAP\nMotion: 3D cursor drift + magnetic button listener\nPerformance: GPU-accelerated transforms & blur\nA11y: Respects prefers-reduced-motion","<div class=\"relative min-h-screen bg-[#05070e] overflow-hidden flex items-center justify-center\">\n  <div class=\"absolute w-96 h-96 rounded-full bg-teal-400/20 blur-3xl animate-pulse\"></div>\n  <h1 class=\"text-6xl font-black text-white\">Move the <span class=\"text-teal-400\">web</span></h1>\n</div>"],
+ ["Nexus Telemetry","Dashboard","Futuristic 3D observability dashboard with live metric gauges.","#38bdf8,#818cf8","Design an ultra-modern monitoring dashboard in Next.js 15: real-time telemetry gauges, glowing sparklines with SVG path interpolation, 3D metric cards with hover elevation, status indicators, and an interactive log stream. Dark mode with cyan/indigo accent lighting.","images/nexus-dashboard.svg","Tech: Next.js 15 + Recharts/Tremor + WebSockets\nMotion: Smooth numeric lerping + animated path stroke-dashoffset\nLayout: Responsive CSS Grid Bento architecture","export default function MetricsDashboard() {\n  return (\n    <div className=\"grid grid-cols-1 md:grid-cols-3 gap-6 p-8 bg-[#05070e]\">\n      <MetricCard title=\"Throughput\" value=\"148.2k\" trend=\"+12%\" />\n    </div>\n  );\n}"],
+ ["Neural Forge","AI Website Generator","Autonomous AI web builder interface with neural synthesis graph.","#f43f5e,#facc15","Create an AI site generation studio UI: prompt terminal with syntax highlighting, live canvas iframe preview with zoom/pan controls, dynamic neural node tree showing generation steps, and a component drawer for instant editing. Include voice prompt input trigger.","images/ai-generator.svg","Tech: React + Tailwind + Zustand\nUX: Dynamic workflow nodes + floating toolbar\nAnimation: Framer Motion layoutId transitions","const generatePrompt = async (input) => {\n  const res = await fetch('/api/generate', { method: 'POST', body: JSON.stringify({ prompt: input }) });\n  return res.json();\n};"],
+ ["Orbit Planet 3D","Three.js","Interactive 3D low-poly celestial sphere tied to scroll.","#a78bfa,#22d3ee","Using Three.js, render a rotating low-poly planet in a hero. Tie rotation and camera zoom to scroll progress. Add soft lighting, a starfield particle cloud, and a fallback gradient if WebGL is unavailable. Optimized for 60fps across mobile and desktop.","images/orbit-scene.svg","Tech: Three.js + WebGL Canvas\nMotion: Orbit camera tied to window scroll & mouse parallax\nOptimization: Dispose geometries and materials on unmount","const scene = new THREE.Scene();\nconst camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);\nconst renderer = new THREE.WebGLRenderer({ alpha: true });"],
+ ["Liquid Chrome","Background","WebGL liquid metal fluid dynamics shader with cursor ripples.","#e0e7ff,#818cf8","Create a liquid chrome metal background in Three.js/WebGL: procedural fragment shader calculating specular reflections, mouse velocity ripple distorts, and a high-refraction metallic normal map. Throttles rendering when the tab is hidden.","images/liquid-metal.svg","Tech: Three.js + Custom GLSL Fragment Shader\nMotion: Surface tension simulation reacting to cursor velocity\nPerformance: Half-float framebuffer optimization","precision highp float;\nuniform vec2 u_mouse;\nuniform float u_time;\nvoid main() {\n  vec2 uv = gl_FragCoord.xy / u_resolution;\n  gl_FragColor = vec4(vec3(sin(uv.x * 10.0 + u_time)), 1.0);\n}"],
+ ["SaaS Command","SaaS","Collaborative workspace with real-time kanban and presence.","#5eead4,#3b82f6","Build an enterprise SaaS workspace with drag-and-drop Kanban columns, live user avatar presence pills, activity feeds with slide-in notifications, and keyboard shortcut modal command palette (Cmd+K). Persist board state in localStorage.","images/saas-matrix.svg","Tech: React 19 + dnd-kit + Tailwind CSS\nMotion: Drag velocity tilt & spring snap drop\nArchitecture: Modular widget boards with responsive collapse","import { DndContext } from '@dnd-kit/core';\nexport function KanbanBoard() {\n  return <DndContext onDragEnd={handleDragEnd}>{/* columns */}</DndContext>;\n}"],
+ ["Tidewave Landing","Landing","Scroll-driven landing page with reveal sections.","#38bdf8,#6366f1","Create a one-page landing site with 5 sections: hero, features grid, workflow steps, stats counter, newsletter. Use IntersectionObserver for fade-up reveals and animate stats counting up when visible. Mobile-first, max width 1160px, system font stack.","images/tidewave-landing.svg","Tech: Vanilla HTML5/CSS3/JS or React\nMotion: 3D perspective scroll reveals + numeric lerp counter\nA11y: Semantic landmarks, aria-live for counters","const io = new IntersectionObserver((entries) => {\n  entries.forEach(e => e.isIntersecting && e.target.classList.add('in'));\n}, { threshold: 0.15 });\ndocument.querySelectorAll('.reveal').forEach(el => io.observe(el));"],
+ ["Dynamic Island","Animation","iOS-style morphing floating pill navbar with state transitions.","#5eead4,#38bdf8","Build an interactive floating navbar inspired by the Dynamic Island. Expands from a 48px pill into a full navigation tray or media player with spring physics using Framer Motion or Web Animations API.","images/dynamic-island.svg","Tech: React + Framer Motion (layoutId) or Web Animations API\nMotion: Spring damping 28, stiffness 300\nA11y: Focus trap on expansion, Esc to dismiss","<motion.div layout transition={{ type: 'spring', stiffness: 300, damping: 28 }} className=\"bg-black rounded-full p-3\">\n  <motion.span layout=\"position\">Now Playing</motion.span>\n</motion.div>"],
  ["Folio Dark","Portfolio","Minimal developer portfolio with project cards.","#f472b6,#fb923c","Build a developer portfolio in plain HTML/CSS/JS: sticky blur navbar, hero with typing effect, project cards with hover lift and tech tags, skills section, contact form that opens a mailto link. Add smooth scroll and active nav highlighting.","images/folio-dark.svg","Tech: HTML, CSS, JavaScript\nMotion: 3D hover tilt cards with dynamic cursor glare\nA11y: High contrast text, focus-visible outlines","const typeWriter = (el, text, i = 0) => {\n  if (i < text.length) { el.textContent += text.charAt(i); setTimeout(() => typeWriter(el, text, i + 1), 50); }\n};"],
  ["Shop Rail","Ecommerce","Product grid with quick-add cart drawer.","#facc15,#f97316","Create an ecommerce product page: filterable grid, product cards with hover image swap, a slide-in cart drawer, quantity controls, and a running total saved in localStorage. No backend needed.","images/shop-rail.svg","Tech: HTML/CSS + localStorage state\nMotion: 3D product card perspective, slide-in drawer\nStorage: Cart persistence via JSON in localStorage","const cart = JSON.parse(localStorage.getItem('cart') || '[]');\nfunction addToCart(item) { cart.push(item); localStorage.setItem('cart', JSON.stringify(cart)); }"],
- ["Orbit Scene","3D","Interactive 3D object that follows scroll.","#a78bfa,#22d3ee","Using Three.js, render a rotating low-poly planet in a hero. Tie rotation and camera zoom to scroll progress. Add soft lighting, a starfield background, and a fallback gradient if WebGL is unavailable.","images/orbit-scene.svg","Tech: Three.js + WebGL Canvas\nMotion: Interactive 3D orbit camera tied to mouse & scroll\nOptimization: Degrades gracefully on low-power devices","const scene = new THREE.Scene();\nconst camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);\nconst renderer = new THREE.WebGLRenderer({ alpha: true });"],
- ["Mesh Glow","Background","Animated mesh-gradient canvas background.","#34d399,#3b82f6","Write a reusable canvas component that draws an animated mesh gradient using 4 moving color points. Expose colors and speed as props. Pause the animation when the tab is hidden.","images/mesh-glow.svg","Tech: Canvas 2D API or WebGL Shader\nMotion: Perlin noise 3D procedural flow field\nOptimization: document.hidden tab throttling","function render() {\n  ctx.clearRect(0,0,width,height);\n  points.forEach(p => { p.x += Math.sin(t)*p.vx; });\n  requestAnimationFrame(render);\n}"],
- ["Halftone Tide","Background","Halftone dot wave background effect.","#e2e8f0,#64748b","Create a canvas background of halftone dots whose size follows a moving sine wave. Dots react to mouse proximity. Keep it at 60fps by limiting grid size on mobile.","images/halftone-tide.svg","Tech: HTML5 Canvas 2D\nMotion: 3D depth wave dot scaling + distance formula cursor reaction\nFPS: Dynamic grid stepping based on devicePixelRatio","const dist = Math.hypot(mouseX - dotX, mouseY - dotY);\nconst radius = baseRadius * (1 + Math.sin(time + dotX*0.02)) * (dist < 80 ? 1.5 : 1);"],
- ["Split Hero","Hero","Two-column hero with rotating word headline.","#fb7185,#f59e0b","Build a hero with a left text column and right image card. The headline cycles through 3 words with a vertical slide animation every 2 seconds. Add a subtle parallax on the image using mouse movement.","images/split-hero.svg","Tech: CSS Keyframes + 3D Mousemove Parallax\nMotion: Vertical translateY text-carousel\nPhysics: Easing cubic-bezier(0.16, 1, 0.3, 1)","@keyframes slideWords {\n  0%, 25% { transform: translateY(0); }\n  33%, 58% { transform: translateY(-100%); }\n  66%, 92% { transform: translateY(-200%); }\n}"],
- ["Agency One","Landing","Studio site with case-study carousel.","#2dd4bf,#0ea5e9","Create a creative agency landing page with a full-width case-study carousel (drag + arrow keys), a services bento grid, a client logo marquee, and a contact section with a validated form.","images/agency-one.svg","Tech: CSS Grid Bento Layout + 3D Card Hover Depth\nMotion: Momentum scroll carousel with snap points\nA11y: Keyboard arrow left/right listener","carousel.addEventListener('keydown', (e) => {\n  if(e.key === 'ArrowRight') carousel.scrollBy({ left: 300, behavior: 'smooth' });\n});"],
- ["Gallery Wall","Portfolio","Photographer portfolio with masonry layout.","#c084fc,#f472b6","Build a masonry photo gallery using CSS columns, with a lightbox on click (keyboard navigation + Esc to close), lazy-loaded images, and category filter chips.","images/gallery-wall.svg","Tech: CSS column-count masonry + HTML dialog / lightbox\nMotion: 3D scale transform modal open, image skeleton shimmer\nA11y: Escape key to close modal, aria-modal true","document.addEventListener('keydown', e => {\n  if(e.key === 'Escape') lightbox.close();\n});"],
- ["Menu Board","Ecommerce","Restaurant menu with sticky category tabs.","#fbbf24,#ef4444","Create a restaurant site with a sticky category tab bar that highlights as you scroll, menu items with price and dietary tags, and a reservation form that stores requests in localStorage.","images/menu-board.svg","Tech: CSS sticky positioning + IntersectionObserver nav spy\nUX: Smooth scroll navigation with hash update","const observer = new IntersectionObserver((entries) => {\n  entries.forEach(e => e.isIntersecting && setActiveTab(e.target.id));\n}, { rootMargin: '-20% 0px -70% 0px' });"],
- ["Glass Cards","Hero","Glassmorphism feature cards over a gradient.","#67e8f9,#a5b4fc","Design a hero followed by 3 glassmorphism feature cards (backdrop-filter blur, 1px translucent border, soft shadow). Cards tilt in 3D toward the cursor on hover and reset smoothly on leave.","images/glass-cards.svg","Tech: CSS backdrop-filter + 3D transform perspective\nMotion: True 3D rotateX and rotateY physics with specular light","card.addEventListener('mousemove', (e) => {\n  const { width, height, left, top } = card.getBoundingClientRect();\n  const x = (e.clientX - left) / width - 0.5;\n  const y = (e.clientY - top) / height - 0.5;\n  card.style.transform = `perspective(800px) rotateY(${x * 16}deg) rotateX(${-y * 16}deg)`;\n});"],
- ["Liquid Metal","Background","WebGL liquid metal fluid dynamics shader with cursor interaction.","#e0e7ff,#818cf8","Create a liquid chrome metal background in Three.js/WebGL: procedural fragment shader calculating specular reflections, mouse velocity ripple distorts, and a high-refraction metallic normal map. Pause when offscreen.","images/liquid-metal.svg","Tech: Three.js + Custom GLSL Fragment Shader\nMotion: Ripple wave equation based on cursor speed in 3D\nOptimization: Half-float textures on mobile devices","precision highp float;\nuniform vec2 u_mouse;\nuniform float u_time;\nvoid main() {\n  vec2 uv = gl_FragCoord.xy / u_resolution;\n  gl_FragColor = vec4(vec3(sin(uv.x * 10.0 + u_time)), 1.0);\n}"],
- ["Dynamic Island","Hero","iOS-style morphing floating pill with state transitions.","#5eead4,#38bdf8","Build an interactive floating navbar inspired by the Dynamic Island. Expands from a 48px pill into a full navigation tray or media player with spring physics using Framer Motion or Web Animations API.","images/dynamic-island.svg","Tech: React + Framer Motion (layoutId) or CSS transition\nMotion: 3D spring damping 28, stiffness 300\nA11y: Keyboard focus trap during expanded state","<motion.div layout transition={{ type: 'spring', stiffness: 300, damping: 28 }} className=\"bg-black rounded-full p-3\">\n  <motion.span layout=\"position\">Now Playing</motion.span>\n</motion.div>"],
- ["Kinetic Type","Typography","Scroll-skewed variable font marquee with depth.","#f43f5e,#a855f7","Build an infinite kinetic typography section with variable font weight manipulation. When the user scrolls fast, words skew dynamically based on scroll velocity and warp along a sine curve.","images/kinetic-type.svg","Tech: CSS Variable Fonts + 3D depth transforms\nMotion: transform skewX(calc(var(--velocity) * 1.5deg))\nTypography: font-variation-settings: 'wght' 900","let lastY = window.scrollY;\nwindow.addEventListener('scroll', () => {\n  const velocity = window.scrollY - lastY;\n  document.body.style.setProperty('--velocity', `${velocity}`);\n  lastY = window.scrollY;\n});"],
- ["Particle Cloud","3D","Interactive GPU particle vortex reacting to mouse velocity.","#5eead4,#818cf8","Render 20,000 instanced particles in Three.js forming a spherical galaxy vortex. Mouse velocity injects turbulence forces into the curl noise field, dispersing particles and letting them gently re-coalesce.","images/particle-cloud.svg","Tech: Three.js InstancedMesh or Points + WebGL ShaderMaterial\nPhysics: 3D Curl noise vector field + attraction spring\nPerformance: 60fps verified with 20k points","const geometry = new THREE.BufferGeometry();\nconst positions = new Float32Array(count * 3);\ngeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\nconst points = new THREE.Points(geometry, material);"]
+ ["Kinetic Velocity","Typography","Scroll-skewed variable font marquee with depth.","#f43f5e,#a855f7","Build an infinite kinetic typography section with variable font weight manipulation. When the user scrolls fast, words skew dynamically based on scroll velocity and warp along a sine curve.","images/kinetic-type.svg","Tech: CSS Variable Fonts + 3D depth transforms\nMotion: transform skewX(calc(var(--velocity) * 1.5deg))\nTypography: font-variation-settings: 'wght' 900","let lastY = window.scrollY;\nwindow.addEventListener('scroll', () => {\n  const velocity = window.scrollY - lastY;\n  document.body.style.setProperty('--velocity', `${velocity}`);\n  lastY = window.scrollY;\n});"],
+ ["Galaxy Vortex","Three.js","Interactive GPU particle vortex reacting to mouse velocity.","#5eead4,#818cf8","Render 20,000 instanced particles in Three.js forming a spherical galaxy vortex. Mouse velocity injects turbulence forces into the curl noise field, dispersing particles and letting them gently re-coalesce.","images/particle-cloud.svg","Tech: Three.js InstancedMesh or Points + WebGL ShaderMaterial\nPhysics: 3D Curl noise vector field + attraction spring\nPerformance: 60fps verified with 20k points","const geometry = new THREE.BufferGeometry();\nconst positions = new Float32Array(count * 3);\ngeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\nconst points = new THREE.Points(geometry, material);"],
+ ["Next Reactive","React & Next.js","Next.js 15 Server Actions with optimistic UI updates.","#00f2fe,#4facfe","Build a Next.js 15 reactive dashboard showing live user votes and bookmark counts. Utilize Server Actions with useOptimistic hook, revalidating cache on the fly without page reload. Add Framer Motion count tickers.","images/next-react.svg","Tech: Next.js 15 + React 19 useOptimistic + Tailwind\nUX: Zero layout shift, immediate feedback\nPerformance: Partial Prerendering (PPR) ready","'use server'\nexport async function updateVote(id) {\n  await db.votes.increment(id);\n  revalidatePath('/dashboard');\n}"],
+ ["Spring Physics","Animation","Interactive spring gesture playground with velocity lerp.","#c084fc,#f472b6","Build a gesture-driven playground with draggable cards that spring back into position with velocity decay. Include friction, tension, and mass sliders to customize physics in real-time.","images/motion-physics.svg","Tech: Framer Motion or GSAP Draggable\nPhysics: RK4 Spring Integrator with custom damping\nInteraction: Touch and pointer events support","<motion.div drag dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }} dragElastic={0.2}>\n  Drag Me\n</motion.div>"],
+ ["Glass Matrix","Hero","Glassmorphism feature cards over animated 3D mesh.","#67e8f9,#a5b4fc","Design a hero followed by 3 glassmorphism feature cards (backdrop-filter blur, 1px translucent border, soft shadow). Cards tilt in 3D toward the cursor on hover and reset smoothly on leave.","images/glass-cards.svg","Tech: CSS backdrop-filter + 3D transform perspective\nMotion: True 3D rotateX and rotateY physics with specular light","card.addEventListener('mousemove', (e) => {\n  const { width, height, left, top } = card.getBoundingClientRect();\n  const x = (e.clientX - left) / width - 0.5;\n  const y = (e.clientY - top) / height - 0.5;\n  card.style.transform = `perspective(800px) rotateY(${x * 16}deg) rotateX(${-y * 16}deg)`;\n});"],
+ ["Agency One","Landing","Studio site with case-study carousel.","#2dd4bf,#0ea5e9","Create a creative agency landing page with a full-width case-study carousel (drag + arrow keys), a services bento grid, a client logo marquee, and a contact section with a validated form.","images/agency-one.svg","Tech: CSS Grid Bento Layout + 3D Card Hover Depth\nMotion: Momentum scroll carousel with snap points\nA11y: Keyboard arrow left/right listener","carousel.addEventListener('keydown', (e) => {\n  if(e.key === 'ArrowRight') carousel.scrollBy({ left: 300, behavior: 'smooth' });\n});"]
 ];
 
+// Complete Free Resources Ecosystem (Master Prompt Section 5)
 const R=[
- ["21st.dev","https://21st.dev","Free","The npm for Design Engineers — directory of free, open-source animated React & Tailwind component libraries."],
- ["Libraries.dev","https://libraries.dev","Free","Production-ready open-source React UI effect libraries tailored for AI interfaces, voice visualizers, and glowing shaders."],
- ["Aceternity UI","https://ui.aceternity.com","Free + Pro","Animated sections, effects and full-page templates for Next.js, Tailwind, and Framer Motion."],
- ["Magic UI","https://magicui.design","Free + Pro","20+ animated React components and effects that drop smoothly into any shadcn/ui project."],
- ["Spectrum UI","https://github.com/arihantcodes/spectrum-ui","Free","250+ animated components, blocks, and templates built on shadcn/ui under Apache 2.0 license."],
- ["shadcn/ui","https://ui.shadcn.com","Free","The accessible, copy-paste component architecture that modern web animation libraries extend."],
- ["MotionSites","https://motionsites.ai","Freemium","Curated prompt and design library for animated hero sections with instant copy."],
- ["Libraries.io","https://libraries.io","Open Data","Search and discover open-source packages, dependency trees, and licenses across 30+ package managers."]
+ ["21st.dev","https://21st.dev","Free","Component Registry","The npm for Design Engineers — directory of free, open-source animated React & Tailwind component libraries."],
+ ["Aceternity UI","https://ui.aceternity.com","Free + Pro","Templates & FX","Trending animated components, landing sections and full-page templates for Next.js, Tailwind, and Motion."],
+ ["Magic UI","https://magicui.design","Free + Pro","Component Library","20+ animated React components and visual effects designed to drop directly into shadcn/ui codebases."],
+ ["shadcn/ui","https://ui.shadcn.com","Free","Base Architecture","The industry standard, accessible copy-paste component architecture that powers the modern UI ecosystem."],
+ ["Three.js","https://threejs.org","Free (MIT)","3D Engine","The premier JavaScript 3D library for creating WebGL GPU-accelerated graphics in modern web browsers."],
+ ["React Three Fiber","https://r3f.docs.pmnd.rs","Free (MIT)","React 3D","A powerful React renderer for Three.js. Build declarative, reusable 3D component trees with ease."],
+ ["GSAP","https://gsap.com","Free (Standard)","Animation Engine","High-performance JavaScript animation engine for smooth, complex timeline sequencing and ScrollTrigger."],
+ ["Motion","https://motion.dev","Free (MIT)","Animation Library","Production-ready animation and gesture library for React and modern JavaScript. Formerly Framer Motion."],
+ ["Spline","https://spline.design","Free + Pro","3D Design Tool","Interactive 3D design software in the browser with real-time web export and React component integration."],
+ ["MotionSites","https://motionsites.ai","Freemium","Prompt Library","Curated prompt and inspiration library for animated hero sections with instant copy-paste code."],
+ ["Spectrum UI","https://github.com/arihantcodes/spectrum-ui","Free (Apache 2.0)","Component Blocks","250+ animated components, bento blocks, and templates built on shadcn/ui and Tailwind."],
+ ["LottieFiles","https://lottiefiles.com","Free + Pro","Vector Animations","Lightweight, scalable JSON and dotLottie animations for web apps and interactive UI workflows."],
+ ["Libraries.dev","https://libraries.dev","Free","AI UI Effects","Production-ready open-source React UI effect libraries tailored for AI interfaces and voice shaders."]
 ];
 
 let favs = JSON.parse(localStorage.getItem("pd_favs") || "[]");
@@ -264,7 +523,7 @@ const cats=["All","⭐ Saved",...new Set(P.map(p=>p[1]))];
 let cat="All",term="";
 const $=id=>document.getElementById(id);
 
-$("mq").innerHTML=("<span>React</span><span>Next.js</span><span>Tailwind</span><span>Three.js 3D</span><span>WebGL</span><span>GSAP</span><span>Vercel</span><span>21st.dev</span><span>Libraries.dev</span>").repeat(6);
+$("mq").innerHTML=("<span>Three.js 3D</span><span>React 19</span><span>Next.js 15</span><span>GSAP ScrollTrigger</span><span>WebGL Shaders</span><span>Tailwind CSS</span><span>21st.dev</span><span>Motion.dev</span><span>Spline 3D</span>").repeat(6);
 $("count").textContent=P.length;
 $("sP").dataset.n=P.length;
 $("sC").dataset.n=cats.length-2;
@@ -272,11 +531,14 @@ $("sR").dataset.n=R.length;
 $("chips").innerHTML=cats.map(c=>`<span class="chip ${c==="All"?"on":""}" data-c="${c}">${c}</span>`).join("");
 
 $("res").innerHTML=R.map(r=>{
-  const pillClass = r[2]==="Free" ? "" : r[2]==="Open Data" ? "od" : "fm";
-  return `<a class="res reveal" href="${r[1]}" target="_blank" rel="noopener noreferrer">
-    <h3>${r[0]}<span class="pill ${pillClass}">${r[2]}</span></h3>
-    <p>${r[3]}</p>
-    <span class="visit">Visit site &rarr;</span>
+  const pillClass = r[2].includes("Free") ? "" : "fm";
+  return `<a class="res" href="${r[1]}" target="_blank" rel="noopener noreferrer">
+    <div>
+      <h3>${r[0]}<span class="pill ${pillClass}">${r[2]}</span></h3>
+      <span style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:2px;display:block">${r[3]}</span>
+      <p>${r[4]}</p>
+    </div>
+    <span class="visit">Explore documentation &rarr;</span>
   </a>`;
 }).join("");
 
@@ -294,10 +556,10 @@ function draw(){
   $("cards").innerHTML=list.map(p=>{
     const i=P.indexOf(p), g=p[3].split(",");
     const isFav = favs.includes(i);
-    return `<div class="card reveal" data-i="${i}" id="${slugify(p[0])}">
+    return `<div class="card" data-i="${i}" id="${slugify(p[0])}">
     <div class="card-glare"></div>
     <button class="fav-btn ${isFav?'active':''}" data-fav="${i}" title="${isFav?'Remove from saved':'Save prompt'}">★</button>
-    <div class="thumb" style="background:radial-gradient(circle at 30% 30%,${g[0]},transparent 60%),radial-gradient(circle at 75% 70%,${g[1]},transparent 60%),#0a0d15">
+    <div class="thumb" style="background:radial-gradient(circle at 30% 30%,${g[0]},transparent 65%),radial-gradient(circle at 75% 70%,${g[1]},transparent 65%),#090d18">
       <img class="thumb-img" src="${p[5]}" alt="${p[0]}" loading="lazy">
     </div>
     <div class="in">
@@ -308,19 +570,19 @@ function draw(){
         <button class="copy" data-copy="${i}">Copy</button>
       </div>
     </div></div>`;
-  }).join("")||'<p class="sub" style="grid-column: 1/-1; text-align: center; padding: 40px 0;">No prompts found.</p>';
+  }).join("")||'<p class="sub" style="grid-column: 1/-1; text-align: center; padding: 40px 0;">No matching prompts found.</p>';
   
-  observe();
   bind3DTilt();
 }
 
+// 3D Perspective Tilt with dynamic cursor light tracking
 function bind3DTilt() {
   document.querySelectorAll('.card').forEach(card => {
     card.onmousemove = e => {
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `perspective(1000px) rotateY(${x * 16}deg) rotateX(${-y * 16}deg) translateZ(10px)`;
+      card.style.transform = `perspective(1000px) rotateY(${x * 14}deg) rotateX(${-y * 14}deg) translateZ(10px)`;
       card.style.setProperty('--gx', `${(x + 0.5) * 100}%`);
       card.style.setProperty('--gy', `${(y + 0.5) * 100}%`);
     };
@@ -453,16 +715,42 @@ $("form").onsubmit=e=>{
     l.push($("email").value);
     localStorage.setItem("pd_subs",JSON.stringify(l));
   }catch(_){}
-  $("msg").textContent="Subscribed. (Demo: saved in your browser only.)";
+  $("msg").textContent="Subscribed to drops. (Demo: saved locally in browser)";
   $("form").reset();
 };
 
-const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.12});
-function observe(){document.querySelectorAll(".reveal:not(.in)").forEach(el=>io.observe(el))}
+// Cursor Ambient Glow
+const glow = $("cursor-glow");
+window.addEventListener("pointermove", (e) => {
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+});
 
-const cio=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)return;
-  const el=x.target,n=+el.dataset.n,s=el.dataset.suf||"";let v=0;
-  const t=setInterval(()=>{v+=Math.max(1,Math.ceil(n/40));if(v>=n){v=n;clearInterval(t)}el.textContent=v+s},30);cio.unobserve(el)}),{threshold:.5});
+// Magnetic Buttons using GSAP
+document.querySelectorAll(".btn").forEach(b => {
+  b.addEventListener("mousemove", (e) => {
+    const rect = b.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    gsap.to(b, { x: x * 0.25, y: y * 0.25, duration: 0.3, ease: "power2.out" });
+  });
+  b.addEventListener("mouseleave", () => {
+    gsap.to(b, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+  });
+});
+
+// Animated Counter Observer
+const cio=new IntersectionObserver(es=>es.forEach(x=>{
+  if(!x.isIntersecting)return;
+  const el=x.target,n=+el.dataset.n,s=el.dataset.suf||"";
+  let v=0;
+  const t=setInterval(()=>{
+    v+=Math.max(1,Math.ceil(n/35));
+    if(v>=n){v=n;clearInterval(t)}
+    el.textContent=v+s;
+  },30);
+  cio.unobserve(el);
+}),{threshold:.5});
 document.querySelectorAll("[data-n]").forEach(el=>cio.observe(el));
 
 // Check for deep link in URL hash
@@ -472,70 +760,94 @@ function checkHash() {
     const slug = hash.replace("#prompt=", "");
     const idx = P.findIndex(p => slugify(p[0]) === slug);
     if (idx !== -1) {
-      setTimeout(() => openModal(idx), 300);
+      setTimeout(() => openModal(idx), 350);
     }
   }
 }
 
 // ---------------------------------------------------------------------
-// Three.js 3D Interactive Hero Canvas with Inertia & Particle Constellation
+// Advanced Three.js 3D Hero Scene with Interactive PBR Geometry & Constellation
 // ---------------------------------------------------------------------
 function initHero3D() {
   const canvas = $("hero-canvas");
   if (!canvas || typeof THREE === 'undefined') return;
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / (canvas.clientHeight || 560), 0.1, 1000);
-  camera.position.z = 24;
+  const camera = new THREE.PerspectiveCamera(55, window.innerWidth / (canvas.clientHeight || 640), 0.1, 1000);
+  camera.position.z = 26;
 
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight || 560);
+    renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight || 640);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   } catch(e) {
-    console.warn("WebGL not available, continuing with canvas 2D fallback", e);
+    console.warn("WebGL renderer init exception:", e);
     return;
   }
 
-  // 1. Central 3D Glowing Wireframe Icosahedron & Ring
+  // 3D Central Mesh Cluster
   const group = new THREE.Group();
   scene.add(group);
 
-  const icosaGeo = new THREE.IcosahedronGeometry(7, 1);
-  const icosaMat = new THREE.MeshStandardMaterial({
+  // Central 3D Icosahedron
+  const icoGeo = new THREE.IcosahedronGeometry(7.5, 1);
+  const icoMat = new THREE.MeshStandardMaterial({
     color: 0x5eead4,
     wireframe: true,
     transparent: true,
-    opacity: 0.35,
-    roughness: 0.2,
-    metalness: 0.8
+    opacity: 0.38,
+    roughness: 0.1,
+    metalness: 0.9
   });
-  const icosa = new THREE.Mesh(icosaGeo, icosaMat);
+  const icosa = new THREE.Mesh(icoGeo, icoMat);
   group.add(icosa);
 
-  // Outer orbital Torus
-  const torusGeo = new THREE.TorusGeometry(10.5, 0.15, 16, 100);
-  const torusMat = new THREE.MeshBasicMaterial({ color: 0x818cf8, transparent: true, opacity: 0.4 });
+  // Concentric 3D Torus Knot
+  const knotGeo = new THREE.TorusKnotGeometry(4.2, 0.45, 120, 16);
+  const knotMat = new THREE.MeshStandardMaterial({
+    color: 0x818cf8,
+    roughness: 0.25,
+    metalness: 0.85,
+    transparent: true,
+    opacity: 0.65
+  });
+  const knot = new THREE.Mesh(knotGeo, knotMat);
+  group.add(knot);
+
+  // Outer orbital Torus ring
+  const torusGeo = new THREE.TorusGeometry(11.5, 0.14, 16, 120);
+  const torusMat = new THREE.MeshBasicMaterial({ color: 0xc084fc, transparent: true, opacity: 0.45 });
   const torus = new THREE.Mesh(torusGeo, torusMat);
-  torus.rotation.x = Math.PI / 3;
+  torus.rotation.x = Math.PI / 2.8;
   group.add(torus);
 
-  // 2. 3D Floating Particle Constellation
-  const particleCount = 450;
+  // 3D Orbital Satellites
+  const satGeo = new THREE.SphereGeometry(0.55, 16, 16);
+  const satMat1 = new THREE.MeshBasicMaterial({ color: 0x5eead4 });
+  const satMat2 = new THREE.MeshBasicMaterial({ color: 0x818cf8 });
+  const sat1 = new THREE.Mesh(satGeo, satMat1);
+  const sat2 = new THREE.Mesh(satGeo, satMat2);
+  group.add(sat1);
+  group.add(sat2);
+
+  // 3D Floating Particle Constellation
+  const particleCount = 550;
   const particleGeo = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount * 3);
   const colors = new Float32Array(particleCount * 3);
 
   const c1 = new THREE.Color(0x5eead4);
   const c2 = new THREE.Color(0x818cf8);
+  const c3 = new THREE.Color(0xc084fc);
 
   for (let i = 0; i < particleCount; i++) {
-    positions[i * 3] = (Math.random() - 0.5) * 60;
-    positions[i * 3 + 1] = (Math.random() - 0.5) * 40;
-    positions[i * 3 + 2] = (Math.random() - 0.5) * 40;
+    positions[i * 3] = (Math.random() - 0.5) * 70;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 45;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 45;
 
-    const mixed = c1.clone().lerp(c2, Math.random());
+    const rnd = Math.random();
+    const mixed = rnd < 0.5 ? c1.clone().lerp(c2, rnd * 2) : c2.clone().lerp(c3, (rnd - 0.5) * 2);
     colors[i * 3] = mixed.r;
     colors[i * 3 + 1] = mixed.g;
     colors[i * 3 + 2] = mixed.b;
@@ -545,29 +857,29 @@ function initHero3D() {
   particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
   const particleMat = new THREE.PointsMaterial({
-    size: 0.6,
+    size: 0.7,
     vertexColors: true,
     transparent: true,
-    opacity: 0.75
+    opacity: 0.8
   });
   const particleSystem = new THREE.Points(particleGeo, particleMat);
   scene.add(particleSystem);
 
-  // 3. Dynamic Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  // Dynamic Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
   scene.add(ambientLight);
 
-  const pointLight1 = new THREE.PointLight(0x5eead4, 2, 50);
-  pointLight1.position.set(15, 10, 15);
-  scene.add(pointLight1);
+  const light1 = new THREE.PointLight(0x5eead4, 2.8, 60);
+  light1.position.set(18, 12, 18);
+  scene.add(light1);
 
-  const pointLight2 = new THREE.PointLight(0x818cf8, 2, 50);
-  pointLight2.position.set(-15, -10, 10);
-  scene.add(pointLight2);
+  const light2 = new THREE.PointLight(0x818cf8, 2.8, 60);
+  light2.position.set(-18, -12, 12);
+  scene.add(light2);
 
-  // Mouse interactivity with inertia
+  // Mouse inertia coordinates
   let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
-  window.addEventListener('mousemove', (e) => {
+  window.addEventListener('pointermove', (e) => {
     targetX = (e.clientX / window.innerWidth - 0.5) * 2;
     targetY = (e.clientY / window.innerHeight - 0.5) * 2;
   });
@@ -575,7 +887,7 @@ function initHero3D() {
   function onResize() {
     if (!canvas || !canvas.parentElement) return;
     const w = canvas.parentElement.clientWidth;
-    const h = canvas.parentElement.clientHeight || 560;
+    const h = canvas.parentElement.clientHeight || 640;
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
@@ -585,20 +897,31 @@ function initHero3D() {
   let clock = new THREE.Clock();
   function animate() {
     requestAnimationFrame(animate);
-    const elapsedTime = clock.getElapsedTime();
+    const t = clock.getElapsedTime();
 
-    // Smooth inertia
+    // Smooth inertia lerp
     mouseX += (targetX - mouseX) * 0.05;
     mouseY += (targetY - mouseY) * 0.05;
 
-    // 3D Rotations
-    group.rotation.y = elapsedTime * 0.2 + mouseX * 0.8;
-    group.rotation.x = elapsedTime * 0.15 - mouseY * 0.5;
-    group.position.x = mouseX * 2.5;
-    group.position.y = -mouseY * 2.0;
+    // 3D rotations
+    icosa.rotation.y = t * 0.22;
+    icosa.rotation.x = t * 0.15;
+    knot.rotation.y = -t * 0.35;
+    knot.rotation.z = t * 0.2;
 
-    particleSystem.rotation.y = elapsedTime * 0.05;
-    particleSystem.rotation.x = Math.sin(elapsedTime * 0.1) * 0.1;
+    group.rotation.y = mouseX * 0.7;
+    group.rotation.x = -mouseY * 0.5;
+    group.position.x = mouseX * 3.0;
+    group.position.y = -mouseY * 2.5;
+
+    // Orbital satellites
+    sat1.position.x = Math.cos(t * 1.5) * 11.5;
+    sat1.position.z = Math.sin(t * 1.5) * 11.5;
+    sat2.position.x = Math.cos(t * 1.5 + Math.PI) * 11.5;
+    sat2.position.z = Math.sin(t * 1.5 + Math.PI) * 11.5;
+
+    particleSystem.rotation.y = t * 0.04;
+    particleSystem.rotation.x = Math.sin(t * 0.08) * 0.1;
 
     renderer.render(scene, camera);
   }
@@ -607,7 +930,6 @@ function initHero3D() {
 
 window.addEventListener('DOMContentLoaded', () => {
   draw();
-  observe();
   checkHash();
   initHero3D();
 });

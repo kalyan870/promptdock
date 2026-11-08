@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="saasG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5eead4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="#07090f"/>
+  <!-- Sidebar & Kanban -->
+  <rect x="35" y="30" width="70" height="180" rx="10" fill="#0f131d" stroke="#202638"/>
+  <circle cx="70" cy="55" r="14" fill="url(#saasG)"/>
+  <rect x="47" y="85" width="46" height="6" rx="2" fill="#8d95aa"/>
+  <rect x="47" y="105" width="46" height="6" rx="2" fill="#8d95aa" opacity="0.6"/>
+  <rect x="47" y="125" width="46" height="6" rx="2" fill="#8d95aa" opacity="0.4"/>
+  <!-- Workspace cards -->
+  <rect x="120" y="30" width="115" height="180" rx="10" fill="#0f131d" stroke="#5eead4" stroke-width="1.5"/>
+  <rect x="135" y="45" width="60" height="8" rx="2" fill="#eef1f8"/>
+  <rect x="135" y="65" width="85" height="40" rx="6" fill="#151b28" stroke="#202638"/>
+  <rect x="135" y="115" width="85" height="40" rx="6" fill="#151b28" stroke="#202638"/>
+  <rect x="250" y="30" width="115" height="180" rx="10" fill="#0f131d" stroke="#202638"/>
+  <rect x="265" y="45" width="60" height="8" rx="2" fill="#eef1f8"/>
+  <rect x="265" y="65" width="85" height="50" rx="6" fill="#151b28" stroke="#202638"/>
+</svg>
