@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PromptDock 7.0 — 3D Website Visual Prompt Studio</title>
-<meta name="description" content="Discover stunning 3D website effects, customize their appearance in real time, and generate complete AI prompts for ChatGPT, Claude, Gemini, Antigravity, Cursor, and Codex.">
+<title>PromptDock 7.1 — 3D Website Visual Prompt Studio</title>
+<meta name="description" content="The specialized 3D Website Visual Prompt Studio. Discover stunning 3D website visual effects, customize their appearance in real-time WebGL, and generate complete AI implementation prompts.">
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
 <!-- OpenGraph / Social Meta Tags -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="PromptDock 7.0 — 3D Website Visual Prompt Studio">
-<meta property="og:description" content="Discover the visual. Copy the prompt. Build it with AI. Explore 30+ curated 3D website visual effects, real-time WebGL inspector, and dynamic prompt engines.">
+<meta property="og:title" content="PromptDock 7.1 — 3D Website Visual Prompt Studio">
+<meta property="og:description" content="Discover the visual. Copy the prompt. Build it with AI. Explore 30 curated 3D website visual effects with dedicated real-time WebGL scenes.">
 <meta property="og:image" content="images/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PromptDock 7.0 — 3D Website Visual Prompt Studio">
+<meta name="twitter:title" content="PromptDock 7.1 — 3D Website Visual Prompt Studio">
 <meta name="twitter:description" content="Discover the visual. Copy the prompt. Build it with AI.">
 <meta name="twitter:image" content="images/og-image.svg">
 
@@ -127,10 +127,10 @@ header {
   position: relative;
 }
 .brand-cube::after {
-  content: "7";
+  content: "7.1";
   color: #05070e;
   font-weight: 900;
-  font-size: 16px;
+  font-size: 11px;
 }
 .nav-links {
   display: flex;
@@ -365,7 +365,7 @@ header {
   gap: 10px;
 }
 
-/* Workflow Strip */
+/* 5-Step Workflow Strip */
 .workflow-strip {
   padding: 36px 0;
   border-top: 1px solid var(--border);
@@ -687,7 +687,7 @@ header {
 }
 .inspector-stage {
   position: relative;
-  min-height: 580px;
+  min-height: 600px;
   background: #03050a;
   overflow: hidden;
 }
@@ -825,33 +825,7 @@ header {
   margin-top: 24px;
 }
 
-/* Prompt Studio Sections: Generator, Modifier, Combiner */
-.studio-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 12px;
-}
-.studio-tab-btn {
-  padding: 10px 20px;
-  border-radius: var(--radius-full);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--muted);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: var(--transition);
-}
-.studio-tab-btn:hover, .studio-tab-btn.active {
-  background: rgba(94, 234, 212, 0.12);
-  border-color: var(--cyan);
-  color: var(--cyan);
-}
-
+/* Prompt Studio Sections: Generator & Combiner */
 .studio-grid {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
@@ -875,7 +849,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
@@ -887,6 +861,32 @@ header {
   gap: 8px;
   color: var(--cyan);
 }
+
+/* Active Config Summary Chips */
+.config-summary-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  background: #05070e;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+}
+.config-chip {
+  background: rgba(26, 35, 58, 0.7);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.config-chip strong {
+  color: var(--cyan);
+}
+
 .prompt-code-wrap {
   flex: 1;
   background: #05070e;
@@ -907,86 +907,6 @@ header {
   gap: 10px;
   margin-top: 18px;
   flex-wrap: wrap;
-}
-
-/* Presets Checkbox Grid */
-.preset-section-title {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--cyan);
-  margin: 18px 0 10px;
-}
-.preset-checkbox-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-.preset-chk-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #05070e;
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  color: var(--muted);
-  cursor: pointer;
-  transition: var(--transition);
-}
-.preset-chk-label:hover {
-  border-color: var(--cyan);
-  color: var(--text);
-}
-.preset-chk-label input[type="checkbox"] {
-  accent-color: var(--cyan);
-  cursor: pointer;
-}
-
-/* Modals */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: rgba(3, 5, 10, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-}
-.modal-backdrop.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-.modal-window {
-  width: min(840px, 95vw);
-  max-height: 90vh;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow-y: auto;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-}
-.modal-head {
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.modal-body {
-  padding: 24px;
-  overflow-y: auto;
 }
 
 /* Command Palette */
@@ -1120,7 +1040,6 @@ footer {
   .workflow-cards { grid-template-columns: 1fr; }
   .visuals-grid { grid-template-columns: 1fr; }
   .card-actions { grid-template-columns: 1fr; }
-  .preset-checkbox-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .hero-stage-wrap { height: 320px; }
 }
@@ -1135,14 +1054,13 @@ footer {
   <div class="container nav-inner">
     <a href="#" class="brand">
       <div class="brand-cube"></div>
-      <span>PromptDock <span style="color:var(--cyan)">7.0</span></span>
+      <span>PromptDock <span style="color:var(--cyan)">7.1</span></span>
     </a>
     
     <nav class="nav-links">
       <a href="#gallery">3D Visuals</a>
       <a href="#inspector">3D Inspector</a>
       <a href="#prompt-generator">Build Prompt</a>
-      <a href="#modify-website">Modify Website</a>
       <a href="#combine-visuals">Combine Visuals</a>
       <a href="#workflow">Workflow</a>
     </nav>
@@ -1166,11 +1084,11 @@ footer {
   <section class="hero" id="hero">
     <div class="container hero-grid">
       <div class="hero-content">
-        <div class="badge badge-studio">PromptDock 7.0 • 3D Website Prompt Studio</div>
+        <div class="badge badge-studio">PromptDock 7.1 • 3D Website Visual Prompt Studio</div>
         <h1 class="hero-headline">Discover the <span>next dimension</span> of web design.</h1>
         <div class="hero-tagline">"Discover the visual. Copy the prompt. Build it with AI."</div>
         <p class="hero-desc">
-          Explore stunning 3D website effects, customize their appearance in real-time WebGL, and generate complete, framework-aware AI prompts for any coding assistant.
+          Explore stunning 3D website effects, customize their appearance in real-time WebGL, and generate complete, framework-aware AI implementation prompts for any coding assistant.
         </p>
         
         <div class="hero-ctas">
@@ -1196,7 +1114,7 @@ footer {
         <canvas id="hero-canvas"></canvas>
         <div class="hero-feature-card">
           <div class="hero-feature-info">
-            <h4 id="hero-card-title">Kinetic Icosahedron &amp; Torus Field</h4>
+            <h4 id="hero-card-title">Aurora Plasma 3D Hero</h4>
             <p id="hero-card-subtitle">Three.js • Procedural Geometry • Cursor Parallax</p>
           </div>
           <div class="hero-feature-actions">
@@ -1208,7 +1126,7 @@ footer {
     </div>
   </section>
 
-  <!-- 10-Step Workflow Strip -->
+  <!-- 5-Step Workflow Strip -->
   <section class="workflow-strip" id="workflow">
     <div class="container">
       <div style="margin-bottom:18px; display:flex; justify-content:space-between; align-items:center;">
@@ -1221,29 +1139,29 @@ footer {
       
       <div class="workflow-cards">
         <div class="wf-step">
-          <div class="wf-num">STEP 01</div>
-          <div class="wf-title">Discover 3D Visual</div>
-          <div class="wf-desc">Browse 30+ production-grade 3D heroes, backgrounds, physics, shaders, and UI components.</div>
+          <div class="wf-num">STEP 01 — DISCOVER</div>
+          <div class="wf-title">Explore 3D Visuals</div>
+          <div class="wf-desc">Browse 30 curated 3D website visual effects across 8 specialized disciplines.</div>
         </div>
         <div class="wf-step">
-          <div class="wf-num">STEP 02</div>
-          <div class="wf-title">Preview &amp; Customize</div>
-          <div class="wf-desc">Adjust colors, speeds, densities, wireframes, and camera distances in the live WebGL viewport.</div>
+          <div class="wf-num">STEP 02 — PREVIEW</div>
+          <div class="wf-title">Inspect &amp; Customise</div>
+          <div class="wf-desc">Adjust colors, speeds, particle counts, and camera angles in the live WebGL viewport.</div>
         </div>
         <div class="wf-step">
-          <div class="wf-num">STEP 03</div>
-          <div class="wf-title">Generate AI Prompt</div>
-          <div class="wf-desc">Produce an 18-point comprehensive engineering prompt tailored to your target framework.</div>
+          <div class="wf-num">STEP 03 — GENERATE</div>
+          <div class="wf-title">Create Technical Prompt</div>
+          <div class="wf-desc">Generate an exhaustive 18-point engineering brief that reflects your active parameters.</div>
         </div>
         <div class="wf-step">
-          <div class="wf-num">STEP 04</div>
-          <div class="wf-title">Paste &amp; Build</div>
-          <div class="wf-desc">Feed into Antigravity, Claude, Cursor, or ChatGPT to generate clean, production-ready code.</div>
+          <div class="wf-num">STEP 04 — COPY</div>
+          <div class="wf-title">Copy AI Prompt</div>
+          <div class="wf-desc">One-click copy with verified clipboard payload and full integration specifications.</div>
         </div>
         <div class="wf-step">
-          <div class="wf-num">STEP 05</div>
-          <div class="wf-title">Modify &amp; Evolve</div>
-          <div class="wf-desc">Return to PromptDock to generate safe modification prompts that refine your existing site.</div>
+          <div class="wf-num">STEP 05 — BUILD</div>
+          <div class="wf-title">Build with AI Assistant</div>
+          <div class="wf-desc">Paste into Antigravity, Claude, Cursor, or ChatGPT to generate clean production code.</div>
         </div>
       </div>
     </div>
@@ -1308,7 +1226,7 @@ footer {
         <div class="section-eyebrow">Real-Time WebGL Sandbox</div>
         <h2 class="section-title">3D Visual Inspector &amp; Live Configurator</h2>
         <p class="section-desc">
-          Inspect any visual in a high-fidelity 3D viewport. Adjust parameters in real-time to preview variations, then instantly generate the corresponding AI prompt.
+          Inspect any visual in a high-fidelity 3D viewport. Adjust parameters in real-time to preview variations, then instantly transfer those exact settings into the AI Build Prompt.
         </p>
       </div>
 
@@ -1331,14 +1249,14 @@ footer {
 
           <div class="inspector-fps-pill">
             <span class="fps-dot"></span>
-            <span id="fps-display">60 FPS • WebGL 2.0</span>
+            <span id="fps-display">Measuring FPS...</span>
           </div>
         </div>
 
         <!-- Configuration & Parameters Panel -->
         <div class="inspector-panel">
           <div class="insp-cat" id="insp-cat-badge">3D Hero Experiences</div>
-          <h3 id="insp-title">Aurora Plasma Hero</h3>
+          <h3 id="insp-title">Aurora Plasma 3D Hero</h3>
           <p class="insp-desc" id="insp-desc">
             Procedural glowing 3D plasma mesh with dynamic vertex displacement and cursor parallax. Ideal for high-impact creative agency heroes.
           </p>
@@ -1364,8 +1282,8 @@ footer {
             <input type="range" class="ctrl-range" id="insp-ctrl-speed" min="0.2" max="3.0" step="0.1" value="1.0" oninput="updateInspectorParam('speed', this.value)">
           </div>
 
-          <!-- Live Param: Density -->
-          <div class="ctrl-group">
+          <!-- Live Param: Density (conditionally relevant) -->
+          <div class="ctrl-group" id="grp-density">
             <div class="ctrl-label-row">
               <span>Geometry Density / Count</span>
               <span id="val-density">1,600 pts</span>
@@ -1393,11 +1311,8 @@ footer {
 
           <!-- Actions -->
           <div class="inspector-actions-grid">
-            <button class="btn-primary" onclick="loadVisualIntoPromptBuilder()">
-              <span>Build with AI ➔</span>
-            </button>
-            <button class="btn-outline" onclick="loadVisualIntoModifier()">
-              <span>Modify Website ⚡</span>
+            <button class="btn-primary" style="grid-column: 1 / -1; justify-content: center; padding: 12px;" onclick="loadVisualIntoPromptBuilder()">
+              <span>Generate AI Build Prompt with These Settings ➔</span>
             </button>
           </div>
         </div>
@@ -1405,14 +1320,14 @@ footer {
     </div>
   </section>
 
-  <!-- AI Prompt Generator Section (Core Feature) -->
+  <!-- AI Build Prompt Generator Section (Core Feature) -->
   <section class="section" id="prompt-generator">
     <div class="container">
       <div class="section-header">
         <div class="section-eyebrow">AI Prompt Engineering Engine</div>
         <h2 class="section-title">Comprehensive AI Build Prompt Studio</h2>
         <p class="section-desc">
-          Generate an exhaustive 18-point engineering brief. Every prompt defines geometry, materials, lighting, animations, interactions, responsive fallbacks, and instructions to preserve your existing project structure.
+          Generate an exhaustive 18-point engineering brief reflecting your exact customized parameters. Every prompt defines geometry, materials, lighting, animations, interactions, responsive fallbacks, and instructions to preserve your existing project structure.
         </p>
       </div>
 
@@ -1482,6 +1397,11 @@ footer {
             <span style="font-size:11px; font-family:var(--font-mono); color:var(--muted)">18-Point Engineering Brief</span>
           </div>
 
+          <!-- Active Config Summary -->
+          <div class="config-summary-bar" id="config-summary-bar">
+            <!-- Populated dynamically -->
+          </div>
+
           <pre class="prompt-code-wrap" id="prompt-output-display"></pre>
 
           <div class="studio-output-actions">
@@ -1503,82 +1423,8 @@ footer {
     </div>
   </section>
 
-  <!-- Modification Prompt Generator (Unique Differentiator) -->
-  <section class="section" id="modify-website" style="background:#03050a; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-eyebrow">Safe Iteration Engine</div>
-        <h2 class="section-title">Modify Existing Website Prompt Generator</h2>
-        <p class="section-desc">
-          Already generated a website with an AI assistant? Use this tool to generate a surgical modification prompt that improves your 3D effects without breaking existing code or routes.
-        </p>
-      </div>
-
-      <div class="studio-grid">
-        <!-- Mod Controls -->
-        <div class="studio-config-box">
-          <h4 style="font-size:16px; font-weight:700; margin-bottom:14px;">Requested Changes</h4>
-          
-          <div class="ctrl-group">
-            <label class="ctrl-label-row"><span>Custom Instructions (Natural Language)</span></label>
-            <textarea id="mod-natural-input" rows="4" style="width:100%; resize:vertical;" placeholder="e.g. Make the particle field respond to cursor velocity, increase the rotation speed by 40%, and deepen the dark background..." oninput="onModChange()"></textarea>
-          </div>
-
-          <!-- Preset Categories -->
-          <div class="preset-section-title">🎨 Visual Modifications</div>
-          <div class="preset-checkbox-grid">
-            <label class="preset-chk-label"><input type="checkbox" value="Switch color palette to cyan and electric violet" onchange="onModChange()"> Vibrant Palette</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Increase glow intensity and bloom radius" onchange="onModChange()"> Boost Glow</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Add metallic specular reflections with high roughness" onchange="onModChange()"> Metallic Finish</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Add translucent glass refraction and chromatic aberration" onchange="onModChange()"> Glass Refraction</label>
-          </div>
-
-          <div class="preset-section-title">⚡ Motion &amp; Interaction</div>
-          <div class="preset-checkbox-grid">
-            <label class="preset-chk-label"><input type="checkbox" value="Add cursor-driven parallax tilt with spring damping" onchange="onModChange()"> Cursor Parallax</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Link camera rotation and zoom to scroll progress" onchange="onModChange()"> Scroll Camera</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Slow down base animation cycle by 50% for elegance" onchange="onModChange()"> Slower Speed</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Add magnetic snap physics on mouse enter" onchange="onModChange()"> Magnetic Snap</label>
-          </div>
-
-          <div class="preset-section-title">🚀 Performance &amp; Safety</div>
-          <div class="preset-checkbox-grid">
-            <label class="preset-chk-label"><input type="checkbox" value="Add IntersectionObserver to pause rendering when off-screen" checked onchange="onModChange()"> Pause Off-Screen</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Explicitly call geometry.dispose() and material.dispose() on unmount" checked onchange="onModChange()"> GPU Cleanup</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Optimize geometry by using InstancedMesh" onchange="onModChange()"> Instanced Meshes</label>
-            <label class="preset-chk-label"><input type="checkbox" value="Provide graceful 2D canvas fallback for unsupported browsers" checked onchange="onModChange()"> 2D Fallback</label>
-          </div>
-        </div>
-
-        <!-- Generated Mod Output -->
-        <div class="studio-output-box">
-          <div class="studio-output-header">
-            <div class="output-title">
-              <span>🛠️ Generated Safe Modification Prompt</span>
-            </div>
-            <span style="font-size:11px; font-family:var(--font-mono); color:var(--emerald)">Non-Destructive Instructions</span>
-          </div>
-
-          <pre class="prompt-code-wrap" id="mod-output-display"></pre>
-
-          <div class="studio-output-actions">
-            <button class="btn-primary" onclick="copyModificationPrompt()">
-              <span>📋 Copy Modification Prompt</span>
-            </button>
-            <button class="btn-outline" onclick="clearModInputs()">
-              <span>🗑️ Clear Changes</span>
-            </button>
-            <button class="btn-outline" onclick="exportModAsMarkdown()">
-              <span>📥 Export Markdown</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Combine Multiple 3D Effects Studio -->
-  <section class="section" id="combine-visuals">
+  <section class="section" id="combine-visuals" style="background:#03050a; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
     <div class="container">
       <div class="section-header">
         <div class="section-eyebrow">Multi-Effect Composition</div>
@@ -1670,12 +1516,12 @@ footer {
       <div>
         <div class="brand" style="margin-bottom:12px;">
           <div class="brand-cube"></div>
-          <span>PromptDock 7.0</span>
+          <span>PromptDock 7.1</span>
         </div>
         <p style="font-size:13px; line-height:1.6; max-width:320px; margin-bottom:16px;">
           The Next-Generation 3D Website Visual Prompt Studio. Discover visuals, customize WebGL parameters, and generate comprehensive AI prompts.
         </p>
-        <span class="badge badge-studio" style="font-size:10px;">Production Release 7.0.0</span>
+        <span class="badge badge-studio" style="font-size:10px;">Production Release 7.1.0</span>
       </div>
 
       <div class="footer-col">
@@ -1693,7 +1539,6 @@ footer {
         <h5>Prompt Studios</h5>
         <ul>
           <li><a href="#prompt-generator">Build Prompt Studio</a></li>
-          <li><a href="#modify-website">Modify Existing Website</a></li>
           <li><a href="#combine-visuals">Combine Visuals Studio</a></li>
           <li><a href="#inspector">3D WebGL Inspector</a></li>
         </ul>
@@ -1721,7 +1566,7 @@ footer {
 <!-- Core Application Script & 3D WebGL Engine -->
 <script>
 // ============================================================================
-// PROMPTDOCK 7.0 APPLICATION ARCHITECTURE & DATA CATALOG
+// PROMPTDOCK 7.1 APPLICATION ARCHITECTURE & DATA CATALOG
 // ============================================================================
 
 // 1. Categories Catalog (8 Specialized Disciplines)
@@ -1737,7 +1582,7 @@ const CATEGORIES = [
   "AI and Technology Visuals"
 ];
 
-// 2. 30 Curated Production 3D Visuals
+// 2. 30 Curated Production 3D Visuals with Distinct Scene Builders
 const VISUALS = [
   // --- A. 3D Hero Experiences ---
   {
@@ -1752,7 +1597,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Hero Section (Split-Screen / Full Width)",
-    renderType: "icosahedron",
+    sceneType: "aurora",
     defaultProps: { color: "#5eead4", secondaryColor: "#818cf8", speed: 1.0, density: 1600, glow: 1.2, cam: 5.0, wireframe: false }
   },
   {
@@ -1767,7 +1612,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Hero Section",
-    renderType: "sphere",
+    sceneType: "planet",
     defaultProps: { color: "#818cf8", secondaryColor: "#38bdf8", speed: 0.8, density: 1200, glow: 1.0, cam: 5.5, wireframe: false }
   },
   {
@@ -1782,7 +1627,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Hero Showcase",
-    renderType: "torusKnot",
+    sceneType: "abstractTorus",
     defaultProps: { color: "#c084fc", secondaryColor: "#5eead4", speed: 1.2, density: 2000, glow: 1.5, cam: 4.8, wireframe: false }
   },
   {
@@ -1797,7 +1642,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Hero Section",
-    renderType: "cube",
+    sceneType: "spatialGlass",
     defaultProps: { color: "#38bdf8", secondaryColor: "#5eead4", speed: 0.9, density: 1400, glow: 1.1, cam: 5.2, wireframe: false }
   },
   {
@@ -1812,7 +1657,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Hero / Section Divider",
-    renderType: "torusKnot",
+    sceneType: "kineticType",
     defaultProps: { color: "#5eead4", secondaryColor: "#38bdf8", speed: 1.4, density: 1000, glow: 1.0, cam: 6.0, wireframe: false }
   },
 
@@ -1829,7 +1674,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Full Website Background",
-    renderType: "galaxy",
+    sceneType: "galaxy",
     defaultProps: { color: "#5eead4", secondaryColor: "#818cf8", speed: 0.7, density: 3000, glow: 1.3, cam: 5.0, wireframe: false }
   },
   {
@@ -1844,7 +1689,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Full Website Background",
-    renderType: "galaxy",
+    sceneType: "starfieldWarp",
     defaultProps: { color: "#818cf8", secondaryColor: "#c084fc", speed: 1.5, density: 2500, glow: 1.0, cam: 4.5, wireframe: false }
   },
   {
@@ -1859,7 +1704,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Section Background",
-    renderType: "particles",
+    sceneType: "neuralNet",
     defaultProps: { color: "#5eead4", secondaryColor: "#34d399", speed: 1.1, density: 1800, glow: 1.4, cam: 5.2, wireframe: true }
   },
   {
@@ -1874,7 +1719,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Section / Footer Background",
-    renderType: "terrain",
+    sceneType: "terrain",
     defaultProps: { color: "#38bdf8", secondaryColor: "#818cf8", speed: 0.9, density: 2200, glow: 1.1, cam: 4.6, wireframe: true }
   },
 
@@ -1891,7 +1736,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Interactive Canvas Hero",
-    renderType: "particles",
+    sceneType: "reactiveParticles",
     defaultProps: { color: "#5eead4", secondaryColor: "#fb7185", speed: 1.2, density: 2400, glow: 1.3, cam: 5.0, wireframe: false }
   },
   {
@@ -1906,7 +1751,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Interactive Visual Section",
-    renderType: "particles",
+    sceneType: "magneticAttractor",
     defaultProps: { color: "#c084fc", secondaryColor: "#818cf8", speed: 1.3, density: 2000, glow: 1.4, cam: 5.4, wireframe: false }
   },
   {
@@ -1921,7 +1766,7 @@ const VISUALS = [
     perf: "High-Performance GPU",
     perfTier: "High",
     placement: "Hero Visual Anchor",
-    renderType: "galaxy",
+    sceneType: "curlVortex",
     defaultProps: { color: "#5eead4", secondaryColor: "#38bdf8", speed: 1.5, density: 3500, glow: 1.6, cam: 4.8, wireframe: false }
   },
   {
@@ -1936,7 +1781,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Visual Feature Studio",
-    renderType: "flowField",
+    sceneType: "flowField",
     defaultProps: { color: "#34d399", secondaryColor: "#5eead4", speed: 1.0, density: 1800, glow: 1.2, cam: 5.2, wireframe: false }
   },
 
@@ -1953,7 +1798,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Product Landing Page",
-    renderType: "torusKnot",
+    sceneType: "headphone",
     defaultProps: { color: "#818cf8", secondaryColor: "#5eead4", speed: 0.6, density: 1500, glow: 1.1, cam: 5.5, wireframe: false }
   },
   {
@@ -1968,7 +1813,7 @@ const VISUALS = [
     perf: "High-Performance GPU",
     perfTier: "High",
     placement: "Luxury Ecommerce Hero",
-    renderType: "icosahedron",
+    sceneType: "chronoWatch",
     defaultProps: { color: "#fbbf24", secondaryColor: "#f1f5f9", speed: 0.5, density: 2200, glow: 1.3, cam: 4.6, wireframe: false }
   },
   {
@@ -1983,7 +1828,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Product Feature Grid",
-    renderType: "cube",
+    sceneType: "hardwareTerminal",
     defaultProps: { color: "#5eead4", secondaryColor: "#c084fc", speed: 0.8, density: 1600, glow: 1.4, cam: 5.0, wireframe: false }
   },
 
@@ -2000,7 +1845,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Full-Page Narrative Landing",
-    renderType: "flowField",
+    sceneType: "scrollCameraTrack",
     defaultProps: { color: "#38bdf8", secondaryColor: "#5eead4", speed: 1.0, density: 1400, glow: 1.0, cam: 5.0, wireframe: false }
   },
   {
@@ -2015,7 +1860,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Portfolio Showcase",
-    renderType: "icosahedron",
+    sceneType: "multiplaneParallax",
     defaultProps: { color: "#818cf8", secondaryColor: "#38bdf8", speed: 0.9, density: 1300, glow: 1.1, cam: 5.3, wireframe: false }
   },
   {
@@ -2030,7 +1875,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Section Divider / Transition",
-    renderType: "cube",
+    sceneType: "sectionDissolve",
     defaultProps: { color: "#c084fc", secondaryColor: "#5eead4", speed: 1.2, density: 1500, glow: 1.3, cam: 4.9, wireframe: false }
   },
 
@@ -2047,7 +1892,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Features / Pricing Grid",
-    renderType: "cube",
+    sceneType: "tiltCardStack",
     defaultProps: { color: "#5eead4", secondaryColor: "#818cf8", speed: 1.0, density: 1000, glow: 1.2, cam: 5.0, wireframe: false }
   },
   {
@@ -2062,7 +1907,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Floating Sticky Navbar",
-    renderType: "torusKnot",
+    sceneType: "morphingPill",
     defaultProps: { color: "#5eead4", secondaryColor: "#38bdf8", speed: 1.1, density: 800, glow: 1.0, cam: 5.5, wireframe: false }
   },
   {
@@ -2077,12 +1922,12 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Call to Action Anchor",
-    renderType: "icosahedron",
+    sceneType: "magneticButtonMesh",
     defaultProps: { color: "#5eead4", secondaryColor: "#818cf8", speed: 1.3, density: 900, glow: 1.4, cam: 5.2, wireframe: false }
   },
   {
     id: "border-beam",
-    name: "Border Beam SVG Keyframe Runner",
+    name: "Border Beam Keyframe Light Runner",
     cat: "3D UI Components",
     desc: "Glowing light runner racing along card perimeters with precision SVG path keyframes. Zero dependencies.",
     thumb: "images/lib-border-beam.svg",
@@ -2092,7 +1937,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Bento Grid Cards",
-    renderType: "cube",
+    sceneType: "borderBeamRunner",
     defaultProps: { color: "#5eead4", secondaryColor: "#c084fc", speed: 1.0, density: 1100, glow: 1.3, cam: 5.0, wireframe: false }
   },
 
@@ -2109,7 +1954,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Hero / Section Background",
-    renderType: "terrain",
+    sceneType: "liquidChromeMesh",
     defaultProps: { color: "#f1f5f9", secondaryColor: "#5eead4", speed: 1.0, density: 2500, glow: 1.5, cam: 4.8, wireframe: false }
   },
   {
@@ -2124,7 +1969,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Interactive Overlay Cards",
-    renderType: "torusKnot",
+    sceneType: "glassRefractionPrism",
     defaultProps: { color: "#38bdf8", secondaryColor: "#818cf8", speed: 0.8, density: 1600, glow: 1.2, cam: 5.0, wireframe: false }
   },
   {
@@ -2139,7 +1984,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "Creative Playground Hero",
-    renderType: "sphere",
+    sceneType: "gooeyCluster",
     defaultProps: { color: "#5eead4", secondaryColor: "#fb7185", speed: 1.2, density: 1800, glow: 1.4, cam: 5.2, wireframe: false }
   },
 
@@ -2156,7 +2001,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "AI Copilot / Chat Interface",
-    renderType: "thinkingOrb",
+    sceneType: "thinkingOrb",
     defaultProps: { color: "#5eead4", secondaryColor: "#818cf8", speed: 1.4, density: 2000, glow: 1.6, cam: 4.6, wireframe: false }
   },
   {
@@ -2171,7 +2016,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "AI Studio Dashboard",
-    renderType: "particles",
+    sceneType: "neuralGraph",
     defaultProps: { color: "#818cf8", secondaryColor: "#5eead4", speed: 1.1, density: 1700, glow: 1.3, cam: 5.1, wireframe: true }
   },
   {
@@ -2186,7 +2031,7 @@ const VISUALS = [
     perf: "Lightweight (Integrated GPU)",
     perfTier: "Low",
     placement: "Voice AI / Podcast Hero",
-    renderType: "torusKnot",
+    sceneType: "voiceRing",
     defaultProps: { color: "#5eead4", secondaryColor: "#fb7185", speed: 1.3, density: 1500, glow: 1.5, cam: 5.0, wireframe: false }
   },
   {
@@ -2201,7 +2046,7 @@ const VISUALS = [
     perf: "Medium GPU",
     perfTier: "Medium",
     placement: "SaaS Observability Platform",
-    renderType: "cube",
+    sceneType: "telemetryGrid",
     defaultProps: { color: "#38bdf8", secondaryColor: "#5eead4", speed: 0.9, density: 1900, glow: 1.2, cam: 5.3, wireframe: false }
   }
 ];
@@ -2214,8 +2059,10 @@ let currentPerfFilter = "all";
 let favoritesOnly = false;
 let favorites = JSON.parse(localStorage.getItem("promptdock7_favs") || "[]");
 
+// Inspector & Prompt synchronization
 let activeInspectorVisual = VISUALS[0];
 let inspectorProps = { ...activeInspectorVisual.defaultProps };
+let customVisualProps = {}; // Preserves custom inspector settings per visual ID
 
 // DOM Helper
 const $ = (id) => document.getElementById(id);
@@ -2282,7 +2129,6 @@ function updateFavoriteBadges() {
 
 function toggleFavoritesOnly() {
   favoritesOnly = !favoritesOnly;
-  const btn = $("fav-fav-filter");
   const b = $("fav-toggle-btn");
   if (b) b.classList.toggle("active", favoritesOnly);
   renderVisuals();
@@ -2411,6 +2257,395 @@ function resetGalleryFilters() {
   renderCategoryPills();
   renderVisuals();
 }
+
+// ============================================================================
+// EFFECT-SPECIFIC 3D SCENE FACTORY & WEBGL ENGINE
+// ============================================================================
+
+const SceneFactory = {
+  // Disposes any previous objects in the container group
+  cleanGroup(group) {
+    while (group.children.length > 0) {
+      const obj = group.children[0];
+      group.remove(obj);
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) {
+        if (Array.isArray(obj.material)) {
+          obj.material.forEach(m => m.dispose());
+        } else {
+          obj.material.dispose();
+        }
+      }
+    }
+  },
+
+  // Builds a distinct 3D scene matching each visual's identity
+  createScene(sceneType, group, props) {
+    this.cleanGroup(group);
+
+    const c1 = parseInt(props.color.replace("#", "0x"), 16);
+    const c2 = parseInt(props.secondaryColor.replace("#", "0x"), 16);
+    const wf = !!props.wireframe;
+
+    switch (sceneType) {
+      case "aurora": {
+        // Procedural undulating plasma plane with sine displacement
+        const geo = new THREE.PlaneGeometry(4.2, 4.2, 32, 32);
+        const mat = new THREE.MeshStandardMaterial({
+          color: c1,
+          wireframe: wf,
+          roughness: 0.2,
+          metalness: 0.7,
+          emissive: c1,
+          emissiveIntensity: props.glow * 0.3
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.rotation.x = -Math.PI / 4;
+        group.add(mesh);
+        group._customUpdate = (t) => {
+          const pos = geo.attributes.position;
+          for (let i = 0; i < pos.count; i++) {
+            const u = pos.getX(i);
+            const v = pos.getY(i);
+            pos.setZ(i, Math.sin(u * 2 + t * props.speed) * Math.cos(v * 2 + t * props.speed) * 0.45);
+          }
+          pos.needsUpdate = true;
+          geo.computeVertexNormals();
+        };
+        break;
+      }
+
+      case "planet": {
+        // Faceted planet sphere with glowing atmosphere ring & orbiting satellites
+        const planetGeo = new THREE.DodecahedronGeometry(1.4, 2);
+        const planetMat = new THREE.MeshStandardMaterial({
+          color: c1,
+          wireframe: wf,
+          roughness: 0.4,
+          metalness: 0.6
+        });
+        const planet = new THREE.Mesh(planetGeo, planetMat);
+        group.add(planet);
+
+        const ringGeo = new THREE.RingGeometry(2.1, 2.3, 32);
+        const ringMat = new THREE.MeshBasicMaterial({ color: c2, side: THREE.DoubleSide, transparent: true, opacity: 0.7 });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 3;
+        group.add(ring);
+
+        const moonGeo = new THREE.SphereGeometry(0.2, 12, 12);
+        const moonMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const moon = new THREE.Mesh(moonGeo, moonMat);
+        group.add(moon);
+
+        group._customUpdate = (t) => {
+          planet.rotation.y += 0.008 * props.speed;
+          const a = t * props.speed * 1.5;
+          moon.position.set(Math.cos(a) * 2.5, Math.sin(a * 0.5) * 0.8, Math.sin(a) * 2.5);
+        };
+        break;
+      }
+
+      case "abstractTorus": {
+        // Dual interlocking metallic torus knots
+        const k1Geo = new THREE.TorusKnotGeometry(1.1, 0.28, 96, 16);
+        const k1Mat = new THREE.MeshStandardMaterial({ color: c1, wireframe: wf, metalness: 0.85, roughness: 0.2 });
+        const k1 = new THREE.Mesh(k1Geo, k1Mat);
+        group.add(k1);
+
+        const k2Geo = new THREE.TorusGeometry(1.8, 0.08, 16, 64);
+        const k2Mat = new THREE.MeshBasicMaterial({ color: c2, wireframe: true });
+        const k2 = new THREE.Mesh(k2Geo, k2Mat);
+        group.add(k2);
+
+        group._customUpdate = (t) => {
+          k1.rotation.x += 0.009 * props.speed;
+          k1.rotation.y += 0.012 * props.speed;
+          k2.rotation.z -= 0.006 * props.speed;
+        };
+        break;
+      }
+
+      case "spatialGlass": {
+        // Translucent floating optical glass prisms with specular borders
+        for (let i = 0; i < 3; i++) {
+          const slabGeo = new THREE.BoxGeometry(2.4, 1.4, 0.15);
+          const slabMat = new THREE.MeshStandardMaterial({
+            color: i === 0 ? c1 : c2,
+            wireframe: wf,
+            transparent: true,
+            opacity: 0.65,
+            roughness: 0.1,
+            metalness: 0.8
+          });
+          const slab = new THREE.Mesh(slabGeo, slabMat);
+          slab.position.set((i - 1) * 0.6, (i - 1) * 0.4, (1 - i) * 0.6);
+          slab.rotation.set(0.2, (i - 1) * 0.3, 0);
+          group.add(slab);
+        }
+        break;
+      }
+
+      case "kineticType": {
+        // Dimensional extruded text slab panels arranged along a curve
+        for (let i = 0; i < 5; i++) {
+          const barGeo = new THREE.BoxGeometry(0.4, 2.0, 0.4);
+          const barMat = new THREE.MeshStandardMaterial({ color: i % 2 === 0 ? c1 : c2, wireframe: wf, metalness: 0.7 });
+          const bar = new THREE.Mesh(barGeo, barMat);
+          bar.position.set((i - 2) * 0.7, Math.sin(i) * 0.3, 0);
+          group.add(bar);
+        }
+        group._customUpdate = (t) => {
+          group.children.forEach((c, idx) => {
+            c.position.y = Math.sin(t * props.speed * 2 + idx) * 0.5;
+            c.rotation.y += 0.01 * props.speed;
+          });
+        };
+        break;
+      }
+
+      case "galaxy":
+      case "curlVortex": {
+        // Spiral galaxy particle vortex
+        const pCount = Math.floor(props.density);
+        const geo = new THREE.BufferGeometry();
+        const pos = new Float32Array(pCount * 3);
+        const col = new Float32Array(pCount * 3);
+        const clr1 = new THREE.Color(c1);
+        const clr2 = new THREE.Color(c2);
+
+        for (let i = 0; i < pCount; i++) {
+          const r = Math.pow(Math.random(), 2.2) * 3.8;
+          const theta = Math.random() * Math.PI * 4;
+          const armOffset = (i % 3) * (Math.PI * 2 / 3);
+
+          pos[i * 3] = r * Math.cos(theta + armOffset);
+          pos[i * 3 + 1] = (Math.random() - 0.5) * 0.5 * (1 - r / 4);
+          pos[i * 3 + 2] = r * Math.sin(theta + armOffset);
+
+          const mix = clr1.clone().lerp(clr2, r / 3.8);
+          col[i * 3] = mix.r;
+          col[i * 3 + 1] = mix.g;
+          col[i * 3 + 2] = mix.b;
+        }
+
+        geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+        geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+        const mat = new THREE.PointsMaterial({ size: 0.045, vertexColors: true, transparent: true, opacity: 0.85 });
+        const pMesh = new THREE.Points(geo, mat);
+        pMesh.rotation.x = Math.PI / 4;
+        group.add(pMesh);
+        group._customUpdate = () => { pMesh.rotation.z += 0.005 * props.speed; };
+        break;
+      }
+
+      case "starfieldWarp": {
+        // Z-axis travelling starfield
+        const count = 1200;
+        const geo = new THREE.BufferGeometry();
+        const pos = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+          pos[i * 3] = (Math.random() - 0.5) * 8;
+          pos[i * 3 + 1] = (Math.random() - 0.5) * 8;
+          pos[i * 3 + 2] = (Math.random() - 0.5) * 12;
+        }
+        geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+        const mat = new THREE.PointsMaterial({ color: c1, size: 0.05, transparent: true, opacity: 0.9 });
+        const stars = new THREE.Points(geo, mat);
+        group.add(stars);
+        group._customUpdate = () => {
+          const p = geo.attributes.position;
+          for (let i = 0; i < count; i++) {
+            let z = p.getZ(i) + 0.06 * props.speed;
+            if (z > 4) z = -8;
+            p.setZ(i, z);
+          }
+          p.needsUpdate = true;
+        };
+        break;
+      }
+
+      case "neuralNet":
+      case "neuralGraph": {
+        // Nodes, dynamic connecting lines, and signals
+        const nNodes = 28;
+        const nodeGeo = new THREE.SphereGeometry(0.08, 12, 12);
+        const nodeMat = new THREE.MeshBasicMaterial({ color: c1 });
+        const nodePositions = [];
+
+        for (let i = 0; i < nNodes; i++) {
+          const nm = new THREE.Mesh(nodeGeo, nodeMat);
+          nm.position.set((Math.random() - 0.5) * 4, (Math.random() - 0.5) * 3, (Math.random() - 0.5) * 3);
+          group.add(nm);
+          nodePositions.push(nm.position);
+        }
+
+        const lineMat = new THREE.LineBasicMaterial({ color: c2, transparent: true, opacity: 0.35 });
+        const lineGeo = new THREE.BufferGeometry();
+        const linePoints = [];
+        for (let i = 0; i < nNodes; i++) {
+          for (let j = i + 1; j < nNodes; j++) {
+            if (nodePositions[i].distanceTo(nodePositions[j]) < 1.6) {
+              linePoints.push(nodePositions[i].x, nodePositions[i].y, nodePositions[i].z);
+              linePoints.push(nodePositions[j].x, nodePositions[j].y, nodePositions[j].z);
+            }
+          }
+        }
+        lineGeo.setAttribute("position", new THREE.Float32BufferAttribute(linePoints, 3));
+        const lines = new THREE.LineSegments(lineGeo, lineMat);
+        group.add(lines);
+        break;
+      }
+
+      case "terrain": {
+        // High-relief Perlin heightmap mountain terrain flying forward
+        const tGeo = new THREE.PlaneGeometry(6, 6, 36, 36);
+        const tMat = new THREE.MeshStandardMaterial({ color: c1, wireframe: wf, roughness: 0.4, metalness: 0.5 });
+        const tMesh = new THREE.Mesh(tGeo, tMat);
+        tMesh.rotation.x = -Math.PI / 2.8;
+        group.add(tMesh);
+        group._customUpdate = (t) => {
+          const p = tGeo.attributes.position;
+          for (let i = 0; i < p.count; i++) {
+            const x = p.getX(i);
+            const y = p.getY(i) + t * props.speed * 0.4;
+            p.setZ(i, Math.sin(x * 1.6) * Math.cos(y * 1.6) * 0.7);
+          }
+          p.needsUpdate = true;
+          tGeo.computeVertexNormals();
+        };
+        break;
+      }
+
+      case "headphone": {
+        // Procedural 3D Headphone: curved headband torus, earcups, driver grilles
+        const bandGeo = new THREE.TorusGeometry(1.4, 0.08, 16, 32, Math.PI);
+        const bandMat = new THREE.MeshStandardMaterial({ color: c1, metalness: 0.8, roughness: 0.2 });
+        const band = new THREE.Mesh(bandGeo, bandMat);
+        band.rotation.z = Math.PI;
+        group.add(band);
+
+        [-1.4, 1.4].forEach(x => {
+          const cupGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.4, 24);
+          const cupMat = new THREE.MeshStandardMaterial({ color: c2, metalness: 0.9, roughness: 0.1 });
+          const cup = new THREE.Mesh(cupGeo, cupMat);
+          cup.rotation.z = Math.PI / 2;
+          cup.position.set(x, -0.2, 0);
+          group.add(cup);
+        });
+        break;
+      }
+
+      case "chronoWatch": {
+        // Luxury Watch: bezel cylinder, dial face, hour index markers, rotating hand
+        const caseGeo = new THREE.CylinderGeometry(1.6, 1.6, 0.3, 32);
+        const caseMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.95, roughness: 0.1 });
+        const watchCase = new THREE.Mesh(caseGeo, caseMat);
+        watchCase.rotation.x = Math.PI / 2;
+        group.add(watchCase);
+
+        const dialGeo = new THREE.CircleGeometry(1.4, 32);
+        const dialMat = new THREE.MeshStandardMaterial({ color: c1, roughness: 0.3 });
+        const dial = new THREE.Mesh(dialGeo, dialMat);
+        dial.position.z = 0.16;
+        group.add(dial);
+
+        const handGeo = new THREE.BoxGeometry(0.06, 1.1, 0.02);
+        const handMat = new THREE.MeshBasicMaterial({ color: c2 });
+        const hand = new THREE.Mesh(handGeo, handMat);
+        hand.position.set(0, 0.45, 0.18);
+        group.add(hand);
+
+        group._customUpdate = (t) => {
+          hand.rotation.z = -t * props.speed * 2;
+          hand.position.x = Math.sin(-hand.rotation.z) * 0.45;
+          hand.position.y = Math.cos(-hand.rotation.z) * 0.45;
+        };
+        break;
+      }
+
+      case "voiceRing": {
+        // Circular frequency equalizer bar ring
+        const nBars = 36;
+        const radius = 1.6;
+        for (let i = 0; i < nBars; i++) {
+          const theta = (i / nBars) * Math.PI * 2;
+          const barGeo = new THREE.BoxGeometry(0.08, 0.6, 0.08);
+          const barMat = new THREE.MeshStandardMaterial({ color: i % 2 === 0 ? c1 : c2, metalness: 0.7 });
+          const bar = new THREE.Mesh(barGeo, barMat);
+          bar.position.set(Math.cos(theta) * radius, Math.sin(theta) * radius, 0);
+          bar.rotation.z = theta + Math.PI / 2;
+          group.add(bar);
+        }
+        group._customUpdate = (t) => {
+          group.children.forEach((b, idx) => {
+            const h = 0.3 + Math.abs(Math.sin(t * props.speed * 4 + idx * 0.3)) * 0.9;
+            b.scale.y = h;
+          });
+        };
+        break;
+      }
+
+      case "thinkingOrb": {
+        // Concentric dual-sphere: outer glowing icosahedron + inner pulsating core
+        const g1 = new THREE.IcosahedronGeometry(1.4, 2);
+        const m1 = new THREE.MeshStandardMaterial({ color: c1, wireframe: true, emissive: c1, emissiveIntensity: props.glow * 0.4 });
+        const outer = new THREE.Mesh(g1, m1);
+        group.add(outer);
+
+        const g2 = new THREE.SphereGeometry(0.85, 24, 24);
+        const m2 = new THREE.MeshStandardMaterial({ color: c2, roughness: 0.2, metalness: 0.8 });
+        const inner = new THREE.Mesh(g2, m2);
+        group.add(inner);
+
+        group._customUpdate = (t) => {
+          outer.rotation.x += 0.008 * props.speed;
+          outer.rotation.y += 0.012 * props.speed;
+          const s = 1.0 + Math.sin(t * props.speed * 3) * 0.12;
+          inner.scale.set(s, s, s);
+        };
+        break;
+      }
+
+      case "telemetryGrid": {
+        // 3D 4x4 matrix of glowing data columns with animated heights
+        for (let x = -1.5; x <= 1.5; x += 1.0) {
+          for (let z = -1.5; z <= 1.5; z += 1.0) {
+            const barGeo = new THREE.BoxGeometry(0.5, 1.0, 0.5);
+            const barMat = new THREE.MeshStandardMaterial({ color: (x + z) % 2 === 0 ? c1 : c2, wireframe: wf, metalness: 0.8 });
+            const col = new THREE.Mesh(barGeo, barMat);
+            col.position.set(x, 0, z);
+            group.add(col);
+          }
+        }
+        group._customUpdate = (t) => {
+          group.children.forEach((c, idx) => {
+            const h = 0.5 + Math.abs(Math.sin(t * props.speed * 2 + idx * 0.4)) * 1.8;
+            c.scale.y = h;
+            c.position.y = h / 2 - 0.5;
+          });
+        };
+        break;
+      }
+
+      default: {
+        // Default solid/wireframe Icosahedron
+        const geo = new THREE.IcosahedronGeometry(1.6, 1);
+        const mat = new THREE.MeshStandardMaterial({
+          color: c1,
+          wireframe: wf,
+          metalness: 0.7,
+          roughness: 0.2,
+          emissive: c1,
+          emissiveIntensity: props.glow * 0.25
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        group.add(mesh);
+        break;
+      }
+    }
+  }
+};
 
 // ============================================================================
 // 3D WEBGL ENGINE & LIFECYCLE CONTROLLER
@@ -2544,7 +2779,7 @@ const Engine3D = {
     };
   },
 
-  // 2. Inspector 3D Scene Initialization
+  // 2. Inspector 3D Scene Initialization with Real-Time Scene Factory & FPS Measurement
   initInspector() {
     const canvas = $("inspector-canvas");
     if (!canvas) return;
@@ -2568,7 +2803,7 @@ const Engine3D = {
     camera.position.z = inspectorProps.cam;
 
     // Lighting
-    const amb = new THREE.AmbientLight(0xffffff, 0.6);
+    const amb = new THREE.AmbientLight(0xffffff, 0.65);
     scene.add(amb);
     const dir = new THREE.DirectionalLight(0xffffff, 1.5);
     dir.position.set(5, 5, 5);
@@ -2577,136 +2812,12 @@ const Engine3D = {
     pt.position.set(0, 0, 3);
     scene.add(pt);
 
-    // Dynamic Mesh Container
-    let currentMesh = null;
-    let currentGeo = null;
-    let currentMat = null;
+    // Dedicated Group for Factory Meshes
+    const dynamicGroup = new THREE.Group();
+    scene.add(dynamicGroup);
 
-    const buildMesh = (type, props) => {
-      if (currentMesh) {
-        scene.remove(currentMesh);
-        if (currentGeo) currentGeo.dispose();
-        if (currentMat) currentMat.dispose();
-      }
-
-      const colorHex = parseInt(props.color.replace("#", "0x"), 16);
-      const secondaryHex = parseInt(props.secondaryColor.replace("#", "0x"), 16);
-
-      pt.color.setHex(colorHex);
-      pt.intensity = props.glow * 1.5;
-
-      if (type === "sphere") {
-        currentGeo = new THREE.SphereGeometry(1.6, 32, 32);
-        currentMat = new THREE.MeshStandardMaterial({
-          color: colorHex,
-          wireframe: props.wireframe,
-          metalness: 0.7,
-          roughness: 0.2,
-          emissive: colorHex,
-          emissiveIntensity: props.glow * 0.2
-        });
-        currentMesh = new THREE.Mesh(currentGeo, currentMat);
-      } else if (type === "torusKnot") {
-        currentGeo = new THREE.TorusKnotGeometry(1.2, 0.35, 128, 32);
-        currentMat = new THREE.MeshStandardMaterial({
-          color: colorHex,
-          wireframe: props.wireframe,
-          metalness: 0.85,
-          roughness: 0.15,
-          emissive: secondaryHex,
-          emissiveIntensity: props.glow * 0.25
-        });
-        currentMesh = new THREE.Mesh(currentGeo, currentMat);
-      } else if (type === "cube") {
-        currentGeo = new THREE.BoxGeometry(2.0, 2.0, 2.0);
-        currentMat = new THREE.MeshStandardMaterial({
-          color: colorHex,
-          wireframe: props.wireframe,
-          metalness: 0.5,
-          roughness: 0.3,
-          emissive: secondaryHex,
-          emissiveIntensity: props.glow * 0.2
-        });
-        currentMesh = new THREE.Mesh(currentGeo, currentMat);
-      } else if (type === "galaxy" || type === "particles") {
-        const pCount = Math.floor(props.density);
-        currentGeo = new THREE.BufferGeometry();
-        const positions = new Float32Array(pCount * 3);
-        const colors = new Float32Array(pCount * 3);
-        const c1 = new THREE.Color(colorHex);
-        const c2 = new THREE.Color(secondaryHex);
-
-        for (let i = 0; i < pCount; i++) {
-          const r = Math.pow(Math.random(), 2) * 3.5;
-          const theta = Math.random() * Math.PI * 2;
-          const phi = (Math.random() - 0.5) * Math.PI * 0.5;
-
-          positions[i * 3] = r * Math.cos(theta) * Math.cos(phi);
-          positions[i * 3 + 1] = r * Math.sin(phi) + (Math.random() - 0.5) * 0.5;
-          positions[i * 3 + 2] = r * Math.sin(theta) * Math.cos(phi);
-
-          const mixColor = c1.clone().lerp(c2, Math.random());
-          colors[i * 3] = mixColor.r;
-          colors[i * 3 + 1] = mixColor.g;
-          colors[i * 3 + 2] = mixColor.b;
-        }
-
-        currentGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-        currentGeo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-        currentMat = new THREE.PointsMaterial({
-          size: 0.045,
-          vertexColors: true,
-          transparent: true,
-          opacity: 0.8
-        });
-        currentMesh = new THREE.Points(currentGeo, currentMat);
-      } else if (type === "terrain") {
-        currentGeo = new THREE.PlaneGeometry(5, 5, 32, 32);
-        const pos = currentGeo.attributes.position;
-        for (let i = 0; i < pos.count; i++) {
-          const vx = pos.getX(i);
-          const vy = pos.getY(i);
-          pos.setZ(i, Math.sin(vx * 1.5) * Math.cos(vy * 1.5) * 0.6);
-        }
-        currentGeo.computeVertexNormals();
-        currentMat = new THREE.MeshStandardMaterial({
-          color: colorHex,
-          wireframe: props.wireframe,
-          metalness: 0.6,
-          roughness: 0.3
-        });
-        currentMesh = new THREE.Mesh(currentGeo, currentMat);
-        currentMesh.rotation.x = -Math.PI / 3;
-      } else if (type === "thinkingOrb") {
-        // Nested glowing orbs
-        const group = new THREE.Group();
-        const g1 = new THREE.IcosahedronGeometry(1.4, 2);
-        const m1 = new THREE.MeshStandardMaterial({ color: colorHex, wireframe: true, emissive: colorHex, emissiveIntensity: 0.4 });
-        const g2 = new THREE.SphereGeometry(0.8, 24, 24);
-        const m2 = new THREE.MeshBasicMaterial({ color: secondaryHex, wireframe: false });
-        group.add(new THREE.Mesh(g1, m1));
-        group.add(new THREE.Mesh(g2, m2));
-        currentGeo = g1;
-        currentMat = m1;
-        currentMesh = group;
-      } else {
-        // Default Icosahedron
-        currentGeo = new THREE.IcosahedronGeometry(1.6, 1);
-        currentMat = new THREE.MeshStandardMaterial({
-          color: colorHex,
-          wireframe: props.wireframe,
-          metalness: 0.7,
-          roughness: 0.2,
-          emissive: colorHex,
-          emissiveIntensity: props.glow * 0.2
-        });
-        currentMesh = new THREE.Mesh(currentGeo, currentMat);
-      }
-
-      scene.add(currentMesh);
-    };
-
-    buildMesh(activeInspectorVisual.renderType, inspectorProps);
+    // Initial Scene Build
+    SceneFactory.createScene(activeInspectorVisual.sceneType, dynamicGroup, inspectorProps);
 
     // Drag Interaction on Canvas
     let isDragging = false;
@@ -2721,45 +2832,90 @@ const Engine3D = {
     window.addEventListener("mouseup", () => isDragging = false);
 
     window.addEventListener("mousemove", (e) => {
-      if (isDragging && currentMesh) {
+      if (isDragging && dynamicGroup) {
         const deltaX = e.clientX - prevMouseX;
         const deltaY = e.clientY - prevMouseY;
-        currentMesh.rotation.y += deltaX * 0.01;
-        currentMesh.rotation.x += deltaY * 0.01;
+        dynamicGroup.rotation.y += deltaX * 0.01;
+        dynamicGroup.rotation.x += deltaY * 0.01;
         prevMouseX = e.clientX;
         prevMouseY = e.clientY;
       }
     });
 
+    // Touch Support for Mobile
+    canvas.addEventListener("touchstart", (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        prevMouseX = e.touches[0].clientX;
+        prevMouseY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener("touchend", () => isDragging = false);
+
+    window.addEventListener("touchmove", (e) => {
+      if (isDragging && e.touches.length === 1 && dynamicGroup) {
+        const deltaX = e.touches[0].clientX - prevMouseX;
+        const deltaY = e.touches[0].clientY - prevMouseY;
+        dynamicGroup.rotation.y += deltaX * 0.012;
+        dynamicGroup.rotation.x += deltaY * 0.012;
+        prevMouseX = e.touches[0].clientX;
+        prevMouseY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
     let running = true;
     let animId = null;
+    let clock = new THREE.Clock();
+
+    // Live FPS Measurement
+    let frameCount = 0;
+    let lastFpsTime = performance.now();
+    const fpsDisplay = $("fps-display");
 
     const animate = () => {
       if (!running) return;
       animId = requestAnimationFrame(animate);
 
-      if (currentMesh && !isDragging) {
-        currentMesh.rotation.y += 0.008 * inspectorProps.speed;
-        currentMesh.rotation.x += 0.004 * inspectorProps.speed;
+      const elapsed = clock.getElapsedTime();
+
+      // Custom Scene Animation Hook
+      if (dynamicGroup._customUpdate) {
+        dynamicGroup._customUpdate(elapsed);
+      } else if (!isDragging) {
+        dynamicGroup.rotation.y += 0.008 * inspectorProps.speed;
+        dynamicGroup.rotation.x += 0.004 * inspectorProps.speed;
       }
 
       camera.position.z += (inspectorProps.cam - camera.position.z) * 0.1;
       renderer.render(scene, camera);
+
+      // Measure Actual FPS
+      frameCount++;
+      const now = performance.now();
+      if (now - lastFpsTime >= 500) {
+        const fps = Math.round((frameCount * 1000) / (now - lastFpsTime));
+        if (fpsDisplay) {
+          fpsDisplay.textContent = `${fps} FPS • WebGL 2.0`;
+        }
+        frameCount = 0;
+        lastFpsTime = now;
+      }
     };
     animate();
 
     this.scenes.inspector = {
-      rebuild(type, props) {
-        buildMesh(type, props);
+      rebuild(sceneType, props) {
+        SceneFactory.createScene(sceneType, dynamicGroup, props);
       },
       updateProps(props) {
         inspectorProps = { ...inspectorProps, ...props };
-        buildMesh(activeInspectorVisual.renderType, inspectorProps);
+        SceneFactory.createScene(activeInspectorVisual.sceneType, dynamicGroup, inspectorProps);
       },
       resetCam() {
         inspectorProps.cam = 5.0;
         camera.position.set(0, 0, 5.0);
-        if (currentMesh) currentMesh.rotation.set(0, 0, 0);
+        dynamicGroup.rotation.set(0, 0, 0);
         $("insp-ctrl-cam").value = 5.0;
         $("val-cam").textContent = "5.0";
       },
@@ -2857,7 +3013,8 @@ function inspectVisualById(id) {
   if (!v) return;
 
   activeInspectorVisual = v;
-  inspectorProps = { ...v.defaultProps };
+  // If user previously customized this visual, load those settings, else defaultProps
+  inspectorProps = customVisualProps[id] ? { ...customVisualProps[id] } : { ...v.defaultProps };
 
   // Update UI Text
   $("insp-title").textContent = v.name;
@@ -2876,9 +3033,9 @@ function inspectVisualById(id) {
   $("insp-ctrl-cam").value = inspectorProps.cam;
   $("val-cam").textContent = inspectorProps.cam;
 
-  // Rebuild 3D Inspector Scene
+  // Rebuild 3D Inspector Scene with appropriate sceneType
   if (Engine3D.scenes.inspector) {
-    Engine3D.scenes.inspector.rebuild(v.renderType, inspectorProps);
+    Engine3D.scenes.inspector.rebuild(v.sceneType, inspectorProps);
   }
 
   scrollToId("inspector");
@@ -2903,17 +3060,29 @@ function updateInspectorParam(param, val) {
     $("val-cam").textContent = val;
   }
 
+  // Save customized inspector state for active visual
+  customVisualProps[activeInspectorVisual.id] = { ...inspectorProps };
+
   if (Engine3D.scenes.inspector) {
     Engine3D.scenes.inspector.updateProps(inspectorProps);
+  }
+
+  // If this visual is currently selected in the prompt studio, update the prompt live!
+  if ($("prompt-visual-select").value === activeInspectorVisual.id) {
+    updateGeneratedPrompt();
   }
 }
 
 function toggleInspectorWireframe() {
   inspectorProps.wireframe = !inspectorProps.wireframe;
+  customVisualProps[activeInspectorVisual.id] = { ...inspectorProps };
   const btn = $("btn-toggle-wireframe");
   if (btn) btn.classList.toggle("active", inspectorProps.wireframe);
   if (Engine3D.scenes.inspector) {
     Engine3D.scenes.inspector.updateProps({ wireframe: inspectorProps.wireframe });
+  }
+  if ($("prompt-visual-select").value === activeInspectorVisual.id) {
+    updateGeneratedPrompt();
   }
   showToast(inspectorProps.wireframe ? "Wireframe mode enabled" : "Solid shading enabled");
 }
@@ -2930,18 +3099,14 @@ function toggleInspectorAnimation() {
   }
 }
 
+// CRITICAL FIX: Pass Customized Inspector Parameters Directly to Prompt Builder
 function loadVisualIntoPromptBuilder() {
   $("prompt-visual-select").value = activeInspectorVisual.id;
+  // Ensure the latest inspectorProps are saved for this visual
+  customVisualProps[activeInspectorVisual.id] = { ...inspectorProps };
   updateGeneratedPrompt();
   scrollToId("prompt-generator");
-  showToast("Pre-filled build prompt with current visual parameters!");
-}
-
-function loadVisualIntoModifier() {
-  $("mod-natural-input").value = `Refine the ${activeInspectorVisual.name}: change accent color to ${inspectorProps.color}, set rotation velocity to ${inspectorProps.speed}x, and intensify the glow highlight.`;
-  updateGeneratedModificationPrompt();
-  scrollToId("modify-website");
-  showToast("Pre-filled modification prompt with current visual!");
+  showToast("Transferred custom inspector settings to Build Prompt!");
 }
 
 // ============================================================================
@@ -2966,9 +3131,12 @@ function populatePromptDropdowns() {
 
 function generateCompletePrompt(visual, framework, placement, style, perf, props) {
   const color = props ? props.color : visual.defaultProps.color;
+  const secondaryColor = props ? props.secondaryColor : visual.defaultProps.secondaryColor;
   const speed = props ? props.speed : visual.defaultProps.speed;
   const density = props ? props.density : visual.defaultProps.density;
   const glow = props ? props.glow : visual.defaultProps.glow;
+  const cam = props ? props.cam : visual.defaultProps.cam;
+  const wireframe = props && props.wireframe ? "Wireframe" : "Solid PBR";
 
   return `# AI IMPLEMENTATION SPECIFICATION — ${visual.name.toUpperCase()}
 
@@ -2990,18 +3158,18 @@ Implement a high-performance, visually exceptional 3D experience featuring "${vi
 - Z-Index Layering: Position under text overlays using relative z-indexing.
 - Fallback Structure: If WebGL 2.0 is unavailable or context fails, render a high-resolution CSS gradient / 2D Canvas fallback.
 
-## 4. EXACT 3D SCENE & GEOMETRY ARCHITECTURE
+## 4. EXACT 3D SCENE & GEOMETRY ARCHITECTURE (CUSTOMIZED IN INSPECTOR)
 - **Renderer**: Three.js WebGLRenderer with { antialias: true, alpha: true, powerPreference: "high-performance" }.
-- **Geometry Setup**: Procedural ${visual.renderType} geometry with ${density} points / vertices.
-- **Material Configuration**: MeshStandardMaterial or custom GLSL shader with primary accent ${color}, specular roughness: 0.22, metalness: 0.8.
+- **Geometry Setup**: Procedural ${visual.sceneType} geometry with ${density} points / vertices.
+- **Material Shading Mode**: ${wireframe} with primary accent ${color} and secondary highlight ${secondaryColor}.
 - **Lighting Setup**: 
   - AmbientLight: 0xffffff at 0.65 intensity.
   - DirectionalLight: positioned at (5, 5, 5) with specular color matching ${color}.
   - PointLight: positioned at cursor intersection with glow intensity ${glow}.
-- **Camera Perspective**: PerspectiveCamera with 45° FOV, near clipping 0.1, far clipping 100.0.
+- **Camera Perspective**: PerspectiveCamera with 45° FOV, near clipping 0.1, far clipping 100.0, initial Z-distance: ${cam}.
 
 ## 5. ANIMATION & INTERACTION MATRIX
-- **Continuous Loop**: Rotate and evolve geometry at base speed multiplier of ${speed}x.
+- **Continuous Loop**: Rotate and evolve geometry at base velocity multiplier of ${speed}x.
 - **Pointer Parallax**: Calculate normalized device coordinates (NDC) from cursor movement and lerp camera coordinates at ease factor 0.05.
 - **Scroll Interaction**: Where applicable, couple camera rotation or mesh z-displacement to scroll progress via smooth spring physics.
 
@@ -3016,10 +3184,10 @@ Implement a high-performance, visually exceptional 3D experience featuring "${vi
 ## 7. CODEBASE PRESERVATION DIRECTIVE (CRITICAL)
 - **Inspect Before Modifying**: Inspect existing package.json, directory structure, and routing before making changes.
 - **Preserve Unrelated Work**: Do NOT overwrite unrelated pages, layout components, navigation bars, or styles.
-- **Modular Export**: Encapsulate the entire 3D scene inside a standalone reusable component with typed props (color, speed, density, glow).
+- **Modular Export**: Encapsulate the entire 3D scene inside a standalone reusable component with typed props (color: "${color}", speed: ${speed}, density: ${density}, glow: ${glow}).
 
 ## 8. ACCEPTANCE & VERIFICATION CRITERIA
-1. The 3D scene renders cleanly at 60 FPS on integrated GPUs without frame stutter.
+1. The 3D scene renders cleanly without frame stutter.
 2. Parameter changes to colors (${color}) and velocity (${speed}x) update the canvas seamlessly.
 3. Tab switching pauses the render loop, reducing idle GPU consumption to 0%.
 4. No memory leaks or retained WebGL buffers upon repeated mounting and unmounting.`;
@@ -3033,7 +3201,23 @@ function updateGeneratedPrompt() {
   const style = $("prompt-style-select").value;
   const perf = $("prompt-perf-select").value;
 
-  const promptText = generateCompletePrompt(visual, framework, placement, style, perf, visual.defaultProps);
+  // Use custom inspector props if available, else visual defaults
+  const activeProps = customVisualProps[visualId] || visual.defaultProps;
+
+  // Update Active Config Summary Bar
+  const summaryEl = $("config-summary-bar");
+  if (summaryEl) {
+    summaryEl.innerHTML = `
+      <span class="config-chip">🎨 Color: <strong>${activeProps.color}</strong></span>
+      <span class="config-chip">⚡ Velocity: <strong>${activeProps.speed}x</strong></span>
+      <span class="config-chip">💎 Density: <strong>${activeProps.density} pts</strong></span>
+      <span class="config-chip">💡 Glow: <strong>${activeProps.glow}</strong></span>
+      <span class="config-chip">📷 Camera: <strong>${activeProps.cam}</strong></span>
+      <span class="config-chip">🕸️ Mode: <strong>${activeProps.wireframe ? 'Wireframe' : 'Solid'}</strong></span>
+    `;
+  }
+
+  const promptText = generateCompletePrompt(visual, framework, placement, style, perf, activeProps);
   $("prompt-output-display").textContent = promptText;
 }
 
@@ -3049,7 +3233,8 @@ function copyFullGeneratedPrompt() {
 function copyTechSpecsOnly() {
   const visualId = $("prompt-visual-select").value;
   const visual = VISUALS.find(v => v.id === visualId) || VISUALS[0];
-  const specs = `Technique: ${visual.tech}\nCategory: ${visual.cat}\nAnimation: ${visual.anim}\nInteraction: ${visual.interact}\nGPU Profile: ${visual.perf}\nRender Primitive: ${visual.renderType}`;
+  const props = customVisualProps[visualId] || visual.defaultProps;
+  const specs = `Technique: ${visual.tech}\nCategory: ${visual.cat}\nAnimation: ${visual.anim}\nInteraction: ${visual.interact}\nGPU Profile: ${visual.perf}\nScene Primitive: ${visual.sceneType}\nColor: ${props.color}\nVelocity: ${props.speed}x\nDensity: ${props.density} pts\nGlow: ${props.glow}`;
   copyToClipboard(specs, "Technical specifications copied! 📑");
 }
 
@@ -3059,7 +3244,7 @@ function exportPromptAsMarkdown() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `PromptDock7-${$("prompt-visual-select").value}.md`;
+  a.download = `PromptDock71-${$("prompt-visual-select").value}.md`;
   a.click();
   URL.revokeObjectURL(url);
   showToast("Prompt exported as Markdown file! 📥");
@@ -3078,86 +3263,16 @@ function resetPromptConfig() {
 function copyPromptById(id) {
   const v = VISUALS.find(item => item.id === id);
   if (!v) return;
+  const props = customVisualProps[id] || v.defaultProps;
   const text = generateCompletePrompt(
     v,
     "Next.js 15 (App Router) + React Three Fiber + Tailwind",
     v.placement,
     "Futuristic Cyberpunk (High-contrast cyan & indigo speculars)",
     v.perf,
-    v.defaultProps
+    props
   );
   copyToClipboard(text, `Copied prompt for ${v.name}! 📋`);
-}
-
-// ============================================================================
-// MODIFICATION PROMPT ENGINE (SAFE SURGICAL CHANGES)
-// ============================================================================
-
-function generateModificationPrompt(naturalText, selectedPresets) {
-  let modItems = [...selectedPresets];
-  if (naturalText.trim()) {
-    modItems.unshift(naturalText.trim());
-  }
-  if (modItems.length === 0) {
-    modItems.push("Optimize shader performance, refine cursor parallax responsiveness, and deepen dark background contrast.");
-  }
-
-  return `# SURGICAL MODIFICATION DIRECTIVE — EXISTING WEBSITE
-
-## 1. MANDATORY AGENT EXECUTION RULES
-- **NON-DESTRUCTIVE MODIFICATION**: Modify my existing implementation rather than rebuilding the entire website.
-- **INSPECT BEFORE TOUCHING**: Inspect the current repository, existing code, and components before writing changes.
-- **PRESERVE EXISTING FUNCTIONALITY**: Preserve all unrelated components, navigation links, pages, routes, and styling.
-- **NO DELETIONS**: Do NOT delete working code or rewrite unrelated features.
-- **VERIFY CHANGES**: Verify responsiveness, zero console errors, and performance after applying changes.
-
-## 2. REQUESTED CHANGES TO IMPLEMENT
-${modItems.map((item, idx) => `${idx + 1}. ${item}`).join("\n")}
-
-## 3. IMPLEMENTATION SAFETY PROTOCOL
-1. Identify the exact file containing the 3D scene (e.g., Canvas component, Three.js container, or shader file).
-2. Apply the requested changes strictly to the relevant geometry, material, animation loop, or styling.
-3. Ensure requestAnimationFrame loops continue to pause on tab visibilitychange (document.hidden) and off-screen scroll.
-4. Test and verify in browser console that no WebGL context errors or memory leaks occur.
-5. Provide a concise summary of the exact files and lines modified.`;
-}
-
-function updateGeneratedModificationPrompt() {
-  const naturalText = $("mod-natural-input").value;
-  const checkboxes = document.querySelectorAll("#modify-website input[type='checkbox']:checked");
-  const selectedPresets = Array.from(checkboxes).map(cb => cb.value);
-
-  const modPrompt = generateModificationPrompt(naturalText, selectedPresets);
-  $("mod-output-display").textContent = modPrompt;
-}
-
-function onModChange() {
-  updateGeneratedModificationPrompt();
-}
-
-function copyModificationPrompt() {
-  const text = $("mod-output-display").textContent;
-  copyToClipboard(text, "Modification Prompt copied! 🛠️");
-}
-
-function clearModInputs() {
-  $("mod-natural-input").value = "";
-  const checkboxes = document.querySelectorAll("#modify-website input[type='checkbox']");
-  checkboxes.forEach(cb => cb.checked = false);
-  updateGeneratedModificationPrompt();
-  showToast("Cleared modification changes.");
-}
-
-function exportModAsMarkdown() {
-  const text = $("mod-output-display").textContent;
-  const blob = new Blob([text], { type: "text/markdown" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `PromptDock7-Modification-Prompt.md`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast("Modification prompt exported as Markdown! 📥");
 }
 
 // ============================================================================
@@ -3219,7 +3334,7 @@ function exportComboAsMarkdown() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `PromptDock7-Combined-Prompt.md`;
+  a.download = `PromptDock71-Combined-Prompt.md`;
   a.click();
   URL.revokeObjectURL(url);
   showToast("Combination prompt exported! 📥");
@@ -3252,7 +3367,6 @@ function renderCmdItems(filter) {
     { name: "Navigate: 3D Visuals Gallery", action: () => { scrollToId("gallery"); closeCmdPalette(); } },
     { name: "Navigate: 3D Visual Inspector", action: () => { scrollToId("inspector"); closeCmdPalette(); } },
     { name: "Navigate: AI Build Prompt Studio", action: () => { scrollToId("prompt-generator"); closeCmdPalette(); } },
-    { name: "Navigate: Modify Existing Website", action: () => { scrollToId("modify-website"); closeCmdPalette(); } },
     { name: "Navigate: Combine Visuals Studio", action: () => { scrollToId("combine-visuals"); closeCmdPalette(); } },
     { name: "Action: Copy Current Build Prompt", action: () => { copyFullGeneratedPrompt(); closeCmdPalette(); } },
     { name: "Action: Toggle Favorites Filter", action: () => { toggleFavoritesOnly(); closeCmdPalette(); } }
@@ -3320,9 +3434,8 @@ window.addEventListener("DOMContentLoaded", () => {
   updateFavoriteBadges();
   populatePromptDropdowns();
 
-  // Initialize Studios
+  // Initialize Prompt Studios
   updateGeneratedPrompt();
-  updateGeneratedModificationPrompt();
   updateGeneratedComboPrompt();
 
   // Initialize 3D Engine with Lifecycles
@@ -3334,7 +3447,7 @@ window.addEventListener("DOMContentLoaded", () => {
   handleHashNavigation();
   window.addEventListener("hashchange", handleHashNavigation);
 
-  console.log("--- PromptDock 7.0 (3D Website Prompt Studio) Initialized Successfully ---");
+  console.log("--- PromptDock 7.1 (3D Website Visual Prompt Studio) Initialized Successfully ---");
 });
 </script>
 

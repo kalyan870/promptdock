@@ -1,6 +1,6 @@
 # Deployment & Production Architecture
 
-PromptDock 5.0 is hosted on Vercel's Global Edge Network with custom HTTP security headers and immutable asset caching.
+PromptDock 7.1 is hosted on Vercel's Global Edge Network with custom HTTP security headers, asset compression, and immutable caching.
 
 ## Vercel Configuration (`vercel.json`)
 
@@ -37,4 +37,5 @@ PromptDock 5.0 is hosted on Vercel's Global Edge Network with custom HTTP securi
 vercel deploy --prod --yes
 ```
 
-- Production URL: `https://promptdock-eight.vercel.app`
+- Production URL: [https://promptdock-eight.vercel.app](https://promptdock-eight.vercel.app)
+- GitHub Repository: [https://github.com/kalyan870/promptdock](https://github.com/kalyan870/promptdock)

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('--- Starting PromptDock 7.0 Code Linter ---');
+console.log('--- Starting PromptDock 7.1 Code Linter ---');
 let errors = 0;
 
 const indexPath = path.join(__dirname, 'index.html');

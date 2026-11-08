@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 
-console.log('--- Starting PromptDock 7.0 Master Verification Suite ---');
+console.log('--- Starting PromptDock 7.1 Master Verification Suite ---');
 
 let passed = 0;
 let failed = 0;
@@ -22,34 +22,32 @@ const indexPath = path.join(__dirname, 'index.html');
 assert(fs.existsSync(indexPath), 'index.html exists');
 
 const html = fs.readFileSync(indexPath, 'utf-8');
-assert(html.includes('<title>PromptDock 7.0 — 3D Website Visual Prompt Studio</title>'), 'HTML contains correct PromptDock 7.0 title');
+assert(html.includes('<title>PromptDock 7.1 — 3D Website Visual Prompt Studio</title>'), 'HTML contains correct PromptDock 7.1 title');
 assert(html.includes('"Discover the visual. Copy the prompt. Build it with AI."'), 'HTML contains core product tagline');
 
 // 2. Section Canvases & Interactive WebGL Viewports
 assert(html.includes('id="hero-canvas"'), 'Hero section contains 3D canvas (#hero-canvas)');
 assert(html.includes('id="inspector-canvas"'), 'Inspector section contains 3D canvas (#inspector-canvas)');
 
-// 3. Core Studios & Functional Modules
+// 3. Core Studios & Modules (Verified Removal of Modification Feature)
 assert(html.includes('id="gallery"'), '3D Visual Discovery Library section exists (#gallery)');
 assert(html.includes('id="inspector"'), '3D Visual Inspector section exists (#inspector)');
 assert(html.includes('id="prompt-generator"'), 'AI Build Prompt Studio section exists (#prompt-generator)');
-assert(html.includes('id="modify-website"'), 'Modify Existing Website section exists (#modify-website)');
 assert(html.includes('id="combine-visuals"'), 'Combine 3D Visuals section exists (#combine-visuals)');
-assert(html.includes('id="workflow"'), 'End-to-end workflow section exists (#workflow)');
+assert(html.includes('id="workflow"'), 'End-to-end 5-step workflow section exists (#workflow)');
 assert(html.includes('id="cmd-palette"'), 'Global Command Palette exists (#cmd-palette)');
-assert(html.includes('id="toast"'), 'Toast notification element exists (#toast)');
+assert(!html.includes('id="modify-website"'), 'Modify Existing Website section has been completely removed');
+assert(!html.includes('generateModificationPrompt'), 'generateModificationPrompt function removed');
 
-// 4. Libraries & Scripts
+// 4. Verify Parameter Transfer to Prompt Generator
+assert(html.includes('config-summary-bar'), 'Active Configuration Summary Bar exists in Build Prompt Studio');
+assert(html.includes('loadVisualIntoPromptBuilder'), 'loadVisualIntoPromptBuilder function exists');
+
+// 5. Libraries & Ecosystem
 assert(html.includes('three.min.js'), 'HTML loads Three.js CDN');
 assert(html.includes('gsap.min.js'), 'HTML loads GSAP CDN');
 
-// 5. Ecosystem & References
-const ecosystem = [
-  'Three.js',
-  'React Three Fiber',
-  'Libraries.dev',
-  '21st.dev'
-];
+const ecosystem = ['Three.js', 'React Three Fiber', 'Libraries.dev', '21st.dev'];
 ecosystem.forEach(res => {
   assert(html.includes(res), `Ecosystem reference "${res}" is present`);
 });
@@ -132,7 +130,7 @@ server.listen(4897, () => {
     let data = '';
     res.on('data', chunk => data += chunk);
     res.on('end', () => {
-      assert(data.includes('PromptDock 7.0'), 'Home response contains PromptDock 7.0');
+      assert(data.includes('PromptDock 7.1'), 'Home response contains PromptDock 7.1');
       assert(data.includes('hero-canvas'), 'Home response contains hero-canvas');
       assert(data.includes('inspector-canvas'), 'Home response contains inspector-canvas');
 

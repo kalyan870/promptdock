@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('--- Starting PromptDock 7.0 Data & Catalog Typechecker ---');
+console.log('--- Starting PromptDock 7.1 Data & Catalog Typechecker ---');
 let errors = 0;
 
 const indexPath = path.join(__dirname, 'index.html');
@@ -40,7 +40,7 @@ if (!catMatch) {
   }
 }
 
-// 2. Verify VISUALS catalog
+// 2. Verify VISUALS catalog with dedicated sceneType
 const vIdx = html.indexOf('const VISUALS =');
 const vEndIdx = html.indexOf('// Active State', vIdx);
 if (vIdx === -1 || vEndIdx === -1) {
@@ -51,12 +51,12 @@ if (vIdx === -1 || vEndIdx === -1) {
     const vCode = html.substring(vIdx + 15, html.lastIndexOf('];', vEndIdx) + 1);
     const visuals = eval(vCode);
     console.log(`Checking ${visuals.length} VISUALS catalog items...`);
-    if (visuals.length < 24) {
-      console.error(`[TYPE FAIL] Expected at least 24 visuals, found ${visuals.length}`);
+    if (visuals.length < 30) {
+      console.error(`[TYPE FAIL] Expected at least 30 visuals, found ${visuals.length}`);
       errors++;
     }
 
-    const requiredKeys = ['id', 'name', 'cat', 'desc', 'thumb', 'tech', 'anim', 'interact', 'perf', 'perfTier', 'placement', 'renderType', 'defaultProps'];
+    const requiredKeys = ['id', 'name', 'cat', 'desc', 'thumb', 'tech', 'anim', 'interact', 'perf', 'perfTier', 'placement', 'sceneType', 'defaultProps'];
     visuals.forEach((v, idx) => {
       requiredKeys.forEach(k => {
         if (v[k] === undefined || v[k] === null || v[k] === '') {
@@ -73,18 +73,19 @@ if (vIdx === -1 || vEndIdx === -1) {
         }
       });
     });
-    console.log(`[TYPE PASS] All ${visuals.length} 3D visuals strictly conform to schema`);
+    console.log(`[TYPE PASS] All ${visuals.length} 3D visuals strictly conform to schema with dedicated sceneType`);
   } catch (err) {
     console.error(`[TYPE FAIL] Failed to parse VISUALS: ${err.message}`);
     errors++;
   }
 }
 
-// 3. Verify Dynamic Prompt Functions
+// 3. Verify Functions & SceneFactory
 const requiredFunctions = [
   'generateCompletePrompt',
-  'generateModificationPrompt',
   'generateCombinedPrompt',
+  'loadVisualIntoPromptBuilder',
+  'SceneFactory.createScene',
   'Engine3D.initHero',
   'Engine3D.initInspector',
   'Engine3D.setupLifecycle'
@@ -98,7 +99,15 @@ requiredFunctions.forEach(fn => {
   }
 });
 
-// 4. Verify 3D Engine Lifecycle Hooks
+// 4. Verify Absolute Removal of Modification Feature
+if (html.includes('id="modify-website"') || html.includes('generateModificationPrompt') || html.includes('loadVisualIntoModifier')) {
+  console.error('[TYPE FAIL] Obsolete modification feature found in index.html!');
+  errors++;
+} else {
+  console.log('[TYPE PASS] Verified 0 obsolete modification references in index.html');
+}
+
+// 5. Verify 3D Engine Lifecycle Hooks
 const lifecycleHooks = [
   'IntersectionObserver',
   'visibilitychange',
@@ -116,18 +125,10 @@ lifecycleHooks.forEach(hook => {
   }
 });
 
-// 5. Verify Tagline and Key Branding
-if (!html.includes('"Discover the visual. Copy the prompt. Build it with AI."')) {
-  console.error('[TYPE FAIL] Missing core tagline in HTML');
-  errors++;
-} else {
-  console.log('[TYPE PASS] Core product tagline verified in HTML');
-}
-
 if (errors > 0) {
   console.error(`--- Typechecker failed with ${errors} error(s) ---`);
   process.exit(1);
 } else {
-  console.log('--- PromptDock 7.0 Typechecker PASSED (0 errors) ---');
+  console.log('--- PromptDock 7.1 Typechecker PASSED (0 errors) ---');
   process.exit(0);
 }

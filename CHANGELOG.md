@@ -2,6 +2,15 @@
 
 All notable changes to PromptDock are documented in this file.
 
+## [7.1.0] - 2026-11-08
+
+### Changed & Refined
+- **Removed Website Modification Functionality**: Refined the core product to be a pure, high-precision 3D Website Visual Prompt Studio. Streamlined the workflow to a clean 5-step loop (Discover → Preview & Customise → Generate Prompt → Copy → Build with AI). Removed all modification section UI, inputs, buttons, and redundant scripts while preserving strict codebase-preservation rules inside the AI Build Prompts.
+- **Inspector Parameter Transfer to Build Prompt**: Fixed parameter transfer so active Inspector controls (accent color, animation speed, particle/mesh density, glow intensity, camera distance, wireframe state) are passed directly into the AI Build Prompt Generator rather than resetting to defaults. Added a real-time `#config-summary-bar` displaying the active values above the generated prompt.
+- **Dedicated 3D Scene Factories (`SceneFactory`)**: Replaced generic fallback shapes with 30 distinct procedural Three.js scene architectures mapped via `v.sceneType`. Each visual now renders a unique, tailored 3D geometry structure in the Inspector (such as procedural watch dials, curved headphone bands, cyber terrain meshes, galaxy particle clouds, thinking hologram orbs, and glass refraction prisms).
+- **Live Dynamic FPS Counter**: Implemented real frame delta measurement in the WebGL loop using `performance.now()`, rendering live measured framerates in `#fps-display`.
+- **Documentation Refinement**: Pruned `docs/modification-engine.md` and updated all remaining 9 documentation guides, verifying 100% architectural and functional alignment with PromptDock 7.1.
+
 ## [7.0.0] - 2026-11-08
 
 ### Added
@@ -17,11 +26,9 @@ All notable changes to PromptDock are documented in this file.
   - AI and Technology Visuals (Thinking hologram orbs, multi-agent neural graphs, audio FFT visualizers, telemetry matrices).
 - **Interactive 3D Visual Inspector**: Real-time WebGL 2.0 viewport with live parameter sliders (Color, Velocity, Density, Glow, Camera Distance, Wireframe toggle) that alter the Three.js scene dynamically.
 - **Comprehensive 18-Point AI Build Prompt Engine**: Generates exhaustive engineering briefs including geometry, material parameters, lighting, animations, pointer parallax, framework-specific package commands, GPU lifecycle, and strict codebase preservation instructions.
-- **Modify Existing Website Studio**: Dedicated natural-language + multi-select preset engine generating surgical modification prompts that instruct AI coding tools to improve existing implementations without breaking routes, styles, or working features.
 - **Combine 3D Visuals Studio**: Multi-effect composer fusing primary and secondary 3D effects into a unified prompt sharing a single requestAnimationFrame render loop and harmonized lighting.
 - **Local Favourites & Deep Linking**: Real-time favorites persistence in `localStorage` and URL hashtag navigation.
 - **Engine Lifecycle Protocol**: Off-screen auto-pausing via `IntersectionObserver`, `visibilitychange` suspension on tab switches, `ResizeObserver` container listeners, and WebGL context loss recovery.
-- **New Documentation Suite**: Added `docs/product-overview.md`, `docs/visual-library.md`, `docs/prompt-engine.md`, `docs/modification-engine.md`, `docs/visual-composer.md`, and `docs/3d-rendering.md`.
 
 ## [6.0.0] - 2026-11-08
 

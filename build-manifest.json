@@ -1,10 +1,10 @@
 {
-  "buildTime": "2026-11-08T12:28:04.518Z",
-  "version": "7.0.0",
-  "title": "PromptDock 7.0 — 3D Website Visual Prompt Studio",
+  "buildTime": "2026-11-08T13:28:27.651Z",
+  "version": "7.1.0",
+  "title": "PromptDock 7.1 — Premium 3D Visual Prompt Studio",
   "tagline": "Discover the visual. Copy the prompt. Build it with AI.",
   "assetsCount": 54,
-  "indexHtmlSize": 120299,
+  "indexHtmlSize": 124436,
   "status": "PRODUCTION_READY",
   "deploymentTarget": "Vercel Edge"
 }
