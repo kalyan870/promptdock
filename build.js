@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('--- Starting PromptDock 6.0 Production Build Pipeline ---');
+console.log('--- Starting PromptDock 7.0 Production Build Pipeline ---');
 
 // 1. Verify index.html exists and is valid HTML
 const indexPath = path.join(__dirname, 'index.html');
@@ -14,21 +14,22 @@ console.log(`[PASS] index.html read successfully (${html.length} bytes)`);
 
 // 2. Validate essential sections & elements
 const requiredTokens = [
-  'PromptDock 6.0',
+  'PromptDock 7.0',
+  'Discover the <span>next dimension</span> of web design.',
+  '"Discover the visual. Copy the prompt. Build it with AI."',
   'hero-canvas',
-  'component-canvas',
-  'workflow-canvas',
-  'modal-3d-canvas',
-  'pg-component-mount',
-  'Component Marketplace',
-  'Creative Effects',
-  'Workflow Studio',
-  'Showcase Projects & Case Studies',
-  '21st.dev',
-  'https://libraries.dev',
-  'workflow-agents.svg',
+  'inspector-canvas',
+  'id="gallery"',
+  'id="inspector"',
+  'id="prompt-generator"',
+  'id="modify-website"',
+  'id="combine-visuals"',
+  'id="workflow"',
   'three.min.js',
-  'gsap.min.js'
+  'gsap.min.js',
+  'generateCompletePrompt',
+  'generateModificationPrompt',
+  'generateCombinedPrompt'
 ];
 
 for (const token of requiredTokens) {
@@ -62,21 +63,18 @@ console.log(`[PASS] All ${imageFiles.length} assets validated for non-zero integ
 // 4. Verify documentation suite exists
 const docsDir = path.join(__dirname, 'docs');
 const expectedDocs = [
-  'architecture.md',
-  'getting-started.md',
-  'components.md',
-  'effects.md',
-  'prompt-library.md',
-  'visual-system.md',
-  '3d-engine.md',
+  'product-overview.md',
+  'visual-library.md',
+  'prompt-engine.md',
+  'modification-engine.md',
+  'visual-composer.md',
+  '3d-rendering.md',
   'performance.md',
-  'workflow.md',
+  'architecture.md',
   'testing.md',
-  'deployment.md',
-  'roadmap.md'
+  'deployment.md'
 ];
 
-// Ensure any missing doc is created before check
 for (const doc of expectedDocs) {
   if (!fs.existsSync(path.join(docsDir, doc))) {
     console.error(`[FAIL] Missing required documentation file: docs/${doc}`);
@@ -88,7 +86,9 @@ console.log(`[PASS] Documentation suite verified (${expectedDocs.length} files i
 // 5. Generate build manifest
 const manifest = {
   buildTime: new Date().toISOString(),
-  version: '6.0.0',
+  version: '7.0.0',
+  title: 'PromptDock 7.0 — 3D Website Visual Prompt Studio',
+  tagline: 'Discover the visual. Copy the prompt. Build it with AI.',
   assetsCount: imageFiles.length,
   indexHtmlSize: html.length,
   status: 'PRODUCTION_READY',
@@ -96,6 +96,6 @@ const manifest = {
 };
 
 fs.writeFileSync(path.join(__dirname, 'build-manifest.json'), JSON.stringify(manifest, null, 2));
-console.log('[PASS] Generated build-manifest.json (v6.0.0)');
+console.log('[PASS] Generated build-manifest.json (v7.0.0)');
 
-console.log('--- PromptDock 6.0 Production Build SUCCESS (100% Pass) ---');
+console.log('--- PromptDock 7.0 Production Build SUCCESS (100% Pass) ---');

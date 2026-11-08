@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 
-console.log('--- Starting PromptDock 6.0 Master Verification Suite ---');
+console.log('--- Starting PromptDock 7.0 Master Verification Suite ---');
 
 let passed = 0;
 let failed = 0;
@@ -22,84 +22,70 @@ const indexPath = path.join(__dirname, 'index.html');
 assert(fs.existsSync(indexPath), 'index.html exists');
 
 const html = fs.readFileSync(indexPath, 'utf-8');
-assert(html.includes('<title>PromptDock 6.0 — The Real Interactive Creative Developer Platform</title>'), 'HTML contains correct PromptDock 6.0 title');
+assert(html.includes('<title>PromptDock 7.0 — 3D Website Visual Prompt Studio</title>'), 'HTML contains correct PromptDock 7.0 title');
+assert(html.includes('"Discover the visual. Copy the prompt. Build it with AI."'), 'HTML contains core product tagline');
 
-// 2. Section Canvases
+// 2. Section Canvases & Interactive WebGL Viewports
 assert(html.includes('id="hero-canvas"'), 'Hero section contains 3D canvas (#hero-canvas)');
-assert(html.includes('id="component-canvas"'), 'Component section contains 3D canvas (#component-canvas)');
-assert(html.includes('id="workflow-canvas"'), 'Workflow section contains 3D canvas (#workflow-canvas)');
-assert(html.includes('id="modal-3d-canvas"'), 'Modal contains 3D inspector canvas (#modal-3d-canvas)');
+assert(html.includes('id="inspector-canvas"'), 'Inspector section contains 3D canvas (#inspector-canvas)');
 
-// 3. Section Headers & Discovery Features
-assert(html.includes('id="pg-component-mount"'), 'Live Component Playground mount exists');
-assert(html.includes('Component Marketplace') || html.includes('Visual Component Marketplace'), 'Component Marketplace section exists');
-assert(html.includes('Creative Effects'), 'Creative Effects & Shader Registry exists');
-assert(html.includes('Workflow Studio'), 'Workflow Studio section exists');
-assert(html.includes('Showcase Projects &amp; Case Studies') || html.includes('Showcase Projects & Case Studies'), 'Showcase Projects section exists');
-assert(html.includes('id="cmd-palette"'), 'Global Command Palette exists');
-assert(html.includes('images/workflow-agents.svg'), 'AI Coding Agent Pipeline visual referenced');
+// 3. Core Studios & Functional Modules
+assert(html.includes('id="gallery"'), '3D Visual Discovery Library section exists (#gallery)');
+assert(html.includes('id="inspector"'), '3D Visual Inspector section exists (#inspector)');
+assert(html.includes('id="prompt-generator"'), 'AI Build Prompt Studio section exists (#prompt-generator)');
+assert(html.includes('id="modify-website"'), 'Modify Existing Website section exists (#modify-website)');
+assert(html.includes('id="combine-visuals"'), 'Combine 3D Visuals section exists (#combine-visuals)');
+assert(html.includes('id="workflow"'), 'End-to-end workflow section exists (#workflow)');
+assert(html.includes('id="cmd-palette"'), 'Global Command Palette exists (#cmd-palette)');
+assert(html.includes('id="toast"'), 'Toast notification element exists (#toast)');
 
 // 4. Libraries & Scripts
-assert(html.includes('three.min.js'), 'HTML loads Three.js');
-assert(html.includes('gsap.min.js'), 'HTML loads GSAP');
+assert(html.includes('three.min.js'), 'HTML loads Three.js CDN');
+assert(html.includes('gsap.min.js'), 'HTML loads GSAP CDN');
 
-// 5. Ecosystem & Attribution Checks
-const requiredResources = [
-  '21st.dev',
-  'Libraries.dev',
-  'Aceternity UI',
-  'Magic UI',
-  'shadcn/ui',
+// 5. Ecosystem & References
+const ecosystem = [
   'Three.js',
   'React Three Fiber',
-  'GSAP',
-  'Motion',
-  'Spline',
-  'Spectrum UI',
-  'LottieFiles'
+  'Libraries.dev',
+  '21st.dev'
 ];
-
-requiredResources.forEach(res => {
-  assert(html.includes(res), `Ecosystem resource "${res}" is present`);
+ecosystem.forEach(res => {
+  assert(html.includes(res), `Ecosystem reference "${res}" is present`);
 });
-
-assert(html.includes('https://libraries.dev'), 'Canonical attribution URL https://libraries.dev is present');
 
 // 6. Image Assets Checks
 const imagesDir = path.join(__dirname, 'images');
 assert(fs.existsSync(imagesDir), 'images directory exists');
 
 const requiredImages = [
-  'comp-hero.svg',
-  'comp-navbar.svg',
-  'comp-buttons.svg',
-  'comp-cards.svg',
-  'comp-pricing.svg',
-  'comp-bento.svg',
-  'comp-chat.svg',
-  'comp-forms.svg',
-  'comp-text.svg',
+  'aurora-hero.svg',
+  'orbit-scene.svg',
   'comp-3d.svg',
-  'comp-backgrounds.svg',
+  'glass-cards.svg',
+  'kinetic-type.svg',
+  'particle-cloud.svg',
+  'halftone-tide.svg',
+  'ai-generator.svg',
+  'example-lumina.svg',
+  'motion-physics.svg',
+  'lib-magnetic.svg',
+  'workflow-3d.svg',
+  'example-product-3d.svg',
+  'example-chrono.svg',
+  'example-cyberfolio.svg',
+  'tidewave-landing.svg',
+  'folio-dark.svg',
+  'split-hero.svg',
+  'comp-cards.svg',
+  'dynamic-island.svg',
+  'comp-buttons.svg',
   'lib-border-beam.svg',
-  'lib-thinking-orb.svg',
   'lib-liquid-metal.svg',
   'lib-gooey.svg',
+  'lib-thinking-orb.svg',
   'lib-voice-viz.svg',
-  'lib-magnetic.svg',
-  'res-21st.svg',
-  'res-libraries.svg',
-  'example-lumina.svg',
-  'example-nova.svg',
-  'example-cyberfolio.svg',
-  'example-chrono.svg',
-  'example-saas-dash.svg',
-  'example-ai-chat.svg',
-  'example-dev-folio.svg',
-  'example-product-3d.svg',
-  'workflow-pipeline.svg',
-  'workflow-agents.svg',
-  'architecture-dock.svg',
+  'nexus-dashboard.svg',
   'favicon.svg',
   'og-image.svg'
 ];
@@ -146,15 +132,15 @@ server.listen(4897, () => {
     let data = '';
     res.on('data', chunk => data += chunk);
     res.on('end', () => {
-      assert(data.includes('PromptDock 6.0'), 'Home response contains PromptDock 6.0');
+      assert(data.includes('PromptDock 7.0'), 'Home response contains PromptDock 7.0');
       assert(data.includes('hero-canvas'), 'Home response contains hero-canvas');
-      assert(data.includes('comp-hero.svg'), 'Home response contains comp-hero.svg');
+      assert(data.includes('inspector-canvas'), 'Home response contains inspector-canvas');
 
-      http.get('http://localhost:4897/images/workflow-agents.svg', (imgRes) => {
-        assert(imgRes.statusCode === 200, 'GET /images/workflow-agents.svg returned valid SVG');
+      http.get('http://localhost:4897/images/aurora-hero.svg', (imgRes) => {
+        assert(imgRes.statusCode === 200, 'GET /images/aurora-hero.svg returned valid SVG');
 
-        http.get('http://localhost:4897/images/res-libraries.svg', (wfRes) => {
-          assert(wfRes.statusCode === 200, 'GET /images/res-libraries.svg returned valid SVG');
+        http.get('http://localhost:4897/images/orbit-scene.svg', (orbitRes) => {
+          assert(orbitRes.statusCode === 200, 'GET /images/orbit-scene.svg returned valid SVG');
 
           server.close(() => {
             console.log(`\n--- Test Summary: ${passed} passed, ${failed} failed ---`);

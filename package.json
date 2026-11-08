@@ -1,7 +1,7 @@
 {
   "name": "promptdock",
-  "version": "6.0.0",
-  "description": "The Real Interactive Creative Developer Platform — Live Component Playground (21st.dev), Creative Effects Registry (Libraries.dev), AI Agent Workflows, and 3D WebGL Engine.",
+  "version": "7.0.0",
+  "description": "PromptDock 7.0 — The Next-Generation 3D Website Visual Prompt Studio. Discover the visual. Copy the prompt. Build it with AI.",
   "scripts": {
     "dev": "node -e \"const http=require('http'),fs=require('fs'),path=require('path');http.createServer((req,res)=>{const p=path.join(__dirname,req.url==='/'?'index.html':req.url);if(fs.existsSync(p)){res.writeHead(200,{'Content-Type':p.endsWith('.html')?'text/html':p.endsWith('.svg')?'image/svg+xml':'text/plain'});fs.createReadStream(p).pipe(res);}else{res.writeHead(404);res.end('Not Found');}}).listen(3000,()=>console.log('Dev server running on http://localhost:3000'))\"",
     "start": "npm run dev",
@@ -13,18 +13,20 @@
     "validate": "node lint.js && node typecheck.js && node test-build.js && node test-e2e.js && node build.js"
   },
   "keywords": [
-    "prompts",
-    "ai",
-    "animations",
+    "promptdock",
+    "3d-website",
+    "prompt-studio",
     "threejs",
     "webgl",
-    "gsap",
-    "tailwind",
-    "21st.dev",
-    "libraries.dev",
-    "nextjs",
-    "component-playground",
-    "creative-developer"
+    "react-three-fiber",
+    "ai-prompts",
+    "claude",
+    "chatgpt",
+    "cursor",
+    "antigravity",
+    "gemini",
+    "codex",
+    "shaders"
   ],
   "author": "kalyan870",
   "license": "MIT"
