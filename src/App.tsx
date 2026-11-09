@@ -65,24 +65,29 @@ export const App: React.FC = () => {
     }
   };
 
-  const handleCopyPromptFromGallery = (visual: VisualItem) => {
+  const handleCopyPromptFromGallery = async (visual: VisualItem) => {
     setSelectedVisual(visual);
     const props = customPropsByVisual[visual.id] || visual.defaultProps;
     const prompt = PromptEngine.generateBuildPrompt(visual, props);
-    navigator.clipboard.writeText(prompt);
-    showToast(`Full 18-point AI build prompt for "${visual.name}" copied to clipboard!`);
+    try {
+      await navigator.clipboard.writeText(prompt);
+      showToast(`Full 18-point AI build prompt for "${visual.name}" copied to clipboard!`);
+    } catch (err) {
+      console.warn('Clipboard write failed:', err);
+      showToast(`Full 18-point AI build prompt for "${visual.name}" ready!`);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-[#04060b] text-slate-100 flex flex-col font-sans selection:bg-teal-500/30 selection:text-teal-200">
+    <div className="min-h-screen bg-[#04060b] text-slate-100 flex flex-col font-sans selection:bg-teal-500/30 selection:text-teal-200 overflow-x-hidden">
       <Header />
 
       <main className="flex-1">
         {/* 1. 21st.dev Horizon Hero Section */}
         <HorizonHeroSection />
 
-        {/* 2. 5-Step Visual Loop Workflow Strip */}
-        <WorkflowSection />
+        {/* 2. Interactive Visual Storyboard (5-Stage Connected Workflow) */}
+        <WorkflowSection onCopyToast={showToast} />
 
         {/* 3. 3D Visual Discovery Gallery (30 Curated Visuals) */}
         <GallerySection

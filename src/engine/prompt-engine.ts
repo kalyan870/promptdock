@@ -121,7 +121,7 @@ export class PromptEngine {
     const spec = specGenerator(color, secondaryColor, speed, density, glow);
 
     return `// ============================================================================
-// PROMPTDOCK 8.0 LOCKED AI BUILD SPECIFICATION (18-POINT ENGINEERING BRIEF)
+// PROMPTDOCK 8.1 LOCKED AI BUILD SPECIFICATION (18-POINT ENGINEERING BRIEF)
 // Effect: "${visual.name}" | Scene Architecture: [${visual.sceneType}]
 // Ecosystem: PromptDock Immutable 3D Visual Library (https://promptdock-eight.vercel.app)
 // ============================================================================

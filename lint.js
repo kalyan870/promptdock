@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('--- Starting PromptDock 8.0 Code Linter ---');
+console.log('--- Starting PromptDock 8.1 Code Linter ---');
 
 let errors = 0;
 
@@ -24,7 +24,7 @@ check('index.html exists', fs.existsSync(indexPath));
 const html = fs.readFileSync(indexPath, 'utf-8');
 
 check('index.html contains DOCTYPE', html.includes('<!DOCTYPE html>'));
-check('index.html contains PromptDock 8.0 title', html.includes('PromptDock 8.0'));
+check('index.html contains PromptDock 8.1 title', html.includes('PromptDock 8.1'));
 check('index.html contains root mount div', html.includes('<div id="root"></div>'));
 check('index.html loads main.tsx', html.includes('/src/main.tsx'));
 check('index.html includes favicon link', html.includes('/images/favicon.svg'));
@@ -83,8 +83,8 @@ check('PromptGeneratorSection has NO <textarea> (strictly immutable)', !promptGe
 check('PromptGeneratorSection has NO contenteditable', !promptGenCode.toLowerCase().includes('contenteditable'));
 
 if (errors > 0) {
-  console.error(`\n--- PromptDock 8.0 Linter FAILED with ${errors} error(s) ---`);
+  console.error(`\n--- PromptDock 8.1 Linter FAILED with ${errors} error(s) ---`);
   process.exit(1);
 }
 
-console.log('--- PromptDock 8.0 Linter PASSED (0 errors) ---');
+console.log('--- PromptDock 8.1 Linter PASSED (0 errors) ---');

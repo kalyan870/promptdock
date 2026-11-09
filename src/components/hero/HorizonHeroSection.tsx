@@ -366,7 +366,7 @@ export const HorizonHeroSection: React.FC = () => {
           {/* Release Badge with 21st.dev Attribution */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-teal-500/30 backdrop-blur-md text-xs font-mono text-teal-300 shadow-[0_0_20px_rgba(94,234,212,0.15)]">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            <span>PromptDock 8.0 • The Immutable 3D Visual Prompt Library</span>
+            <span>PromptDock 8.1 • The Immutable 3D Visual Prompt Library</span>
           </div>
 
           {/* Main Headline */}

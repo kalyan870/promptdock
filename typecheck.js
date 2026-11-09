@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('--- Starting PromptDock 8.0 Data & Catalog Typechecker ---');
+console.log('--- Starting PromptDock 8.1 Data & Catalog Typechecker ---');
 
 // 1. Read visuals.ts, scene-factory.ts, and prompt-engine.ts
 const visualsPath = path.join(__dirname, 'src/data/visuals.ts');
@@ -106,4 +106,4 @@ for (const tok of forbiddenTokens) {
 }
 console.log('[TYPE PASS] Verified 0 obsolete website modification references');
 
-console.log('--- PromptDock 8.0 Typechecker PASSED (0 errors) ---');
+console.log('--- PromptDock 8.1 Typechecker PASSED (0 errors) ---');

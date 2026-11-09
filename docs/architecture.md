@@ -1,56 +1,58 @@
-# PromptDock 7.2 — System Architecture
+# PromptDock 8.1 — System Architecture
 
-PromptDock 7.2 is built on a modular React 19 + TypeScript + Vite architecture delivering high-performance WebGL 2.0 rendering, seamless 21st.dev component integration, and parameter-transferred AI build prompt generation.
+PromptDock 8.1 is built on a modular React 19 + TypeScript + Vite architecture delivering high-performance WebGL 2.0 rendering, 21st.dev component integration, canonical 18-point prompt generation, and Playwright browser E2E verification.
 
 ```mermaid
 graph TD
-    Client["User Browser / Client"] --> Router["Anchor Router & Navigation"]
+    Client["User Browser / Client"] --> Presentation["React 19 + Tailwind UI Layer"]
     
-    subgraph Presentation ["React 19 + Tailwind UI Layer"]
+    subgraph Presentation ["Presentation Layer"]
       Hero["21st.dev Horizon Hero Section (Scott Clayton, MIT)"]
-      Workflow["5-Step Visual Loop Strip"]
-      Gallery["3D Visual Discovery Gallery (30 Curated Effects)"]
+      Storyboard["Interactive Visual Storyboard (5 Connected Stages)"]
+      Gallery["Curated Bento Gallery (30 Dedicated Effects)"]
       Inspector["Interactive 3D Inspector Viewport"]
-      PromptStudio["Detailed AI Build Prompt Studio (18 Points)"]
+      PromptStudio["Locked AI Prompt Studio (Read-Only &lt;pre&gt;)"]
       CombineStudio["Combine 3D Visuals Studio (Single rAF Loop)"]
-      Footer["Footer with 21st.dev Attribution"]
+      Footer["Footer with v8.1 Release Badge"]
     end
     
-    subgraph WebGL ["3D & Shader Engine"]
+    subgraph Engine ["3D & Prompt Engine"]
       HorizonEngine["Horizon WebGL Canvas (Starfield, Nebula, Mountains, Atmosphere)"]
       SceneFac["SceneFactory (30 Dedicated Procedural Scenes)"]
+      PromptEng["Canonical PromptEngine (18-Point Tailored Briefs)"]
       Telemetry["Live Real-Time FPS Telemetry (performance.now)"]
       Lifecycle["Lifecycle Manager (cleanGroup & GPU Disposal)"]
     end
     
-    subgraph Pipeline ["Vite & CI/CD Pipeline"]
+    subgraph Pipeline ["Validation & CI/CD Pipeline"]
       Vite["Vite 8.3 Compiler -> dist/"]
       Linter["lint.js (Tag Balance & Attribution Verifier)"]
       Typechecker["typecheck.js (30-Scene Registry Verifier)"]
       UnitTests["test-build.js (HTTP Asset Delivery Tests)"]
-      E2ETests["test-e2e.ts (159+ Three.js Scene Verifications)"]
+      SceneTests["test-e2e.ts (SceneFactory Unit Tests)"]
+      PlaywrightTests["test-browser-e2e.ts (28 Browser Interactions)"]
       VercelEdge["Vercel Global Edge CDN (dist/)"]
     end
     
-    Client --> Presentation
-    Presentation --> WebGL
-    WebGL --> Pipeline
+    Presentation --> Engine
+    Engine --> Pipeline
 ```
 
 ## Key Architectural Highlights
 
-1. **21st.dev Horizon Hero Section Integration**:
-   - Original 3D component authored by Scott Clayton (`@lovesickfromthe6ix`) under MIT License.
-   - Custom GLSL vertex and fragment shaders for multi-layer twinkling starfields and wave-displaced nebula planes.
-   - 4 procedural mountain geometry layers with depth-based parallax and atmospheric Fresnel rim lighting.
+1. **Interactive Visual Storyboard (`WorkflowSection.tsx`)**:
+   - Replaced static text cards with a connected panoramic 5-stage storyboard.
+   - Embedded real-time Three.js canvas in Stage 02, interactive gallery miniature in Stage 01, preset lock indicators in Stage 03, read-only prompt preview in Stage 04, and AI coding assistant pipeline in Stage 05.
 
-2. **Dedicated SceneFactory (30 Independent 3D Scenes)**:
-   - Zero fallback fall-through: Every visual has an explicit dedicated procedural Three.js generator.
-   - Completely separated `galaxy` (5-arm logarithmic spiral) from `curlVortex` (turbulent fluid advection), and `neuralNet` (structured lattice) from `neuralGraph` (packet transmissions).
+2. **Curated Bento Discovery Gallery (`GallerySection.tsx`)**:
+   - Multi-tier bento showcase highlighting top visuals in Hero, Shaders, Particles, Products, and AI disciplines.
+   - Preserves search, category filtering, and direct canonical prompt copying.
 
-3. **GPU Memory Leak Elimination**:
-   - `SceneFactory.cleanGroup()` recursively cleans geometries, materials, material arrays, and allocated textures.
-   - Resets `group._customUpdate = null` to ensure old frame loops terminate immediately upon scene switching.
+3. **Canonical Single-Source PromptEngine (`prompt-engine.ts`)**:
+   - Centralized prompt generation for all copy actions across the platform.
+   - Tailored geometry, shaders, lighting, and animation formulas for each specific visual effect.
+   - Zero in-browser prompt editing: all prompts rendered inside read-only `<pre>`.
 
-4. **Parameter Transfer to 18-Point Build Prompt**:
-   - User adjustments in Inspector sliders are preserved in state and directly injected into the 18-point detailed AI build prompt.
+4. **Playwright Automated Browser Testing (`test-browser-e2e.ts`)**:
+   - Real Chromium browser testing verifying 28 critical user interactions, console error audits, network request tracking, and responsive layout validation.
+   - Real webp screenshot captures committed to `docs/assets/screenshots/`.

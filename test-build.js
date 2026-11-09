@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('--- Starting PromptDock 8.0 Master Verification Suite ---');
+console.log('--- Starting PromptDock 8.1 Master Verification Suite ---');
 
 let passed = 0;
 let failed = 0;
@@ -29,7 +29,7 @@ const distIndex = path.join(distDir, 'index.html');
 assert(fs.existsSync(distIndex), 'dist/index.html exists');
 
 const html = fs.readFileSync(distIndex, 'utf-8');
-assert(html.includes('PromptDock 8.0'), 'dist/index.html contains PromptDock 8.0');
+assert(html.includes('PromptDock 8.1'), 'dist/index.html contains PromptDock 8.1');
 assert(html.includes('id="root"'), 'dist/index.html contains root mount div');
 
 // 2. Verify all 54 image assets in dist/images
@@ -73,7 +73,7 @@ server.listen(4897, () => {
     let data = '';
     res.on('data', chunk => data += chunk);
     res.on('end', () => {
-      assert(data.includes('PromptDock 8.0'), 'Response contains PromptDock 8.0');
+      assert(data.includes('PromptDock 8.1'), 'Response contains PromptDock 8.1');
       assert(data.includes('root'), 'Response contains root div');
 
       // Request an image asset

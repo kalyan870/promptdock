@@ -1,16 +1,17 @@
-# PromptDock 8.0 — The Immutable 3D Visual Prompt Ecosystem
+# PromptDock 8.1 — The Immutable 3D Visual Prompt Ecosystem
 
 <p align="center">
-  <img src="images/comp-hero.svg" alt="PromptDock 8.0 3D Discovery Studio" width="100%" style="border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);" />
+  <img src="docs/assets/screenshots/desktop-home.webp" alt="PromptDock 8.1 Desktop Experience" width="100%" style="border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);" />
 </p>
 
 <p align="center">
   <a href="https://promptdock-eight.vercel.app"><img src="https://img.shields.io/badge/Production-Live-5eead4?style=for-the-badge&logo=vercel&logoColor=04060b" alt="Production Vercel"></a>
   <a href="https://github.com/kalyan870/promptdock/actions"><img src="https://img.shields.io/badge/CI-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white" alt="CI Status"></a>
-  <img src="https://img.shields.io/badge/Release-8.0.0-38bdf8?style=for-the-badge" alt="Release 8.0.0">
+  <img src="https://img.shields.io/badge/Release-8.1.0-38bdf8?style=for-the-badge" alt="Release 8.1.0">
   <img src="https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react&logoColor=black" alt="React 19">
   <img src="https://img.shields.io/badge/Vite-8.3-646cff?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
   <img src="https://img.shields.io/badge/Three.js-r174-818cf8?style=for-the-badge&logo=threedotjs&logoColor=white" alt="Three.js">
+  <img src="https://img.shields.io/badge/Playwright-E2E_Verified-22c55e?style=for-the-badge&logo=playwright&logoColor=white" alt="Playwright Verified">
   <img src="https://img.shields.io/badge/21st.dev-Horizon_Hero-c084fc?style=for-the-badge" alt="21st.dev">
   <img src="https://img.shields.io/badge/License-MIT-a78bfa?style=for-the-badge" alt="MIT License">
 </p>
@@ -23,27 +24,73 @@
 > 
 > *Discover extraordinary 3D websites. Build yours with AI.*
 
-**PromptDock 8.0** is an immutable **3D Visual Prompt Ecosystem**. It turns exceptional 3D web effects into locked, production-ready AI website-building instructions. 
+**PromptDock 8.1** is a curated, immutable **3D Visual Prompt Ecosystem**. It transforms exceptional 3D web effects into locked, production-ready AI website-building instructions. 
 
-PromptDock is a curated visual prompt library, not an in-browser prompt editor, not a general chatbot, and not an AI website builder that pretends to deploy websites itself. The visitor discovers the 3D visual, inspects the real WebGL effect, tweaks aesthetic parameters in real time, copies the locked 18-point AI prompt, and pastes it into their chosen AI coding assistant to build the experience.
+PromptDock is a curated visual prompt library, not an in-browser prompt editor, not a generic AI chatbot, and not an AI website builder that pretends to deploy websites itself. The visitor discovers the 3D visual, inspects the real WebGL effect, tweaks aesthetic parameters in real time, copies the locked 18-point AI prompt, and pastes it into their chosen AI coding assistant to build the experience.
 
 - **Live Production Platform**: [https://promptdock-eight.vercel.app](https://promptdock-eight.vercel.app)
 - **Canonical GitHub Repository**: [https://github.com/kalyan870/promptdock](https://github.com/kalyan870/promptdock)
 
 ---
 
-## 🚀 Key Architectural Pillars of PromptDock 8.0
+## 📸 Real Visual Showcase (Captured from Live Application)
 
-### 1. 🔒 100% Immutable Prompts (Zero In-Browser Editing)
+### 1. Interactive Visual Storyboard (5 Connected Stages)
+<p align="center">
+  <img src="docs/assets/screenshots/workflow-storyboard.webp" alt="PromptDock 8.1 Interactive Visual Storyboard" width="100%" style="border-radius: 12px; border: 1px solid #1e293b;" />
+</p>
+A connected five-stage journey: Visual Discovery &rarr; Real-Time 3D Preview with embedded WebGL Torus &rarr; Preset Configuration &rarr; Locked 18-Point Prompt Copy &rarr; AI Assistant Build Pipeline.
+
+### 2. Curated Bento Discovery Gallery
+<p align="center">
+  <img src="docs/assets/screenshots/discovery-gallery.webp" alt="PromptDock 8.1 Curated Bento Discovery Gallery" width="100%" style="border-radius: 12px; border: 1px solid #1e293b;" />
+</p>
+Curated Bento showcase presenting 30 dedicated Three.js effects across 8 creative categories with prominent featured cards, instant search, tech stack filtering, and direct prompt copying.
+
+### 3. Interactive 3D Visual Inspector & Parameter HUD
+<p align="center">
+  <img src="docs/assets/screenshots/visual-inspector.webp" alt="PromptDock 8.1 Visual Inspector" width="100%" style="border-radius: 12px; border: 1px solid #1e293b;" />
+</p>
+Live procedural rendering sandbox with real-time FPS telemetry, orbit drag/touch controls, camera reset, wireframe toggles, and instant parameter transfer into the AI prompt generator.
+
+### 4. Locked Read-Only AI Build Prompt Studio
+<p align="center">
+  <img src="docs/assets/screenshots/locked-prompt-studio.webp" alt="PromptDock 8.1 Locked Prompt Studio" width="100%" style="border-radius: 12px; border: 1px solid #1e293b;" />
+</p>
+Strictly read-only prompt studio generating comprehensive 18-point engineering briefs. Absolute zero textareas or contenteditable fields—prompts are pre-authored and locked for code agent execution.
+
+### 5. Multi-Effect Visual Composer
+<p align="center">
+  <img src="docs/assets/screenshots/combine-visuals.webp" alt="PromptDock 8.1 Combine Visuals Studio" width="100%" style="border-radius: 12px; border: 1px solid #1e293b;" />
+</p>
+
+### 6. Mobile Viewport Parity
+<p align="center">
+  <img src="docs/assets/screenshots/mobile-home.webp" alt="PromptDock 8.1 Mobile Viewport" width="45%" style="border-radius: 12px; border: 1px solid #1e293b;" />
+</p>
+
+---
+
+## 🚀 Key Architectural Pillars of PromptDock 8.1
+
+### 1. 🎬 Interactive Visual Storyboard (`src/components/workflow/WorkflowSection.tsx`)
+- Completely replaced simple text cards with a panoramic 5-stage connected interactive storyboard.
+- Features real-time 3D canvas rendering for Stage 02, interactive gallery miniature for Stage 01, preset lock indicators for Stage 03, read-only prompt preview for Stage 04, and AI coding assistant pipeline for Stage 05.
+
+### 2. 🎴 Bento-Style Discovery Gallery (`src/components/gallery/GallerySection.tsx`)
+- Curated Bento showcase featuring prominent cards for top creative disciplines (Aurora Hero, Liquid Chrome, Curl-Noise Vortex, Chrono Watch, Thinking Orb).
+- 30 production WebGL effects, live search, multi-factor filtering, and responsive view switcher (Bento vs Grid).
+
+### 3. 🔒 100% Immutable Prompts (Zero In-Browser Editing)
 - All prompt containers are rendered strictly inside read-only `<pre id="prompt-display">` elements.
 - Absolute zero `<textarea>`, `contenteditable`, or inline modification inputs exist for prompts.
 - Eliminates user confusion: PromptDock does not deploy websites internally; it equips developers with deterministic prompts for external AI code agents.
 
-### 2. 🎯 Canonical Single-Source PromptEngine (`src/engine/prompt-engine.ts`)
+### 4. 🎯 Canonical Single-Source PromptEngine (`src/engine/prompt-engine.ts`)
 - Every copy action across the platform—Discovery Gallery, 3D Inspector, Prompt Generator, and Hero—invokes one unified canonical engine.
 - Every copy action copies the complete, exhaustive **18-point engineering brief** with active parameter overrides incorporated directly.
 
-### 3. 📐 Scene-Specific Geometry, Shader & Kinematic Tailoring
+### 5. 📐 Scene-Specific Geometry, Shader & Kinematic Tailoring
 - Prompts are dynamically customized to the exact scene type rather than generic sine-wave templates:
   - **Horology (`chronoWatch`)**: Cylindrical titanium bezel, beveled sapphire crystal lens with transmission, brushed dial plane, and three kinematic hands with micro-stepping seconds sweep.
   - **Acoustic Audio (`headphone`)**: Sculpted headband arch segment, telescoping slider arms, circumaural cushion PBR materials, and continuous turntable presentation orbit.
@@ -52,19 +99,9 @@ PromptDock is a curated visual prompt library, not an in-browser prompt editor, 
   - **Astrophysics (`galaxy`)**: Logarithmic spiral arm distribution with differential Keplerian angular velocities.
   - **Cognitive Systems (`neuralNet` / `thinkingOrb`)**: Proximity-linked synaptic line segments and multi-shell concentric Fresnel pulsing spheres.
 
-### 4. 🌐 Authentic 21st.dev 3D Horizon Hero Integration
+### 6. 🌐 Authentic 21st.dev 3D Horizon Hero Integration
 - Features Scott Clayton's (`@lovesickfromthe6ix`) interactive 3D WebGL Horizon engine under MIT License.
 - Multi-tier twinkling starfield, procedural animated nebula plane, 4 depth planes of procedural mountains, Fresnel atmospheric halo, and cursor parallax.
-
-### 5. 📚 Multi-Ecosystem Reference & Source Audit
-- Detailed technical audit (`docs/reference-source-audit.md`) covering:
-  - **21st.dev**: Design engineer component registry and Horizon Hero integration.
-  - **Libraries.dev**: Dependency analytics and creative classification taxonomy.
-  - **Magic UI**: Modern animated UI components and Tailwind token architecture.
-  - **Motion.dev**: Physics-driven spring dynamics and 60 FPS loop benchmarks.
-  - **Prompt Motion**: Structured natural-language animation prompting schemas.
-  - **Skills.sh**: Agentic skill standardization and tool manifest patterns.
-  - **Three.js**: WebGL 2.0 rendering engine, buffer geometry management, and resource disposal.
 
 ---
 
@@ -92,7 +129,8 @@ flowchart LR
 graph TD
     UI["React 19 + Tailwind CSS Frontend"]
     UI --> Hero["21st.dev Horizon Hero (Three.js + GSAP)"]
-    UI --> Gallery["Discovery Gallery (30 Curated Visuals)"]
+    UI --> Storyboard["Interactive Visual Storyboard (5 Connected Stages)"]
+    UI --> Gallery["Bento Discovery Gallery (30 Curated Visuals)"]
     UI --> Inspector["Interactive 3D Inspector"]
     UI --> PromptSec["Locked Prompt Studio (Read-Only &lt;pre&gt;)"]
     UI --> Composer["Combine 3D Visuals Studio"]
@@ -104,6 +142,7 @@ graph TD
     Gallery -.->|One-Click Copy| PE["PromptEngine (src/engine/prompt-engine.ts)"]
     Inspector -.->|One-Click Copy| PE
     PromptSec --> PE
+    Storyboard -.->|Sample Copy| PE
     PE --> LockedBrief["18-Point Immutable AI Prompt"]
 ```
 
@@ -124,13 +163,16 @@ npm run typecheck
 # Run unit tests and static asset verification
 npm run test
 
-# Run 30-scene E2E Playwright integration test suite
+# Run 30-scene E2E SceneFactory test suite
 npm run test:e2e
+
+# Run Playwright real browser E2E test suite (28 assertions & screenshots)
+npm run test:browser
 
 # Run Vite production build (outputs to dist/)
 npm run build
 
-# Master validation pipeline (all checks must pass 100%)
+# Master validation pipeline (all 6 checks must pass 100%)
 npm run validate
 ```
 
@@ -145,7 +187,8 @@ npm run validate
 - [`docs/visual-library.md`](docs/visual-library.md) — Complete 30-effect visual catalog across 8 creative categories.
 - [`docs/product-overview.md`](docs/product-overview.md) — Product identity, principles, and audience definition.
 - [`docs/architecture.md`](docs/architecture.md) — React 19 + TypeScript + Vite system architecture.
-- [`docs/testing.md`](docs/testing.md) — Testing strategy, unit tests, and Playwright E2E suites.
+- [`docs/workflow.md`](docs/workflow.md) — Connected 5-stage interactive visual storyboard specification.
+- [`docs/testing.md`](docs/testing.md) — Playwright real browser testing suite and 28-point interaction verification.
 - [`docs/deployment.md`](docs/deployment.md) — Vercel production deployment and GitHub Actions CI/CD.
 
 ---

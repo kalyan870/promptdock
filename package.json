@@ -1,6 +1,6 @@
 {
   "name": "promptdock",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "type": "module",
   "description": "PromptDock 8.0 — The Immutable 3D Visual Prompt Platform. See the visual. Copy the prompt. Build the experience.",
   "engines": {
@@ -15,7 +15,8 @@
     "typecheck": "node typecheck.js",
     "test": "node test-build.js",
     "test:e2e": "node --experimental-strip-types test-e2e.ts",
-    "validate": "node lint.js && node typecheck.js && node test-build.js && node --experimental-strip-types test-e2e.ts && npm run build"
+    "validate": "node lint.js && node typecheck.js && node test-build.js && node --experimental-strip-types test-e2e.ts && node --experimental-strip-types test-browser-e2e.ts && npm run build",
+    "test:browser": "node --experimental-strip-types test-browser-e2e.ts"
   },
   "keywords": [
     "promptdock",

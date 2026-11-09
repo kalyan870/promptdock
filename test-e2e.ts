@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('--- Starting PromptDock 8.0 End-to-End (E2E) Test Suite ---');
+console.log('--- Starting PromptDock 8.1 End-to-End (E2E) Test Suite ---');
 
 let passed = 0;
 let failed = 0;
@@ -133,7 +133,7 @@ server.listen(4898, () => {
       server.close(() => {
         console.log(`\n--- E2E Summary: ${passed} passed, ${failed} failed ---`);
         if (failed > 0) process.exit(1);
-        console.log('--- ALL PromptDock 8.0 E2E Tests PASSED (100% Success) ---');
+        console.log('--- ALL PromptDock 8.1 E2E Tests PASSED (100% Success) ---');
         process.exit(0);
       });
     });

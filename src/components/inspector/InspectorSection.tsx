@@ -101,10 +101,34 @@ export const InspectorSection: React.FC<InspectorProps> = ({
         if (threeRef.current) threeRef.current.isDragging = false;
       };
 
+      // Touch Orbit Handlers for Mobile Devices
+      const onTouchStart = (e: TouchEvent) => {
+        if (!threeRef.current || e.touches.length === 0) return;
+        threeRef.current.isDragging = true;
+        threeRef.current.prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      };
+
+      const onTouchMove = (e: TouchEvent) => {
+        if (!threeRef.current || !threeRef.current.isDragging || e.touches.length === 0) return;
+        const dx = e.touches[0].clientX - threeRef.current.prevMouse.x;
+        const dy = e.touches[0].clientY - threeRef.current.prevMouse.y;
+        threeRef.current.group.rotation.y += dx * 0.008;
+        threeRef.current.group.rotation.x += dy * 0.008;
+        threeRef.current.prevMouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      };
+
+      const onTouchEnd = () => {
+        if (threeRef.current) threeRef.current.isDragging = false;
+      };
+
       const canvas = canvasRef.current;
       canvas.addEventListener('mousedown', onMouseDown);
       window.addEventListener('mousemove', onMouseMove);
       window.addEventListener('mouseup', onMouseUp);
+
+      canvas.addEventListener('touchstart', onTouchStart, { passive: true });
+      window.addEventListener('touchmove', onTouchMove, { passive: true });
+      window.addEventListener('touchend', onTouchEnd);
 
       // Render Loop with Real-Time FPS Calculation
       let lastTime = performance.now();
@@ -156,6 +180,9 @@ export const InspectorSection: React.FC<InspectorProps> = ({
         canvas.removeEventListener('mousedown', onMouseDown);
         window.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('mouseup', onMouseUp);
+        canvas.removeEventListener('touchstart', onTouchStart);
+        window.removeEventListener('touchmove', onTouchMove);
+        window.removeEventListener('touchend', onTouchEnd);
         resizeObserver.disconnect();
         SceneFactory.cleanGroup(group);
         renderer.dispose();
@@ -265,6 +292,21 @@ export const InspectorSection: React.FC<InspectorProps> = ({
                 title="Reset Camera & Parameters"
               >
                 ↺ Reset View
+              </button>
+
+              <button
+                onClick={() => {
+                  if (!containerRef.current) return;
+                  if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                  } else {
+                    containerRef.current.requestFullscreen?.();
+                  }
+                }}
+                className="p-2 rounded-lg bg-slate-900/80 border border-slate-700/80 text-xs text-slate-300 hover:text-white hover:bg-slate-800 backdrop-blur-md transition-colors"
+                title="Toggle Fullscreen 3D View"
+              >
+                ⛶ Fullscreen
               </button>
             </div>
           </div>

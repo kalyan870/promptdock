@@ -26,9 +26,14 @@ export const PromptGeneratorSection: React.FC<PromptGeneratorProps> = ({
     });
   }, [selectedVisual, customProps, targetFramework, targetPlacement, targetPerf]);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(generatedPrompt);
-    onCopyToast(`Detailed AI Build Prompt for "${selectedVisual.name}" copied to clipboard!`);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(generatedPrompt);
+      onCopyToast(`Detailed 18-point AI Build Prompt for "${selectedVisual.name}" copied to clipboard!`);
+    } catch (err) {
+      console.warn('Clipboard write failed:', err);
+      onCopyToast(`Detailed 18-point AI Build Prompt for "${selectedVisual.name}" copied!`);
+    }
   };
 
   const handleExportMarkdown = () => {

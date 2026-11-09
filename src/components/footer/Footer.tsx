@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-teal-400 to-indigo-600 flex items-center justify-center font-bold text-slate-950 text-xs">
               PD
             </div>
-            <span className="text-lg font-bold text-white">PromptDock 8.0</span>
+            <span className="text-lg font-bold text-white">PromptDock 8.1</span>
           </div>
           <p className="text-xs text-slate-400 max-w-sm font-light leading-relaxed">
             &ldquo;See the visual. Copy the prompt. Build the experience.&rdquo; A curated 3D visual prompt library turning exceptional web effects into ready-to-use AI website-building instructions.
@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
           </h4>
           <ul className="space-y-2 text-xs">
             <li><a href="#hero" className="hover:text-teal-300 transition-colors">3D Horizon Hero</a></li>
-            <li><a href="#workflow" className="hover:text-teal-300 transition-colors">5-Step Visual Loop</a></li>
+            <li><a href="#workflow" className="hover:text-teal-300 transition-colors">Visual Storyboard</a></li>
             <li><a href="#gallery" className="hover:text-teal-300 transition-colors">Discovery Gallery (30)</a></li>
             <li><a href="#inspector" className="hover:text-teal-300 transition-colors">Interactive 3D Inspector</a></li>
             <li><a href="#prompt-generator" className="hover:text-teal-300 transition-colors">Detailed AI Prompt Studio</a></li>
