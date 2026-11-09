@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { VISUALS } from './src/data/visuals.ts';
 import { SceneFactory } from './src/engine/scene-factory.ts';
+import { PromptEngine } from './src/engine/prompt-engine.ts';
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
@@ -9,7 +10,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('--- Starting PromptDock 7.2 End-to-End (E2E) Test Suite ---');
+console.log('--- Starting PromptDock 8.0 End-to-End (E2E) Test Suite ---');
 
 let passed = 0;
 let failed = 0;
@@ -24,8 +25,8 @@ function assert(condition: boolean, message: string) {
   }
 }
 
-// 1. Verify all 30 Scene Implementations in SceneFactory
-console.log('\n[E2E] Testing All 30 Dedicated Three.js Scene Implementations...');
+// 1. Verify all 30 Dedicated Scene Implementations in SceneFactory
+console.log('\n[E2E 1/4] Testing All 30 Dedicated Three.js Scene Implementations...');
 const testGroup = new THREE.Group();
 
 for (const visual of VISUALS) {
@@ -45,8 +46,8 @@ for (const visual of VISUALS) {
   assert((testGroup as any)._customUpdate === null, `SceneFactory.cleanGroup reset _customUpdate hook to null`);
 }
 
-// 2. Test Parameter Transfer into Prompt Generation
-console.log('\n[E2E] Testing Active Parameter Transfer into Prompt Generator...');
+// 2. Canonical PromptEngine & 18-Point Verification
+console.log('\n[E2E 2/4] Testing Canonical PromptEngine & 18-Point Engineering Brief...');
 const customProps = {
   color: '#ff0055',
   secondaryColor: '#00ffff',
@@ -57,25 +58,48 @@ const customProps = {
   wireframe: true
 };
 
-const simulatedPrompt = `
-Color: ${customProps.color}
-Secondary: ${customProps.secondaryColor}
-Speed: ${customProps.speed}x
-Density: ${customProps.density}
-Glow: ${customProps.glow}
-Cam: ${customProps.cam}
-Wireframe: ${customProps.wireframe}
-`;
+const auroraVisual = VISUALS.find(v => v.sceneType === 'aurora')!;
+const watchVisual = VISUALS.find(v => v.sceneType === 'chronoWatch')!;
+const headphoneVisual = VISUALS.find(v => v.sceneType === 'headphone')!;
+const prismVisual = VISUALS.find(v => v.sceneType === 'glassRefractionPrism')!;
 
-assert(simulatedPrompt.includes('#ff0055'), 'Custom color transferred to prompt');
-assert(simulatedPrompt.includes('2.4x'), 'Custom speed transferred to prompt');
-assert(simulatedPrompt.includes('3200'), 'Custom density transferred to prompt');
-assert(simulatedPrompt.includes('2.1'), 'Custom glow transferred to prompt');
-assert(simulatedPrompt.includes('7.5'), 'Custom camera distance transferred to prompt');
-assert(simulatedPrompt.includes('true'), 'Custom wireframe state transferred to prompt');
+const promptAurora = PromptEngine.generateBuildPrompt(auroraVisual, customProps);
+const promptWatch = PromptEngine.generateBuildPrompt(watchVisual, customProps);
+const promptHeadphone = PromptEngine.generateBuildPrompt(headphoneVisual, customProps);
+const promptPrism = PromptEngine.generateBuildPrompt(prismVisual, customProps);
 
-// 3. Test HTTP Serving on Port 4898
-console.log('\n[E2E] Testing Production HTTP Asset Delivery...');
+// Verify 18 points exist in all generated prompts
+for (let i = 1; i <= 18; i++) {
+  assert(promptAurora.includes(`### ${i}.`), `PromptEngine generated Section ### ${i} for Aurora`);
+  assert(promptWatch.includes(`### ${i}.`), `PromptEngine generated Section ### ${i} for ChronoWatch`);
+}
+
+// Verify custom parameter transfers
+assert(promptAurora.includes('#ff0055'), 'Active color transferred to PromptEngine brief');
+assert(promptAurora.includes('#00ffff'), 'Active secondaryColor transferred to PromptEngine brief');
+assert(promptAurora.includes('2.4x'), 'Active speed multiplier transferred to PromptEngine brief');
+assert(promptAurora.includes('3200'), 'Active density transferred to PromptEngine brief');
+assert(promptAurora.includes('2.1'), 'Active glow transferred to PromptEngine brief');
+assert(promptAurora.includes('7.5'), 'Active camera distance transferred to PromptEngine brief');
+assert(promptAurora.includes('true (Wireframe enabled)'), 'Active wireframe state transferred to PromptEngine brief');
+
+// Verify scene-specific tailoring
+assert(promptWatch.includes('titanium bezel') || promptWatch.includes('sapphire crystal'), 'ChronoWatch prompt contains horology-specific geometry');
+assert(promptHeadphone.includes('headband arch') || promptHeadphone.includes('earcup'), 'Headphone prompt contains acoustic-specific geometry');
+assert(promptPrism.includes('triangular prism') || promptPrism.includes('transmission'), 'Prism prompt contains optics-specific dispersion geometry');
+
+// 3. Immutability Verification: Ensure Zero Textareas or Contenteditable in Prompt Generator
+console.log('\n[E2E 3/4] Verifying Prompt Immutability (No in-browser prompt editing)...');
+const promptGenPath = path.join(__dirname, 'src', 'components', 'prompt-generator', 'PromptGeneratorSection.tsx');
+const promptGenSource = fs.readFileSync(promptGenPath, 'utf8');
+
+assert(!promptGenSource.includes('<textarea'), 'PromptGeneratorSection contains ZERO <textarea> tags (strictly read-only)');
+assert(!promptGenSource.toLowerCase().includes('contenteditable'), 'PromptGeneratorSection contains ZERO contenteditable attributes');
+assert(promptGenSource.includes('<pre'), 'Prompt is rendered inside read-only <pre> container');
+assert(promptGenSource.includes('id="prompt-display"'), 'Prompt container has correct id="prompt-display" selector');
+
+// 4. Test HTTP Serving on Port 4898
+console.log('\n[E2E 4/4] Testing Production HTTP Asset Delivery...');
 const distDir = path.join(__dirname, 'dist');
 const server = http.createServer((req, res) => {
   const reqUrl = req.url === '/' ? '/index.html' : req.url;
@@ -109,7 +133,7 @@ server.listen(4898, () => {
       server.close(() => {
         console.log(`\n--- E2E Summary: ${passed} passed, ${failed} failed ---`);
         if (failed > 0) process.exit(1);
-        console.log('--- ALL PromptDock 7.2 E2E Tests PASSED (100% Success) ---');
+        console.log('--- ALL PromptDock 8.0 E2E Tests PASSED (100% Success) ---');
         process.exit(0);
       });
     });

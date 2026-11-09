@@ -10,10 +10,10 @@ export const Footer: React.FC = () => {
             <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-teal-400 to-indigo-600 flex items-center justify-center font-bold text-slate-950 text-xs">
               PD
             </div>
-            <span className="text-lg font-bold text-white">PromptDock 7.2</span>
+            <span className="text-lg font-bold text-white">PromptDock 8.0</span>
           </div>
           <p className="text-xs text-slate-400 max-w-sm font-light leading-relaxed">
-            &ldquo;Discover the visual. Copy the prompt. Build it with AI.&rdquo; A specialized 3D Website Visual Prompt Studio connecting creative WebGL experiences directly to modern AI coding assistants.
+            &ldquo;See the visual. Copy the prompt. Build the experience.&rdquo; A curated 3D visual prompt library turning exceptional web effects into ready-to-use AI website-building instructions.
           </p>
           <div className="text-[11px] font-mono text-slate-500 pt-2">
             3D Hero Section adapted from <a href="https://21st.dev/@lovesickfromthe6ix/components/horizon-hero-section" target="_blank" rel="noreferrer" className="text-sky-400 hover:underline">Scott Clayton</a> under MIT License.

@@ -1,8 +1,11 @@
 {
   "name": "promptdock",
-  "version": "7.2.0",
+  "version": "8.0.0",
   "type": "module",
-  "description": "PromptDock 7.2 — Premium 3D Visual Prompt Studio. 21st.dev 3D Horizon Hero Integration and Complete Scene Engine.",
+  "description": "PromptDock 8.0 — The Immutable 3D Visual Prompt Platform. See the visual. Copy the prompt. Build the experience.",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "vite",
     "start": "vite",
@@ -17,9 +20,10 @@
   "keywords": [
     "promptdock",
     "3d-website",
-    "prompt-studio",
+    "visual-prompts",
+    "prompt-library",
+    "immutable-prompts",
     "21st-dev",
-    "horizon-hero",
     "threejs",
     "webgl",
     "react",

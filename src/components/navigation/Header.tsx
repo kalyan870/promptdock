@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = () => {
               PromptDock
             </span>
             <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-teal-500/10 text-teal-400 border border-teal-500/20">
-              v7.2
+              v8.0
             </span>
           </div>
         </a>

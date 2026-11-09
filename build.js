@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('--- Starting PromptDock 7.2 Production Build Pipeline ---');
+console.log('--- Starting PromptDock 8.0 Production Build Pipeline ---');
 
 // 1. Verify dist/index.html exists and is valid HTML
 const distDir = path.join(__dirname, 'dist');
@@ -19,7 +19,7 @@ console.log(`[PASS] dist/index.html read successfully (${html.length} bytes)`);
 
 // 2. Validate essential tokens
 const requiredTokens = [
-  'PromptDock 7.2',
+  'PromptDock 8.0',
   'id="root"'
 ];
 
@@ -50,9 +50,12 @@ for (const file of imageFiles) {
 }
 console.log(`[PASS] All ${imageFiles.length} assets in dist/images validated for non-zero integrity`);
 
-// 4. Verify documentation suite exists (9 core docs in 7.2)
+// 4. Verify documentation suite exists (12 core docs in 8.0)
 const docsDir = path.join(__dirname, 'docs');
 const expectedDocs = [
+  'reference-source-audit.md',
+  'scene-engine.md',
+  'licence-and-attribution.md',
   'product-overview.md',
   'visual-library.md',
   'prompt-engine.md',
@@ -75,10 +78,10 @@ console.log(`[PASS] Documentation suite verified (${expectedDocs.length} files i
 // 5. Generate build manifest
 const manifest = {
   buildTime: new Date().toISOString(),
-  version: '7.2.0',
-  title: 'PromptDock 7.2 — Premium 3D Visual Prompt Studio',
+  version: '8.0.0',
+  title: 'PromptDock 8.0 — The Immutable 3D Visual Prompt Ecosystem',
   heroEngine: '21st.dev Horizon Hero Section (Scott Clayton, MIT License)',
-  tagline: 'Discover the visual. Copy the prompt. Build it with AI.',
+  tagline: 'See the visual. Copy the prompt. Build the experience.',
   scenesCount: 30,
   assetsCount: imageFiles.length,
   distHtmlSize: html.length,
@@ -87,5 +90,5 @@ const manifest = {
 };
 
 fs.writeFileSync(path.join(__dirname, 'build-manifest.json'), JSON.stringify(manifest, null, 2));
-console.log('[PASS] Generated build-manifest.json (v7.2.0)');
-console.log('--- PromptDock 7.2 Production Build Pipeline Complete (SUCCESS) ---');
+console.log('[PASS] Generated build-manifest.json (v8.0.0)');
+console.log('--- PromptDock 8.0 Production Build Pipeline Complete (SUCCESS) ---');

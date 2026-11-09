@@ -5,19 +5,27 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('--- Starting PromptDock 7.2 Data & Catalog Typechecker ---');
+console.log('--- Starting PromptDock 8.0 Data & Catalog Typechecker ---');
 
-// 1. Read visuals.ts and scene-factory.ts
+// 1. Read visuals.ts, scene-factory.ts, and prompt-engine.ts
 const visualsPath = path.join(__dirname, 'src/data/visuals.ts');
 const factoryPath = path.join(__dirname, 'src/engine/scene-factory.ts');
+const promptEnginePath = path.join(__dirname, 'src/engine/prompt-engine.ts');
 
-if (!fs.existsSync(visualsPath) || !fs.existsSync(factoryPath)) {
-  console.error('[TYPE FAIL] Missing visuals.ts or scene-factory.ts');
+if (!fs.existsSync(visualsPath) || !fs.existsSync(factoryPath) || !fs.existsSync(promptEnginePath)) {
+  console.error('[TYPE FAIL] Missing visuals.ts, scene-factory.ts, or prompt-engine.ts');
   process.exit(1);
 }
 
 const visualsCode = fs.readFileSync(visualsPath, 'utf-8');
 const factoryCode = fs.readFileSync(factoryPath, 'utf-8');
+const promptEngineCode = fs.readFileSync(promptEnginePath, 'utf-8');
+
+if (!promptEngineCode.includes('generateBuildPrompt')) {
+  console.error('[TYPE FAIL] PromptEngine must export generateBuildPrompt');
+  process.exit(1);
+}
+console.log('[TYPE PASS] PromptEngine exports canonical generateBuildPrompt function');
 
 // 2. Extract sceneTypes from visuals.ts
 const sceneTypeMatches = visualsCode.match(/sceneType:\s*"([^"]+)"/g) || [];
@@ -98,4 +106,4 @@ for (const tok of forbiddenTokens) {
 }
 console.log('[TYPE PASS] Verified 0 obsolete website modification references');
 
-console.log('--- PromptDock 7.2 Typechecker PASSED (0 errors) ---');
+console.log('--- PromptDock 8.0 Typechecker PASSED (0 errors) ---');

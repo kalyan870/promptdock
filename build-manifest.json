@@ -1,12 +1,12 @@
 {
-  "buildTime": "2026-11-08T16:10:39.024Z",
-  "version": "7.2.0",
-  "title": "PromptDock 7.2 — Premium 3D Visual Prompt Studio",
+  "buildTime": "2026-11-09T03:34:26.070Z",
+  "version": "8.0.0",
+  "title": "PromptDock 8.0 — The Immutable 3D Visual Prompt Ecosystem",
   "heroEngine": "21st.dev Horizon Hero Section (Scott Clayton, MIT License)",
-  "tagline": "Discover the visual. Copy the prompt. Build it with AI.",
+  "tagline": "See the visual. Copy the prompt. Build the experience.",
   "scenesCount": 30,
   "assetsCount": 54,
-  "distHtmlSize": 1202,
+  "distHtmlSize": 1205,
   "status": "PRODUCTION_READY",
   "deploymentTarget": "Vercel Edge (dist/)"
 }

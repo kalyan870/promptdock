@@ -366,21 +366,23 @@ export const HorizonHeroSection: React.FC = () => {
           {/* Release Badge with 21st.dev Attribution */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 border border-teal-500/30 backdrop-blur-md text-xs font-mono text-teal-300 shadow-[0_0_20px_rgba(94,234,212,0.15)]">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            <span>PromptDock 7.2 • Powered by 21st.dev & Three.js</span>
+            <span>PromptDock 8.0 • The Immutable 3D Visual Prompt Library</span>
           </div>
 
           {/* Main Headline */}
           <h1 ref={titleRef} className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
-            Discover the <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-400 to-indigo-400">next dimension</span> of web design.
+            Discover extraordinary <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-sky-400 to-indigo-400">3D websites</span>. Build yours with AI.
           </h1>
 
           {/* Subtitle / Core Tagline */}
-          <p ref={subtitleRef} className="text-lg sm:text-xl text-slate-300 font-light max-w-2xl leading-relaxed">
-            &ldquo;Discover the visual. Copy the prompt. Build it with AI.&rdquo;
-            <span className="block mt-2 text-sm text-slate-400">
-              A curated 3D Website Visual Prompt Studio engineered for modern AI coding assistants. Discover 30 production WebGL effects, preview in real time, tweak parameters, and generate exhaustive 18-point implementation prompts.
-            </span>
-          </p>
+          <div ref={subtitleRef} className="space-y-2">
+            <p className="text-lg sm:text-xl text-slate-200 font-medium leading-relaxed">
+              &ldquo;See the visual. Copy the prompt. Build the experience.&rdquo;
+            </p>
+            <p className="text-sm text-slate-400 font-light max-w-2xl leading-relaxed">
+              A curated 3D visual prompt library that turns exceptional web effects into ready-to-use AI website-building instructions. Discover 30 production WebGL effects, preview in real time, tweak parameters, and copy locked, complete 18-point AI prompts directly into your AI coding assistant.
+            </p>
+          </div>
 
           {/* Primary & Secondary Call to Actions */}
           <div ref={ctaRef} className="flex flex-wrap items-center gap-4 pt-2">
@@ -398,9 +400,9 @@ export const HorizonHeroSection: React.FC = () => {
               href="#prompt-generator"
               className="inline-flex items-center justify-center px-6 py-3.5 rounded-xl bg-slate-900/90 text-slate-200 font-medium text-sm border border-slate-700/80 hover:bg-slate-800 hover:border-slate-600 transition-all duration-200 backdrop-blur-md active:scale-95"
             >
-              Create a Prompt
+              Copy 18-Point Prompts
               <svg className="w-4 h-4 ml-2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
               </svg>
             </a>
 

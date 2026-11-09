@@ -2,18 +2,18 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/* ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  test:
-    name: Production Verification & Asset Integrity
+  validate:
+    name: PromptDock 8.0 CI Validation
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [ 18.x, 20.x, 22.x ]
+        node-version: [ 22.x, 24.x ]
 
     steps:
     - name: Checkout repository
@@ -24,11 +24,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install --prefer-offline --no-audit
+    - name: Install dependencies (npm ci)
+      run: npm ci
 
-    - name: Run Production Verification Suite
-      run: npm test
-
-    - name: Run Build
-      run: npm run build
+    - name: Run Full Master Validation Pipeline
+      run: npm run validate

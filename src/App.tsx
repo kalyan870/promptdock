@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { VISUALS, VisualItem, VisualProps } from './data/visuals';
-import { Header } from './components/navigation/Header';
-import { HorizonHeroSection } from './components/hero/HorizonHeroSection';
-import { WorkflowSection } from './components/workflow/WorkflowSection';
-import { GallerySection } from './components/gallery/GallerySection';
-import { InspectorSection } from './components/inspector/InspectorSection';
-import { PromptGeneratorSection } from './components/prompt-generator/PromptGeneratorSection';
-import { VisualComposerSection } from './components/visual-composer/VisualComposerSection';
-import { Footer } from './components/footer/Footer';
+import { VISUALS, type VisualItem, type VisualProps } from './data/visuals.ts';
+import { PromptEngine } from './engine/prompt-engine.ts';
+import { Header } from './components/navigation/Header.tsx';
+import { HorizonHeroSection } from './components/hero/HorizonHeroSection.tsx';
+import { WorkflowSection } from './components/workflow/WorkflowSection.tsx';
+import { GallerySection } from './components/gallery/GallerySection.tsx';
+import { InspectorSection } from './components/inspector/InspectorSection.tsx';
+import { PromptGeneratorSection } from './components/prompt-generator/PromptGeneratorSection.tsx';
+import { VisualComposerSection } from './components/visual-composer/VisualComposerSection.tsx';
+import { Footer } from './components/footer/Footer.tsx';
 
 export const App: React.FC = () => {
   const [selectedVisual, setSelectedVisual] = useState<VisualItem>(VISUALS[0]);
@@ -67,9 +68,9 @@ export const App: React.FC = () => {
   const handleCopyPromptFromGallery = (visual: VisualItem) => {
     setSelectedVisual(visual);
     const props = customPropsByVisual[visual.id] || visual.defaultProps;
-    const brief = `// PromptDock 7.2 AI Build Brief for ${visual.name} (${visual.sceneType})\n// Color: ${props.color}, Speed: ${props.speed}x, Density: ${props.density}pts, Glow: ${props.glow}\n// Visit https://promptdock-eight.vercel.app for full 18-point brief.`;
-    navigator.clipboard.writeText(brief);
-    showToast(`Build brief for "${visual.name}" copied to clipboard!`);
+    const prompt = PromptEngine.generateBuildPrompt(visual, props);
+    navigator.clipboard.writeText(prompt);
+    showToast(`Full 18-point AI build prompt for "${visual.name}" copied to clipboard!`);
   };
 
   return (

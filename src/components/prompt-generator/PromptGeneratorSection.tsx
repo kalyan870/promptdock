@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { VisualItem, VisualProps } from '../../data/visuals';
+import type { VisualItem, VisualProps } from '../../data/visuals.ts';
+import { PromptEngine } from '../../engine/prompt-engine.ts';
 
 interface PromptGeneratorProps {
   selectedVisual: VisualItem;
@@ -16,133 +17,13 @@ export const PromptGeneratorSection: React.FC<PromptGeneratorProps> = ({
   const [targetPlacement, setTargetPlacement] = useState<string>('Hero Section (Split-Screen / Full Width)');
   const [targetPerf, setTargetPerf] = useState<string>('Lightweight (Integrated GPU, 60 FPS)');
 
-  // Generate Exhaustive 18-Point Detailed AI Build Prompt
+  // Generate Exhaustive 18-Point Detailed AI Build Prompt via canonical PromptEngine
   const generatedPrompt = useMemo(() => {
-    const color = customProps.color || selectedVisual.defaultProps.color || '#5eead4';
-    const secondaryColor = customProps.secondaryColor || selectedVisual.defaultProps.secondaryColor || '#818cf8';
-    const speed = (customProps.speed || selectedVisual.defaultProps.speed || 1.0).toFixed(1);
-    const density = customProps.density || selectedVisual.defaultProps.density || 1600;
-    const glow = (customProps.glow || selectedVisual.defaultProps.glow || 1.2).toFixed(1);
-    const cam = (customProps.cam || selectedVisual.defaultProps.cam || 5.0).toFixed(1);
-    const wireframe = customProps.wireframe ? 'true (Wireframe enabled)' : 'false (Solid shaded surface)';
-
-    return `// ============================================================================
-// PROMPTDOCK 7.2 DETAILED AI BUILD PROMPT (18-POINT ENGINEERING BRIEF)
-// Reference Effect: "${selectedVisual.name}" (${selectedVisual.sceneType})
-// ============================================================================
-
-Act as a Principal Creative Frontend Architect, Three.js Specialist, and Senior WebGL Engineer.
-
-Implement the production-tested 3D visual effect described in the following 18-point technical brief into my existing application.
-
-### 1. ROLE & OBJECTIVE
-Deliver a production-ready, performant, and interactive 3D WebGL implementation of "${selectedVisual.name}" matching the exact visual aesthetics, material quality, and responsive mechanics specified below.
-
-### 2. REFERENCE VISUAL SPECIFICATION
-- Visual Effect: ${selectedVisual.name}
-- Category: ${selectedVisual.cat}
-- Scene Architecture: ${selectedVisual.sceneType}
-- Aesthetic Character: ${selectedVisual.desc}
-- Primary Interaction: ${selectedVisual.interact}
-
-### 3. WEBSITE PLACEMENT & LAYOUT CONSTRAINTS
-- Target Container: ${targetPlacement}
-- Canvas Layout: Relative or fixed container preserving parent aspect ratio.
-- Z-Index Layering: Z-Index 0 or 1, positioned beneath interactive HTML content layers.
-- Cumulative Layout Shift (CLS): 0.00. The canvas must mount with predetermined dimensions.
-
-### 4. EXACT 3D SCENE ARCHITECTURE & WEBGL RENDERER
-- Engine: Three.js WebGLRenderer (WebGL 2.0).
-- Renderer Configuration:
-  * antialias: true
-  * alpha: true (transparent background blending seamlessly with page dark tone)
-  * powerPreference: "high-performance"
-  * pixelRatio: Math.min(window.devicePixelRatio, 2.0)
-- Scene Background: Transparent or dark (#04060b).
-- Scene Fog: THREE.FogExp2(0x04060b, 0.0003) for soft depth attenuation.
-
-### 5. GEOMETRY CONFIGURATION & VERTEX DENSITY
-- Geometry Type: Procedural mesh / buffer geometry mapped to "${selectedVisual.sceneType}".
-- Active Vertex / Particle Density: ${density} vertices / points.
-- Structure: Optimized buffer attributes with explicit position, normal, and UV coordinates.
-
-### 6. MATERIAL, PBR SPECULAR & SHADER DETAILS
-- Shading Mode: ${wireframe}
-- Primary Accent Tone: ${color}
-- Secondary Accent Tone: ${secondaryColor}
-- PBR Properties:
-  * Metalness: 0.85
-  * Roughness: 0.20
-  * Transmission / Opacity: 0.88
-  * Emissive Channel: ${secondaryColor} at ${glow} intensity
-
-### 7. LIGHTING SETUP (AMBIENT, DIRECTIONAL & SPECULAR)
-- Ambient Lighting: THREE.AmbientLight(0xffffff, 0.6) for balanced base visibility.
-- Key Light: THREE.DirectionalLight(0xffffff, 1.2) at vector (5, 8, 5).
-- Rim Light: THREE.DirectionalLight(${color}, ${glow}) at vector (-5, -5, -5) to produce dramatic silhouette edges.
-- Specular Glare: Specular highlights calibrated to cursor vector.
-
-### 8. CAMERA PERSPECTIVE, FOV & COORDINATES
-- Camera Type: THREE.PerspectiveCamera
-- Field of View (FOV): 50 degrees
-- Clipping Planes: Near = 0.1, Far = 1000.0
-- Active Camera Distance: ${cam} units along the Z-axis.
-- Target Focus: (0, 0, 0) with gentle lerped lookAt transitions.
-
-### 9. CONTINUOUS ANIMATION LOOP & MATHEMATICAL FORMULAS
-- Animation Velocity: Base speed multiplied by ${speed}x.
-- Formula: Time-driven continuous trigonometric motion:
-  * Primary wave: sin(x * 0.8 + time * ${speed}) * cos(y * 0.6 + time * ${speed} * 0.8)
-  * Idle rotation: group.rotation.y += delta * 0.4 * ${speed}
-
-### 10. POINTER & MOUSE PARALLAX INTERACTIONS (NDC LERPING)
-- Coordinate System: Normalized Device Coordinates (NDC) mapped from -1.0 to +1.0.
-- Interpolation: Exponential smoothing (lerp) with a damping coefficient of 0.05.
-- Parallax Range: Maximum camera tilt offset of +/- 0.4 radians along X/Y axes.
-
-### 11. SCROLL-DRIVEN INTERACTIONS & VELOCITY COUPLING
-- Scroll Relationship: Scroll progress shifts camera depth and rotates primary geometry along Y-axis.
-- Scroll Smoothing: Couple camera position smoothly to window.scrollY without jarring layout shifts.
-
-### 12. COLOR PALETTE & EMISSIVE CONFIGURATIONS
-- Primary Glow Hex: ${color}
-- Secondary Accent Hex: ${secondaryColor}
-- Deep Background Tone: #04060b (Void Black)
-- Emissive Multiplier: ${glow}
-
-### 13. TARGET FRAMEWORK & EXACT INSTALLATION COMMANDS
-- Selected Framework: ${targetFramework}
-- Required Package Command:
-  \`npm install three @types/three gsap\`
-  ${targetFramework.includes('React Three Fiber') ? '\`npm install @react-three/fiber @react-three/drei\`' : ''}
-
-### 14. RESPONSIVE LAYOUT & MOBILE VIEWPORT RULES
-- Resize Strategy: Attach ResizeObserver to canvas parent container.
-- Mobile GPU Budget: If window.innerWidth < 768px, cap pixelRatio to 1.5 and reduce geometry density by 40%.
-- Touch Support: Handle touchmove and touchstart for mobile parity.
-
-### 15. GPU LIFECYCLE, THROTTLING & BATTERY CONSERVATION
-- Off-Screen Pausing: Wrap render loop in an IntersectionObserver to cancelAnimationFrame when scrolled out of view.
-- Tab Visibility: Listen for document.visibilitychange to halt rendering when the browser tab is hidden.
-- Frame Budget: Target rock-solid 60 FPS on integrated laptop GPUs (${targetPerf}).
-
-### 16. MEMORY DISPOSAL PROTOCOL
-- On Component Unmount:
-  * Cancel active requestAnimationFrame ID.
-  * Recursively traverse scene: call geometry.dispose() and material.dispose().
-  * Dispose any allocated WebGLRenderTarget or textures.
-  * Call renderer.dispose() and remove canvas from DOM.
-
-### 17. MANDATORY CODEBASE PRESERVATION DIRECTIVE
-- STRICT RULE: Inspect my existing codebase before making any modifications.
-- DO NOT overwrite, delete, or break unrelated routes, styling, or existing features.
-- Integrate this 3D component cleanly as an isolated modular file or component.
-
-### 18. ACCEPTANCE & VERIFICATION CRITERIA
-- Render Test: Canvas mounts cleanly without console errors or WebGL warnings.
-- Framerate Test: Sustains steady 60 FPS during cursor movement.
-- Teardown Test: Zero memory leaks observed across route changes or re-renders.
-`;
+    return PromptEngine.generateBuildPrompt(selectedVisual, customProps, {
+      framework: targetFramework,
+      placement: targetPlacement,
+      perfTier: targetPerf
+    });
   }, [selectedVisual, customProps, targetFramework, targetPlacement, targetPerf]);
 
   const handleCopy = () => {

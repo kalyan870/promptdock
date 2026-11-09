@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log('--- Starting PromptDock 7.2 Code Linter ---');
+console.log('--- Starting PromptDock 8.0 Code Linter ---');
 
 let errors = 0;
 
@@ -24,7 +24,7 @@ check('index.html exists', fs.existsSync(indexPath));
 const html = fs.readFileSync(indexPath, 'utf-8');
 
 check('index.html contains DOCTYPE', html.includes('<!DOCTYPE html>'));
-check('index.html contains PromptDock 7.2 title', html.includes('PromptDock 7.2'));
+check('index.html contains PromptDock 8.0 title', html.includes('PromptDock 8.0'));
 check('index.html contains root mount div', html.includes('<div id="root"></div>'));
 check('index.html loads main.tsx', html.includes('/src/main.tsx'));
 check('index.html includes favicon link', html.includes('/images/favicon.svg'));
@@ -43,6 +43,7 @@ const requiredComponents = [
   'src/main.tsx',
   'src/data/visuals.ts',
   'src/engine/scene-factory.ts',
+  'src/engine/prompt-engine.ts',
   'src/components/hero/HorizonHeroSection.tsx',
   'src/components/navigation/Header.tsx',
   'src/components/workflow/WorkflowSection.tsx',
@@ -76,9 +77,14 @@ const allCode = [
 check('No modify-website element in application', !allCode.includes('id="modify-website"'));
 check('No generateModificationPrompt function in application', !allCode.includes('generateModificationPrompt'));
 
+// 5. Verify Prompt Immutability (zero textareas in PromptGeneratorSection)
+const promptGenCode = fs.readFileSync(path.join(__dirname, 'src/components/prompt-generator/PromptGeneratorSection.tsx'), 'utf-8');
+check('PromptGeneratorSection has NO <textarea> (strictly immutable)', !promptGenCode.includes('<textarea'));
+check('PromptGeneratorSection has NO contenteditable', !promptGenCode.toLowerCase().includes('contenteditable'));
+
 if (errors > 0) {
-  console.error(`\n--- PromptDock 7.2 Linter FAILED with ${errors} error(s) ---`);
+  console.error(`\n--- PromptDock 8.0 Linter FAILED with ${errors} error(s) ---`);
   process.exit(1);
 }
 
-console.log('--- PromptDock 7.2 Linter PASSED (0 errors) ---');
+console.log('--- PromptDock 8.0 Linter PASSED (0 errors) ---');
